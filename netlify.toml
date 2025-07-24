@@ -1,14 +1,12 @@
 [build]
-  command = "echo 'Netlify build complete!'"
-  functions = "functions"  # Indica que suas funções estão no diretório 'functions'
-  publish = "."            # O diretório que será publicado (raiz do seu projeto, onde está index.html)
+  publish = "."
+  command = "echo 'Netlify build complete!'" # Ou seu comando de build do frontend, se houver
+
+[functions]
+  directory = "functions"
 
 [[redirects]]
   from = "/api/*"
-  to = "/.netlify/functions/api/:splat" # Redireciona /api para sua função lambda
+  to = "/.netlify/functions/api/:splat"
   status = 200
-
-[[redirects]]
-  from = "/*"
-  to = "/index.html"
-  status = 200
+  force = true
