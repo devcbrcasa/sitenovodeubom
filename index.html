@@ -283,6 +283,15 @@
             background-color: rgba(251, 191, 36, 0.9); /* yellow-400 */
             color: white;
         }
+
+        /* Estilos para o player de música */
+        .spotify-track-card {
+            cursor: pointer;
+            transition: transform 0.2s ease-in-out;
+        }
+        .spotify-track-card:hover {
+            transform: translateY(-5px);
+        }
     </style>
 </head>
 <body class="bg-primary text-gray-800">
@@ -306,6 +315,7 @@
                 <a href="#services" class="hover:text-primary transition-colors">Serviços</a>
                 <a href="#projects" class="hover:text-primary transition-colors">Projetos</a>
                 <a href="#portfolio" class="hover:text-primary transition-colors">Portfólio</a>
+                <a href="#music-player" class="hover:text-primary transition-colors">Músicas</a> <!-- Novo link -->
                 <a href="#studio" class="hover:text-primary transition-colors">Estúdio</a>
                 <a href="#testimonials" class="hover:text-primary transition-colors">Depoimentos</a>
                 <a href="#contact" class="hover:text-primary transition-colors">Contato</a>
@@ -328,6 +338,7 @@
                 <a href="#services" class="hover:text-primary transition-colors">Serviços</a>
                 <a href="#projects" class="hover:text-primary transition-colors">Projetos</a>
                 <a href="#portfolio" class="hover:text-primary transition-colors">Portfólio</a>
+                <a href="#music-player" class="hover:text-primary transition-colors">Músicas</a> <!-- Novo link -->
                 <a href="#studio" class="hover:text-primary transition-colors">Estúdio</a>
                 <a href="#testimonials" class="hover:text-primary transition-colors">Depoimentos</a>
                 <a href="#contact" class="hover:text-primary transition-colors">Contato</a>
@@ -445,6 +456,34 @@
             <div id="admin-portfolio-button" class="text-center mt-12 hidden">
                 <button id="add-portfolio-btn" class="bg-primary hover:bg-purple-700 text-white font-bold py-3 px-6 rounded-full transition-colors">
                     <i class="fas fa-plus mr-2"></i> Adicionar Item de Portfólio
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Nova Seção: Player de Música Spotify -->
+    <section id="music-player" class="py-20 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">Ouça Nossas <span class="text-primary">Produções</span></h2>
+                <p class="text-gray-600 max-w-2xl mx-auto">Selecione uma faixa para ouvir diretamente do Spotify.</p>
+            </div>
+            
+            <div class="max-w-xl mx-auto mb-8 bg-secondary rounded-lg shadow-xl p-4">
+                <div id="spotify-player-iframe-container" class="w-full">
+                    <!-- O iframe do Spotify será carregado aqui -->
+                    <p class="text-white text-center py-8">Selecione uma música abaixo para começar a ouvir!</p>
+                </div>
+            </div>
+
+            <div id="spotify-tracks-container" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+                <p id="no-spotify-tracks-message" class="col-span-full text-center text-gray-500 text-lg hidden">Nenhuma música disponível ainda. Adicione uma!</p>
+                <!-- As músicas do Spotify serão carregadas aqui via JS -->
+            </div>
+
+            <div id="admin-spotify-tracks-button" class="text-center mt-12 hidden">
+                <button id="add-spotify-track-btn" class="bg-primary hover:bg-purple-700 text-white font-bold py-3 px-6 rounded-full transition-colors">
+                    <i class="fab fa-spotify mr-2"></i> Adicionar Música Spotify
                 </button>
             </div>
         </div>
@@ -650,6 +689,10 @@
         <button id="edit-social-links-btn" class="bg-blue-600 hover:bg-blue-700 text-white p-3 rounded-full shadow-lg transition-colors hidden">
             <i class="fas fa-share-alt text-xl"></i>
         </button>
+        <!-- Novo botão para gerenciar músicas do Spotify (admin) -->
+        <button id="manage-spotify-tracks-btn" class="bg-green-600 hover:bg-green-700 text-white p-3 rounded-full shadow-lg transition-colors hidden">
+            <i class="fab fa-spotify text-xl"></i>
+        </button>
     </div>
 
     <div id="admin-login-modal" class="modal">
@@ -808,19 +851,53 @@
         </div>
     </div>
 
+    <!-- Novo Modal para Gerenciar Músicas Spotify (Admin) -->
+    <div id="spotify-track-modal" class="modal">
+        <div class="modal-content">
+            <span class="close" id="spotify-track-close">×</span>
+            <div class="p-4">
+                <h2 class="text-2xl font-bold text-white mb-4" id="spotify-track-modal-title">Adicionar Música Spotify</h2>
+                <form id="spotify-track-form" class="space-y-4">
+                    <input type="hidden" id="spotify-track-id">
+                    <div>
+                        <label for="spotify-track-title" class="block text-sm font-medium text-gray-300">Título da Música:</label>
+                        <input type="text" id="spotify-track-title" class="mt-1 block w-full border border-gray-600 rounded-md shadow-sm p-2 bg-gray-700 text-white" required>
+                    </div>
+                    <div>
+                        <label for="spotify-track-artist" class="block text-sm font-medium text-gray-300">Artista:</label>
+                        <input type="text" id="spotify-track-artist" class="mt-1 block w-full border border-gray-600 rounded-md shadow-sm p-2 bg-gray-700 text-white" required>
+                    </div>
+                    <div>
+                        <label for="spotify-track-id-input" class="block text-sm font-medium text-gray-300">ID da Música Spotify:</label>
+                        <input type="text" id="spotify-track-id-input" class="mt-1 block w-full border border-gray-600 rounded-md shadow-sm p-2 bg-gray-700 text-white" placeholder="Ex: 3n3Ppam7vgaVa1iaxmoLqA" required>
+                        <p class="text-xs text-gray-400 mt-1">Você pode encontrar o ID da música no link de compartilhamento do Spotify (ex: `https://open.spotify.com/track/<ID_AQUI>`).</p>
+                    </div>
+                    <div>
+                        <label for="spotify-track-image-url" class="block text-sm font-medium text-gray-300">URL da Imagem da Capa (Opcional):</label>
+                        <input type="url" id="spotify-track-image-url" class="mt-1 block w-full border border-gray-600 rounded-md shadow-sm p-2 bg-gray-700 text-white" placeholder="URL da capa do álbum">
+                    </div>
+                    <button type="submit" class="w-full bg-primary hover:bg-purple-700 text-white font-bold py-3 px-6 rounded-lg transition-colors">
+                        <i class="fas fa-save mr-2"></i> Salvar Música
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+
 
     <script>
         // Variável global para o token JWT
         const JWT_TOKEN_KEY = 'jwt_token';
 
         // Variáveis globais para elementos do DOM (serão atribuídas em DOMContentLoaded)
-        let adminLoginBtn, logoutBtn, changePasswordBtn, editSocialLinksBtn;
-        let adminLoginModal, changePasswordModal, socialLinksModal, projectModal, portfolioModal, addTestimonialModal;
-        let adminLoginClose, changePasswordClose, socialLinksClose, projectClose, portfolioClose, addTestimonialClose;
-        let adminLoginForm, changePasswordForm, socialLinksForm, projectForm, portfolioForm, testimonialForm;
+        let adminLoginBtn, logoutBtn, changePasswordBtn, editSocialLinksBtn, manageSpotifyTracksBtn; // manageSpotifyTracksBtn adicionado
+        let adminLoginModal, changePasswordModal, socialLinksModal, projectModal, portfolioModal, addTestimonialModal, spotifyTrackModal; // spotifyTrackModal adicionado
+        let adminLoginClose, changePasswordClose, socialLinksClose, projectClose, portfolioClose, addTestimonialClose, spotifyTrackClose; // spotifyTrackClose adicionado
+        let adminLoginForm, changePasswordForm, socialLinksForm, projectForm, portfolioForm, testimonialForm, spotifyTrackForm; // spotifyTrackForm adicionado
         let projectsContainer, noProjectsMessage, adminProjectsButton, addProjectBtn;
         let portfolioContainer, noPortfolioMessage, adminPortfolioButton, addPortfolioBtn;
-        let testimonialsContainer, noTestimonialsMessage, addTestimonialBtn; // Novos elementos para depoimentos
+        let testimonialsContainer, noTestimonialsMessage, addTestimonialBtn;
+        let spotifyPlayerIframeContainer, spotifyTracksContainer, noSpotifyTracksMessage, addSpotifyTrackBtn; // Novos elementos para Spotify
         let adminLoginIcon;
 
         // --- Funções Auxiliares (podem ser definidas fora de DOMContentLoaded) ---
@@ -839,7 +916,6 @@
                 if (!token) {
                     console.error('Nenhum token JWT encontrado');
                     logout();
-                    // Mensagem mais específica para o usuário
                     alert('Sua sessão expirou ou você não está logado. Por favor, faça login novamente.');
                     return null;
                 }
@@ -869,10 +945,8 @@
                 }
                 
                 if (!response.ok) {
-                    // Se o status for 401 (Não autorizado) ou 403 (Proibido),
-                    // é provável que seja um problema de autenticação/token expirado
                     if (response.status === 401 || response.status === 403) {
-                        logout(); // Força o logout no frontend
+                        logout();
                         alert(responseData.message || 'Sua sessão expirou ou suas credenciais são inválidas. Por favor, faça login novamente.');
                     } else {
                         alert(responseData.message || `Erro: ${response.statusText}. Verifique o console para mais detalhes.`);
@@ -883,8 +957,6 @@
                 return responseData;
             } catch (error) {
                 console.error(`Erro na API (${method} ${endpoint}):`, error);
-                // A mensagem já foi exibida acima se for 401/403
-                // Se for outro tipo de erro de rede, exibe a mensagem genérica
                 if (error.message.includes('Failed to fetch') || error.message.includes('NetworkError')) {
                      alert('Erro ao conectar com o servidor. Verifique sua conexão ou tente novamente mais tarde.');
                 }
@@ -895,7 +967,6 @@
         function logout() {
             localStorage.removeItem(JWT_TOKEN_KEY);
             checkLoginStatus();
-            // alert('Você foi desconectado.'); // Removido para evitar alerts duplos com fetchAPI
         }
 
         function openModal(modal) {
@@ -909,7 +980,8 @@
             if (modal === projectModal && projectForm) projectForm.reset();
             if (modal === portfolioModal && portfolioForm) portfolioForm.reset();
             if (modal === changePasswordModal && changePasswordForm) changePasswordForm.reset();
-            if (modal === addTestimonialModal && testimonialForm) testimonialForm.reset(); // Resetar formulário de depoimento
+            if (modal === addTestimonialModal && testimonialForm) testimonialForm.reset();
+            if (modal === spotifyTrackModal && spotifyTrackForm) spotifyTrackForm.reset(); // Resetar formulário de música Spotify
         }
 
         function toggleAdminMode(enable) {
@@ -917,14 +989,17 @@
                 document.body.classList.add('admin-mode');
                 adminProjectsButton.classList.remove('hidden');
                 adminPortfolioButton.classList.remove('hidden');
+                manageSpotifyTracksBtn.classList.remove('hidden'); // Mostrar botão de gerenciar músicas
             } else {
                 document.body.classList.remove('admin-mode');
                 adminProjectsButton.classList.add('hidden');
                 adminPortfolioButton.classList.add('hidden');
+                manageSpotifyTracksBtn.classList.add('hidden'); // Esconder botão de gerenciar músicas
             }
             fetchProjects();
             fetchPortfolio();
-            fetchTestimonials(); // Atualizar depoimentos no modo admin
+            fetchTestimonials();
+            fetchSpotifyTracks(); // Atualizar músicas Spotify no modo admin
         }
 
         function checkLoginStatus() {
@@ -936,6 +1011,7 @@
                 logoutBtn.classList.remove('hidden');
                 changePasswordBtn.classList.remove('hidden');
                 editSocialLinksBtn.classList.remove('hidden');
+                manageSpotifyTracksBtn.classList.remove('hidden'); // Mostrar para admin
                 adminLoginIcon.classList.remove('fa-lock');
                 adminLoginIcon.classList.add('fa-user-shield');
                 
@@ -947,6 +1023,7 @@
                 logoutBtn.classList.add('hidden');
                 changePasswordBtn.classList.add('hidden');
                 editSocialLinksBtn.classList.add('hidden');
+                manageSpotifyTracksBtn.classList.add('hidden'); // Esconder para não-admin
                 adminLoginIcon.classList.remove('fa-user-shield');
                 adminLoginIcon.classList.add('fa-lock');
                 
@@ -1066,8 +1143,6 @@
 
         // --- Funções de CRUD de Depoimentos ---
         async function fetchTestimonials() {
-            // Se for admin, busca todos os depoimentos (aprovados e pendentes)
-            // Se não for admin, busca apenas os aprovados
             const endpoint = document.body.classList.contains('admin-mode') ? '/testimonials/all' : '/testimonials';
             const testimonials = await fetchAPI(endpoint, 'GET', null, document.body.classList.contains('admin-mode'));
 
@@ -1079,7 +1154,7 @@
                     noTestimonialsMessage.classList.add('hidden');
                     testimonials.forEach(testimonial => {
                         const starsHtml = Array(testimonial.rating).fill('<i class="fas fa-star"></i>').join('');
-                        const emptyStarsHtml = Array(5 - testimonial.rating).fill('<i class="far fa-star"></i>').join(''); // Estrelas vazias
+                        const emptyStarsHtml = Array(5 - testimonial.rating).fill('<i class="far fa-star"></i>').join('');
 
                         const adminActionsHtml = document.body.classList.contains('admin-mode') ? `
                             <div class="flex gap-2 mt-4">
@@ -1124,7 +1199,7 @@
             if (response) {
                 alert('Seu depoimento foi enviado com sucesso e será revisado em breve!');
                 closeModal(addTestimonialModal);
-                fetchTestimonials(); // Atualiza a lista para mostrar o novo depoimento (se for admin)
+                fetchTestimonials();
             }
         }
 
@@ -1144,6 +1219,65 @@
                 if (response !== null) {
                     alert('Depoimento excluído com sucesso!');
                     fetchTestimonials();
+                }
+            }
+        }
+
+        // --- Funções de CRUD de Músicas Spotify ---
+        function loadSpotifyPlayer(spotifyId) {
+            spotifyPlayerIframeContainer.innerHTML = `
+                <iframe src="https://open.spotify.com/embed/track/${spotifyId}?utm_source=generator" 
+                        width="100%" height="380" frameborder="0" allowtransparency="true" 
+                        allow="encrypted-media; fullscreen; picture-in-picture"></iframe>
+            `;
+        }
+
+        async function fetchSpotifyTracks() {
+            const spotifyTracks = await fetchAPI('/spotify-tracks');
+            if (spotifyTracks) {
+                spotifyTracksContainer.innerHTML = '';
+                if (spotifyTracks.length === 0) {
+                    noSpotifyTracksMessage.classList.remove('hidden');
+                } else {
+                    noSpotifyTracksMessage.classList.add('hidden');
+                    spotifyTracks.forEach(track => {
+                        spotifyTracksContainer.innerHTML += `
+                            <div class="spotify-track-card bg-secondary text-white rounded-lg shadow-lg overflow-hidden relative p-4 flex flex-col items-center text-center" onclick="loadSpotifyPlayer('${track.spotifyId}')">
+                                <div class="admin-badge ${document.body.classList.contains('admin-mode') ? '' : 'hidden'}">ADMIN</div>
+                                <img src="${track.image_url || 'https://via.placeholder.com/150x150?text=Capa'}" alt="${track.title}" class="w-24 h-24 rounded-full object-cover mb-3">
+                                <h3 class="text-lg font-bold">${track.title}</h3>
+                                <p class="text-gray-400 text-sm">${track.artist}</p>
+                                <div class="spotify-track-actions absolute top-2 right-2 flex gap-2 ${document.body.classList.contains('admin-mode') ? '' : 'hidden'}">
+                                    <button onclick="event.stopPropagation(); editSpotifyTrack('${track._id}', '${track.title.replace(/'/g, "\\'")}', '${track.artist.replace(/'/g, "\\'")}', '${track.spotifyId}', '${track.image_url}')" class="bg-blue-500 hover:bg-blue-600 text-white p-2 rounded-full text-xs"><i class="fas fa-edit"></i></button>
+                                    <button onclick="event.stopPropagation(); deleteSpotifyTrack('${track._id}')" class="bg-red-500 hover:bg-red-600 text-white p-2 rounded-full text-xs"><i class="fas fa-trash-alt"></i></button>
+                                </div>
+                            </div>
+                        `;
+                    });
+                    // Carrega a primeira música automaticamente se houver
+                    if (spotifyTracks.length > 0) {
+                        loadSpotifyPlayer(spotifyTracks[0].spotifyId);
+                    }
+                }
+            }
+        }
+
+        function editSpotifyTrack(id, title, artist, spotifyId, imageUrl) {
+            document.getElementById('spotify-track-modal-title').textContent = 'Editar Música Spotify';
+            document.getElementById('spotify-track-id').value = id;
+            document.getElementById('spotify-track-title').value = title;
+            document.getElementById('spotify-track-artist').value = artist;
+            document.getElementById('spotify-track-id-input').value = spotifyId;
+            document.getElementById('spotify-track-image-url').value = imageUrl;
+            openModal(spotifyTrackModal);
+        }
+
+        async function deleteSpotifyTrack(id) {
+            if (confirm('Tem certeza que deseja excluir esta música do Spotify?')) {
+                const response = await fetchAPI(`/spotify-tracks/${id}`, 'DELETE', null, true);
+                if (response !== null) {
+                    alert('Música do Spotify excluída com sucesso!');
+                    fetchSpotifyTracks();
                 }
             }
         }
@@ -1171,26 +1305,31 @@
             logoutBtn = document.getElementById('logout-btn');
             changePasswordBtn = document.getElementById('change-password-btn');
             editSocialLinksBtn = document.getElementById('edit-social-links-btn');
+            manageSpotifyTracksBtn = document.getElementById('manage-spotify-tracks-btn'); // Novo botão
+
             adminLoginModal = document.getElementById('admin-login-modal');
             changePasswordModal = document.getElementById('change-password-modal');
             socialLinksModal = document.getElementById('social-links-modal');
             projectModal = document.getElementById('project-modal');
             portfolioModal = document.getElementById('portfolio-modal');
-            addTestimonialModal = document.getElementById('add-testimonial-modal'); // Novo modal
+            addTestimonialModal = document.getElementById('add-testimonial-modal');
+            spotifyTrackModal = document.getElementById('spotify-track-modal'); // Novo modal
 
             adminLoginClose = document.getElementById('admin-login-close');
             changePasswordClose = document.getElementById('change-password-close');
             socialLinksClose = document.getElementById('social-links-close');
             projectClose = document.getElementById('project-close');
             portfolioClose = document.getElementById('portfolio-close');
-            addTestimonialClose = document.getElementById('add-testimonial-close'); // Novo close button
+            addTestimonialClose = document.getElementById('add-testimonial-close');
+            spotifyTrackClose = document.getElementById('spotify-track-close'); // Novo close button
 
             adminLoginForm = document.getElementById('admin-login-form');
             changePasswordForm = document.getElementById('change-password-form');
             socialLinksForm = document.getElementById('social-links-form');
             projectForm = document.getElementById('project-form');
             portfolioForm = document.getElementById('portfolio-form');
-            testimonialForm = document.getElementById('testimonial-form'); // Novo formulário
+            testimonialForm = document.getElementById('testimonial-form');
+            spotifyTrackForm = document.getElementById('spotify-track-form'); // Novo formulário
 
             projectsContainer = document.getElementById('projects-container');
             noProjectsMessage = document.getElementById('no-projects-message');
@@ -1202,9 +1341,14 @@
             adminPortfolioButton = document.getElementById('admin-portfolio-button');
             addPortfolioBtn = document.getElementById('add-portfolio-btn');
 
-            testimonialsContainer = document.getElementById('testimonials-container'); // Novo container
-            noTestimonialsMessage = document.getElementById('no-testimonials-message'); // Nova mensagem
-            addTestimonialBtn = document.getElementById('add-testimonial-btn'); // Novo botão
+            testimonialsContainer = document.getElementById('testimonials-container');
+            noTestimonialsMessage = document.getElementById('no-testimonials-message');
+            addTestimonialBtn = document.getElementById('add-testimonial-btn');
+
+            spotifyPlayerIframeContainer = document.getElementById('spotify-player-iframe-container'); // Novo container do iframe
+            spotifyTracksContainer = document.getElementById('spotify-tracks-container'); // Novo container das músicas
+            noSpotifyTracksMessage = document.getElementById('no-spotify-tracks-message'); // Nova mensagem
+            addSpotifyTrackBtn = document.getElementById('add-spotify-track-btn'); // Novo botão
 
             adminLoginIcon = document.getElementById('admin-login-icon');
 
@@ -1217,7 +1361,8 @@
             socialLinksClose.onclick = () => closeModal(socialLinksModal);
             projectClose.onclick = () => closeModal(projectModal);
             portfolioClose.onclick = () => closeModal(portfolioModal);
-            addTestimonialClose.onclick = () => closeModal(addTestimonialModal); // Novo event listener para fechar
+            addTestimonialClose.onclick = () => closeModal(addTestimonialModal);
+            spotifyTrackClose.onclick = () => closeModal(spotifyTrackModal); // Novo event listener para fechar
 
             window.onclick = (event) => {
                 if (event.target == adminLoginModal) closeModal(adminLoginModal);
@@ -1225,7 +1370,8 @@
                 if (event.target == socialLinksModal) closeModal(socialLinksModal);
                 if (event.target == projectModal) closeModal(projectModal);
                 if (event.target == portfolioModal) closeModal(portfolioModal);
-                if (event.target == addTestimonialModal) closeModal(addTestimonialModal); // Novo event listener para fechar
+                if (event.target == addTestimonialModal) closeModal(addTestimonialModal);
+                if (event.target == spotifyTrackModal) closeModal(spotifyTrackModal); // Novo event listener para fechar
             };
 
             // --- Funcionalidade de Login ---
@@ -1370,7 +1516,7 @@
 
             // Event listener for testimonial form
             addTestimonialBtn.addEventListener('click', () => {
-                testimonialForm.reset(); // Limpa o formulário antes de abrir
+                testimonialForm.reset();
                 openModal(addTestimonialModal);
             });
 
@@ -1383,11 +1529,48 @@
                 await submitTestimonial(name, rating, comment);
             });
 
+            // Event listeners para músicas do Spotify
+            manageSpotifyTracksBtn.addEventListener('click', () => {
+                // Ao clicar em "Gerenciar Músicas Spotify", abre o modal para adicionar
+                document.getElementById('spotify-track-modal-title').textContent = 'Adicionar Nova Música Spotify';
+                document.getElementById('spotify-track-id').value = ''; // Limpa o ID para nova adição
+                spotifyTrackForm.reset();
+                openModal(spotifyTrackModal);
+            });
+
+            spotifyTrackForm.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                const spotifyTrackIdInput = document.getElementById('spotify-track-id');
+                const title = document.getElementById('spotify-track-title').value;
+                const artist = document.getElementById('spotify-track-artist').value;
+                const spotifyId = document.getElementById('spotify-track-id-input').value; // Usar o ID do input
+                const image_url = document.getElementById('spotify-track-image-url').value;
+
+                const trackData = { title, artist, spotifyId, image_url };
+                const trackDbId = spotifyTrackIdInput.value; // Este é o _id do MongoDB
+
+                if (trackDbId) {
+                    const response = await fetchAPI(`/spotify-tracks/${trackDbId}`, 'PUT', trackData, true);
+                    if (response) {
+                        alert('Música Spotify atualizada com sucesso!');
+                    }
+                } else {
+                    const response = await fetchAPI('/spotify-tracks', 'POST', trackData, true);
+                    if (response) {
+                        alert('Música Spotify adicionada com sucesso!');
+                    }
+                }
+                closeModal(spotifyTrackModal);
+                fetchSpotifyTracks(); // Recarrega a lista de músicas
+            });
+
+
             // Chamadas iniciais
             checkLoginStatus();
             fetchProjects();
             fetchPortfolio();
-            fetchTestimonials(); // Adicionado para carregar os depoimentos
+            fetchTestimonials();
+            fetchSpotifyTracks(); // Adicionado para carregar as músicas do Spotify
         });
     </script>
 </body>
