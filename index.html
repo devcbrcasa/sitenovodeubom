@@ -855,8 +855,9 @@
         }
 
 async function fetchAPI(endpoint, method = 'GET', data = null, needsAuth = false) {
-    // Corrigir o baseURL para apontar para as Netlify Functions
-    const baseURL = '/.netlify/functions/api';
+    // Construir a URL base absoluta usando window.location.origin
+    // Isso garante que a URL seja sempre absoluta e não dependa do contexto do blob://
+    const baseURL = `${window.location.origin}/.netlify/functions/api`;
     
     const options = {
         method: method,
@@ -880,7 +881,9 @@ async function fetchAPI(endpoint, method = 'GET', data = null, needsAuth = false
     }
 
     try {
-        const response = await fetch(`${baseURL}${endpoint}`, options);
+        // Garantir que não haja barras duplas se o endpoint já começar com uma
+        const url = `${baseURL}${endpoint.startsWith('/') ? endpoint : '/' + endpoint}`;
+        const response = await fetch(url, options);
         
         // Verifica se a resposta está vazia (como em DELETE)
         if (response.status === 204) return {};
@@ -945,7 +948,8 @@ async function fetchAPI(endpoint, method = 'GET', data = null, needsAuth = false
             const username = document.getElementById('admin-username').value;
             const password = document.getElementById('admin-password').value;
 
-            const data = await fetchAPI('/api/login', 'POST', { username, password });
+            // CORREÇÃO: Removido '/api'
+            const data = await fetchAPI('/login', 'POST', { username, password });
             if (data && data.token) {
                 localStorage.setItem(JWT_TOKEN_KEY, data.token);
                 alert('Login bem-sucedido!');
@@ -974,7 +978,8 @@ async function fetchAPI(endpoint, method = 'GET', data = null, needsAuth = false
                 return;
             }
 
-            const data = await fetchAPI('/api/change-password', 'POST', { oldPassword, newPassword }, true);
+            // CORREÇÃO: Removido '/api'
+            const data = await fetchAPI('/change-password', 'POST', { oldPassword, newPassword }, true);
             if (data) {
                 alert(data.message);
                 closeModal(changePasswordModal);
@@ -984,7 +989,8 @@ async function fetchAPI(endpoint, method = 'GET', data = null, needsAuth = false
 
         // --- Links Sociais ---
         editSocialLinksBtn.addEventListener('click', async () => {
-            const socialLinks = await fetchAPI('/api/social-links', 'GET');
+            // CORREÇÃO: Removido '/api'
+            const socialLinks = await fetchAPI('/social-links', 'GET');
             if (socialLinks) {
                 document.getElementById('instagram-link').value = socialLinks.instagram || '';
                 document.getElementById('facebook-link').value = socialLinks.facebook || '';
@@ -1002,7 +1008,8 @@ async function fetchAPI(endpoint, method = 'GET', data = null, needsAuth = false
                 spotify: document.getElementById('spotify-link-global').value,
                 youtube: document.getElementById('youtube-link-global').value,
             };
-            const data = await fetchAPI('/api/social-links', 'PUT', updates, true);
+            // CORREÇÃO: Removido '/api'
+            const data = await fetchAPI('/social-links', 'PUT', updates, true);
             if (data) {
                 alert(data.message);
                 closeModal(socialLinksModal);
@@ -1011,7 +1018,8 @@ async function fetchAPI(endpoint, method = 'GET', data = null, needsAuth = false
 
         // --- PROJETOS ---
         async function fetchProjects() {
-            const projects = await fetchAPI('/api/projects');
+            // CORREÇÃO: Removido '/api'
+            const projects = await fetchAPI('/projects');
             if (projects) {
                 projectsContainer.innerHTML = '';
                 if (projects.length === 0) {
@@ -1062,10 +1070,12 @@ async function fetchAPI(endpoint, method = 'GET', data = null, needsAuth = false
             const projectId = projectIdInput.value;
 
             if (projectId) {
-                await fetchAPI(`/api/projects/${projectId}`, 'PUT', projectData, true);
+                // CORREÇÃO: Removido '/api'
+                await fetchAPI('/projects/${projectId}', 'PUT', projectData, true);
                 alert('Projeto atualizado com sucesso!');
             } else {
-                await fetchAPI('/api/projects', 'POST', projectData, true);
+                // CORREÇÃO: Removido '/api'
+                await fetchAPI('/projects', 'POST', projectData, true);
                 alert('Projeto adicionado com sucesso!');
             }
             closeModal(projectModal);
@@ -1085,7 +1095,8 @@ async function fetchAPI(endpoint, method = 'GET', data = null, needsAuth = false
 
         async function deleteProject(id) {
             if (confirm('Tem certeza que deseja excluir este projeto?')) {
-                const response = await fetchAPI(`/api/projects/${id}`, 'DELETE', null, true);
+                // CORREÇÃO: Removido '/api'
+                const response = await fetchAPI('/projects/${id}', 'DELETE', null, true);
                 if (response !== null) { // Check if response is not null (meaning no error occurred)
                     alert('Projeto excluído com sucesso!');
                     fetchProjects();
@@ -1095,7 +1106,8 @@ async function fetchAPI(endpoint, method = 'GET', data = null, needsAuth = false
 
         // --- PORTFÓLIO ---
         async function fetchPortfolio() {
-            const portfolioItems = await fetchAPI('/api/portfolio');
+            // CORREÇÃO: Removido '/api'
+            const portfolioItems = await fetchAPI('/portfolio');
             if (portfolioItems) {
                 portfolioContainer.innerHTML = '';
                 if (portfolioItems.length === 0) {
@@ -1147,10 +1159,12 @@ async function fetchAPI(endpoint, method = 'GET', data = null, needsAuth = false
             const portfolioId = portfolioIdInput.value;
 
             if (portfolioId) {
-                await fetchAPI(`/api/portfolio/${portfolioId}`, 'PUT', itemData, true);
+                // CORREÇÃO: Removido '/api'
+                await fetchAPI('/portfolio/${portfolioId}', 'PUT', itemData, true);
                 alert('Item de portfólio atualizado com sucesso!');
             } else {
-                await fetchAPI('/api/portfolio', 'POST', itemData, true);
+                // CORREÇÃO: Removido '/api'
+                await fetchAPI('/portfolio', 'POST', itemData, true);
                 alert('Item de portfólio adicionado com sucesso!');
             }
             closeModal(portfolioModal);
@@ -1171,7 +1185,8 @@ async function fetchAPI(endpoint, method = 'GET', data = null, needsAuth = false
 
         async function deletePortfolioItem(id) {
             if (confirm('Tem certeza que deseja excluir este item de portfólio?')) {
-                const response = await fetchAPI(`/api/portfolio/${id}`, 'DELETE', null, true);
+                // CORREÇÃO: Removido '/api'
+                const response = await fetchAPI('/portfolio/${id}', 'DELETE', null, true);
                 if (response !== null) { // Check if response is not null (meaning no error occurred)
                     alert('Item de portfólio excluído com sucesso!');
                     fetchPortfolio();
