@@ -839,6 +839,8 @@
                 if (!token) {
                     console.error('Nenhum token JWT encontrado');
                     logout();
+                    // Mensagem mais específica para o usuário
+                    alert('Sua sessão expirou ou você não está logado. Por favor, faça login novamente.');
                     return null;
                 }
                 options.headers['Authorization'] = `Bearer ${token}`;
@@ -867,13 +869,25 @@
                 }
                 
                 if (!response.ok) {
+                    // Se o status for 401 (Não autorizado) ou 403 (Proibido),
+                    // é provável que seja um problema de autenticação/token expirado
+                    if (response.status === 401 || response.status === 403) {
+                        logout(); // Força o logout no frontend
+                        alert(responseData.message || 'Sua sessão expirou ou suas credenciais são inválidas. Por favor, faça login novamente.');
+                    } else {
+                        alert(responseData.message || `Erro: ${response.statusText}. Verifique o console para mais detalhes.`);
+                    }
                     throw new Error(responseData.message || `Erro: ${response.statusText}`);
                 }
                 
                 return responseData;
             } catch (error) {
                 console.error(`Erro na API (${method} ${endpoint}):`, error);
-                alert('Erro ao conectar com o servidor. Verifique o console para mais detalhes.');
+                // A mensagem já foi exibida acima se for 401/403
+                // Se for outro tipo de erro de rede, exibe a mensagem genérica
+                if (error.message.includes('Failed to fetch') || error.message.includes('NetworkError')) {
+                     alert('Erro ao conectar com o servidor. Verifique sua conexão ou tente novamente mais tarde.');
+                }
                 return null;
             }
         }
@@ -881,7 +895,7 @@
         function logout() {
             localStorage.removeItem(JWT_TOKEN_KEY);
             checkLoginStatus();
-            alert('Você foi desconectado.');
+            // alert('Você foi desconectado.'); // Removido para evitar alerts duplos com fetchAPI
         }
 
         function openModal(modal) {

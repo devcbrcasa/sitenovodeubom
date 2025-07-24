@@ -92,7 +92,11 @@ const authenticateToken = (req, res, next) => {
 
     jwt.verify(token, process.env.JWT_SECRET, (err, user) => {
         if (err) {
-            console.error('Erro de verificação de token:', err);
+            console.error('Erro de verificação de token:', err); // Loga o erro para depuração
+            // Se o erro for de token expirado, envia uma mensagem específica
+            if (err.name === 'TokenExpiredError') {
+                return res.status(403).json({ message: 'Sua sessão expirou. Por favor, faça login novamente.' });
+            }
             return res.status(403).json({ message: 'Token inválido ou expirado.' });
         }
         req.user = user;
@@ -116,7 +120,8 @@ router.post('/login', async (req, res) => {
             return res.status(400).json({ message: 'Credenciais inválidas.' });
         }
 
-        const token = jwt.sign({ id: user._id, username: user.username }, process.env.JWT_SECRET, { expiresIn: '1h' });
+        // AQUI: Tempo de expiração do token alterado para 8 horas
+        const token = jwt.sign({ id: user._id, username: user.username }, process.env.JWT_SECRET, { expiresIn: '8h' });
         res.json({ message: 'Login bem-sucedido!', token });
     } catch (error) {
         res.status(500).json({ message: 'Erro no servidor.', error: error.message });
