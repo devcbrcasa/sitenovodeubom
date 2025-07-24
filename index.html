@@ -788,11 +788,12 @@
         const projectClose = document.getElementById('project-close');
         const portfolioClose = document.getElementById('portfolio-close');
 
-        const adminLoginForm = document.getElementById('admin-login-form');
-        const changePasswordForm = document.getElementById('change-password-form');
-        const socialLinksForm = document.getElementById('social-links-form');
-        const projectForm = document.getElementById('project-form');
-        const portfolioForm = document.getElementById('portfolio-form');
+        // Moved these inside DOMContentLoaded or after their HTML elements are defined
+        // const adminLoginForm = document.getElementById('admin-login-form');
+        // const changePasswordForm = document.getElementById('change-password-form');
+        // const socialLinksForm = document.getElementById('social-links-form');
+        // const projectForm = document.getElementById('project-form');
+        // const portfolioForm = document.getElementById('portfolio-form');
 
         const projectsContainer = document.getElementById('projects-container');
         const noProjectsMessage = document.getElementById('no-projects-message');
@@ -885,14 +886,26 @@ async function fetchAPI(endpoint, method = 'GET', data = null, needsAuth = false
         const url = `${baseURL}${endpoint.startsWith('/') ? endpoint : '/' + endpoint}`;
         const response = await fetch(url, options);
         
-        // Verifica se a resposta está vazia (como em DELETE)
+        // Handle 204 No Content explicitly
         if (response.status === 204) return {};
-        
-        // Verifica se a resposta é JSON válido
-        const text = await response.text();
-        const responseData = text ? JSON.parse(text) : {};
+
+        // Check Content-Type header before parsing as JSON
+        const contentType = response.headers.get('content-type');
+        let responseData = {};
+
+        if (contentType && contentType.includes('application/json')) {
+            const text = await response.text();
+            responseData = text ? JSON.parse(text) : {};
+        } else {
+            // If not JSON, log the raw text for debugging and throw a generic error
+            const rawText = await response.text();
+            console.error('Resposta não é JSON. Conteúdo:', rawText); // Adicionado o conteúdo para melhor depuração
+            throw new Error(`Resposta inesperada do servidor (Status: ${response.status}, Tipo: ${contentType}). Verifique os logs do Netlify.`);
+        }
         
         if (!response.ok) {
+            // If response is not OK (e.g., 4xx, 5xx)
+            // Use the message from responseData if available, otherwise a generic error
             throw new Error(responseData.message || `Erro: ${response.statusText}`);
         }
         
@@ -942,80 +955,6 @@ async function fetchAPI(endpoint, method = 'GET', data = null, needsAuth = false
             if (event.target == portfolioModal) closeModal(portfolioModal);
         };
 
-        // --- Funcionalidade de Login ---
-        adminLoginForm.addEventListener('submit', async (e) => {
-            e.preventDefault();
-            const username = document.getElementById('admin-username').value;
-            const password = document.getElementById('admin-password').value;
-
-            // CORREÇÃO: Removido '/api'
-            const data = await fetchAPI('/login', 'POST', { username, password });
-            if (data && data.token) {
-                localStorage.setItem(JWT_TOKEN_KEY, data.token);
-                alert('Login bem-sucedido!');
-                closeModal(adminLoginModal);
-                checkLoginStatus();
-            }
-        });
-
-        logoutBtn.addEventListener('click', () => {
-            logout();
-        });
-
-        // --- Funcionalidade de Alterar Senha ---
-        changePasswordForm.addEventListener('submit', async (e) => {
-            e.preventDefault();
-            const oldPassword = document.getElementById('old-password').value;
-            const newPassword = document.getElementById('new-password').value;
-            const confirmNewPassword = document.getElementById('confirm-new-password').value;
-
-            if (newPassword.length < 6) {
-                alert('A nova senha deve ter no mínimo 6 caracteres.');
-                return;
-            }
-            if (newPassword !== confirmNewPassword) {
-                alert('A nova senha e a confirmação não coincidem.');
-                return;
-            }
-
-            // CORREÇÃO: Removido '/api'
-            const data = await fetchAPI('/change-password', 'POST', { oldPassword, newPassword }, true);
-            if (data) {
-                alert(data.message);
-                closeModal(changePasswordModal);
-                logout(); // Força o logout após a alteração da senha
-            }
-        });
-
-        // --- Links Sociais ---
-        editSocialLinksBtn.addEventListener('click', async () => {
-            // CORREÇÃO: Removido '/api'
-            const socialLinks = await fetchAPI('/social-links', 'GET');
-            if (socialLinks) {
-                document.getElementById('instagram-link').value = socialLinks.instagram || '';
-                document.getElementById('facebook-link').value = socialLinks.facebook || '';
-                document.getElementById('spotify-link-global').value = socialLinks.spotify || '';
-                document.getElementById('youtube-link-global').value = socialLinks.youtube || '';
-                openModal(socialLinksModal);
-            }
-        });
-
-        socialLinksForm.addEventListener('submit', async (e) => {
-            e.preventDefault();
-            const updates = {
-                instagram: document.getElementById('instagram-link').value,
-                facebook: document.getElementById('facebook-link').value,
-                spotify: document.getElementById('spotify-link-global').value,
-                youtube: document.getElementById('youtube-link-global').value,
-            };
-            // CORREÇÃO: Removido '/api'
-            const data = await fetchAPI('/social-links', 'PUT', updates, true);
-            if (data) {
-                alert(data.message);
-                closeModal(socialLinksModal);
-            }
-        });
-
         // --- PROJETOS ---
         async function fetchProjects() {
             // CORREÇÃO: Removido '/api'
@@ -1056,53 +995,6 @@ async function fetchAPI(endpoint, method = 'GET', data = null, needsAuth = false
             projectForm.reset();
             openModal(projectModal);
         });
-
-        projectForm.addEventListener('submit', async (e) => {
-            e.preventDefault();
-            const projectIdInput = document.getElementById('project-id');
-            const title = document.getElementById('project-title').value;
-            const description = document.getElementById('project-description').value;
-            const image_url = document.getElementById('project-image-url').value;
-            const spotify_link = document.getElementById('project-spotify-link').value;
-            const youtube_link = document.getElementById('project-youtube-link').value;
-
-            const projectData = { title, description, image_url, spotify_link, youtube_link };
-            const projectId = projectIdInput.value;
-
-            if (projectId) {
-                // CORREÇÃO: Removido '/api'
-                await fetchAPI('/projects/${projectId}', 'PUT', projectData, true);
-                alert('Projeto atualizado com sucesso!');
-            } else {
-                // CORREÇÃO: Removido '/api'
-                await fetchAPI('/projects', 'POST', projectData, true);
-                alert('Projeto adicionado com sucesso!');
-            }
-            closeModal(projectModal);
-            fetchProjects();
-        });
-
-        function editProject(id, title, description, imageUrl, spotifyLink, youtubeLink) {
-            document.getElementById('project-modal-title').textContent = 'Editar Projeto';
-            document.getElementById('project-id').value = id;
-            document.getElementById('project-title').value = title;
-            document.getElementById('project-description').value = description;
-            document.getElementById('project-image-url').value = imageUrl;
-            document.getElementById('project-spotify-link').value = spotifyLink;
-            document.getElementById('project-youtube-link').value = youtubeLink;
-            openModal(projectModal);
-        }
-
-        async function deleteProject(id) {
-            if (confirm('Tem certeza que deseja excluir este projeto?')) {
-                // CORREÇÃO: Removido '/api'
-                const response = await fetchAPI('/projects/${id}', 'DELETE', null, true);
-                if (response !== null) { // Check if response is not null (meaning no error occurred)
-                    alert('Projeto excluído com sucesso!');
-                    fetchProjects();
-                }
-            }
-        }
 
         // --- PORTFÓLIO ---
         async function fetchPortfolio() {
@@ -1145,32 +1037,6 @@ async function fetchAPI(endpoint, method = 'GET', data = null, needsAuth = false
             openModal(portfolioModal);
         });
 
-        portfolioForm.addEventListener('submit', async (e) => {
-            e.preventDefault();
-            const portfolioIdInput = document.getElementById('portfolio-id');
-            const title = document.getElementById('portfolio-title').value;
-            const description = document.getElementById('portfolio-description').value;
-            const image_url = document.getElementById('portfolio-image-url').value;
-            // Capture os novos campos
-            const spotify_link = document.getElementById('portfolio-spotify-link').value;
-            const youtube_link = document.getElementById('portfolio-youtube-link').value;
-
-            const itemData = { title, description, image_url, spotify_link, youtube_link };
-            const portfolioId = portfolioIdInput.value;
-
-            if (portfolioId) {
-                // CORREÇÃO: Removido '/api'
-                await fetchAPI('/portfolio/${portfolioId}', 'PUT', itemData, true);
-                alert('Item de portfólio atualizado com sucesso!');
-            } else {
-                // CORREÇÃO: Removido '/api'
-                await fetchAPI('/portfolio', 'POST', itemData, true);
-                alert('Item de portfólio adicionado com sucesso!');
-            }
-            closeModal(portfolioModal);
-            fetchPortfolio();
-        });
-
         function editPortfolioItem(id, title, description, imageUrl, spotifyLink, youtubeLink) {
             document.getElementById('portfolio-modal-title').textContent = 'Editar Item de Portfólio';
             document.getElementById('portfolio-id').value = id;
@@ -1185,9 +1051,9 @@ async function fetchAPI(endpoint, method = 'GET', data = null, needsAuth = false
 
         async function deletePortfolioItem(id) {
             if (confirm('Tem certeza que deseja excluir este item de portfólio?')) {
-                // CORREÇÃO: Removido '/api'
-                const response = await fetchAPI('/portfolio/${id}', 'DELETE', null, true);
-                if (response !== null) { // Check if response is not null (meaning no error occurred)
+                // CORREÇÃO: Usando crases (template literal) para interpolar o ID na URL
+                const response = await fetchAPI(`/portfolio/${id}`, 'DELETE', null, true);
+                if (response !== null) {
                     alert('Item de portfólio excluído com sucesso!');
                     fetchPortfolio();
                 }
@@ -1211,6 +1077,135 @@ async function fetchAPI(endpoint, method = 'GET', data = null, needsAuth = false
 
         // --- Inicialização ---
         document.addEventListener('DOMContentLoaded', () => {
+            // Moved form variable assignments inside DOMContentLoaded
+            const adminLoginForm = document.getElementById('admin-login-form');
+            const changePasswordForm = document.getElementById('change-password-form');
+            const socialLinksForm = document.getElementById('social-links-form');
+            const projectForm = document.getElementById('project-form');
+            const portfolioForm = document.getElementById('portfolio-form');
+
+            // --- Funcionalidade de Login ---
+            adminLoginForm.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                const username = document.getElementById('admin-username').value;
+                const password = document.getElementById('admin-password').value;
+
+                const data = await fetchAPI('/login', 'POST', { username, password });
+                if (data && data.token) {
+                    localStorage.setItem(JWT_TOKEN_KEY, data.token);
+                    alert('Login bem-sucedido!');
+                    closeModal(adminLoginModal);
+                    checkLoginStatus();
+                }
+            });
+
+            // --- Funcionalidade de Alterar Senha ---
+            changePasswordForm.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                const oldPassword = document.getElementById('old-password').value;
+                const newPassword = document.getElementById('new-password').value;
+                const confirmNewPassword = document.getElementById('confirm-new-password').value;
+
+                if (newPassword.length < 6) {
+                    alert('A nova senha deve ter no mínimo 6 caracteres.');
+                    return;
+                }
+                if (newPassword !== confirmNewPassword) {
+                    alert('A nova senha e a confirmação não coincidem.');
+                    return;
+                }
+
+                const data = await fetchAPI('/change-password', 'POST', { oldPassword, newPassword }, true);
+                if (data) {
+                    alert(data.message);
+                    closeModal(changePasswordModal);
+                    logout(); // Força o logout após a alteração da senha
+                }
+            });
+
+            // --- Links Sociais ---
+            editSocialLinksBtn.addEventListener('click', async () => {
+                const socialLinks = await fetchAPI('/social-links', 'GET');
+                if (socialLinks) {
+                    document.getElementById('instagram-link').value = socialLinks.instagram || '';
+                    document.getElementById('facebook-link').value = socialLinks.facebook || '';
+                    document.getElementById('spotify-link-global').value = socialLinks.spotify || '';
+                    document.getElementById('youtube-link-global').value = socialLinks.youtube || '';
+                    openModal(socialLinksModal);
+                }
+            });
+
+            socialLinksForm.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                const updates = {
+                    instagram: document.getElementById('instagram-link').value,
+                    facebook: document.getElementById('facebook-link').value,
+                    spotify: document.getElementById('spotify-link-global').value,
+                    youtube: document.getElementById('youtube-link-global').value,
+                };
+                const data = await fetchAPI('/social-links', 'PUT', updates, true);
+                if (data) {
+                    alert(data.message);
+                    closeModal(socialLinksModal);
+                }
+            });
+
+            // Event listener for project form (moved inside DOMContentLoaded)
+            projectForm.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                const projectIdInput = document.getElementById('project-id');
+                const title = document.getElementById('project-title').value;
+                const description = document.getElementById('project-description').value;
+                const image_url = document.getElementById('project-image-url').value;
+                const spotify_link = document.getElementById('project-spotify-link').value;
+                const youtube_link = document.getElementById('project-youtube-link').value;
+
+                const projectData = { title, description, image_url, spotify_link, youtube_link };
+                const projectId = projectIdInput.value;
+
+                if (projectId) {
+                    const response = await fetchAPI(`/projects/${projectId}`, 'PUT', projectData, true);
+                    if (response) {
+                        alert('Projeto atualizado com sucesso!');
+                    }
+                } else {
+                    const response = await fetchAPI('/projects', 'POST', projectData, true);
+                    if (response) {
+                        alert('Projeto adicionado com sucesso!');
+                    }
+                }
+                closeModal(projectModal);
+                fetchProjects();
+            });
+
+            // Event listener for portfolio form (moved inside DOMContentLoaded)
+            portfolioForm.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                const portfolioIdInput = document.getElementById('portfolio-id');
+                const title = document.getElementById('portfolio-title').value;
+                const description = document.getElementById('portfolio-description').value;
+                const image_url = document.getElementById('portfolio-image-url').value;
+                const spotify_link = document.getElementById('portfolio-spotify-link').value;
+                const youtube_link = document.getElementById('portfolio-youtube-link').value;
+
+                const itemData = { title, description, image_url, spotify_link, youtube_link };
+                const portfolioId = portfolioIdInput.value;
+
+                if (portfolioId) {
+                    const response = await fetchAPI(`/portfolio/${portfolioId}`, 'PUT', itemData, true);
+                    if (response) {
+                        alert('Item de portfólio atualizado com sucesso!');
+                    }
+                } else {
+                    const response = await fetchAPI('/portfolio', 'POST', itemData, true);
+                    if (response) {
+                        alert('Item de portfólio adicionado com sucesso!');
+                    }
+                }
+                closeModal(portfolioModal);
+                fetchPortfolio();
+            });
+
             checkLoginStatus();
             fetchProjects();
             fetchPortfolio();
