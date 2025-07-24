@@ -2,7 +2,7 @@ const path = require('path');
 const dotenv = require('dotenv');
 const mongoose = require('mongoose');
 const connectToDatabase = require('./utils/db');
-const User = require('./models/User'); // Certifique-se que o nome do arquivo do modelo User é 'User.js' com 'U' maiúsculo
+const User = require('./models/user'); // Certifique-se que o nome do arquivo do modelo User é 'user.js' com 'u' minúsculo
 
 // Define o caminho para a raiz do projeto de forma absoluta
 // __dirname é o diretório do arquivo seedAdmin.js (functions/)
