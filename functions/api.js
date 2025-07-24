@@ -8,7 +8,7 @@ const dotenv = require('dotenv');
 dotenv.config();
 
 const app = express();
-const router = express.Router();
+const router = express(); // Corrigido para express.Router()
 
 // Middleware para parsear JSON
 app.use(express.json());
@@ -70,7 +70,7 @@ const SocialLinksSchema = new mongoose.Schema({
 
 const SocialLinks = mongoose.model('SocialLinks', SocialLinksSchema);
 
-// NOVO SCHEMA PARA DEPOIMENTOS
+// Schema para Depoimentos
 const TestimonialSchema = new mongoose.Schema({
     name: { type: String, required: true },
     rating: { type: Number, required: true, min: 1, max: 5 },
@@ -80,6 +80,18 @@ const TestimonialSchema = new mongoose.Schema({
 });
 
 const Testimonial = mongoose.model('Testimonial', TestimonialSchema);
+
+// NOVO SCHEMA PARA MÚSICAS SPOTIFY
+const SpotifyTrackSchema = new mongoose.Schema({
+    title: { type: String, required: true },
+    artist: { type: String, required: true },
+    spotifyId: { type: String, required: true, unique: true }, // ID único do Spotify
+    image_url: { type: String, default: '' }, // URL da capa do álbum/música
+    createdAt: { type: Date, default: Date.now }
+});
+
+const SpotifyTrack = mongoose.model('SpotifyTrack', SpotifyTrackSchema);
+
 
 // --- Middleware de Autenticação ---
 const authenticateToken = (req, res, next) => {
@@ -93,7 +105,6 @@ const authenticateToken = (req, res, next) => {
     jwt.verify(token, process.env.JWT_SECRET, (err, user) => {
         if (err) {
             console.error('Erro de verificação de token:', err); // Loga o erro para depuração
-            // Se o erro for de token expirado, envia uma mensagem específica
             if (err.name === 'TokenExpiredError') {
                 return res.status(403).json({ message: 'Sua sessão expirou. Por favor, faça login novamente.' });
             }
@@ -120,7 +131,6 @@ router.post('/login', async (req, res) => {
             return res.status(400).json({ message: 'Credenciais inválidas.' });
         }
 
-        // AQUI: Tempo de expiração do token alterado para 8 horas
         const token = jwt.sign({ id: user._id, username: user.username }, process.env.JWT_SECRET, { expiresIn: '8h' });
         res.json({ message: 'Login bem-sucedido!', token });
     } catch (error) {
@@ -310,7 +320,7 @@ router.put('/social-links', authenticateToken, async (req, res) => {
     }
 });
 
-// --- NOVAS ROTAS PARA DEPOIMENTOS ---
+// --- Rotas para Depoimentos ---
 
 // Rota para submeter um novo depoimento (público)
 router.post('/testimonials', async (req, res) => {
@@ -374,6 +384,71 @@ router.delete('/testimonials/:id', authenticateToken, async (req, res) => {
         res.status(204).send(); // No Content
     } catch (error) {
         res.status(500).json({ message: 'Erro ao excluir depoimento.', error: error.message });
+    }
+});
+
+// --- NOVAS ROTAS PARA MÚSICAS SPOTIFY ---
+
+// Rota para adicionar uma nova música Spotify (admin-only)
+router.post('/spotify-tracks', authenticateToken, async (req, res) => {
+    try {
+        const { title, artist, spotifyId, image_url } = req.body;
+        if (!title || !artist || !spotifyId) {
+            return res.status(400).json({ message: 'Título, artista e ID do Spotify são obrigatórios.' });
+        }
+        const newTrack = new SpotifyTrack({ title, artist, spotifyId, image_url });
+        await newTrack.save();
+        res.status(201).json({ message: 'Música Spotify adicionada com sucesso!', track: newTrack });
+    } catch (error) {
+        // Se o erro for de duplicidade de spotifyId (unique: true)
+        if (error.code === 11000) {
+            return res.status(409).json({ message: 'Esta música do Spotify (ID) já existe.' });
+        }
+        res.status(500).json({ message: 'Erro ao adicionar música Spotify.', error: error.message });
+    }
+});
+
+// Rota para obter todas as músicas Spotify (público)
+router.get('/spotify-tracks', async (req, res) => {
+    try {
+        const tracks = await SpotifyTrack.find({}).sort({ createdAt: -1 }); // Ordena pelas mais recentes
+        res.json(tracks);
+    } catch (error) {
+        res.status(500).json({ message: 'Erro ao buscar músicas Spotify.', error: error.message });
+    }
+});
+
+// Rota para atualizar uma música Spotify por ID (admin-only)
+router.put('/spotify-tracks/:id', authenticateToken, async (req, res) => {
+    try {
+        const { title, artist, spotifyId, image_url } = req.body;
+        const updatedTrack = await SpotifyTrack.findByIdAndUpdate(
+            req.params.id,
+            { title, artist, spotifyId, image_url },
+            { new: true, runValidators: true } // runValidators para garantir que o spotifyId único seja validado
+        );
+        if (!updatedTrack) {
+            return res.status(404).json({ message: 'Música Spotify não encontrada.' });
+        }
+        res.json({ message: 'Música Spotify atualizada com sucesso!', track: updatedTrack });
+    } catch (error) {
+        if (error.code === 11000) {
+            return res.status(409).json({ message: 'Este ID do Spotify já está sendo usado por outra música.' });
+        }
+        res.status(400).json({ message: 'Erro ao atualizar música Spotify.', error: error.message });
+    }
+});
+
+// Rota para excluir uma música Spotify por ID (admin-only)
+router.delete('/spotify-tracks/:id', authenticateToken, async (req, res) => {
+    try {
+        const deletedTrack = await SpotifyTrack.findByIdAndDelete(req.params.id);
+        if (!deletedTrack) {
+            return res.status(404).json({ message: 'Música Spotify não encontrada.' });
+        }
+        res.status(204).send(); // No Content
+    } catch (error) {
+        res.status(500).json({ message: 'Erro ao excluir música Spotify.', error: error.message });
     }
 });
 
