@@ -539,7 +539,12 @@
             
             <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
                 <div>
-                    <form name="contact" method="POST" data-netlify="true" class="space-y-6">
+                 <form name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field" action="/#contact" class="space-y-6">
+    <!-- Campo honeypot para prevenção de spam (manter oculto) -->
+    <p class="hidden">
+        <label>Não preencha este campo: <input name="bot-field" /></label>
+    </p>
+
     <div>
         <label for="name" class="block mb-2 font-medium">Nome</label>
         <input type="text" id="name" name="name" class="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-lg focus:outline-none focus:border-primary text-white" placeholder="Seu nome">
@@ -570,6 +575,7 @@
     
     <button type="submit" class="w-full bg-primary hover:bg-purple-700 text-white font-bold py-3 px-6 rounded-lg transition-colors">Enviar Mensagem</button>
 </form>
+
                 </div>
                 
                 <div>
