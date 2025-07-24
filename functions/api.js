@@ -9,8 +9,8 @@ const { JWT_SECRET, authenticateToken } = require('./utils/auth');
 // Modelos Mongoose
 const User = require('./models/user');
 const Project = require('./models/Project');
-const Portfolio = require('./models/portfolio'); // <-- Importado como 'portfolio' em minúsculas
-const SocialLinks = require('./models/sociallinks'); // <-- Importado como 'sociallinks' em minúsculas
+const Portfolio = require('./models/portfolio');
+const SocialLinks = require('./models/sociallinks');
 
 const app = express();
 
@@ -30,7 +30,8 @@ app.use(async (req, res, next) => {
 });
 
 // --- Rotas de Autenticação ---
-app.post('/api/login', async (req, res) => {
+// Rota de login: removido '/api'
+app.post('/login', async (req, res) => {
   const { username, password } = req.body;
 
   try {
@@ -52,7 +53,8 @@ app.post('/api/login', async (req, res) => {
   }
 });
 
-app.post('/api/change-password', authenticateToken, async (req, res) => {
+// Rota de alteração de senha: removido '/api'
+app.post('/change-password', authenticateToken, async (req, res) => {
   const { oldPassword, newPassword } = req.body;
   const userId = req.user.id; // Obtido do token JWT
 
@@ -78,8 +80,8 @@ app.post('/api/change-password', authenticateToken, async (req, res) => {
 });
 
 // --- Rotas de Projetos (CRUD) ---
-// Obter todos os projetos
-app.get('/api/projects', async (req, res) => {
+// Obter todos os projetos: removido '/api'
+app.get('/projects', async (req, res) => {
   try {
     const projects = await Project.find().sort({ createdAt: -1 });
     res.json(projects);
@@ -88,8 +90,8 @@ app.get('/api/projects', async (req, res) => {
   }
 });
 
-// Adicionar novo projeto (protegido por autenticação)
-app.post('/api/projects', authenticateToken, async (req, res) => {
+// Adicionar novo projeto (protegido por autenticação): removido '/api'
+app.post('/projects', authenticateToken, async (req, res) => {
   try {
     const newProject = new Project(req.body);
     await newProject.save();
@@ -100,8 +102,8 @@ app.post('/api/projects', authenticateToken, async (req, res) => {
   }
 });
 
-// Atualizar projeto por ID (protegido por autenticação)
-app.put('/api/projects/:id', authenticateToken, async (req, res) => {
+// Atualizar projeto por ID (protegido por autenticação): removido '/api'
+app.put('/projects/:id', authenticateToken, async (req, res) => {
   try {
     const updatedProject = await Project.findByIdAndUpdate(req.params.id, req.body, { new: true });
     if (!updatedProject) {
@@ -114,8 +116,8 @@ app.put('/api/projects/:id', authenticateToken, async (req, res) => {
   }
 });
 
-// Deletar projeto por ID (protegido por autenticação)
-app.delete('/api/projects/:id', authenticateToken, async (req, res) => {
+// Deletar projeto por ID (protegido por autenticação): removido '/api'
+app.delete('/projects/:id', authenticateToken, async (req, res) => {
   try {
     const deletedProject = await Project.findByIdAndDelete(req.params.id);
     if (!deletedProject) {
@@ -129,8 +131,8 @@ app.delete('/api/projects/:id', authenticateToken, async (req, res) => {
 });
 
 // --- Rotas de Portfólio (CRUD) ---
-// Obter todos os itens do portfólio
-app.get('/api/portfolio', async (req, res) => {
+// Obter todos os itens do portfólio: removido '/api'
+app.get('/portfolio', async (req, res) => {
   try {
     const portfolioItems = await Portfolio.find().sort({ createdAt: -1 });
     res.json(portfolioItems);
@@ -139,8 +141,8 @@ app.get('/api/portfolio', async (req, res) => {
   }
 });
 
-// Adicionar novo item de portfólio (protegido por autenticação)
-app.post('/api/portfolio', authenticateToken, async (req, res) => {
+// Adicionar novo item de portfólio (protegido por autenticação): removido '/api'
+app.post('/portfolio', authenticateToken, async (req, res) => {
   try {
     const newItem = new Portfolio(req.body);
     await newItem.save();
@@ -151,8 +153,8 @@ app.post('/api/portfolio', authenticateToken, async (req, res) => {
   }
 });
 
-// Atualizar item de portfólio por ID (protegido por autenticação)
-app.put('/api/portfolio/:id', authenticateToken, async (req, res) => {
+// Atualizar item de portfólio por ID (protegido por autenticação): removido '/api'
+app.put('/portfolio/:id', authenticateToken, async (req, res) => {
   try {
     const updatedItem = await Portfolio.findByIdAndUpdate(req.params.id, req.body, { new: true });
     if (!updatedItem) {
@@ -165,8 +167,8 @@ app.put('/api/portfolio/:id', authenticateToken, async (req, res) => {
   }
 });
 
-// Deletar item de portfólio por ID (protegido por autenticação)
-app.delete('/api/portfolio/:id', authenticateToken, async (req, res) => {
+// Deletar item de portfólio por ID (protegido por autenticação): removido '/api'
+app.delete('/portfolio/:id', authenticateToken, async (req, res) => {
   try {
     const deletedItem = await Portfolio.findByIdAndDelete(req.params.id);
     if (!deletedItem) {
@@ -180,8 +182,8 @@ app.delete('/api/portfolio/:id', authenticateToken, async (req, res) => {
 });
 
 // --- Rotas de Links Sociais ---
-// Obter links sociais
-app.get('/api/social-links', async (req, res) => {
+// Obter links sociais: removido '/api'
+app.get('/social-links', async (req, res) => {
   try {
     let socialLinks = await SocialLinks.findOne();
     if (!socialLinks) {
@@ -194,8 +196,8 @@ app.get('/api/social-links', async (req, res) => {
   }
 });
 
-// Atualizar links sociais (protegido por autenticação)
-app.put('/api/social-links', authenticateToken, async (req, res) => {
+// Atualizar links sociais (protegido por autenticação): removido '/api'
+app.put('/social-links', authenticateToken, async (req, res) => {
   try {
     // Encontre e atualize o único documento de links sociais
     const updatedSocialLinks = await SocialLinks.findOneAndUpdate({}, req.body, { new: true, upsert: true });
