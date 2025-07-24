@@ -232,7 +232,57 @@
         .admin-mode .edit-social-links-btn {
             display: block;
         }
-        
+
+        /* Estilos para as estrelas de avaliação */
+        .rating-stars {
+            display: flex;
+            justify-content: center; /* Centraliza as estrelas */
+            gap: 5px; /* Espaçamento entre as estrelas */
+            margin-bottom: 1rem;
+        }
+        .rating-stars input[type="radio"] {
+            display: none; /* Oculta os radios buttons */
+        }
+        .rating-stars label {
+            font-size: 2rem; /* Tamanho das estrelas */
+            color: #ccc; /* Cor padrão das estrelas */
+            cursor: pointer;
+            transition: color 0.2s;
+        }
+        .rating-stars label:hover,
+        .rating-stars label:hover ~ label,
+        .rating-stars input[type="radio"]:checked ~ label {
+            color: #ffc107; /* Cor das estrelas preenchidas */
+        }
+        .rating-stars label:hover {
+            transform: scale(1.1); /* Efeito de hover */
+        }
+        /* Inverte a ordem das estrelas para que o hover funcione da direita para a esquerda */
+        .rating-stars {
+            direction: rtl;
+        }
+        .rating-stars label {
+            direction: ltr;
+        }
+
+        .testimonial-status-badge {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: bold;
+            z-index: 10;
+        }
+        .testimonial-status-badge.approved {
+            background-color: rgba(34, 197, 94, 0.9); /* green-500 */
+            color: white;
+        }
+        .testimonial-status-badge.pending {
+            background-color: rgba(251, 191, 36, 0.9); /* yellow-400 */
+            color: white;
+        }
     </style>
 </head>
 <body class="bg-primary text-gray-800">
@@ -466,66 +516,15 @@
                 <p class="text-gray-600 max-w-2xl mx-auto">Veja o que nossos clientes têm a dizer sobre sua experiência com a CBR Records.</p>
             </div>
             
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <div class="bg-white p-8 rounded-lg shadow-lg">
-                    <div class="flex items-center mb-4">
-                        <div class="w-12 h-12 bg-primary/20 rounded-full flex items-center justify-center mr-4">
-                            <span class="text-primary font-bold">LM</span>
-                        </div>
-                        <div>
-                            <h4 class="font-bold">Luna Mendes</h4>
-                            <p class="text-gray-600 text-sm">Cantora</p>
-                        </div>
-                    </div>
-                    <p class="text-gray-600 italic">"A experiência de gravar meu EP na CBR Records foi incrível. A equipe é extremamente profissional e atenciosa, e o resultado final superou todas as minhas expectativas."</p>
-                    <div class="mt-4 flex text-yellow-400">
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                    </div>
-                </div>
-                
-                <div class="bg-white p-8 rounded-lg shadow-lg">
-                    <div class="flex items-center mb-4">
-                        <div class="w-12 h-12 bg-primary/20 rounded-full flex items-center justify-center mr-4">
-                            <span class="text-primary font-bold">RS</span>
-                        </div>
-                        <div>
-                            <h4 class="font-bold">Rafael Santos</h4>
-                            <p class="text-gray-600 text-sm">Banda Horizonte</p>
-                        </div>
-                    </div>
-                    <p class="text-gray-600 italic">"A CBR Records transformou completamente o som da nossa banda. A produção musical trouxe uma qualidade que não imaginávamos ser possível. Recomendo a todos os músicos."</p>
-                    <div class="mt-4 flex text-yellow-400">
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                    </div>
-                </div>
-                
-                <div class="bg-white p-8 rounded-lg shadow-lg">
-                    <div class="flex items-center mb-4">
-                        <div class="w-12 h-12 bg-primary/20 rounded-full flex items-center justify-center mr-4">
-                            <span class="text-primary font-bold">CM</span>
-                        </div>
-                        <div>
-                            <h4 class="font-bold">Carla Moreira</h4>
-                            <p class="text-gray-600 text-sm">Compositora</p>
-                        </div>
-                    </div>
-                    <p class="text-gray-600 italic">"Os arranjos que a equipe da CBR Records criou para minhas composições deram vida às minhas ideias de uma forma que eu nunca imaginei. Profissionais talentosos e dedicados."</p>
-                    <div class="mt-4 flex text-yellow-400">
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star-half-alt"></i>
-                    </div>
-                </div>
+            <div id="testimonials-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <p id="no-testimonials-message" class="col-span-full text-center text-gray-500 text-lg hidden">Nenhum depoimento ainda. Seja o primeiro a deixar um!</p>
+                <!-- Depoimentos existentes serão carregados aqui via JS -->
+            </div>
+
+            <div class="text-center mt-12">
+                <button id="add-testimonial-btn" class="bg-primary hover:bg-purple-700 text-white font-bold py-3 px-6 rounded-full transition-colors">
+                    <i class="fas fa-star mr-2"></i> Deixe seu Depoimento
+                </button>
             </div>
         </div>
     </section>
@@ -539,43 +538,41 @@
             
             <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
                 <div>
-                 <form name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field" action="/#contact" class="space-y-6">
-    <!-- Campo honeypot para prevenção de spam (manter oculto) -->
-    <p class="hidden">
-        <label>Não preencha este campo: <input name="bot-field" /></label>
-    </p>
-
-    <div>
-        <label for="name" class="block mb-2 font-medium">Nome</label>
-        <input type="text" id="name" name="name" class="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-lg focus:outline-none focus:border-primary text-white" placeholder="Seu nome">
-    </div>
-    
-    <div>
-        <label for="email" class="block mb-2 font-medium">Email</label>
-        <input type="email" id="email" name="email" class="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-lg focus:outline-none focus:border-primary text-white" placeholder="seu@email.com">
-    </div>
-    
-    <div>
-        <label for="service" class="block mb-2 font-medium">Serviço de Interesse</label>
-        <select id="service" name="service" class="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-lg focus:outline-none focus:border-primary text-white">
-            <option value="" disabled selected>Selecione um serviço</option>
-            <option value="recording">Gravação</option>
-            <option value="mixing">Mixagem</option>
-            <option value="mastering">Masterização</option>
-            <option value="production">Produção Musical</option>
-            <option value="distribution">Distribuição Digital</option>
-            <option value="other">Outro</option>
-        </select>
-    </div>
-    
-    <div>
-        <label for="message" class="block mb-2 font-medium">Mensagem</label>
-        <textarea id="message" name="message" rows="5" class="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-lg focus:outline-none focus:border-primary text-white" placeholder="Conte-nos sobre seu projeto..."></textarea>
-    </div>
-    
-    <button type="submit" class="w-full bg-primary hover:bg-purple-700 text-white font-bold py-3 px-6 rounded-lg transition-colors">Enviar Mensagem</button>
-</form>
-
+                    <form name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field" action="/#contact" class="space-y-6">
+                        <!-- Campo honeypot para prevenção de spam (manter oculto) -->
+                        <p class="hidden">
+                            <label>Não preencha este campo: <input name="bot-field" /></label>
+                        </p>
+                        <div>
+                            <label for="name" class="block mb-2 font-medium">Nome</label>
+                            <input type="text" id="name" name="name" class="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-lg focus:outline-none focus:border-primary text-white" placeholder="Seu nome">
+                        </div>
+                        
+                        <div>
+                            <label for="email" class="block mb-2 font-medium">Email</label>
+                            <input type="email" id="email" name="email" class="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-lg focus:outline-none focus:border-primary text-white" placeholder="seu@email.com">
+                        </div>
+                        
+                        <div>
+                            <label for="service" class="block mb-2 font-medium">Serviço de Interesse</label>
+                            <select id="service" name="service" class="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-lg focus:outline-none focus:border-primary text-white">
+                                <option value="" disabled selected>Selecione um serviço</option>
+                                <option value="recording">Gravação</option>
+                                <option value="mixing">Mixagem</option>
+                                <option value="mastering">Masterização</option>
+                                <option value="production">Produção Musical</option>
+                                <option value="distribution">Distribuição Digital</option>
+                                <option value="other">Outro</option>
+                            </select>
+                        </div>
+                        
+                        <div>
+                            <label for="message" class="block mb-2 font-medium">Mensagem</label>
+                            <textarea id="message" name="message" rows="5" class="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-lg focus:outline-none focus:border-primary text-white" placeholder="Conte-nos sobre seu projeto..."></textarea>
+                        </div>
+                        
+                        <button type="submit" class="w-full bg-primary hover:bg-purple-700 text-white font-bold py-3 px-6 rounded-lg transition-colors">Enviar Mensagem</button>
+                    </form>
                 </div>
                 
                 <div>
@@ -778,6 +775,39 @@
         </div>
     </div>
 
+    <!-- Novo Modal para Deixar Depoimento -->
+    <div id="add-testimonial-modal" class="modal">
+        <div class="modal-content">
+            <span class="close" id="add-testimonial-close">×</span>
+            <div class="p-4">
+                <h2 class="text-2xl font-bold text-white mb-4">Deixe seu Depoimento</h2>
+                <form id="testimonial-form" class="space-y-4">
+                    <div>
+                        <label for="testimonial-name" class="block text-sm font-medium text-gray-300">Seu Nome:</label>
+                        <input type="text" id="testimonial-name" class="mt-1 block w-full border border-gray-600 rounded-md shadow-sm p-2 bg-gray-700 text-white" required>
+                    </div>
+                    <div>
+                        <label for="testimonial-rating" class="block text-sm font-medium text-gray-300 mb-2">Sua Avaliação:</label>
+                        <div class="rating-stars">
+                            <input type="radio" id="star5" name="rating" value="5" required /><label for="star5" title="5 estrelas"><i class="fas fa-star"></i></label>
+                            <input type="radio" id="star4" name="rating" value="4" /><label for="star4" title="4 estrelas"><i class="fas fa-star"></i></label>
+                            <input type="radio" id="star3" name="rating" value="3" /><label for="star3" title="3 estrelas"><i class="fas fa-star"></i></label>
+                            <input type="radio" id="star2" name="rating" value="2" /><label for="star2" title="2 estrelas"><i class="fas fa-star"></i></label>
+                            <input type="radio" id="star1" name="rating" value="1" /><label for="star1" title="1 estrela"><i class="fas fa-star"></i></label>
+                        </div>
+                    </div>
+                    <div>
+                        <label for="testimonial-comment" class="block text-sm font-medium text-gray-300">Seu Depoimento:</label>
+                        <textarea id="testimonial-comment" rows="5" class="mt-1 block w-full border border-gray-600 rounded-md shadow-sm p-2 bg-gray-700 text-white" required></textarea>
+                    </div>
+                    <button type="submit" class="w-full bg-primary hover:bg-purple-700 text-white font-bold py-3 px-6 rounded-lg transition-colors">
+                        <i class="fas fa-paper-plane mr-2"></i> Enviar Depoimento
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+
 
     <script>
         // Variável global para o token JWT
@@ -785,17 +815,16 @@
 
         // Variáveis globais para elementos do DOM (serão atribuídas em DOMContentLoaded)
         let adminLoginBtn, logoutBtn, changePasswordBtn, editSocialLinksBtn;
-        let adminLoginModal, changePasswordModal, socialLinksModal, projectModal, portfolioModal;
-        let adminLoginClose, changePasswordClose, socialLinksClose, projectClose, portfolioClose;
-        let adminLoginForm, changePasswordForm, socialLinksForm, projectForm, portfolioForm;
+        let adminLoginModal, changePasswordModal, socialLinksModal, projectModal, portfolioModal, addTestimonialModal;
+        let adminLoginClose, changePasswordClose, socialLinksClose, projectClose, portfolioClose, addTestimonialClose;
+        let adminLoginForm, changePasswordForm, socialLinksForm, projectForm, portfolioForm, testimonialForm;
         let projectsContainer, noProjectsMessage, adminProjectsButton, addProjectBtn;
         let portfolioContainer, noPortfolioMessage, adminPortfolioButton, addPortfolioBtn;
+        let testimonialsContainer, noTestimonialsMessage, addTestimonialBtn; // Novos elementos para depoimentos
         let adminLoginIcon;
 
         // --- Funções Auxiliares (podem ser definidas fora de DOMContentLoaded) ---
         async function fetchAPI(endpoint, method = 'GET', data = null, needsAuth = false) {
-            // O baseURL já aponta para a função Netlify.
-            // O endpoint NÃO deve conter '/api/' se ele já estiver incluído no netlify.toml
             const baseURL = '/.netlify/functions/api'; 
             
             const options = {
@@ -809,7 +838,7 @@
                 const token = localStorage.getItem(JWT_TOKEN_KEY);
                 if (!token) {
                     console.error('Nenhum token JWT encontrado');
-                    logout(); // Chama a função logout se não houver token
+                    logout();
                     return null;
                 }
                 options.headers['Authorization'] = `Bearer ${token}`;
@@ -820,7 +849,6 @@
             }
 
             try {
-                // Concatena baseURL e endpoint. Endpoint NÃO deve começar com '/api/' aqui.
                 const url = `${baseURL}${endpoint.startsWith('/') ? endpoint : '/' + endpoint}`;
                 const response = await fetch(url, options);
                 
@@ -852,7 +880,7 @@
 
         function logout() {
             localStorage.removeItem(JWT_TOKEN_KEY);
-            checkLoginStatus(); // Atualiza a UI para o modo não-admin
+            checkLoginStatus();
             alert('Você foi desconectado.');
         }
 
@@ -864,11 +892,10 @@
         function closeModal(modal) {
             modal.style.display = 'none';
             document.body.classList.remove('overflow-hidden');
-            // Resetar formulários ao fechar
-            // Verificações para garantir que as variáveis existam antes de resetar
             if (modal === projectModal && projectForm) projectForm.reset();
             if (modal === portfolioModal && portfolioForm) portfolioForm.reset();
             if (modal === changePasswordModal && changePasswordForm) changePasswordForm.reset();
+            if (modal === addTestimonialModal && testimonialForm) testimonialForm.reset(); // Resetar formulário de depoimento
         }
 
         function toggleAdminMode(enable) {
@@ -883,6 +910,7 @@
             }
             fetchProjects();
             fetchPortfolio();
+            fetchTestimonials(); // Atualizar depoimentos no modo admin
         }
 
         function checkLoginStatus() {
@@ -916,7 +944,7 @@
 
         // --- Funções de CRUD de Projetos ---
         async function fetchProjects() {
-            const projects = await fetchAPI('/projects'); // Removido '/api/'
+            const projects = await fetchAPI('/projects');
             if (projects) {
                 projectsContainer.innerHTML = '';
                 if (projects.length === 0) {
@@ -960,7 +988,7 @@
 
         async function deleteProject(id) {
             if (confirm('Tem certeza que deseja excluir este projeto?')) {
-                const response = await fetchAPI(`/projects/${id}`, 'DELETE', null, true); // Removido '/api/'
+                const response = await fetchAPI(`/projects/${id}`, 'DELETE', null, true);
                 if (response !== null) {
                     alert('Projeto excluído com sucesso!');
                     fetchProjects();
@@ -970,7 +998,7 @@
 
         // --- Funções de CRUD de Portfólio ---
         async function fetchPortfolio() {
-            const portfolioItems = await fetchAPI('/portfolio'); // Removido '/api/'
+            const portfolioItems = await fetchAPI('/portfolio');
             if (portfolioItems) {
                 portfolioContainer.innerHTML = '';
                 if (portfolioItems.length === 0) {
@@ -1014,7 +1042,7 @@
 
         async function deletePortfolioItem(id) {
             if (confirm('Tem certeza que deseja excluir este item de portfólio?')) {
-                const response = await fetchAPI(`/portfolio/${id}`, 'DELETE', null, true); // Removido '/api/'
+                const response = await fetchAPI(`/portfolio/${id}`, 'DELETE', null, true);
                 if (response !== null) {
                     alert('Item de portfólio excluído com sucesso!');
                     fetchPortfolio();
@@ -1022,9 +1050,91 @@
             }
         }
 
+        // --- Funções de CRUD de Depoimentos ---
+        async function fetchTestimonials() {
+            // Se for admin, busca todos os depoimentos (aprovados e pendentes)
+            // Se não for admin, busca apenas os aprovados
+            const endpoint = document.body.classList.contains('admin-mode') ? '/testimonials/all' : '/testimonials';
+            const testimonials = await fetchAPI(endpoint, 'GET', null, document.body.classList.contains('admin-mode'));
+
+            if (testimonials) {
+                testimonialsContainer.innerHTML = '';
+                if (testimonials.length === 0) {
+                    noTestimonialsMessage.classList.remove('hidden');
+                } else {
+                    noTestimonialsMessage.classList.add('hidden');
+                    testimonials.forEach(testimonial => {
+                        const starsHtml = Array(testimonial.rating).fill('<i class="fas fa-star"></i>').join('');
+                        const emptyStarsHtml = Array(5 - testimonial.rating).fill('<i class="far fa-star"></i>').join(''); // Estrelas vazias
+
+                        const adminActionsHtml = document.body.classList.contains('admin-mode') ? `
+                            <div class="flex gap-2 mt-4">
+                                ${!testimonial.approved ? `<button onclick="approveTestimonial('${testimonial._id}')" class="bg-green-500 hover:bg-green-600 text-white p-2 rounded-full"><i class="fas fa-check"></i> Aprovar</button>` : ''}
+                                <button onclick="deleteTestimonial('${testimonial._id}')" class="bg-red-500 hover:bg-red-600 text-white p-2 rounded-full"><i class="fas fa-trash-alt"></i> Excluir</button>
+                            </div>
+                        ` : '';
+
+                        const statusBadgeHtml = document.body.classList.contains('admin-mode') ? `
+                            <div class="testimonial-status-badge ${testimonial.approved ? 'approved' : 'pending'}">
+                                ${testimonial.approved ? 'APROVADO' : 'PENDENTE'}
+                            </div>
+                        ` : '';
+
+                        testimonialsContainer.innerHTML += `
+                            <div class="bg-white p-8 rounded-lg shadow-lg relative">
+                                ${statusBadgeHtml}
+                                <div class="flex items-center mb-4">
+                                    <div class="w-12 h-12 bg-primary/20 rounded-full flex items-center justify-center mr-4">
+                                        <span class="text-primary font-bold">${testimonial.name.substring(0, 2).toUpperCase()}</span>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-bold">${testimonial.name}</h4>
+                                        <p class="text-gray-600 text-sm">Cliente</p>
+                                    </div>
+                                </div>
+                                <p class="text-gray-600 italic">"${testimonial.comment}"</p>
+                                <div class="mt-4 flex text-yellow-400">
+                                    ${starsHtml}${emptyStarsHtml}
+                                </div>
+                                ${adminActionsHtml}
+                            </div>
+                        `;
+                    });
+                }
+            }
+        }
+
+        async function submitTestimonial(name, rating, comment) {
+            const testimonialData = { name, rating, comment };
+            const response = await fetchAPI('/testimonials', 'POST', testimonialData);
+            if (response) {
+                alert('Seu depoimento foi enviado com sucesso e será revisado em breve!');
+                closeModal(addTestimonialModal);
+                fetchTestimonials(); // Atualiza a lista para mostrar o novo depoimento (se for admin)
+            }
+        }
+
+        async function approveTestimonial(id) {
+            if (confirm('Tem certeza que deseja aprovar este depoimento?')) {
+                const response = await fetchAPI(`/testimonials/${id}/approve`, 'PUT', null, true);
+                if (response) {
+                    alert('Depoimento aprovado com sucesso!');
+                    fetchTestimonials();
+                }
+            }
+        }
+
+        async function deleteTestimonial(id) {
+            if (confirm('Tem certeza que deseja excluir este depoimento?')) {
+                const response = await fetchAPI(`/testimonials/${id}`, 'DELETE', null, true);
+                if (response !== null) {
+                    alert('Depoimento excluído com sucesso!');
+                    fetchTestimonials();
+                }
+            }
+        }
+
         // --- Navegação Mobile ---
-        // Estes event listeners podem permanecer fora de DOMContentLoaded se os elementos já existirem no HTML
-        // Mas para consistência e segurança, movê-los para dentro é uma boa prática.
         document.getElementById('mobile-menu-button').addEventListener('click', () => {
             document.getElementById('mobile-menu').classList.add('active');
         });
@@ -1052,18 +1162,21 @@
             socialLinksModal = document.getElementById('social-links-modal');
             projectModal = document.getElementById('project-modal');
             portfolioModal = document.getElementById('portfolio-modal');
+            addTestimonialModal = document.getElementById('add-testimonial-modal'); // Novo modal
 
             adminLoginClose = document.getElementById('admin-login-close');
             changePasswordClose = document.getElementById('change-password-close');
             socialLinksClose = document.getElementById('social-links-close');
             projectClose = document.getElementById('project-close');
             portfolioClose = document.getElementById('portfolio-close');
+            addTestimonialClose = document.getElementById('add-testimonial-close'); // Novo close button
 
             adminLoginForm = document.getElementById('admin-login-form');
             changePasswordForm = document.getElementById('change-password-form');
             socialLinksForm = document.getElementById('social-links-form');
             projectForm = document.getElementById('project-form');
             portfolioForm = document.getElementById('portfolio-form');
+            testimonialForm = document.getElementById('testimonial-form'); // Novo formulário
 
             projectsContainer = document.getElementById('projects-container');
             noProjectsMessage = document.getElementById('no-projects-message');
@@ -1075,11 +1188,14 @@
             adminPortfolioButton = document.getElementById('admin-portfolio-button');
             addPortfolioBtn = document.getElementById('add-portfolio-btn');
 
+            testimonialsContainer = document.getElementById('testimonials-container'); // Novo container
+            noTestimonialsMessage = document.getElementById('no-testimonials-message'); // Nova mensagem
+            addTestimonialBtn = document.getElementById('add-testimonial-btn'); // Novo botão
+
             adminLoginIcon = document.getElementById('admin-login-icon');
 
 
             // --- Event Listeners para Modals e Botões Principais ---
-            // Estes são atribuídos aqui para garantir que os elementos já foram carregados
             adminLoginBtn.onclick = () => openModal(adminLoginModal);
             adminLoginClose.onclick = () => closeModal(adminLoginModal);
             changePasswordBtn.onclick = () => openModal(changePasswordModal);
@@ -1087,6 +1203,7 @@
             socialLinksClose.onclick = () => closeModal(socialLinksModal);
             projectClose.onclick = () => closeModal(projectModal);
             portfolioClose.onclick = () => closeModal(portfolioModal);
+            addTestimonialClose.onclick = () => closeModal(addTestimonialModal); // Novo event listener para fechar
 
             window.onclick = (event) => {
                 if (event.target == adminLoginModal) closeModal(adminLoginModal);
@@ -1094,6 +1211,7 @@
                 if (event.target == socialLinksModal) closeModal(socialLinksModal);
                 if (event.target == projectModal) closeModal(projectModal);
                 if (event.target == portfolioModal) closeModal(portfolioModal);
+                if (event.target == addTestimonialModal) closeModal(addTestimonialModal); // Novo event listener para fechar
             };
 
             // --- Funcionalidade de Login ---
@@ -1102,7 +1220,7 @@
                 const username = document.getElementById('admin-username').value;
                 const password = document.getElementById('admin-password').value;
 
-                const data = await fetchAPI('/login', 'POST', { username, password }); // Removido '/api/'
+                const data = await fetchAPI('/login', 'POST', { username, password });
                 if (data && data.token) {
                     localStorage.setItem(JWT_TOKEN_KEY, data.token);
                     alert('Login bem-sucedido!');
@@ -1131,7 +1249,7 @@
                     return;
                 }
 
-                const data = await fetchAPI('/change-password', 'POST', { oldPassword, newPassword }, true); // Removido '/api/'
+                const data = await fetchAPI('/change-password', 'POST', { oldPassword, newPassword }, true);
                 if (data) {
                     alert(data.message);
                     closeModal(changePasswordModal);
@@ -1141,7 +1259,7 @@
 
             // --- Links Sociais ---
             editSocialLinksBtn.addEventListener('click', async () => {
-                const socialLinks = await fetchAPI('/social-links', 'GET'); // Removido '/api/'
+                const socialLinks = await fetchAPI('/social-links', 'GET');
                 if (socialLinks) {
                     document.getElementById('instagram-link').value = socialLinks.instagram || '';
                     document.getElementById('facebook-link').value = socialLinks.facebook || '';
@@ -1159,7 +1277,7 @@
                     spotify: document.getElementById('spotify-link-global').value,
                     youtube: document.getElementById('youtube-link-global').value,
                 };
-                const data = await fetchAPI('/social-links', 'PUT', updates, true); // Removido '/api/'
+                const data = await fetchAPI('/social-links', 'PUT', updates, true);
                 if (data) {
                     alert(data.message);
                     closeModal(socialLinksModal);
@@ -1187,12 +1305,12 @@
                 const projectId = projectIdInput.value;
 
                 if (projectId) {
-                    const response = await fetchAPI(`/projects/${projectId}`, 'PUT', projectData, true); // Removido '/api/'
+                    const response = await fetchAPI(`/projects/${projectId}`, 'PUT', projectData, true);
                     if (response) {
                         alert('Projeto atualizado com sucesso!');
                     }
                 } else {
-                    const response = await fetchAPI('/projects', 'POST', projectData, true); // Removido '/api/'
+                    const response = await fetchAPI('/projects', 'POST', projectData, true);
                     if (response) {
                         alert('Projeto adicionado com sucesso!');
                     }
@@ -1222,12 +1340,12 @@
                 const portfolioId = portfolioIdInput.value;
 
                 if (portfolioId) {
-                    const response = await fetchAPI(`/portfolio/${portfolioId}`, 'PUT', itemData, true); // Removido '/api/'
+                    const response = await fetchAPI(`/portfolio/${portfolioId}`, 'PUT', itemData, true);
                     if (response) {
                         alert('Item de portfólio atualizado com sucesso!');
                     }
                 } else {
-                    const response = await fetchAPI('/portfolio', 'POST', itemData, true); // Removido '/api/'
+                    const response = await fetchAPI('/portfolio', 'POST', itemData, true);
                     if (response) {
                         alert('Item de portfólio adicionado com sucesso!');
                     }
@@ -1236,10 +1354,26 @@
                 fetchPortfolio();
             });
 
+            // Event listener for testimonial form
+            addTestimonialBtn.addEventListener('click', () => {
+                testimonialForm.reset(); // Limpa o formulário antes de abrir
+                openModal(addTestimonialModal);
+            });
+
+            testimonialForm.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                const name = document.getElementById('testimonial-name').value;
+                const rating = parseInt(document.querySelector('input[name="rating"]:checked').value);
+                const comment = document.getElementById('testimonial-comment').value;
+
+                await submitTestimonial(name, rating, comment);
+            });
+
             // Chamadas iniciais
             checkLoginStatus();
             fetchProjects();
             fetchPortfolio();
+            fetchTestimonials(); // Adicionado para carregar os depoimentos
         });
     </script>
 </body>
