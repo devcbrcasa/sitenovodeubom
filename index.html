@@ -539,37 +539,37 @@
             
             <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
                 <div>
-                    <form id="contact-form" class="space-y-6">
-                        <div>
-                            <label for="name" class="block mb-2 font-medium">Nome</label>
-                            <input type="text" id="name" class="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-lg focus:outline-none focus:border-primary text-white" placeholder="Seu nome">
-                        </div>
-                        
-                        <div>
-                            <label for="email" class="block mb-2 font-medium">Email</label>
-                            <input type="email" id="email" class="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-lg focus:outline-none focus:border-primary text-white" placeholder="seu@email.com">
-                        </div>
-                        
-                        <div>
-                            <label for="service" class="block mb-2 font-medium">Serviço de Interesse</label>
-                            <select id="service" class="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-lg focus:outline-none focus:border-primary text-white">
-                                <option value="" disabled selected>Selecione um serviço</option>
-                                <option value="recording">Gravação</option>
-                                <option value="mixing">Mixagem</option>
-                                <option value="mastering">Masterização</option>
-                                <option value="production">Produção Musical</option>
-                                <option value="distribution">Distribuição Digital</option>
-                                <option value="other">Outro</option>
-                            </select>
-                        </div>
-                        
-                        <div>
-                            <label for="message" class="block mb-2 font-medium">Mensagem</label>
-                            <textarea id="message" rows="5" class="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-lg focus:outline-none focus:border-primary text-white" placeholder="Conte-nos sobre seu projeto..."></textarea>
-                        </div>
-                        
-                        <button type="submit" class="w-full bg-primary hover:bg-purple-700 text-white font-bold py-3 px-6 rounded-lg transition-colors">Enviar Mensagem</button>
-                    </form>
+                    <form name="contact" method="POST" data-netlify="true" class="space-y-6">
+    <div>
+        <label for="name" class="block mb-2 font-medium">Nome</label>
+        <input type="text" id="name" name="name" class="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-lg focus:outline-none focus:border-primary text-white" placeholder="Seu nome">
+    </div>
+    
+    <div>
+        <label for="email" class="block mb-2 font-medium">Email</label>
+        <input type="email" id="email" name="email" class="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-lg focus:outline-none focus:border-primary text-white" placeholder="seu@email.com">
+    </div>
+    
+    <div>
+        <label for="service" class="block mb-2 font-medium">Serviço de Interesse</label>
+        <select id="service" name="service" class="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-lg focus:outline-none focus:border-primary text-white">
+            <option value="" disabled selected>Selecione um serviço</option>
+            <option value="recording">Gravação</option>
+            <option value="mixing">Mixagem</option>
+            <option value="mastering">Masterização</option>
+            <option value="production">Produção Musical</option>
+            <option value="distribution">Distribuição Digital</option>
+            <option value="other">Outro</option>
+        </select>
+    </div>
+    
+    <div>
+        <label for="message" class="block mb-2 font-medium">Mensagem</label>
+        <textarea id="message" name="message" rows="5" class="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-lg focus:outline-none focus:border-primary text-white" placeholder="Conte-nos sobre seu projeto..."></textarea>
+    </div>
+    
+    <button type="submit" class="w-full bg-primary hover:bg-purple-700 text-white font-bold py-3 px-6 rounded-lg transition-colors">Enviar Mensagem</button>
+</form>
                 </div>
                 
                 <div>
