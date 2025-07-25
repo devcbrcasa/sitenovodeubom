@@ -949,7 +949,10 @@
                     <div>
                         <label for="youtube-video-youtube-id" class="block text-sm font-medium text-gray-300">ID do Vídeo/Playlist do YouTube:</label>
                         <input type="text" id="youtube-video-youtube-id" class="mt-1 block w-full border border-gray-600 rounded-md shadow-sm p-2 bg-gray-700 text-white" placeholder="Ex: dQw4w9WgXcQ (vídeo) ou PL... (playlist)" required>
-                        <p class="text-xs text-gray-400 mt-1">Encontre o ID na URL do YouTube (ex: `watch?v=<ID_AQUI>` ou `playlist?list=<ID_AQUI>`).</p>
+                        <p class="text-xs text-gray-400 mt-1">
+                            Para **vídeos**, use apenas o ID (ex: `dQw4w9WgXcQ` de `youtube.com/watch?v=dQw4w9WgXcQ`).<br>
+                            Para **playlists**, use o ID da playlist (ex: `PL...` de `youtube.com/playlist?list=PL...`).
+                        </p>
                     </div>
                     <button type="submit" class="w-full bg-primary hover:bg-purple-700 text-white font-bold py-3 px-6 rounded-lg transition-colors">
                         <i class="fas fa-save mr-2"></i> Salvar Vídeo/Playlist
@@ -1422,11 +1425,33 @@
                 embedUrl = `https://www.youtube.com/embed/videoseries?list=${youtubeId}&autoplay=1&rel=0`;
             }
 
-            youtubePlayerContainer.innerHTML = `
-                <iframe src="${embedUrl}" 
-                        frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                        allowfullscreen class="w-full h-full rounded-lg"></iframe>
-            `;
+            console.log('Tentando carregar vídeo do YouTube. ID:', youtubeId, 'Tipo:', type, 'URL de embed:', embedUrl); // Debug log
+
+            if (!youtubePlayerContainer) {
+                console.error('Erro: youtubePlayerContainer não encontrado!');
+                return;
+            }
+
+            // Limpa o conteúdo existente do container
+            youtubePlayerContainer.innerHTML = '';
+
+            const iframe = document.createElement('iframe');
+            iframe.src = embedUrl;
+            iframe.frameBorder = "0";
+            // Adicione 'autoplay' aqui também para garantir, embora o parâmetro na URL já faça isso
+            iframe.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture";
+            iframe.allowFullscreen = true;
+            iframe.classList.add('w-full', 'h-full', 'rounded-lg'); // Aplica classes Tailwind
+
+            iframe.onload = () => {
+                console.log('Iframe do YouTube carregado com sucesso!');
+            };
+            iframe.onerror = (e) => {
+                console.error('Erro ao carregar iframe do YouTube:', e);
+                youtubePlayerContainer.innerHTML = '<p class="text-red-500 text-center py-8">Erro ao carregar o vídeo do YouTube. Verifique o ID.</p>';
+            };
+
+            youtubePlayerContainer.appendChild(iframe);
         }
 
         async function fetchYoutubeVideos() {
@@ -1443,10 +1468,12 @@
                     noYoutubeVideosMessage.classList.add('hidden');
                     // Renderiza os vídeos na lista para seleção
                     youtubeVideos.forEach((video, index) => {
+                        // Tenta obter uma thumbnail padrão do YouTube
+                        const thumbnailUrl = `https://img.youtube.com/vi/${video.youtubeId}/mqdefault.jpg`;
                         youtubeVideosList.innerHTML += `
                             <div class="youtube-video-card bg-secondary text-white rounded-lg shadow-lg overflow-hidden relative p-4 flex flex-col items-center text-center" onclick="playYoutubeVideo(${index})">
                                 <div class="admin-badge ${document.body.classList.contains('admin-mode') ? '' : 'hidden'}">ADMIN</div>
-                                <img src="https://img.youtube.com/vi/${video.youtubeId}/mqdefault.jpg" alt="${video.title}" class="w-full h-24 object-cover rounded-md mb-3">
+                                <img src="${thumbnailUrl}" alt="${video.title}" class="w-full h-24 object-cover rounded-md mb-3" onerror="this.onerror=null;this.src='https://via.placeholder.com/128x72?text=Video+YouTube';">
                                 <h3 class="text-lg font-bold">${video.title}</h3>
                                 <p class="text-gray-400 text-sm">${video.type === 'video' ? 'Vídeo' : 'Playlist'}</p>
                                 <div class="youtube-video-actions absolute top-2 right-2 flex gap-2 ${document.body.classList.contains('admin-mode') ? '' : 'hidden'}">
@@ -1456,15 +1483,20 @@
                             </div>
                         `;
                     });
-                    // Carrega o primeiro vídeo automaticamente
-                    playYoutubeVideo(0);
+                    // Carrega o primeiro vídeo automaticamente, se houver
+                    if (youtubeVideos.length > 0) {
+                        playYoutubeVideo(0);
+                    }
                 }
                 updateYoutubeControls();
             }
         }
 
         function playYoutubeVideo(index) {
-            if (youtubeVideos.length === 0) return;
+            if (youtubeVideos.length === 0) {
+                console.warn('Nenhum vídeo do YouTube para reproduzir.');
+                return;
+            }
             currentYoutubeVideoIndex = index;
             const video = youtubeVideos[currentYoutubeVideoIndex];
             loadYoutubePlayer(video.youtubeId, video.type);
