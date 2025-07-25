@@ -12,7 +12,7 @@ import jwt
 app = Flask(__name__)
 
 # Configuração do MongoDB
-# As variáveis de ambiente serão lidas do Netlify
+# As variáveis de ambiente serão lidas do NWetlify
 MONGO_URI = os.environ.get('MONGODB_URI')
 if not MONGO_URI:
     # Se estiver testando localmente sem as variáveis de ambiente, defina-as aqui
