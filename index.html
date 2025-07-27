@@ -292,6 +292,25 @@
         .spotify-track-card:hover {
             transform: translateY(-5px);
         }
+        /* Estilos para os botões de ação do Spotify Track Card */
+        .spotify-track-actions {
+            display: none; /* Escondido por padrão */
+            position: absolute;
+            top: 8px; /* Ajustado para um pouco mais de espaço */
+            right: 8px; /* Ajustado para um pouco mais de espaço */
+            z-index: 20;
+            gap: 6px; /* Espaçamento entre os botões */
+        }
+        /* Mostra os botões de ação em modo admin */
+        .admin-mode .spotify-track-actions {
+            display: flex;
+        }
+        /* Pequenos ajustes para os botões dentro do card */
+        .spotify-track-actions button {
+            padding: 6px; /* Aumenta o padding para um target maior */
+            font-size: 0.8rem; /* Mantém o tamanho da fonte razoável */
+            border-radius: 9999px; /* Totalmente redondo */
+        }
     </style>
 </head>
 <body class="bg-primary text-gray-800">
@@ -476,7 +495,7 @@
                 </div>
             </div>
 
-            <div id="spotify-tracks-container" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+            <div id="spotify-tracks-container" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6">
                 <p id="no-spotify-tracks-message" class="col-span-full text-center text-gray-500 text-lg hidden">Nenhuma música disponível ainda. Adicione uma!</p>
                 <!-- As músicas do Spotify serão carregadas aqui via JS -->
             </div>
@@ -1228,11 +1247,30 @@
 
         // --- Funções de CRUD de Músicas Spotify ---
         function loadSpotifyPlayer(spotifyId) {
+            console.log('Tentando carregar player do Spotify com ID:', spotifyId); // LOG DE DEBUG
+
+            if (!spotifyId) {
+                console.error('Erro: spotifyId está vazio. Não é possível carregar o player.');
+                spotifyPlayerIframeContainer.innerHTML = '<p class="text-red-500 text-center py-8">ID da música Spotify inválido. Por favor, verifique o ID.</p>';
+                return;
+            }
+            
             spotifyPlayerIframeContainer.innerHTML = `
                 <iframe src="https://open.spotify.com/embed/track/${spotifyId}?utm_source=generator" 
                         width="100%" height="380" frameborder="0" allowtransparency="true" 
                         allow="encrypted-media; fullscreen; picture-in-picture"></iframe>
             `;
+            // Adiciona um listener para verificar se o iframe carregou
+            const iframe = spotifyPlayerIframeContainer.querySelector('iframe');
+            if (iframe) {
+                iframe.onload = () => {
+                    console.log('Iframe do Spotify carregado com sucesso para ID:', spotifyId);
+                };
+                iframe.onerror = (e) => {
+                    console.error('Erro ao carregar iframe do Spotify para ID:', spotifyId, e);
+                    spotifyPlayerIframeContainer.innerHTML = '<p class="text-red-500 text-center py-8">Erro ao carregar o player do Spotify. Verifique o ID da música.</p>';
+                };
+            }
         }
 
         async function fetchSpotifyTracks() {
@@ -1245,11 +1283,11 @@
                     noSpotifyTracksMessage.classList.add('hidden');
                     spotifyTracks.forEach(track => {
                         spotifyTracksContainer.innerHTML += `
-                            <div class="spotify-track-card bg-secondary text-white rounded-lg shadow-lg overflow-hidden relative p-4 flex flex-col items-center text-center" onclick="loadSpotifyPlayer('${track.spotifyId}')">
+                            <div class="spotify-track-card bg-secondary text-white rounded-lg shadow-lg overflow-hidden relative p-4 flex flex-col items-center text-center flex-shrink-0 min-w-0" onclick="loadSpotifyPlayer('${track.spotifyId}')">
                                 <div class="admin-badge ${document.body.classList.contains('admin-mode') ? '' : 'hidden'}">ADMIN</div>
                                 <img src="${track.image_url || 'https://via.placeholder.com/150x150?text=Capa'}" alt="${track.title}" class="w-24 h-24 rounded-full object-cover mb-3">
-                                <h3 class="text-lg font-bold">${track.title}</h3>
-                                <p class="text-gray-400 text-sm">${track.artist}</p>
+                                <h3 class="text-lg font-bold truncate w-full">${track.title}</h3>
+                                <p class="text-gray-400 text-sm truncate w-full">${track.artist}</p>
                                 <div class="spotify-track-actions absolute top-2 right-2 flex gap-2 ${document.body.classList.contains('admin-mode') ? '' : 'hidden'}">
                                     <button onclick="event.stopPropagation(); editSpotifyTrack('${track._id}', '${track.title.replace(/'/g, "\\'")}', '${track.artist.replace(/'/g, "\\'")}', '${track.spotifyId}', '${track.image_url}')" class="bg-blue-500 hover:bg-blue-600 text-white p-2 rounded-full text-xs"><i class="fas fa-edit"></i></button>
                                     <button onclick="event.stopPropagation(); deleteSpotifyTrack('${track._id}')" class="bg-red-500 hover:bg-red-600 text-white p-2 rounded-full text-xs"><i class="fas fa-trash-alt"></i></button>
