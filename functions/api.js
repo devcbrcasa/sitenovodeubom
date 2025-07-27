@@ -10,7 +10,7 @@ const dotenv = require('dotenv');
 dotenv.config();
 
 const app = express();
-const router = express.Router(); // Corrigido para express.Router()
+const router = express.Router();
 
 // Middleware para parsear JSON
 app.use(express.json());
@@ -94,7 +94,7 @@ const SpotifyTrackSchema = new mongoose.Schema({
 
 const SpotifyTrack = mongoose.model('SpotifyTrack', SpotifyTrackSchema);
 
-// NOVO SCHEMA PARA BLOG POSTS
+// Schema para Blog Posts
 const BlogPostSchema = new mongoose.Schema({
     title: { type: String, required: true },
     content: { type: String, required: true },
@@ -105,6 +105,18 @@ const BlogPostSchema = new mongoose.Schema({
 });
 
 const BlogPost = mongoose.model('BlogPost', BlogPostSchema);
+
+// NOVO SCHEMA PARA PACKS E ACAPELLAS (DOWNLOADABLE ITEMS)
+const DownloadableItemSchema = new mongoose.Schema({
+    title: { type: String, required: true },
+    description: { type: String, required: true },
+    type: { type: String, required: true, enum: ['pack', 'acapella', 'outro'] }, // Tipo do item (pack, acapella, etc.)
+    download_url: { type: String, required: true }, // Link para download externo
+    image_url: { type: String, default: '' }, // Imagem de capa para o item
+    createdAt: { type: Date, default: Date.now }
+});
+
+const DownloadableItem = mongoose.model('DownloadableItem', DownloadableItemSchema);
 
 
 // --- Middleware de Autenticação ---
@@ -466,7 +478,7 @@ router.delete('/spotify-tracks/:id', authenticateToken, async (req, res) => {
     }
 });
 
-// --- NOVAS ROTAS PARA BLOG POSTS ---
+// --- Rotas para Blog Posts ---
 
 // Rota para adicionar um novo post de blog (admin-only)
 router.post('/blog-posts', authenticateToken, async (req, res) => {
@@ -539,6 +551,72 @@ router.delete('/blog-posts/:id', authenticateToken, async (req, res) => {
         res.status(204).send(); // No Content
     } catch (error) {
         res.status(500).json({ message: 'Erro ao excluir post de blog.', error: error.message });
+    }
+});
+
+// --- NOVAS ROTAS PARA PACKS E ACAPELLAS (DOWNLOADABLE ITEMS) ---
+
+// Rota para adicionar um novo item de download (admin-only)
+router.post('/downloadable-items', authenticateToken, async (req, res) => {
+    try {
+        const { title, description, type, download_url, image_url } = req.body;
+        if (!title || !description || !type || !download_url) {
+            return res.status(400).json({ message: 'Título, descrição, tipo e URL de download são obrigatórios para o item.' });
+        }
+        const newItem = new DownloadableItem({ title, description, type, download_url, image_url });
+        await newItem.save();
+        res.status(201).json({ message: 'Item de download adicionado com sucesso!', item: newItem });
+    } catch (error) {
+        res.status(500).json({ message: 'Erro ao adicionar item de download.', error: error.message });
+    }
+});
+
+// Rota para obter todos os itens de download (público)
+router.get('/downloadable-items', async (req, res) => {
+    try {
+        const items = await DownloadableItem.find({}).sort({ createdAt: -1 }); // Ordena pelos mais recentes
+        res.json(items);
+    } catch (error) {
+        res.status(500).json({ message: 'Erro ao buscar itens de download.', error: error.message });
+    }
+});
+
+// Rota para obter um único item de download por ID (público)
+router.get('/downloadable-items/:id', async (req, res) => {
+    try {
+        const item = await DownloadableItem.findById(req.params.id);
+        if (!item) {
+            return res.status(404).json({ message: 'Item de download não encontrado.' });
+        }
+        res.json(item);
+    } catch (error) {
+        res.status(500).json({ message: 'Erro ao buscar item de download.', error: error.message });
+    }
+});
+
+// Rota para atualizar um item de download por ID (admin-only)
+router.put('/downloadable-items/:id', authenticateToken, async (req, res) => {
+    try {
+        const updatedItem = await DownloadableItem.findByIdAndUpdate(req.params.id, req.body, { new: true });
+        if (!updatedItem) {
+            return res.status(404).json({ message: 'Item de download não encontrado.' });
+        }
+        res.json({ message: 'Item de download atualizado com sucesso!', item: updatedItem });
+    } catch (error) {
+        res.status(400).json({ message: 'Erro ao atualizar item de download.', error: error.message });
+    }
+});
+
+// Rota para excluir um item de download por ID (admin-only)
+router.delete('/downloadable-items/:id', authenticateToken, async (req, res) => {
+    try {
+        const deletedItem = await DownloadableItem.findByIdAndDelete(req.params.id);
+        if (!deletedItem) {
+            return res.status(404).json({ message: 'Item de download não encontrado.' });
+        }
+        res.status(204).send(); // No Content
+    } catch (error) {
+        res.status(500).json({ message: 'Erro ao excluir item de download.', error: error.message });
     }
 });
 
