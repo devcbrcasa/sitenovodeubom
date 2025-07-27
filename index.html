@@ -381,6 +381,26 @@
             background-color: rgba(251, 191, 36, 0.9); /* yellow-400 */
             color: white;
         }
+
+        /* Estilos para o contêiner do vídeo do YouTube */
+        .video-container {
+            position: relative;
+            width: 100%;
+            padding-bottom: 56.25%; /* 16:9 Aspect Ratio (divide 9 by 16 = 0.5625) */
+            height: 0;
+            overflow: hidden;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
     </style>
 </head>
 <body class="bg-primary text-gray-800">
@@ -405,7 +425,7 @@
                 <a href="#projects" class="hover:text-primary transition-colors">Projetos</a>
                 <a href="#portfolio" class="hover:text-primary transition-colors">Portfólio</a>
                 <a href="#music-player" class="hover:text-primary transition-colors">Músicas</a>
-                <a href="#packs-acapellas" class="hover:text-primary transition-colors">Packs & Acapellas</a> <!-- NOVO LINK -->
+                <a href="#packs-acapellas" class="hover:text-primary transition-colors">Packs & Acapellas</a>
                 <a href="#blog" class="hover:text-primary transition-colors">Blog</a>
                 <a href="#studio" class="hover:text-primary transition-colors">Estúdio</a>
                 <a href="#testimonials" class="hover:text-primary transition-colors">Depoimentos</a>
@@ -430,7 +450,7 @@
                 <a href="#projects" class="hover:text-primary transition-colors">Projetos</a>
                 <a href="#portfolio" class="hover:text-primary transition-colors">Portfólio</a>
                 <a href="#music-player" class="hover:text-primary transition-colors">Músicas</a>
-                <a href="#packs-acapellas" class="hover:text-primary transition-colors">Packs & Acapellas</a> <!-- NOVO LINK -->
+                <a href="#packs-acapellas" class="hover:text-primary transition-colors">Packs & Acapellas</a>
                 <a href="#blog" class="hover:text-primary transition-colors">Blog</a>
                 <a href="#studio" class="hover:text-primary transition-colors">Estúdio</a>
                 <a href="#testimonials" class="hover:text-primary transition-colors">Depoimentos</a>
@@ -582,7 +602,7 @@
         </div>
     </section>
 
-    <!-- NOVA SEÇÃO: PACKS E ACAPELLAS -->
+    <!-- SEÇÃO: PACKS E ACAPELLAS -->
     <section id="packs-acapellas" class="py-20 bg-white">
         <div class="container mx-auto px-4">
             <div class="text-center mb-16">
@@ -602,7 +622,7 @@
             </div>
         </div>
     </section>
-    <!-- FIM NOVA SEÇÃO: PACKS E ACAPELLAS -->
+    <!-- FIM SEÇÃO: PACKS E ACAPELLAS -->
 
     <!-- Seção: Blog -->
     <section id="blog" class="py-20 bg-white">
@@ -624,7 +644,7 @@
             </div>
         </div>
     </section>
-    <!-- FIM NOVA SEÇÃO: BLOG -->
+    <!-- FIM Seção: Blog -->
 
     <section id="studio" class="py-20 bg-white">
         <div class="container mx-auto px-4">
@@ -633,14 +653,11 @@
                 <p class="text-gray-600 max-w-2xl mx-auto">Um espaço projetado para inspirar criatividade e capturar o melhor som possível.</p>
             </div>
             
-            
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
                 <div>
-                    <div class="bg-gradient-to-br from-primary to-purple-800 rounded-lg h-96 flex items-center justify-center shadow-xl">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-32 w-32 text-white opacity-50" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z" />
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                        </svg>
+                    <!-- Player de Vídeo do YouTube -->
+                    <div class="video-container">
+                        <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
                     </div>
                 </div>
                 
@@ -828,11 +845,11 @@
         <button id="manage-spotify-tracks-btn" class="bg-green-600 hover:bg-green-700 text-white p-3 rounded-full shadow-lg transition-colors hidden">
             <i class="fab fa-spotify text-xl"></i>
         </button>
-        <!-- NOVO BOTÃO PARA GERENCIAR BLOG POSTS (ADMIN) -->
+        <!-- Botão para gerenciar Blog Posts (admin) -->
         <button id="manage-blog-posts-btn" class="bg-yellow-600 hover:bg-yellow-700 text-white p-3 rounded-full shadow-lg transition-colors hidden">
             <i class="fas fa-blog text-xl"></i>
         </button>
-        <!-- NOVO BOTÃO PARA GERENCIAR PACKS E ACAPELLAS (ADMIN) -->
+        <!-- Botão para gerenciar Packs e Acapellas (admin) -->
         <button id="manage-downloadable-items-btn" class="bg-orange-600 hover:bg-orange-700 text-white p-3 rounded-full shadow-lg transition-colors hidden">
             <i class="fas fa-cloud-download-alt text-xl"></i>
         </button>
@@ -947,11 +964,12 @@
                     </div>
                     <div>
                         <label for="portfolio-spotify-link" class="block text-sm font-medium text-gray-300">Link Spotify:</label>
-                        <input type="url" id="portfolio-spotify-link" class="mt-1 block w-full border border-gray-600 rounded-md shadow-sm p-2 bg-gray-700 text-white" required>
+                        <input type="url" id="portfolio-spotify-link" class="mt-1 block w-full border border-gray-600 rounded-md shadow-sm p-2 bg-gray-700 text-white">
                     </div>
                     <div>
                         <label for="portfolio-youtube-link" class="block text-sm font-medium text-gray-300">Link YouTube:</label>
-                        <input type="url" id="portfolio-youtube-link" class="mt-1 block w-full border border-gray-600 rounded-md shadow-sm p-2 bg-gray-700 text-white" required>
+                        <input type="url" id="portfolio-youtube-link" class="mt-1 block w-full border border-gray-600 rounded-md shadow-sm p-2 bg-gray-700 text-white">
+                        <p class="text-xs text-gray-400 mt-1">Insira a URL completa do vídeo do YouTube (ex: `https://www.youtube.com/watch?v=dQw4w9WgXcQ`).</p>
                     </div>
                     <button type="submit" class="w-full bg-primary hover:bg-purple-700 text-white font-bold py-3 px-6 rounded-lg transition-colors">
                         <i class="fas fa-save mr-2"></i> Salvar Item
@@ -1027,7 +1045,7 @@
         </div>
     </div>
 
-    <!-- NOVO MODAL PARA BLOG POSTS (ADMIN) -->
+    <!-- Modal para Blog Posts (Admin) -->
     <div id="blog-post-modal" class="modal">
         <div class="modal-content">
             <span class="close" id="blog-post-close">×</span>
@@ -1062,9 +1080,8 @@
             </div>
         </div>
     </div>
-    <!-- FIM NOVO MODAL PARA BLOG POSTS -->
 
-    <!-- NOVO MODAL PARA PACKS E ACAPELLAS (ADMIN) -->
+    <!-- Modal para Packs e Acapellas (Admin) -->
     <div id="downloadable-item-modal" class="modal">
         <div class="modal-content">
             <span class="close" id="downloadable-item-close">×</span>
@@ -1104,29 +1121,27 @@
             </div>
         </div>
     </div>
-    <!-- FIM NOVO MODAL PARA PACKS E ACAPELLAS -->
 
     <script>
         // Variável global para o token JWT
         const JWT_TOKEN_KEY = 'jwt_token';
 
         // Variáveis globais para elementos do DOM (serão atribuídas em DOMContentLoaded)
-        let adminLoginBtn, logoutBtn, changePasswordBtn, editSocialLinksBtn, manageSpotifyTracksBtn, manageBlogPostsBtn, manageDownloadableItemsBtn; // Adicionado manageDownloadableItemsBtn
-        let adminLoginModal, changePasswordModal, socialLinksModal, projectModal, portfolioModal, addTestimonialModal, spotifyTrackModal, blogPostModal, downloadableItemModal; // Adicionado downloadableItemModal
-        let adminLoginClose, changePasswordClose, socialLinksClose, projectClose, portfolioClose, addTestimonialClose, spotifyTrackClose, blogPostClose, downloadableItemClose; // Adicionado downloadableItemClose
-        let adminLoginForm, changePasswordForm, socialLinksForm, projectForm, portfolioForm, testimonialForm, spotifyTrackForm, blogPostForm, downloadableItemForm; // Adicionado downloadableItemForm
+        let adminLoginBtn, logoutBtn, changePasswordBtn, editSocialLinksBtn, manageSpotifyTracksBtn, manageBlogPostsBtn, manageDownloadableItemsBtn;
+        let adminLoginModal, changePasswordModal, socialLinksModal, projectModal, portfolioModal, addTestimonialModal, spotifyTrackModal, blogPostModal, downloadableItemModal;
+        let adminLoginClose, changePasswordClose, socialLinksClose, projectClose, portfolioClose, addTestimonialClose, spotifyTrackClose, blogPostClose, downloadableItemClose;
+        let adminLoginForm, changePasswordForm, socialLinksForm, projectForm, portfolioForm, testimonialForm, spotifyTrackForm, blogPostForm, downloadableItemForm;
         let projectsContainer, noProjectsMessage, adminProjectsButton, addProjectBtn;
         let portfolioContainer, noPortfolioMessage, adminPortfolioButton, addPortfolioBtn;
         let testimonialsContainer, noTestimonialsMessage, addTestimonialBtn;
         let spotifyPlayerIframeContainer, spotifyTracksContainer, noSpotifyTracksMessage, addSpotifyTrackBtn;
         let blogPostsContainer, noBlogPostsMessage, adminBlogButton, addBlogPostBtn;
-        let downloadableItemsContainer, noDownloadableItemsMessage, adminDownloadableItemsButton, addDownloadableItemBtn; // Adicionado elementos de download
+        let downloadableItemsContainer, noDownloadableItemsMessage, adminDownloadableItemsButton, addDownloadableItemBtn;
         let adminLoginIcon;
-        let socialLinksContactDiv; // Referência ao div dos links sociais
+        let socialLinksContactDiv;
 
         // --- Funções Auxiliares (podem ser definidas fora de DOMContentLoaded) ---
         async function fetchAPI(endpoint, method = 'GET', data = null, needsAuth = false) {
-            // Alterado para usar window.location.origin para construir um URL absoluto
             const baseURL = window.location.origin + '/.netlify/functions/api'; 
             
             const options = {
@@ -1147,21 +1162,18 @@
                 options.headers['Authorization'] = `Bearer ${token}`;
             }
 
-            // Para FormData (upload de arquivos), não defina 'Content-Type'
             if (!(data instanceof FormData)) {
                 options.headers['Content-Type'] = 'application/json';
                 if (data) {
                     options.body = JSON.stringify(data);
                 }
             } else {
-                // Se for FormData, o navegador define o Content-Type automaticamente com boundary
                 options.body = data;
             }
 
             try {
-                // Garante que o endpoint sempre comece com '/'
                 const url = `${baseURL}${endpoint.startsWith('/') ? endpoint : '/' + endpoint}`;
-                console.log('Chamando API com URL:', url); // LOG DE DEBUG: Mostra o URL completo da API
+                console.log('Chamando API com URL:', url);
                 const response = await fetch(url, options);
                 
                 if (response.status === 204) return {};
@@ -1175,13 +1187,11 @@
                 } else {
                     const rawText = await response.text();
                     console.error('Resposta não é JSON. Conteúdo:', rawText);
-                    // Tenta parsear como JSON mesmo assim para ver se há um erro JSON no corpo
                     try {
                         responseData = JSON.parse(rawText);
                     } catch (e) {
                         responseData = { message: rawText || 'Resposta inesperada do servidor.' };
                     }
-                    //throw new Error(`Resposta inesperada do servidor (Status: ${response.status}, Tipo: ${contentType}). Verifique os logs do Netlify.`);
                 }
                 
                 if (!response.ok) {
@@ -1223,7 +1233,7 @@
             if (modal === addTestimonialModal && testimonialForm) testimonialForm.reset();
             if (modal === spotifyTrackModal && spotifyTrackForm) spotifyTrackForm.reset();
             if (modal === blogPostModal && blogPostForm) blogPostForm.reset();
-            if (modal === downloadableItemModal && downloadableItemForm) downloadableItemForm.reset(); // Resetar formulário de download
+            if (modal === downloadableItemModal && downloadableItemForm) downloadableItemForm.reset();
         }
 
         function toggleAdminMode(enable) {
@@ -1233,21 +1243,21 @@
                 adminPortfolioButton.classList.remove('hidden');
                 manageSpotifyTracksBtn.classList.remove('hidden');
                 manageBlogPostsBtn.classList.remove('hidden');
-                manageDownloadableItemsBtn.classList.remove('hidden'); // Mostrar botão de download
+                manageDownloadableItemsBtn.classList.remove('hidden');
             } else {
                 document.body.classList.remove('admin-mode');
                 adminProjectsButton.classList.add('hidden');
                 adminPortfolioButton.classList.add('hidden');
                 manageSpotifyTracksBtn.classList.add('hidden');
                 manageBlogPostsBtn.classList.add('hidden');
-                manageDownloadableItemsBtn.classList.add('hidden'); // Esconder botão de download
+                manageDownloadableItemsBtn.classList.add('hidden');
             }
             fetchProjects();
             fetchPortfolio();
             fetchTestimonials();
             fetchSpotifyTracks();
             fetchBlogPosts();
-            fetchDownloadableItems(); // Atualizar itens de download
+            fetchDownloadableItems();
             renderSocialLinks();
         }
 
@@ -1262,7 +1272,7 @@
                 editSocialLinksBtn.classList.remove('hidden');
                 manageSpotifyTracksBtn.classList.remove('hidden');
                 manageBlogPostsBtn.classList.remove('hidden');
-                manageDownloadableItemsBtn.classList.remove('hidden'); // Mostrar botão de download
+                manageDownloadableItemsBtn.classList.remove('hidden');
                 adminLoginIcon.classList.remove('fa-lock');
                 adminLoginIcon.classList.add('fa-user-shield');
                 
@@ -1276,7 +1286,7 @@
                 editSocialLinksBtn.classList.add('hidden');
                 manageSpotifyTracksBtn.classList.add('hidden');
                 manageBlogPostsBtn.classList.add('hidden');
-                manageDownloadableItemsBtn.classList.add('hidden'); // Esconder botão de download
+                manageDownloadableItemsBtn.classList.add('hidden');
                 adminLoginIcon.classList.remove('fa-user-shield');
                 adminLoginIcon.classList.add('fa-lock');
                 
@@ -1478,7 +1488,7 @@
 
         // --- Funções de CRUD de Músicas Spotify ---
         function loadSpotifyPlayer(spotifyId) {
-            console.log('Tentando carregar player do Spotify com ID:', spotifyId); // LOG DE DEBUG
+            console.log('Tentando carregar player do Spotify com ID:', spotifyId);
 
             if (!spotifyId) {
                 console.error('Erro: spotifyId está vazio. Não é possível carregar o player.');
@@ -1491,7 +1501,6 @@
                         width="100%" height="380" frameborder="0" allowtransparency="true" 
                         allow="encrypted-media; fullscreen; picture-in-picture"></iframe>
             `;
-            // Adiciona um listener para verificar se o iframe carregou
             const iframe = spotifyPlayerIframeContainer.querySelector('iframe');
             if (iframe) {
                 iframe.onload = () => {
@@ -1526,7 +1535,6 @@
                             </div>
                         `;
                     });
-                    // Carrega a primeira música automaticamente se houver
                     if (spotifyTracks.length > 0) {
                         loadSpotifyPlayer(spotifyTracks[0].spotifyId);
                     }
@@ -1554,7 +1562,7 @@
             }
         }
 
-        // --- NOVAS FUNÇÕES DE CRUD DE BLOG POSTS ---
+        // --- Funções de CRUD de Blog Posts ---
         async function fetchBlogPosts() {
             const endpoint = document.body.classList.contains('admin-mode') ? '/blog-posts/all' : '/blog-posts';
             const blogPosts = await fetchAPI(endpoint, 'GET', null, document.body.classList.contains('admin-mode'));
@@ -1621,14 +1629,13 @@
                     </div>
                 `;
                 document.body.innerHTML = detailHtml;
-                window.scrollTo(0, 0); // Rola para o topo da página
+                window.scrollTo(0, 0);
             }
         }
 
         function hideBlogPostDetail() {
             location.reload(); 
         }
-
 
         function editBlogPost(id, title, author, imageUrl, content, approved) {
             document.getElementById('blog-post-modal-title').textContent = 'Editar Post de Blog';
@@ -1651,7 +1658,7 @@
             }
         }
 
-        // --- NOVAS FUNÇÕES DE CRUD DE PACKS E ACAPELLAS (DOWNLOADABLE ITEMS) ---
+        // --- Funções de CRUD de Packs e Acapellas (Downloadable Items) ---
         async function fetchDownloadableItems() {
             const downloadableItems = await fetchAPI('/downloadable-items');
             if (downloadableItems) {
@@ -1709,11 +1716,10 @@
         // --- Funções para renderizar Links Sociais ---
         async function renderSocialLinks() {
             const socialLinks = await fetchAPI('/social-links', 'GET');
-            console.log('Dados de links sociais recebidos:', socialLinks); // LOG DE DEBUG
+            console.log('Dados de links sociais recebidos:', socialLinks);
             if (socialLinks) {
-                socialLinksContactDiv.innerHTML = ''; // Limpa os links existentes
+                socialLinksContactDiv.innerHTML = '';
                 
-                // Adiciona links apenas se existirem
                 if (socialLinks.instagram) {
                     socialLinksContactDiv.innerHTML += `
                         <a href="${socialLinks.instagram}" target="_blank" class="bg-gray-700 hover:bg-primary w-10 h-10 rounded-full flex items-center justify-center transition-colors"><i class="fab fa-instagram text-white"></i></a>
@@ -1735,12 +1741,10 @@
                     `;
                 }
 
-                // Mensagem de fallback se nenhum link for configurado
                 if (!socialLinks.instagram && !socialLinks.facebook && !socialLinks.youtube && !socialLinks.spotify) {
                     socialLinksContactDiv.innerHTML = '<p class="text-gray-500 text-sm">Nenhum link social configurado.</p>';
                 }
             } else {
-                // Mensagem de erro se a requisição falhar
                 socialLinksContactDiv.innerHTML = '<p class="text-red-500 text-sm">Erro ao carregar links sociais. Verifique o console.</p>';
             }
         }
@@ -1771,7 +1775,7 @@
             editSocialLinksBtn = document.getElementById('edit-social-links-btn');
             manageSpotifyTracksBtn = document.getElementById('manage-spotify-tracks-btn');
             manageBlogPostsBtn = document.getElementById('manage-blog-posts-btn');
-            manageDownloadableItemsBtn = document.getElementById('manage-downloadable-items-btn'); // Atribuir novo botão
+            manageDownloadableItemsBtn = document.getElementById('manage-downloadable-items-btn');
 
             adminLoginModal = document.getElementById('admin-login-modal');
             changePasswordModal = document.getElementById('change-password-modal');
@@ -1781,7 +1785,7 @@
             addTestimonialModal = document.getElementById('add-testimonial-modal');
             spotifyTrackModal = document.getElementById('spotify-track-modal');
             blogPostModal = document.getElementById('blog-post-modal');
-            downloadableItemModal = document.getElementById('downloadable-item-modal'); // Atribuir novo modal
+            downloadableItemModal = document.getElementById('downloadable-item-modal');
 
             adminLoginClose = document.getElementById('admin-login-close');
             changePasswordClose = document.getElementById('change-password-close');
@@ -1791,7 +1795,7 @@
             addTestimonialClose = document.getElementById('add-testimonial-close');
             spotifyTrackClose = document.getElementById('spotify-track-close');
             blogPostClose = document.getElementById('blog-post-close');
-            downloadableItemClose = document.getElementById('downloadable-item-close'); // Atribuir novo fechar
+            downloadableItemClose = document.getElementById('downloadable-item-close');
 
             adminLoginForm = document.getElementById('admin-login-form');
             changePasswordForm = document.getElementById('change-password-form');
@@ -1801,7 +1805,7 @@
             testimonialForm = document.getElementById('testimonial-form');
             spotifyTrackForm = document.getElementById('spotify-track-form');
             blogPostForm = document.getElementById('blog-post-form');
-            downloadableItemForm = document.getElementById('downloadable-item-form'); // Atribuir novo formulário
+            downloadableItemForm = document.getElementById('downloadable-item-form');
 
             projectsContainer = document.getElementById('projects-container');
             noProjectsMessage = document.getElementById('no-projects-message');
@@ -1822,15 +1826,15 @@
             noSpotifyTracksMessage = document.getElementById('no-spotify-tracks-message');
             addSpotifyTrackBtn = document.getElementById('add-spotify-track-btn');
 
-            blogPostsContainer = document.getElementById('blog-posts-container'); // Atribuir novo container
-            noBlogPostsMessage = document.getElementById('no-blog-posts-message'); // Atribuir nova mensagem
-            adminBlogButton = document.getElementById('admin-blog-button'); // Atribuir novo botão de admin
-            addBlogPostBtn = document.getElementById('add-blog-post-btn'); // Atribuir novo botão adicionar
+            blogPostsContainer = document.getElementById('blog-posts-container');
+            noBlogPostsMessage = document.getElementById('no-blog-posts-message');
+            adminBlogButton = document.getElementById('admin-blog-button');
+            addBlogPostBtn = document.getElementById('add-blog-post-btn');
 
-            downloadableItemsContainer = document.getElementById('downloadable-items-container'); // Atribuir novo container
-            noDownloadableItemsMessage = document.getElementById('no-downloadable-items-message'); // Atribuir nova mensagem
-            adminDownloadableItemsButton = document.getElementById('admin-downloadable-items-button'); // Atribuir novo botão de admin
-            addDownloadableItemBtn = document.getElementById('add-downloadable-item-btn'); // Atribuir novo botão adicionar
+            downloadableItemsContainer = document.getElementById('downloadable-items-container');
+            noDownloadableItemsMessage = document.getElementById('no-downloadable-items-message');
+            adminDownloadableItemsButton = document.getElementById('admin-downloadable-items-button');
+            addDownloadableItemBtn = document.getElementById('add-downloadable-item-btn');
 
             adminLoginIcon = document.getElementById('admin-login-icon');
             socialLinksContactDiv = document.getElementById('social-links-contact');
@@ -1847,7 +1851,7 @@
             addTestimonialClose.onclick = () => closeModal(addTestimonialModal);
             spotifyTrackClose.onclick = () => closeModal(spotifyTrackModal);
             blogPostClose.onclick = () => closeModal(blogPostModal);
-            downloadableItemClose.onclick = () => closeModal(downloadableItemModal); // Fechar modal de download
+            downloadableItemClose.onclick = () => closeModal(downloadableItemModal);
 
             window.onclick = (event) => {
                 if (event.target == adminLoginModal) closeModal(adminLoginModal);
@@ -1858,7 +1862,7 @@
                 if (event.target == addTestimonialModal) closeModal(addTestimonialModal);
                 if (event.target == spotifyTrackModal) closeModal(spotifyTrackModal);
                 if (event.target == blogPostModal) closeModal(blogPostModal);
-                if (event.target == downloadableItemModal) closeModal(downloadableItemModal); // Fechar modal de download ao clicar fora
+                if (event.target == downloadableItemModal) closeModal(downloadableItemModal);
             };
 
             // --- Funcionalidade de Login ---
@@ -1928,7 +1932,7 @@
                 if (data) {
                     alert(data.message);
                     closeModal(socialLinksModal);
-                    renderSocialLinks(); // Chamar para atualizar os links no rodapé
+                    renderSocialLinks();
                 }
             });
 
@@ -2129,7 +2133,7 @@
             fetchTestimonials();
             fetchSpotifyTracks();
             fetchBlogPosts();
-            fetchDownloadableItems(); // Adicionado para carregar os itens de download
+            fetchDownloadableItems();
             renderSocialLinks();
         });
     </script>
