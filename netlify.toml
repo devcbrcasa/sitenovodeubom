@@ -4,7 +4,7 @@
 
 [functions]
   directory = "functions"
-  runtime = "python3.9"  # Runtime de funções em Python
+  runtime = "python3.9"
 
 [[redirects]]
   from = "/api/*"
