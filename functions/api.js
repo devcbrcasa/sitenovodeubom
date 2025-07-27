@@ -125,7 +125,7 @@ const BlogPostSchema = new mongoose.Schema({
 
 const BlogPost = mongoose.model('BlogPost', BlogPostSchema);
 
-// NOVO SCHEMA: Schema para Packs e Acapellas (Downloadable Items)
+// Schema para Packs e Acapellas (Downloadable Items)
 // Adicionado `trim` para strings e `index: true` para `createdAt`
 const DownloadableItemSchema = new mongoose.Schema({
     title: { type: String, required: true, trim: true },
@@ -137,6 +137,13 @@ const DownloadableItemSchema = new mongoose.Schema({
 });
 
 const DownloadableItem = mongoose.model('DownloadableItem', DownloadableItemSchema);
+
+// NOVO SCHEMA: Schema para Configuração do Vídeo do Estúdio
+const StudioConfigSchema = new mongoose.Schema({
+    youtubeVideoId: { type: String, default: '', trim: true } // ID do vídeo do YouTube
+});
+
+const StudioConfig = mongoose.model('StudioConfig', StudioConfigSchema);
 
 
 // --- Middleware de Autenticação ---
@@ -647,7 +654,7 @@ router.delete('/blog-posts/:id', authenticateToken, async (req, res) => {
     }
 });
 
-// --- NOVAS ROTAS PARA PACKS E ACAPELLAS (DOWNLOADABLE ITEMS) ---
+// --- Rotas para Packs e Acapellas (Downloadable Items) ---
 
 // Rota para adicionar um novo item de download (admin-only)
 router.post('/downloadable-items', authenticateToken, async (req, res) => {
@@ -719,6 +726,44 @@ router.delete('/downloadable-items/:id', authenticateToken, async (req, res) => 
     }
 });
 
+// --- NOVAS ROTAS PARA CONFIGURAÇÃO DO VÍDEO DO ESTÚDIO ---
+
+// Rota para obter a configuração do vídeo do estúdio (público)
+router.get('/studio-config', async (req, res) => {
+    try {
+        let studioConfig = await StudioConfig.findOne();
+        if (!studioConfig) {
+            // Se não houver configuração, cria uma com um ID padrão (Rick Astley)
+            studioConfig = new StudioConfig({ youtubeVideoId: 'dQw4w9WgXcQ' });
+            await studioConfig.save();
+        }
+        res.json(studioConfig);
+    } catch (error) {
+        console.error('Erro ao buscar configuração do estúdio:', error);
+        res.status(500).json({ message: 'Erro ao buscar configuração do estúdio.', error: error.message });
+    }
+});
+
+// Rota para atualizar a configuração do vídeo do estúdio (admin-only)
+router.put('/studio-config', authenticateToken, async (req, res) => {
+    try {
+        const { youtubeVideoId } = req.body;
+        if (typeof youtubeVideoId === 'undefined') {
+            return res.status(400).json({ message: 'O ID do vídeo do YouTube é obrigatório.' });
+        }
+        // Encontra e atualiza o único documento de StudioConfig.
+        // `upsert: true` cria o documento se ele não existir.
+        const studioConfig = await StudioConfig.findOneAndUpdate(
+            {}, 
+            { youtubeVideoId }, 
+            { new: true, upsert: true, runValidators: true }
+        );
+        res.json({ message: 'Configuração do vídeo do estúdio atualizada com sucesso!', studioConfig });
+    } catch (error) {
+        console.error('Erro ao atualizar configuração do estúdio:', error);
+        res.status(400).json({ message: 'Erro ao atualizar configuração do estúdio.', error: error.message });
+    }
+});
 
 // Prefixo para as rotas da Netlify Function
 // Todas as rotas serão acessíveis via /.netlify/functions/api/...
