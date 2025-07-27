@@ -1,16 +1,32 @@
 [build]
   publish = "."
-  command = "echo 'Netlify build complete!'"
+  command = "echo 'Netlify build complete!'" # Ou seu comando de build do frontend, se houver
 
 [functions]
   directory = "functions"
-  runtime = "python3.9"
 
+# Regra de redirecionamento para a função API
+# Isso garante que qualquer caminho que não seja um arquivo estático existente
+# e que comece com o prefixo da sua API (se você ainda estiver usando /api no frontend)
+# seja encaminhado para a função.
+# No entanto, como o frontend agora chama diretamente '/projects', '/login', etc.
+# precisamos de uma regra mais abrangente ou garantir que o frontend chame '/api/...'
+# A regra abaixo é a que você já tinha e deveria funcionar se o frontend chamasse /api/projects
+# Vamos adicionar uma regra mais genérica para testar.
+
+# Mantenha esta se o seu frontend ainda chama /api/projects
 [[redirects]]
   from = "/api/*"
   to = "/.netlify/functions/api/:splat"
   status = 200
   force = true
+
+# ADICIONE ESTAS REGRAS ABAIXO PARA CAPTURAR AS CHAMADAS DIRETAS
+# Se o seu frontend está chamando '/projects' e '/portfolio' diretamente,
+# e seu api.js espera '/projects' e '/portfolio', precisamos redirecionar isso para a função.
+# Isso é necessário porque o Netlify Functions por padrão não roteia caminhos arbitrários para funções.
+# A função 'api' é acessível em /.netlify/functions/api
+# Portanto, se o frontend chama '/projects', precisamos que isso vá para /.netlify/functions/api/projects
 
 [[redirects]]
   from = "/projects"
@@ -53,3 +69,6 @@
   to = "/.netlify/functions/api/social-links"
   status = 200
   force = true
+
+
+  
