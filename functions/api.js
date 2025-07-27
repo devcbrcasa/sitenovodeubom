@@ -1,3 +1,5 @@
+// functions/api.js
+
 const express = require('express');
 const serverless = require('serverless-http');
 const mongoose = require('mongoose');
@@ -8,7 +10,7 @@ const dotenv = require('dotenv');
 dotenv.config();
 
 const app = express();
-const router = express(); // Corrigido para express.Router()
+const router = express.Router(); // Corrigido para express.Router()
 
 // Middleware para parsear JSON
 app.use(express.json());
@@ -81,7 +83,7 @@ const TestimonialSchema = new mongoose.Schema({
 
 const Testimonial = mongoose.model('Testimonial', TestimonialSchema);
 
-// NOVO SCHEMA PARA MÚSICAS SPOTIFY
+// Schema para Músicas Spotify
 const SpotifyTrackSchema = new mongoose.Schema({
     title: { type: String, required: true },
     artist: { type: String, required: true },
@@ -91,6 +93,18 @@ const SpotifyTrackSchema = new mongoose.Schema({
 });
 
 const SpotifyTrack = mongoose.model('SpotifyTrack', SpotifyTrackSchema);
+
+// NOVO SCHEMA PARA BLOG POSTS
+const BlogPostSchema = new mongoose.Schema({
+    title: { type: String, required: true },
+    content: { type: String, required: true },
+    author: { type: String, required: true },
+    image_url: { type: String, default: '' },
+    approved: { type: Boolean, default: false }, // Posts começam como não aprovados
+    createdAt: { type: Date, default: Date.now }
+});
+
+const BlogPost = mongoose.model('BlogPost', BlogPostSchema);
 
 
 // --- Middleware de Autenticação ---
@@ -387,7 +401,7 @@ router.delete('/testimonials/:id', authenticateToken, async (req, res) => {
     }
 });
 
-// --- NOVAS ROTAS PARA MÚSICAS SPOTIFY ---
+// --- Rotas para Músicas Spotify ---
 
 // Rota para adicionar uma nova música Spotify (admin-only)
 router.post('/spotify-tracks', authenticateToken, async (req, res) => {
@@ -452,7 +466,85 @@ router.delete('/spotify-tracks/:id', authenticateToken, async (req, res) => {
     }
 });
 
+// --- NOVAS ROTAS PARA BLOG POSTS ---
 
-app.use('/.netlify/functions/api', router); // Prefixo para as rotas da Netlify Function
+// Rota para adicionar um novo post de blog (admin-only)
+router.post('/blog-posts', authenticateToken, async (req, res) => {
+    try {
+        const { title, content, author, image_url, approved } = req.body;
+        if (!title || !content || !author) {
+            return res.status(400).json({ message: 'Título, conteúdo e autor são obrigatórios para o post do blog.' });
+        }
+        const newPost = new BlogPost({ title, content, author, image_url, approved });
+        await newPost.save();
+        res.status(201).json({ message: 'Post de blog adicionado com sucesso!', post: newPost });
+    } catch (error) {
+        res.status(500).json({ message: 'Erro ao adicionar post de blog.', error: error.message });
+    }
+});
 
+// Rota para obter todos os posts de blog APROVADOS (público)
+router.get('/blog-posts', async (req, res) => {
+    try {
+        const approvedPosts = await BlogPost.find({ approved: true }).sort({ createdAt: -1 }); // Ordena pelos mais recentes
+        res.json(approvedPosts);
+    } catch (error) {
+        res.status(500).json({ message: 'Erro ao buscar posts de blog aprovados.', error: error.message });
+    }
+});
+
+// Rota para obter TODOS os posts de blog (admin-only)
+router.get('/blog-posts/all', authenticateToken, async (req, res) => {
+    try {
+        const allPosts = await BlogPost.find({}).sort({ createdAt: -1 }); // Ordena pelos mais recentes
+        res.json(allPosts);
+    } catch (error) {
+        res.status(500).json({ message: 'Erro ao buscar todos os posts de blog.', error: error.message });
+    }
+});
+
+// Rota para obter um único post de blog por ID (público)
+router.get('/blog-posts/:id', async (req, res) => {
+    try {
+        const post = await BlogPost.findById(req.params.id);
+        if (!post) {
+            return res.status(404).json({ message: 'Post de blog não encontrado.' });
+        }
+        res.json(post);
+    } catch (error) {
+        res.status(500).json({ message: 'Erro ao buscar post de blog.', error: error.message });
+    }
+});
+
+// Rota para atualizar um post de blog por ID (admin-only)
+router.put('/blog-posts/:id', authenticateToken, async (req, res) => {
+    try {
+        const updatedPost = await BlogPost.findByIdAndUpdate(req.params.id, req.body, { new: true });
+        if (!updatedPost) {
+            return res.status(404).json({ message: 'Post de blog não encontrado.' });
+        }
+        res.json({ message: 'Post de blog atualizado com sucesso!', post: updatedPost });
+    } catch (error) {
+        res.status(400).json({ message: 'Erro ao atualizar post de blog.', error: error.message });
+    }
+});
+
+// Rota para excluir um post de blog por ID (admin-only)
+router.delete('/blog-posts/:id', authenticateToken, async (req, res) => {
+    try {
+        const deletedPost = await BlogPost.findByIdAndDelete(req.params.id);
+        if (!deletedPost) {
+            return res.status(404).json({ message: 'Post de blog não encontrado.' });
+        }
+        res.status(204).send(); // No Content
+    } catch (error) {
+        res.status(500).json({ message: 'Erro ao excluir post de blog.', error: error.message });
+    }
+});
+
+
+// Prefixo para as rotas da Netlify Function
+app.use('/.netlify/functions/api', router);
+
+// Exporta o handler para o Netlify Functions
 module.exports.handler = serverless(app);
