@@ -656,8 +656,9 @@
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
                 <div>
                     <!-- Player de Vídeo do YouTube -->
-                    <div class="video-container">
-                        <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                    <div class="video-container" id="studio-video-container">
+                        <!-- O iframe do YouTube será carregado aqui via JS -->
+                        <p class="text-gray-600 text-center py-8">Carregando vídeo do estúdio...</p>
                     </div>
                 </div>
                 
@@ -852,6 +853,10 @@
         <!-- Botão para gerenciar Packs e Acapellas (admin) -->
         <button id="manage-downloadable-items-btn" class="bg-orange-600 hover:bg-orange-700 text-white p-3 rounded-full shadow-lg transition-colors hidden">
             <i class="fas fa-cloud-download-alt text-xl"></i>
+        </button>
+        <!-- NOVO BOTÃO: Gerenciar Vídeo do Estúdio (admin) -->
+        <button id="manage-studio-video-btn" class="bg-purple-600 hover:bg-purple-700 text-white p-3 rounded-full shadow-lg transition-colors hidden">
+            <i class="fas fa-video text-xl"></i>
         </button>
     </div>
 
@@ -1122,21 +1127,42 @@
         </div>
     </div>
 
+    <!-- NOVO MODAL: Gerenciar Vídeo do Estúdio -->
+    <div id="studio-video-modal" class="modal">
+        <div class="modal-content">
+            <span class="close" id="studio-video-close">×</span>
+            <div class="p-4">
+                <h2 class="text-2xl font-bold text-white mb-4">Gerenciar Vídeo do Estúdio</h2>
+                <form id="studio-video-form" class="space-y-4">
+                    <div>
+                        <label for="youtube-video-id" class="block text-sm font-medium text-gray-300">ID do Vídeo do YouTube:</label>
+                        <input type="text" id="youtube-video-id" class="mt-1 block w-full border border-gray-600 rounded-md shadow-sm p-2 bg-gray-700 text-white" placeholder="Ex: dQw4w9WgXcQ" required>
+                        <p class="text-xs text-gray-400 mt-1">Insira apenas o ID do vídeo do YouTube (a parte depois de "v=" na URL, ex: `dQw4w9WgXcQ`).</p>
+                    </div>
+                    <button type="submit" class="w-full bg-primary hover:bg-purple-700 text-white font-bold py-3 px-6 rounded-lg transition-colors">
+                        <i class="fas fa-save mr-2"></i> Salvar Vídeo
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+
     <script>
         // Variável global para o token JWT
         const JWT_TOKEN_KEY = 'jwt_token';
 
         // Variáveis globais para elementos do DOM (serão atribuídas em DOMContentLoaded)
-        let adminLoginBtn, logoutBtn, changePasswordBtn, editSocialLinksBtn, manageSpotifyTracksBtn, manageBlogPostsBtn, manageDownloadableItemsBtn;
-        let adminLoginModal, changePasswordModal, socialLinksModal, projectModal, portfolioModal, addTestimonialModal, spotifyTrackModal, blogPostModal, downloadableItemModal;
-        let adminLoginClose, changePasswordClose, socialLinksClose, projectClose, portfolioClose, addTestimonialClose, spotifyTrackClose, blogPostClose, downloadableItemClose;
-        let adminLoginForm, changePasswordForm, socialLinksForm, projectForm, portfolioForm, testimonialForm, spotifyTrackForm, blogPostForm, downloadableItemForm;
+        let adminLoginBtn, logoutBtn, changePasswordBtn, editSocialLinksBtn, manageSpotifyTracksBtn, manageBlogPostsBtn, manageDownloadableItemsBtn, manageStudioVideoBtn;
+        let adminLoginModal, changePasswordModal, socialLinksModal, projectModal, portfolioModal, addTestimonialModal, spotifyTrackModal, blogPostModal, downloadableItemModal, studioVideoModal;
+        let adminLoginClose, changePasswordClose, socialLinksClose, projectClose, portfolioClose, addTestimonialClose, spotifyTrackClose, blogPostClose, downloadableItemClose, studioVideoClose;
+        let adminLoginForm, changePasswordForm, socialLinksForm, projectForm, portfolioForm, testimonialForm, spotifyTrackForm, blogPostForm, downloadableItemForm, studioVideoForm;
         let projectsContainer, noProjectsMessage, adminProjectsButton, addProjectBtn;
         let portfolioContainer, noPortfolioMessage, adminPortfolioButton, addPortfolioBtn;
         let testimonialsContainer, noTestimonialsMessage, addTestimonialBtn;
         let spotifyPlayerIframeContainer, spotifyTracksContainer, noSpotifyTracksMessage, addSpotifyTrackBtn;
         let blogPostsContainer, noBlogPostsMessage, adminBlogButton, addBlogPostBtn;
         let downloadableItemsContainer, noDownloadableItemsMessage, adminDownloadableItemsButton, addDownloadableItemBtn;
+        let studioVideoContainer; // NOVO: Container para o vídeo do estúdio
         let adminLoginIcon;
         let socialLinksContactDiv;
 
@@ -1234,6 +1260,7 @@
             if (modal === spotifyTrackModal && spotifyTrackForm) spotifyTrackForm.reset();
             if (modal === blogPostModal && blogPostForm) blogPostForm.reset();
             if (modal === downloadableItemModal && downloadableItemForm) downloadableItemForm.reset();
+            if (modal === studioVideoModal && studioVideoForm) studioVideoForm.reset(); // NOVO: resetar formulário do vídeo do estúdio
         }
 
         function toggleAdminMode(enable) {
@@ -1244,6 +1271,7 @@
                 manageSpotifyTracksBtn.classList.remove('hidden');
                 manageBlogPostsBtn.classList.remove('hidden');
                 manageDownloadableItemsBtn.classList.remove('hidden');
+                manageStudioVideoBtn.classList.remove('hidden'); // NOVO: mostrar botão de gerenciar vídeo do estúdio
             } else {
                 document.body.classList.remove('admin-mode');
                 adminProjectsButton.classList.add('hidden');
@@ -1251,6 +1279,7 @@
                 manageSpotifyTracksBtn.classList.add('hidden');
                 manageBlogPostsBtn.classList.add('hidden');
                 manageDownloadableItemsBtn.classList.add('hidden');
+                manageStudioVideoBtn.classList.add('hidden'); // NOVO: esconder botão de gerenciar vídeo do estúdio
             }
             fetchProjects();
             fetchPortfolio();
@@ -1259,6 +1288,7 @@
             fetchBlogPosts();
             fetchDownloadableItems();
             renderSocialLinks();
+            fetchStudioVideo(); // NOVO: Recarregar o vídeo do estúdio ao mudar o modo
         }
 
         function checkLoginStatus() {
@@ -1273,6 +1303,7 @@
                 manageSpotifyTracksBtn.classList.remove('hidden');
                 manageBlogPostsBtn.classList.remove('hidden');
                 manageDownloadableItemsBtn.classList.remove('hidden');
+                manageStudioVideoBtn.classList.remove('hidden'); // NOVO: mostrar botão de gerenciar vídeo do estúdio
                 adminLoginIcon.classList.remove('fa-lock');
                 adminLoginIcon.classList.add('fa-user-shield');
                 
@@ -1287,6 +1318,7 @@
                 manageSpotifyTracksBtn.classList.add('hidden');
                 manageBlogPostsBtn.classList.add('hidden');
                 manageDownloadableItemsBtn.classList.add('hidden');
+                manageStudioVideoBtn.classList.add('hidden'); // NOVO: esconder botão de gerenciar vídeo do estúdio
                 adminLoginIcon.classList.remove('fa-user-shield');
                 adminLoginIcon.classList.add('fa-lock');
                 
@@ -1460,7 +1492,7 @@
             const testimonialData = { name, rating, comment };
             const response = await fetchAPI('/testimonials', 'POST', testimonialData);
             if (response) {
-                alert('Seu depoimento foi enviado com sucesso e será revisado em breve!');
+                alert('Seu depoimento foi enviado com sucesso para revisão!');
                 closeModal(addTestimonialModal);
                 fetchTestimonials();
             }
@@ -1749,6 +1781,22 @@
             }
         }
 
+        // --- NOVO: Funções para Gerenciar Vídeo do Estúdio ---
+        async function fetchStudioVideo() {
+            const studioConfig = await fetchAPI('/studio-config');
+            if (studioConfig && studioConfig.youtubeVideoId) {
+                const youtubeVideoId = studioConfig.youtubeVideoId;
+                studioVideoContainer.innerHTML = `
+                    <iframe src="https://www.youtube.com/embed/${youtubeVideoId}" 
+                            title="YouTube video player" frameborder="0" 
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                            referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                `;
+            } else {
+                studioVideoContainer.innerHTML = '<p class="text-gray-600 text-center py-8">Nenhum vídeo do estúdio configurado. Por favor, adicione um.</p>';
+            }
+        }
+
 
         // --- Navegação Mobile ---
         document.getElementById('mobile-menu-button').addEventListener('click', () => {
@@ -1776,6 +1824,7 @@
             manageSpotifyTracksBtn = document.getElementById('manage-spotify-tracks-btn');
             manageBlogPostsBtn = document.getElementById('manage-blog-posts-btn');
             manageDownloadableItemsBtn = document.getElementById('manage-downloadable-items-btn');
+            manageStudioVideoBtn = document.getElementById('manage-studio-video-btn'); // NOVO: Botão de gerenciar vídeo do estúdio
 
             adminLoginModal = document.getElementById('admin-login-modal');
             changePasswordModal = document.getElementById('change-password-modal');
@@ -1786,6 +1835,7 @@
             spotifyTrackModal = document.getElementById('spotify-track-modal');
             blogPostModal = document.getElementById('blog-post-modal');
             downloadableItemModal = document.getElementById('downloadable-item-modal');
+            studioVideoModal = document.getElementById('studio-video-modal'); // NOVO: Modal do vídeo do estúdio
 
             adminLoginClose = document.getElementById('admin-login-close');
             changePasswordClose = document.getElementById('change-password-close');
@@ -1796,6 +1846,7 @@
             spotifyTrackClose = document.getElementById('spotify-track-close');
             blogPostClose = document.getElementById('blog-post-close');
             downloadableItemClose = document.getElementById('downloadable-item-close');
+            studioVideoClose = document.getElementById('studio-video-close'); // NOVO: Fechar modal do vídeo do estúdio
 
             adminLoginForm = document.getElementById('admin-login-form');
             changePasswordForm = document.getElementById('change-password-form');
@@ -1806,6 +1857,7 @@
             spotifyTrackForm = document.getElementById('spotify-track-form');
             blogPostForm = document.getElementById('blog-post-form');
             downloadableItemForm = document.getElementById('downloadable-item-form');
+            studioVideoForm = document.getElementById('studio-video-form'); // NOVO: Formulário do vídeo do estúdio
 
             projectsContainer = document.getElementById('projects-container');
             noProjectsMessage = document.getElementById('no-projects-message');
@@ -1836,6 +1888,8 @@
             adminDownloadableItemsButton = document.getElementById('admin-downloadable-items-button');
             addDownloadableItemBtn = document.getElementById('add-downloadable-item-btn');
 
+            studioVideoContainer = document.getElementById('studio-video-container'); // NOVO: Atribuir container do vídeo do estúdio
+            
             adminLoginIcon = document.getElementById('admin-login-icon');
             socialLinksContactDiv = document.getElementById('social-links-contact');
 
@@ -1852,6 +1906,7 @@
             spotifyTrackClose.onclick = () => closeModal(spotifyTrackModal);
             blogPostClose.onclick = () => closeModal(blogPostModal);
             downloadableItemClose.onclick = () => closeModal(downloadableItemModal);
+            studioVideoClose.onclick = () => closeModal(studioVideoModal); // NOVO: Fechar modal do vídeo do estúdio
 
             window.onclick = (event) => {
                 if (event.target == adminLoginModal) closeModal(adminLoginModal);
@@ -1863,6 +1918,7 @@
                 if (event.target == spotifyTrackModal) closeModal(spotifyTrackModal);
                 if (event.target == blogPostModal) closeModal(blogPostModal);
                 if (event.target == downloadableItemModal) closeModal(downloadableItemModal);
+                if (event.target == studioVideoModal) closeModal(studioVideoModal); // NOVO: Fechar modal do vídeo do estúdio
             };
 
             // --- Funcionalidade de Login ---
@@ -2125,6 +2181,26 @@
                 fetchDownloadableItems();
             });
 
+            // NOVO: Event listeners para Gerenciar Vídeo do Estúdio
+            manageStudioVideoBtn.addEventListener('click', async () => {
+                const studioConfig = await fetchAPI('/studio-config', 'GET');
+                if (studioConfig) {
+                    document.getElementById('youtube-video-id').value = studioConfig.youtubeVideoId || '';
+                    openModal(studioVideoModal);
+                }
+            });
+
+            studioVideoForm.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                const youtubeVideoId = document.getElementById('youtube-video-id').value;
+                const response = await fetchAPI('/studio-config', 'PUT', { youtubeVideoId }, true);
+                if (response) {
+                    alert('Vídeo do estúdio atualizado com sucesso!');
+                    closeModal(studioVideoModal);
+                    fetchStudioVideo(); // Recarrega o vídeo na página principal
+                }
+            });
+
 
             // Chamadas iniciais
             checkLoginStatus();
@@ -2135,6 +2211,7 @@
             fetchBlogPosts();
             fetchDownloadableItems();
             renderSocialLinks();
+            fetchStudioVideo(); // NOVO: Carregar o vídeo do estúdio ao iniciar
         });
     </script>
 </body>
