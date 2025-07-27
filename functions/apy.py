@@ -9,6 +9,7 @@ from functools import wraps
 import jwt
 from datetime import datetime, timedelta
 from werkzeug.utils import secure_filename
+import io
 
 print("API: Iniciando a configuração do Flask...")
 app = Flask(__name__)
