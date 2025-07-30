@@ -2,31 +2,43 @@
 
 const express = require('express');
 const serverless = require('serverless-http');
-const { GoogleGenerativeAI } = require('@google/generative-ai');
 const dotenv = require('dotenv');
+const { GoogleGenerativeAI } = require('@google/generative-ai');
 
 dotenv.config();
 
 const app = express();
 const router = express.Router();
 
-// Middleware para parsear JSON
 app.use(express.json());
 
-// Configura a Google Generative AI com sua chave de API
-// console.log('DEBUG: GEMINI_API_KEY from environment in chat.js:', process.env.GEMINI_API_KEY ? 'Key is present' : 'Key is MISSING or empty');
+// --- LOG DE DEBUG NO INÍCIO DA FUNÇÃO ---
+console.log('chat.js: Função iniciada. Hora:', new Date().toISOString());
+console.log('DEBUG: GEMINI_API_KEY from environment in chat.js:', process.env.GEMINI_API_KEY ? 'Key is present' : 'Key is MISSING or empty');
+// --- FIM LOG DE DEBUG ---
 
-// A ROTA POST DEVE SER PARA A RAIZ DO SEU ROUTER, OU SEJA, '/'
-router.post('/', async (req, res) => { // <-- ESTE DEVE SER O CAMINHO '/'
+const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
+const model = genAI.getGenerativeModel({ model: "gemini-2.5-flash-preview-05-20" });
+
+// --- ROTA GET DE TESTE ---
+// Tente acessar esta URL diretamente no seu navegador:
+// https://produtorarealidade.netlify.app/.netlify/functions/chat
+// Se funcionar, você deve ver: {"message":"Chatbot está online!"}
+router.get('/', (req, res) => {
+    console.log('chat.js: Rota GET / acessada.');
+    res.status(200).json({ message: 'Chatbot está online!' });
+});
+// --- FIM ROTA GET DE TESTE ---
+
+router.post('/', async (req, res) => {
+    console.log('chat.js: Rota POST / acessada.');
     try {
         const { contents } = req.body;
 
         if (!contents || !Array.isArray(contents)) {
+            console.log('chat.js: Conteúdo da conversa inválido.');
             return res.status(400).json({ message: 'Conteúdo da conversa inválido.' });
         }
-
-        const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
-        const model = genAI.getGenerativeModel({ model: "gemini-2.5-flash-preview-05-20" });
 
         const chat = model.startChat({
             history: contents.slice(0, -1),
@@ -45,7 +57,7 @@ router.post('/', async (req, res) => { // <-- ESTE DEVE SER O CAMINHO '/'
         res.json({ text });
 
     } catch (error) {
-        console.error('Erro ao processar mensagem do chatbot (chat.js):', error);
+        console.error('chat.js: Erro ao processar mensagem do chatbot:', error);
         if (error.message.includes("403") || error.message.includes("PERMISSION_DENIED")) {
             res.status(403).json({ message: 'Erro de autenticação com a API. Verifique sua chave GEMINI_API_KEY.', error: error.message });
         } else {
@@ -54,7 +66,6 @@ router.post('/', async (req, res) => { // <-- ESTE DEVE SER O CAMINHO '/'
     }
 });
 
-// O Express app.use DEVE USAR A RAIZ ('/') PARA ESTA FUNÇÃO
-app.use('/', router); // <-- ESTE DEVE SER O CAMINHO '/'
+app.use('/', router);
 
 module.exports.handler = serverless(app);
