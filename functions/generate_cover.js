@@ -12,8 +12,14 @@ const router = express.Router();
 // Middleware para parsear JSON
 app.use(express.json());
 
-// Rota para gerar capa de música agora é definida como '/'
-router.post('/', async (req, res) => { // Alterado de '/generate-cover' para '/'
+// Configura a Google Generative AI com sua chave de API
+// Certifique-se de que process.env.GEMINI_API_KEY esteja configurado no Netlify
+// console.log('DEBUG: GEMINI_API_KEY from environment in generate_cover.js:', process.env.GEMINI_API_KEY ? 'Key is present' : 'Key is MISSING or empty');
+
+// A ROTA POST DEVE SER PARA A RAIZ DO SEU ROUTER, OU SEJA, '/'
+// Quando o Netlify encaminha para /.netlify/functions/generate_cover,
+// o Express dentro da função vê isso como a raiz.
+router.post('/', async (req, res) => { // <-- ESTE DEVE SER O CAMINHO '/'
     try {
         const { prompt } = req.body;
 
@@ -26,7 +32,7 @@ router.post('/', async (req, res) => { // Alterado de '/generate-cover' para '/'
             parameters: { "sampleCount": 1 }
         };
 
-        const apiKey = process.env.GEMINI_API_KEY;
+        const apiKey = process.env.GEMINI_API_KEY; // Sua chave de API do Gemini/Google Cloud
         const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/imagen-3.0-generate-002:predict?key=${apiKey}`;
 
         const response = await fetch(apiUrl, {
@@ -47,7 +53,7 @@ router.post('/', async (req, res) => { // Alterado de '/generate-cover' para '/'
         }
 
     } catch (error) {
-        console.error('Erro ao gerar capa de música:', error);
+        console.error('Erro ao gerar capa de música (generate_cover.js):', error);
         if (error.message.includes("403") || error.message.includes("PERMISSION_DENIED")) {
             res.status(403).json({ message: 'Erro de autenticação com a API. Verifique sua chave GEMINI_API_KEY.', error: error.message });
         } else {
@@ -56,8 +62,8 @@ router.post('/', async (req, res) => { // Alterado de '/generate-cover' para '/'
     }
 });
 
-// O prefixo para a rota da Netlify Function agora é apenas '/'
+// O Express app.use DEVE USAR A RAIZ ('/') PARA ESTA FUNÇÃO
 // Isso significa que a função 'generate_cover' responderá diretamente a /.netlify/functions/generate_cover
-app.use('/', router); // Alterado de '/.netlify/functions/generate-cover' para '/'
+app.use('/', router); // <-- ESTE DEVE SER O CAMINHO '/'
 
 module.exports.handler = serverless(app);

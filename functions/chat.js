@@ -14,17 +14,19 @@ const router = express.Router();
 app.use(express.json());
 
 // Configura a Google Generative AI com sua chave de API
-const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
-const model = genAI.getGenerativeModel({ model: "gemini-2.5-flash-preview-05-20" });
+// console.log('DEBUG: GEMINI_API_KEY from environment in chat.js:', process.env.GEMINI_API_KEY ? 'Key is present' : 'Key is MISSING or empty');
 
-// A rota agora é definida como '/' para que ela responda ao caminho base da função
-router.post('/', async (req, res) => { // Alterado de '/chat' para '/'
+// A ROTA POST DEVE SER PARA A RAIZ DO SEU ROUTER, OU SEJA, '/'
+router.post('/', async (req, res) => { // <-- ESTE DEVE SER O CAMINHO '/'
     try {
         const { contents } = req.body;
 
         if (!contents || !Array.isArray(contents)) {
             return res.status(400).json({ message: 'Conteúdo da conversa inválido.' });
         }
+
+        const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
+        const model = genAI.getGenerativeModel({ model: "gemini-2.5-flash-preview-05-20" });
 
         const chat = model.startChat({
             history: contents.slice(0, -1),
@@ -43,8 +45,7 @@ router.post('/', async (req, res) => { // Alterado de '/chat' para '/'
         res.json({ text });
 
     } catch (error) {
-        console.error('Erro ao processar mensagem do chatbot:', error);
-        // Verifica se o erro é de permissão da API
+        console.error('Erro ao processar mensagem do chatbot (chat.js):', error);
         if (error.message.includes("403") || error.message.includes("PERMISSION_DENIED")) {
             res.status(403).json({ message: 'Erro de autenticação com a API. Verifique sua chave GEMINI_API_KEY.', error: error.message });
         } else {
@@ -53,8 +54,7 @@ router.post('/', async (req, res) => { // Alterado de '/chat' para '/'
     }
 });
 
-// O prefixo para a rota da Netlify Function agora é apenas '/'
-// Isso significa que a função 'chat' responderá diretamente a /.netlify/functions/chat
-app.use('/', router); // Alterado de '/.netlify/functions/chat' para '/'
+// O Express app.use DEVE USAR A RAIZ ('/') PARA ESTA FUNÇÃO
+app.use('/', router); // <-- ESTE DEVE SER O CAMINHO '/'
 
 module.exports.handler = serverless(app);
