@@ -9,7 +9,22 @@ const dotenv = require('dotenv');
 
 // Carrega as variáveis de ambiente do arquivo .env
 dotenv.config();
+// Middleware para parsear JSON no corpo das requisições
+app.use(express.json());
 
+// --- INÍCIO: Opção Correta Adicionada (Middleware CORS) ---
+app.use((req, res, next) => {
+    // Permite requisições de qualquer origem. Em produção, você pode querer restringir isso
+    // para apenas o seu domínio personalizado: 'https://cbrecords.online'
+    res.setHeader('Access-Control-Allow-Origin', '*'); // Ou 'https://cbrecords.online'
+    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
+    res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+    // Lida com requisições OPTIONS (preflight requests)
+    if (req.method === 'OPTIONS') {
+        return res.status(200).send();
+    }
+    next();
+});
 const app = express();
 const router = express.Router();
 
