@@ -12,8 +12,10 @@ const router = express.Router();
 // Middleware para parsear JSON
 app.use(express.json());
 
-// Configura a Google Generative AI com sua chave de API
-// Certifique-se de que process.env.GEMINI_API_KEY esteja configurado no Netlify
+// --- ADICIONE ESTA LINHA PARA DEPURAR ---
+console.log('GEMINI_API_KEY from environment:', process.env.GEMINI_API_KEY ? 'Key is present' : 'Key is MISSING or empty');
+// --- FIM DA LINHA DE DEPURACAO ---
+
 const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
 const model = genAI.getGenerativeModel({ model: "gemini-2.5-flash-preview-05-20" });
 
