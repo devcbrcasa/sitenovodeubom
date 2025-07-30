@@ -70,4 +70,13 @@
   status = 200
   force = true
 
-  
+# --- INÍCIO: NOVOS CABEÇALHOS CORS GLOBAIS ---
+# Isso aplica os cabeçalhos CORS a TODAS as requisições, incluindo as funções.
+[[headers]]
+  for = "/*" # Aplica a todos os caminhos
+  [headers.values]
+    Access-Control-Allow-Origin = "*" # Permite qualquer origem. Para produção, considere 'https://cbrecords.online'
+    Access-Control-Allow-Methods = "GET, POST, PUT, DELETE, OPTIONS"
+    Access-Control-Allow-Headers = "Content-Type, Authorization"
+    Access-Control-Max-Age = "86400" # Cache de preflight por 24 horas
+# --- FIM: NOVOS CABEÇALHOS CORS GLOBAIS ---
