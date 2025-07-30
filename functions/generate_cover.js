@@ -28,9 +28,6 @@ const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
 const model = genAI.getGenerativeModel({ model: "imagen-3.0-generate-002" });
 
 // --- ROTA GET DE TESTE ---
-// Tente acessar esta URL diretamente no seu navegador:
-// https://produtorarealidade.netlify.app/.netlify/functions/generate_cover
-// Se funcionar, você deve ver: {"message":"Gerador de capas está online!"}
 router.get('/', (req, res) => {
     console.log('generate_cover.js: Rota GET / acessada.');
     res.status(200).json({ message: 'Gerador de capas está online!' });
@@ -38,8 +35,6 @@ router.get('/', (req, res) => {
 // --- FIM ROTA GET DE TESTE ---
 
 // A ROTA POST PRINCIPAL DEVE SER PARA A RAIZ DO SEU ROUTER, OU SEJA, '/'
-// Quando o Netlify encaminha para /.netlify/functions/generate_cover,
-// o Express dentro da função vê isso como a raiz.
 router.post('/', async (req, res) => {
     console.log('generate_cover.js: Rota POST / acessada.');
     console.log('generate_cover.js: Conteúdo do req.body:', JSON.stringify(req.body)); // Log do corpo da requisição
@@ -87,8 +82,6 @@ router.post('/', async (req, res) => {
     }
 });
 
-// O Express app.use DEVE USAR A RAIZ ('/') PARA ESTA FUNÇÃO
-// Isso significa que a função 'generate_cover' responderá diretamente a /.netlify/functions/generate_cover
 app.use('/', router);
 
 // Middleware de tratamento de erros (deve ser o ÚLTIMO middleware adicionado ANTES do handler)
@@ -98,11 +91,10 @@ app.use((err, req, res, next) => {
 });
 
 // Middleware catch-all para requisições não tratadas por nenhuma rota
-// Isso irá capturar qualquer requisição que chegue à função mas não corresponda a GET / ou POST /
 app.use((req, res) => {
     console.log(`generate_cover.js: [Catch-all] Requisição não tratada. Método: ${req.method}, URL: ${req.url}, OriginalUrl: ${req.originalUrl}`);
     res.status(404).send(`Cannot ${req.method} ${req.originalUrl || req.url}`);
 });
 
-
-module.exports.handler = serverless(app);
+// AQUI ESTÁ A MUDANÇA CRUCIAL: Adicione basePath para serverless-http
+module.exports.handler = serverless(app, { basePath: '/.netlify/functions/generate_cover' });

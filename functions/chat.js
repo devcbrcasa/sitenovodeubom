@@ -79,10 +79,10 @@ app.use((err, req, res, next) => {
 });
 
 // Middleware catch-all para requisições não tratadas por nenhuma rota
-// Isso irá capturar qualquer requisição que chegue à função mas não corresponda a GET / ou POST /
 app.use((req, res) => {
     console.log(`chat.js: [Catch-all] Requisição não tratada. Método: ${req.method}, URL: ${req.url}, OriginalUrl: ${req.originalUrl}`);
     res.status(404).send(`Cannot ${req.method} ${req.originalUrl || req.url}`);
 });
 
-module.exports.handler = serverless(app);
+// AQUI ESTÁ A MUDANÇA CRUCIAL: Adicione basePath para serverless-http
+module.exports.handler = serverless(app, { basePath: '/.netlify/functions/chat' });
