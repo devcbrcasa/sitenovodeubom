@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CBR RECORDS - Produtora Musical</title>
-    <link rel="icon" href="https://i.imgur.com/2XmR5Z4.jpeg" type="image/png"> 
+    <link rel="icon" href="https://i.imgur.com/HZK1xGE.png" type="image/png"> 
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2124826123756577"
      crossorigin="anonymous"></script>
     <script src="https://cdn.tailwindcss.com"></script>
@@ -1529,7 +1529,8 @@
 
         // --- Funções Auxiliares (podem ser definidas fora de DOMContentLoaded) ---
         async function fetchAPI(endpoint, method = 'GET', data = null, needsAuth = false) {
-            const baseURL = window.location.origin + '/.netlify/functions/api'; 
+            // Base URL agora aponta para o diretório de funções do Netlify
+            const baseURL = window.location.origin + '/.netlify/functions'; 
             
             const options = {
                 method: method,
@@ -1559,7 +1560,8 @@
             }
 
             try {
-                const url = `${baseURL}${endpoint.startsWith('/') ? endpoint : '/' + endpoint}`;
+                // Ajuste do endpoint para incluir o nome da função
+                const url = `${baseURL}${endpoint}`; // Endpoint já deve vir como /api/chat ou /generate_cover
                 console.log('Chamando API com URL:', url);
                 const response = await fetch(url, options);
                 
@@ -1703,7 +1705,7 @@
 
         // --- Funções de CRUD de Projetos ---
         async function fetchProjects() {
-            const projects = await fetchAPI('/projects');
+            const projects = await fetchAPI('/api/projects'); // Chamada para /api/projects
             if (projects) {
                 projectsContainer.innerHTML = '';
                 if (projects.length === 0) {
@@ -1747,7 +1749,7 @@
 
         async function deleteProject(id) {
             if (confirm('Tem certeza que deseja excluir este projeto?')) {
-                const response = await fetchAPI(`/projects/${id}`, 'DELETE', null, true);
+                const response = await fetchAPI(`/api/projects/${id}`, 'DELETE', null, true); // Chamada para /api/projects/:id
                 if (response !== null) {
                     alert('Projeto excluído com sucesso!');
                     fetchProjects();
@@ -1757,7 +1759,7 @@
 
         // --- Funções de CRUD de Portfólio ---
         async function fetchPortfolio() {
-            const portfolioItems = await fetchAPI('/portfolio');
+            const portfolioItems = await fetchAPI('/api/portfolio'); // Chamada para /api/portfolio
             if (portfolioItems) {
                 portfolioContainer.innerHTML = '';
                 if (portfolioItems.length === 0) {
@@ -1801,7 +1803,7 @@
 
         async function deletePortfolioItem(id) {
             if (confirm('Tem certeza que deseja excluir este item de portfólio?')) {
-                const response = await fetchAPI(`/portfolio/${id}`, 'DELETE', null, true);
+                const response = await fetchAPI(`/api/portfolio/${id}`, 'DELETE', null, true); // Chamada para /api/portfolio/:id
                 if (response !== null) {
                     alert('Item de portfólio excluído com sucesso!');
                     fetchPortfolio();
@@ -1811,7 +1813,7 @@
 
         // --- Funções de CRUD de Depoimentos ---
         async function fetchTestimonials() {
-            const endpoint = document.body.classList.contains('admin-mode') ? '/testimonials/all' : '/testimonials';
+            const endpoint = document.body.classList.contains('admin-mode') ? '/api/testimonials/all' : '/api/testimonials'; // Chamada para /api/testimonials/all ou /api/testimonials
             const testimonials = await fetchAPI(endpoint, 'GET', null, document.body.classList.contains('admin-mode'));
 
             if (testimonials) {
@@ -1863,7 +1865,7 @@
 
         async function submitTestimonial(name, rating, comment) {
             const testimonialData = { name, rating, comment };
-            const response = await fetchAPI('/testimonials', 'POST', testimonialData);
+            const response = await fetchAPI('/api/testimonials', 'POST', testimonialData); // Chamada para /api/testimonials
             if (response) {
                 alert('Seu depoimento foi enviado com sucesso para revisão!');
                 closeModal(addTestimonialModal);
@@ -1873,7 +1875,7 @@
 
         async function approveTestimonial(id) {
             if (confirm('Tem certeza que deseja aprovar este depoimento?')) {
-                const response = await fetchAPI(`/testimonials/${id}/approve`, 'PUT', null, true);
+                const response = await fetchAPI(`/api/testimonials/${id}/approve`, 'PUT', null, true); // Chamada para /api/testimonials/:id/approve
                 if (response) {
                     alert('Depoimento aprovado com sucesso!');
                     fetchTestimonials();
@@ -1883,7 +1885,7 @@
 
         async function deleteTestimonial(id) {
             if (confirm('Tem certeza que deseja excluir este depoimento?')) {
-                const response = await fetchAPI(`/testimonials/${id}`, 'DELETE', null, true);
+                const response = await fetchAPI(`/api/testimonials/${id}`, 'DELETE', null, true); // Chamada para /api/testimonials/:id
                 if (response !== null) {
                     alert('Depoimento excluído com sucesso!');
                     fetchTestimonials();
@@ -1919,7 +1921,7 @@
         }
 
         async function fetchSpotifyTracks() {
-            const spotifyTracks = await fetchAPI('/spotify-tracks');
+            const spotifyTracks = await fetchAPI('/api/spotify-tracks'); // Chamada para /api/spotify-tracks
             if (spotifyTracks) {
                 spotifyTracksContainer.innerHTML = '';
                 if (spotifyTracks.length === 0) {
@@ -1959,7 +1961,7 @@
 
         async function deleteSpotifyTrack(id) {
             if (confirm('Tem certeza que deseja excluir esta música do Spotify?')) {
-                const response = await fetchAPI(`/spotify-tracks/${id}`, 'DELETE', null, true);
+                const response = await fetchAPI(`/api/spotify-tracks/${id}`, 'DELETE', null, true); // Chamada para /api/spotify-tracks/:id
                 if (response !== null) {
                     alert('Música do Spotify excluída com sucesso!');
                     fetchSpotifyTracks();
@@ -1969,7 +1971,7 @@
 
         // --- Funções de CRUD de Blog Posts ---
         async function fetchBlogPosts() {
-            const endpoint = document.body.classList.contains('admin-mode') ? '/blog-posts/all' : '/blog-posts';
+            const endpoint = document.body.classList.contains('admin-mode') ? '/api/blog-posts/all' : '/api/blog-posts'; // Chamada para /api/blog-posts/all ou /api/blog-posts
             const blogPosts = await fetchAPI(endpoint, 'GET', null, document.body.classList.contains('admin-mode'));
 
             if (blogPosts) {
@@ -2015,7 +2017,7 @@
         }
 
         async function showBlogPostDetail(id) {
-            const post = await fetchAPI(`/blog-posts/${id}`);
+            const post = await fetchAPI(`/api/blog-posts/${id}`); // Chamada para /api/blog-posts/:id
             if (post) {
                 const createdAtDate = new Date(post.createdAt);
                 const formattedDate = createdAtDate.toLocaleDateString('pt-BR', { day: '2-digit', month: '2-digit', year: 'numeric' });
@@ -2055,7 +2057,7 @@
 
         async function deleteBlogPost(id) {
             if (confirm('Tem certeza que deseja excluir este post de blog?')) {
-                const response = await fetchAPI(`/blog-posts/${id}`, 'DELETE', null, true);
+                const response = await fetchAPI(`/api/blog-posts/${id}`, 'DELETE', null, true); // Chamada para /api/blog-posts/:id
                 if (response !== null) {
                     alert('Post de blog excluído com sucesso!');
                     fetchBlogPosts();
@@ -2065,7 +2067,7 @@
 
         // --- Funções de CRUD de Packs e Acapellas (Downloadable Items) ---
         async function fetchDownloadableItems() {
-            const downloadableItems = await fetchAPI('/downloadable-items');
+            const downloadableItems = await fetchAPI('/api/downloadable-items'); // Chamada para /api/downloadable-items
             if (downloadableItems) {
                 downloadableItemsContainer.innerHTML = '';
                 if (downloadableItems.length === 0) {
@@ -2110,7 +2112,7 @@
 
         async function deleteDownloadableItem(id) {
             if (confirm('Tem certeza que deseja excluir este item de download?')) {
-                const response = await fetchAPI(`/downloadable-items/${id}`, 'DELETE', null, true);
+                const response = await fetchAPI(`/api/downloadable-items/${id}`, 'DELETE', null, true); // Chamada para /api/downloadable-items/:id
                 if (response !== null) {
                     alert('Item de download excluído com sucesso!');
                     fetchDownloadableItems();
@@ -2120,7 +2122,7 @@
 
         // --- Funções para renderizar Links Sociais ---
         async function renderSocialLinks() {
-            const socialLinks = await fetchAPI('/social-links', 'GET');
+            const socialLinks = await fetchAPI('/api/social-links', 'GET'); // Chamada para /api/social-links
             console.log('Dados de links sociais recebidos:', socialLinks);
             if (socialLinks) {
                 socialLinksContactDiv.innerHTML = '';
@@ -2156,7 +2158,7 @@
 
         // --- NOVO: Funções para Gerenciar Vídeo do Estúdio ---
         async function fetchStudioVideo() {
-            const studioConfig = await fetchAPI('/studio-config');
+            const studioConfig = await fetchAPI('/api/studio-config'); // Chamada para /api/studio-config
             if (studioConfig && studioConfig.youtubeVideoId) {
                 const youtubeVideoId = studioConfig.youtubeVideoId;
                 studioVideoContainer.innerHTML = `
@@ -2235,8 +2237,8 @@
             chatHistory.push({ role: "user", parts: [{ text: userMessage }] });
 
             try {
-                // Chamada para a Função Netlify do chatbot
-                const aiResponse = await fetchAPI('/chat', 'POST', { contents: chatHistory });
+                // CORRIGIDO: Chamada para a Função Netlify do chatbot
+                const aiResponse = await fetchAPI('/chat', 'POST', { contents: chatHistory }); 
                 
                 if (aiResponse && aiResponse.text) {
                     addMessageToChat(aiResponse.text, 'ai');
@@ -2270,8 +2272,8 @@
             generateImageBtn.disabled = true; // Desabilita o botão
 
             try {
-                // Chamada para a nova Função Netlify de geração de imagem
-                const response = await fetchAPI('/generate-cover', 'POST', { prompt });
+                // CORRIGIDO: Chamada para a nova Função Netlify de geração de imagem
+                const response = await fetchAPI('/generate_cover', 'POST', { prompt });
 
                 if (response && response.imageUrl) {
                     generatedImage.src = response.imageUrl;
@@ -2449,7 +2451,7 @@
                 const username = document.getElementById('admin-username').value;
                 const password = document.getElementById('admin-password').value;
 
-                const data = await fetchAPI('/login', 'POST', { username, password });
+                const data = await fetchAPI('/api/login', 'POST', { username, password }); // Chamada para /api/login
                 if (data && data.token) {
                     localStorage.setItem(JWT_TOKEN_KEY, data.token);
                     alert('Login bem-sucedido!');
@@ -2478,7 +2480,7 @@
                     return;
                 }
 
-                const data = await fetchAPI('/change-password', 'POST', { oldPassword, newPassword }, true);
+                const data = await fetchAPI('/api/change-password', 'POST', { oldPassword, newPassword }, true); // Chamada para /api/change-password
                 if (data) {
                     alert(data.message);
                     closeModal(changePasswordModal);
@@ -2488,7 +2490,7 @@
 
             // --- Links Sociais ---
             editSocialLinksBtn.addEventListener('click', async () => {
-                const socialLinks = await fetchAPI('/social-links', 'GET');
+                const socialLinks = await fetchAPI('/api/social-links', 'GET'); // Chamada para /api/social-links
                 if (socialLinks) {
                     document.getElementById('instagram-link').value = socialLinks.instagram || '';
                     document.getElementById('facebook-link').value = socialLinks.facebook || '';
@@ -2506,7 +2508,7 @@
                     spotify: document.getElementById('spotify-link-global').value,
                     youtube: document.getElementById('youtube-link-global').value,
                 };
-                const data = await fetchAPI('/social-links', 'PUT', updates, true);
+                const data = await fetchAPI('/api/social-links', 'PUT', updates, true); // Chamada para /api/social-links
                 if (data) {
                     alert(data.message);
                     closeModal(socialLinksModal);
@@ -2535,12 +2537,12 @@
                 const projectId = projectIdInput.value;
 
                 if (projectId) {
-                    const response = await fetchAPI(`/projects/${projectId}`, 'PUT', projectData, true);
+                    const response = await fetchAPI(`/api/projects/${projectId}`, 'PUT', projectData, true); // Chamada para /api/projects/:id
                     if (response) {
                         alert('Projeto atualizado com sucesso!');
                     }
                 } else {
-                    const response = await fetchAPI('/projects', 'POST', projectData, true);
+                    const response = await fetchAPI('/api/projects', 'POST', projectData, true); // Chamada para /api/projects
                     if (response) {
                         alert('Projeto adicionado com sucesso!');
                     }
@@ -2570,12 +2572,12 @@
                 const portfolioId = portfolioIdInput.value;
 
                 if (portfolioId) {
-                    const response = await fetchAPI(`/portfolio/${portfolioId}`, 'PUT', itemData, true);
+                    const response = await fetchAPI(`/api/portfolio/${portfolioId}`, 'PUT', itemData, true); // Chamada para /api/portfolio/:id
                     if (response) {
                         alert('Item de portfólio atualizado com sucesso!');
                     }
                 } else {
-                    const response = await fetchAPI('/portfolio', 'POST', itemData, true);
+                    const response = await fetchAPI('/api/portfolio', 'POST', itemData, true); // Chamada para /api/portfolio
                     if (response) {
                         alert('Item de portfólio adicionado com sucesso!');
                     }
@@ -2619,12 +2621,12 @@
                 const trackDbId = spotifyTrackIdInput.value;
 
                 if (trackDbId) {
-                    const response = await fetchAPI(`/spotify-tracks/${trackDbId}`, 'PUT', trackData, true);
+                    const response = await fetchAPI(`/api/spotify-tracks/${trackDbId}`, 'PUT', trackData, true); // Chamada para /api/spotify-tracks/:id
                     if (response) {
                         alert('Música Spotify atualizada com sucesso!');
                     }
                 } else {
-                    const response = await fetchAPI('/spotify-tracks', 'POST', trackData, true);
+                    const response = await fetchAPI('/api/spotify-tracks', 'POST', trackData, true); // Chamada para /api/spotify-tracks
                     if (response) {
                         alert('Música Spotify adicionada com sucesso!');
                     }
@@ -2654,12 +2656,12 @@
                 const postId = postIdInput.value;
 
                 if (postId) {
-                    const response = await fetchAPI(`/blog-posts/${postId}`, 'PUT', postData, true);
+                    const response = await fetchAPI(`/api/blog-posts/${postId}`, 'PUT', postData, true); // Chamada para /api/blog-posts/:id
                     if (response) {
                         alert('Post de blog atualizado com sucesso!');
                     }
                 } else {
-                    const response = await fetchAPI('/blog-posts', 'POST', postData, true);
+                    const response = await fetchAPI('/api/blog-posts', 'POST', postData, true); // Chamada para /api/blog-posts
                     if (response) {
                         alert('Post de blog adicionado com sucesso!');
                     }
@@ -2689,12 +2691,12 @@
                 const itemId = itemIdInput.value;
 
                 if (itemId) {
-                    const response = await fetchAPI(`/downloadable-items/${itemId}`, 'PUT', itemData, true);
+                    const response = await fetchAPI(`/api/downloadable-items/${itemId}`, 'PUT', itemData, true); // Chamada para /api/downloadable-items/:id
                     if (response) {
                         alert('Item de download atualizado com sucesso!');
                     }
                 } else {
-                    const response = await fetchAPI('/downloadable-items', 'POST', itemData, true);
+                    const response = await fetchAPI('/api/downloadable-items', 'POST', itemData, true); // Chamada para /api/downloadable-items
                     if (response) {
                         alert('Item de download adicionado com sucesso!');
                     }
@@ -2705,7 +2707,7 @@
 
             // NOVO: Event listeners para Gerenciar Vídeo do Estúdio
             manageStudioVideoBtn.addEventListener('click', async () => {
-                const studioConfig = await fetchAPI('/studio-config', 'GET');
+                const studioConfig = await fetchAPI('/api/studio-config', 'GET'); // Chamada para /api/studio-config
                 if (studioConfig) {
                     document.getElementById('youtube-video-id').value = studioConfig.youtubeVideoId || '';
                     openModal(studioVideoModal);
@@ -2715,7 +2717,7 @@
             studioVideoForm.addEventListener('submit', async (e) => {
                 e.preventDefault();
                 const youtubeVideoId = document.getElementById('youtube-video-id').value;
-                const response = await fetchAPI('/studio-config', 'PUT', { youtubeVideoId }, true);
+                const response = await fetchAPI('/api/studio-config', 'PUT', { youtubeVideoId }, true); // Chamada para /api/studio-config
                 if (response) {
                     alert('Vídeo do estúdio atualizado com sucesso!');
                     closeModal(studioVideoModal);
@@ -2735,6 +2737,7 @@
             sendChatBtn.addEventListener('click', sendChatMessage);
             chatInput.addEventListener('keypress', (e) => {
                 if (e.key === 'Enter' && !sendChatBtn.disabled) {
+                    e.preventDefault(); // Impede a quebra de linha padrão
                     sendChatMessage();
                 }
             });
