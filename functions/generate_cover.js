@@ -13,18 +13,6 @@ const router = express.Router();
 // Middleware para parsear JSON
 app.use(express.json());
 
-// --- NOVO: Middleware CORS (Específico para seu domínio) ---
-app.use((req, res, next) => {
-    res.setHeader('Access-Control-Allow-Origin', 'https://cbrecords.online'); // AGORA ESPECÍFICO!
-    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
-    res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
-    if (req.method === 'OPTIONS') {
-        return res.status(200).send();
-    }
-    next();
-});
-// --- FIM NOVO: Middleware CORS ---
-
 // --- LOGS DE INICIALIZAÇÃO DA FUNÇÃO ---
 console.log('generate_cover.js: Função iniciada. Hora:', new Date().toISOString());
 console.log('DEBUG: GEMINI_API_KEY from environment in generate_cover.js:', process.env.GEMINI_API_KEY ? 'Key is present' : 'Key is MISSING or empty');
@@ -39,16 +27,17 @@ app.use((req, res, next) => {
 const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
 const model = genAI.getGenerativeModel({ model: "imagen-3.0-generate-002" });
 
-// ROTA GET DE TESTE
+// --- ROTA GET DE TESTE ---
 router.get('/', (req, res) => {
     console.log('generate_cover.js: Rota GET / acessada.');
     res.status(200).json({ message: 'Gerador de capas está online!' });
 });
+// --- FIM ROTA GET DE TESTE ---
 
-// A ROTA POST PRINCIPAL
+// A ROTA POST PRINCIPAL DEVE SER PARA A RAIZ DO SEU ROUTER, OU SEJA, '/'
 router.post('/', async (req, res) => {
     console.log('generate_cover.js: Rota POST / acessada.');
-    console.log('generate_cover.js: Conteúdo do req.body:', JSON.stringify(req.body));
+    console.log('generate_cover.js: Conteúdo do req.body:', JSON.stringify(req.body)); // Log do corpo da requisição
 
     try {
         const { prompt } = req.body;
@@ -95,16 +84,17 @@ router.post('/', async (req, res) => {
 
 app.use('/', router);
 
-// Middleware de tratamento de erros
+// Middleware de tratamento de erros (deve ser o ÚLTIMO middleware adicionado ANTES do handler)
 app.use((err, req, res, next) => {
     console.error('generate_cover.js: Erro não capturado no Express:', err.stack);
     res.status(500).send('Erro interno do servidor.');
 });
 
-// Middleware catch-all
+// Middleware catch-all para requisições não tratadas por nenhuma rota
 app.use((req, res) => {
     console.log(`generate_cover.js: [Catch-all] Requisição não tratada. Método: ${req.method}, URL: ${req.url}, OriginalUrl: ${req.originalUrl}`);
     res.status(404).send(`Cannot ${req.method} ${req.originalUrl || req.url}`);
 });
 
+// AQUI ESTÁ A MUDANÇA CRUCIAL: Adicione basePath para serverless-http
 module.exports.handler = serverless(app, { basePath: '/.netlify/functions/generate_cover' });
