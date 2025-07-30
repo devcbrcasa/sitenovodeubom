@@ -1,4 +1,5 @@
 // functions/chat.js
+
 const express = require('express');
 const serverless = require('serverless-http');
 const { GoogleGenerativeAI } = require('@google/generative-ai');
@@ -12,24 +13,21 @@ const router = express.Router();
 // Middleware para parsear JSON
 app.use(express.json());
 
-// --- ADICIONE ESTA LINHA PARA DEPURAR ---
-console.log('GEMINI_API_KEY from environment:', process.env.GEMINI_API_KEY ? 'Key is present' : 'Key is MISSING or empty');
-// --- FIM DA LINHA DE DEPURACAO ---
-
+// Configura a Google Generative AI com sua chave de API
 const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
 const model = genAI.getGenerativeModel({ model: "gemini-2.5-flash-preview-05-20" });
 
-router.post('/chat', async (req, res) => {
+// A rota agora é definida como '/' para que ela responda ao caminho base da função
+router.post('/', async (req, res) => { // Alterado de '/chat' para '/'
     try {
-        const { contents } = req.body; // 'contents' deve ser o histórico da conversa
+        const { contents } = req.body;
 
         if (!contents || !Array.isArray(contents)) {
             return res.status(400).json({ message: 'Conteúdo da conversa inválido.' });
         }
 
-        // Inicia um novo chat com o histórico fornecido
         const chat = model.startChat({
-            history: contents.slice(0, -1), // Exclui a última mensagem (a do usuário atual) do histórico para evitar duplicação
+            history: contents.slice(0, -1),
             generationConfig: {
                 temperature: 0.7,
                 topP: 0.95,
@@ -46,11 +44,17 @@ router.post('/chat', async (req, res) => {
 
     } catch (error) {
         console.error('Erro ao processar mensagem do chatbot:', error);
-        res.status(500).json({ message: 'Erro interno do servidor ao se comunicar com a IA.', error: error.message });
+        // Verifica se o erro é de permissão da API
+        if (error.message.includes("403") || error.message.includes("PERMISSION_DENIED")) {
+            res.status(403).json({ message: 'Erro de autenticação com a API. Verifique sua chave GEMINI_API_KEY.', error: error.message });
+        } else {
+            res.status(500).json({ message: 'Erro interno do servidor ao se comunicar com a IA.', error: error.message });
+        }
     }
 });
 
-// Prefixo para as rotas da Netlify Function
-app.use('/.netlify/functions/chat', router);
+// O prefixo para a rota da Netlify Function agora é apenas '/'
+// Isso significa que a função 'chat' responderá diretamente a /.netlify/functions/chat
+app.use('/', router); // Alterado de '/.netlify/functions/chat' para '/'
 
 module.exports.handler = serverless(app);

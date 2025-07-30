@@ -12,8 +12,8 @@ const router = express.Router();
 // Middleware para parsear JSON
 app.use(express.json());
 
-// Rota para gerar capa de música
-router.post('/generate-cover', async (req, res) => {
+// Rota para gerar capa de música agora é definida como '/'
+router.post('/', async (req, res) => { // Alterado de '/generate-cover' para '/'
     try {
         const { prompt } = req.body;
 
@@ -21,13 +21,12 @@ router.post('/generate-cover', async (req, res) => {
             return res.status(400).json({ message: 'A descrição da capa (prompt) é obrigatória.' });
         }
 
-        // Payload para a API imagen-3.0-generate-002
         const payload = {
             instances: { prompt: prompt },
-            parameters: { "sampleCount": 1 } // Gera uma imagem
+            parameters: { "sampleCount": 1 }
         };
 
-        const apiKey = process.env.GEMINI_API_KEY; // Sua chave de API do Gemini/Google Cloud
+        const apiKey = process.env.GEMINI_API_KEY;
         const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/imagen-3.0-generate-002:predict?key=${apiKey}`;
 
         const response = await fetch(apiUrl, {
@@ -49,7 +48,6 @@ router.post('/generate-cover', async (req, res) => {
 
     } catch (error) {
         console.error('Erro ao gerar capa de música:', error);
-        // Verifica se o erro é de permissão da API
         if (error.message.includes("403") || error.message.includes("PERMISSION_DENIED")) {
             res.status(403).json({ message: 'Erro de autenticação com a API. Verifique sua chave GEMINI_API_KEY.', error: error.message });
         } else {
@@ -58,7 +56,8 @@ router.post('/generate-cover', async (req, res) => {
     }
 });
 
-// Prefixo para as rotas da Netlify Function
-app.use('/.netlify/functions/generate-cover', router);
+// O prefixo para a rota da Netlify Function agora é apenas '/'
+// Isso significa que a função 'generate_cover' responderá diretamente a /.netlify/functions/generate_cover
+app.use('/', router); // Alterado de '/.netlify/functions/generate-cover' para '/'
 
 module.exports.handler = serverless(app);
