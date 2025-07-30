@@ -9,6 +9,10 @@ const dotenv = require('dotenv');
 
 // Carrega as variáveis de ambiente do arquivo .env
 dotenv.config();
+
+const app = express();
+const router = express.Router();
+
 // Middleware para parsear JSON no corpo das requisições
 app.use(express.json());
 
@@ -25,11 +29,7 @@ app.use((req, res, next) => {
     }
     next();
 });
-const app = express();
-const router = express.Router();
-
-// Middleware para parsear JSON no corpo das requisições
-app.use(express.json());
+// --- FIM: Opção Correta Adicionada ---
 
 // Conexão com o MongoDB
 // Utiliza process.env.MONGODB_URI, que deve ser configurado no Netlify ou localmente
@@ -785,4 +785,4 @@ router.put('/studio-config', authenticateToken, async (req, res) => {
 app.use('/.netlify/functions/api', router);
 
 // Exporta o handler para o Netlify Functions
-module.exports.handler = serverless(app);
+module.exports.handler = serverless(app, { basePath: '/.netlify/functions/api' });
