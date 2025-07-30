@@ -2,21 +2,26 @@
 
 const express = require('express');
 const serverless = require('serverless-http');
-const { GoogleGenerativeAI } = require('@google/generative-ai');
 const dotenv = require('dotenv');
+const { GoogleGenerativeAI } = require('@google/generative-ai');
 
 dotenv.config();
 
 const app = express();
 const router = express.Router();
 
-// Middleware para parsear JSON
 app.use(express.json());
 
-// --- LOGS DE INICIALIZAÇÃO DA FUNÇÃO (para depuração) ---
+// --- LOGS DE INICIALIZAÇÃO DA FUNÇÃO ---
 console.log('chat.js: Função iniciada. Hora:', new Date().toISOString());
 console.log('DEBUG: GEMINI_API_KEY from environment in chat.js:', process.env.GEMINI_API_KEY ? 'Key is present' : 'Key is MISSING or empty');
 // --- FIM LOGS DE INICIALIZAÇÃO ---
+
+// Middleware de log para todas as requisições que chegam ao Express
+app.use((req, res, next) => {
+    console.log(`chat.js: Requisição recebida - Método: ${req.method}, URL: ${req.url}`);
+    next();
+});
 
 const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
 const model = genAI.getGenerativeModel({ model: "gemini-2.5-flash-preview-05-20" });
@@ -27,10 +32,7 @@ router.get('/', (req, res) => {
     res.status(200).json({ message: 'Chatbot está online!' });
 });
 
-// A ROTA POST PRINCIPAL DEVE SER PARA A RAIZ DO SEU ROUTER, OU SEJA, '/'
-// Quando o Netlify encaminha para /.netlify/functions/chat,
-// o Express dentro da função vê isso como a raiz.
-router.post('/', async (req, res) => { // <-- ESTE DEVE SER O CAMINHO '/'
+router.post('/', async (req, res) => {
     console.log('chat.js: Rota POST / acessada.');
     console.log('chat.js: Conteúdo do req.body:', JSON.stringify(req.body)); // Log do corpo da requisição
 
@@ -68,7 +70,6 @@ router.post('/', async (req, res) => { // <-- ESTE DEVE SER O CAMINHO '/'
     }
 });
 
-// O Express app.use DEVE USAR A RAIZ ('/') PARA ESTA FUNÇÃO
-app.use('/', router); // <-- ESTE DEVE SER O CAMINHO '/'
+app.use('/', router);
 
 module.exports.handler = serverless(app);
