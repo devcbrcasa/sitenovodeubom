@@ -2,41 +2,43 @@
 
 const express = require('express');
 const serverless = require('serverless-http');
-const dotenv = require('dotenv');
 const { GoogleGenerativeAI } = require('@google/generative-ai');
+const dotenv = require('dotenv');
 
 dotenv.config();
 
 const app = express();
 const router = express.Router();
 
+// Middleware para parsear JSON
 app.use(express.json());
 
-// --- LOG DE DEBUG NO INÍCIO DA FUNÇÃO ---
+// --- LOGS DE INICIALIZAÇÃO DA FUNÇÃO (para depuração) ---
 console.log('chat.js: Função iniciada. Hora:', new Date().toISOString());
 console.log('DEBUG: GEMINI_API_KEY from environment in chat.js:', process.env.GEMINI_API_KEY ? 'Key is present' : 'Key is MISSING or empty');
-// --- FIM LOG DE DEBUG ---
+// --- FIM LOGS DE INICIALIZAÇÃO ---
 
 const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
 const model = genAI.getGenerativeModel({ model: "gemini-2.5-flash-preview-05-20" });
 
-// --- ROTA GET DE TESTE ---
-// Tente acessar esta URL diretamente no seu navegador:
-// https://produtorarealidade.netlify.app/.netlify/functions/chat
-// Se funcionar, você deve ver: {"message":"Chatbot está online!"}
+// ROTA GET DE TESTE (para verificar se a função está respondendo)
 router.get('/', (req, res) => {
     console.log('chat.js: Rota GET / acessada.');
     res.status(200).json({ message: 'Chatbot está online!' });
 });
-// --- FIM ROTA GET DE TESTE ---
 
-router.post('/', async (req, res) => {
+// A ROTA POST PRINCIPAL DEVE SER PARA A RAIZ DO SEU ROUTER, OU SEJA, '/'
+// Quando o Netlify encaminha para /.netlify/functions/chat,
+// o Express dentro da função vê isso como a raiz.
+router.post('/', async (req, res) => { // <-- ESTE DEVE SER O CAMINHO '/'
     console.log('chat.js: Rota POST / acessada.');
+    console.log('chat.js: Conteúdo do req.body:', JSON.stringify(req.body)); // Log do corpo da requisição
+
     try {
         const { contents } = req.body;
 
         if (!contents || !Array.isArray(contents)) {
-            console.log('chat.js: Conteúdo da conversa inválido.');
+            console.log('chat.js: Conteúdo da conversa inválido ou ausente no body.');
             return res.status(400).json({ message: 'Conteúdo da conversa inválido.' });
         }
 
@@ -66,6 +68,7 @@ router.post('/', async (req, res) => {
     }
 });
 
-app.use('/', router);
+// O Express app.use DEVE USAR A RAIZ ('/') PARA ESTA FUNÇÃO
+app.use('/', router); // <-- ESTE DEVE SER O CAMINHO '/'
 
 module.exports.handler = serverless(app);
