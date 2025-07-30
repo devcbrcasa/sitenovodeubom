@@ -17,9 +17,9 @@ console.log('chat.js: Função iniciada. Hora:', new Date().toISOString());
 console.log('DEBUG: GEMINI_API_KEY from environment in chat.js:', process.env.GEMINI_API_KEY ? 'Key is present' : 'Key is MISSING or empty');
 // --- FIM LOGS DE INICIALIZAÇÃO ---
 
-// Middleware de log para todas as requisições que chegam ao Express
+// Middleware de log para TODAS as requisições que chegam ao Express
 app.use((req, res, next) => {
-    console.log(`chat.js: Requisição recebida - Método: ${req.method}, URL: ${req.url}`);
+    console.log(`chat.js: [Middleware] Requisição recebida - Método: ${req.method}, URL: ${req.url}, OriginalUrl: ${req.originalUrl}`);
     next();
 });
 
@@ -71,5 +71,18 @@ router.post('/', async (req, res) => {
 });
 
 app.use('/', router);
+
+// Middleware de tratamento de erros (deve ser o ÚLTIMO middleware adicionado ANTES do handler)
+app.use((err, req, res, next) => {
+    console.error('chat.js: Erro não capturado no Express:', err.stack);
+    res.status(500).send('Erro interno do servidor.');
+});
+
+// Middleware catch-all para requisições não tratadas por nenhuma rota
+// Isso irá capturar qualquer requisição que chegue à função mas não corresponda a GET / ou POST /
+app.use((req, res) => {
+    console.log(`chat.js: [Catch-all] Requisição não tratada. Método: ${req.method}, URL: ${req.url}, OriginalUrl: ${req.originalUrl}`);
+    res.status(404).send(`Cannot ${req.method} ${req.originalUrl || req.url}`);
+});
 
 module.exports.handler = serverless(app);

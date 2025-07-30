@@ -18,13 +18,12 @@ console.log('generate_cover.js: Função iniciada. Hora:', new Date().toISOStrin
 console.log('DEBUG: GEMINI_API_KEY from environment in generate_cover.js:', process.env.GEMINI_API_KEY ? 'Key is present' : 'Key is MISSING or empty');
 // --- FIM LOGS DE INICIALIZAÇÃO ---
 
-// Middleware de log para todas as requisições que chegam ao Express
+// Middleware de log para TODAS as requisições que chegam ao Express
 app.use((req, res, next) => {
-    console.log(`generate_cover.js: Requisição recebida - Método: ${req.method}, URL: ${req.url}`);
+    console.log(`generate_cover.js: [Middleware] Requisição recebida - Método: ${req.method}, URL: ${req.url}, OriginalUrl: ${req.originalUrl}`);
     next();
 });
 
-// Configura a Google Generative AI com sua chave de API
 const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
 const model = genAI.getGenerativeModel({ model: "imagen-3.0-generate-002" });
 
@@ -91,5 +90,19 @@ router.post('/', async (req, res) => {
 // O Express app.use DEVE USAR A RAIZ ('/') PARA ESTA FUNÇÃO
 // Isso significa que a função 'generate_cover' responderá diretamente a /.netlify/functions/generate_cover
 app.use('/', router);
+
+// Middleware de tratamento de erros (deve ser o ÚLTIMO middleware adicionado ANTES do handler)
+app.use((err, req, res, next) => {
+    console.error('generate_cover.js: Erro não capturado no Express:', err.stack);
+    res.status(500).send('Erro interno do servidor.');
+});
+
+// Middleware catch-all para requisições não tratadas por nenhuma rota
+// Isso irá capturar qualquer requisição que chegue à função mas não corresponda a GET / ou POST /
+app.use((req, res) => {
+    console.log(`generate_cover.js: [Catch-all] Requisição não tratada. Método: ${req.method}, URL: ${req.url}, OriginalUrl: ${req.originalUrl}`);
+    res.status(404).send(`Cannot ${req.method} ${req.originalUrl || req.url}`);
+});
+
 
 module.exports.handler = serverless(app);
