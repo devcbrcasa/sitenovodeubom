@@ -16,21 +16,6 @@ const router = express.Router();
 // Middleware para parsear JSON no corpo das requisições
 app.use(express.json());
 
-// --- INÍCIO: Middleware CORS Adicionado ---
-app.use((req, res, next) => {
-    // Permite requisições de qualquer origem. Em produção, você pode querer restringir isso
-    // para apenas o seu domínio personalizado: 'https://cbrecords.online'
-    res.setHeader('Access-Control-Allow-Origin', '*'); // Ou 'https://cbrecords.online'
-    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
-    res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
-    // Lida com requisições OPTIONS (preflight requests)
-    if (req.method === 'OPTIONS') {
-        return res.status(200).send();
-    }
-    next();
-});
-// --- FIM: Middleware CORS Adicionado ---
-
 // Conexão com o MongoDB
 // Utiliza process.env.MONGODB_URI, que deve ser configurado no Netlify ou localmente
 mongoose.connect(process.env.MONGODB_URI, {
@@ -785,4 +770,4 @@ router.put('/studio-config', authenticateToken, async (req, res) => {
 app.use('/.netlify/functions/api', router);
 
 // Exporta o handler para o Netlify Functions
-module.exports.handler = serverless(app, { basePath: '/.netlify/functions/api' });
+module.exports.handler = serverless(app);
