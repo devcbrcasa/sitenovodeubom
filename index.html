@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CBR RECORDS - Produtora Musical</title>
-    <link rel="icon" href="https://i.imgur.com/2XmR5Z4.jpeg" type="image/png"> 
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2124826123756577"
      crossorigin="anonymous"></script>
     <script src="https://cdn.tailwindcss.com"></script>
@@ -492,196 +491,6 @@
                 flex-wrap: nowrap;
             }
         }
-
-        /* Estilos para o Chatbot */
-        #chatbot-fab {
-            position: fixed;
-            bottom: 20px;
-            left: 20px; /* Mudei para a esquerda para não colidir com o painel admin */
-            background-color: #6C1CD1;
-            color: white;
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.8rem;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-            cursor: pointer;
-            z-index: 99;
-            transition: background-color 0.3s ease;
-        }
-
-        #chatbot-fab:hover {
-            background-color: #5a19b0;
-        }
-
-        #chatbot-modal .modal-content {
-            max-width: 400px;
-            height: 80vh;
-            display: flex;
-            flex-direction: column;
-            margin: 5vh auto; /* Ajuste para centralizar verticalmente */
-            background-color: #1E1E24;
-            border-radius: 10px;
-            overflow: hidden;
-        }
-
-        #chat-messages {
-            flex-grow: 1;
-            padding: 1rem;
-            overflow-y: auto;
-            background-color: #2a2a30; /* Fundo mais claro para as mensagens */
-            border-bottom: 1px solid #3a3a40;
-        }
-
-        .chat-message {
-            margin-bottom: 0.75rem;
-            display: flex;
-            font-size: 0.9rem;
-        }
-
-        .chat-message.user {
-            justify-content: flex-end;
-        }
-
-        .chat-message.ai {
-            justify-content: flex-start;
-        }
-
-        .chat-message .bubble {
-            max-width: 80%;
-            padding: 0.6rem 0.9rem;
-            border-radius: 1.2rem;
-            line-height: 1.4;
-            word-wrap: break-word; /* Garante que o texto quebre */
-        }
-
-        .chat-message.user .bubble {
-            background-color: #6C1CD1; /* primary */
-            color: white;
-            border-bottom-right-radius: 0.3rem; /* Canto inferior direito mais reto */
-        }
-
-        .chat-message.ai .bubble {
-            background-color: #4a4a50; /* Cinza escuro para IA */
-            color: white;
-            border-bottom-left-radius: 0.3rem; /* Canto inferior esquerdo mais reto */
-        }
-
-        #chat-input-container {
-            display: flex;
-            padding: 1rem;
-            background-color: #1E1E24;
-            border-top: 1px solid #3a3a40;
-        }
-
-        #chat-input {
-            flex-grow: 1;
-            padding: 0.75rem;
-            border-radius: 9999px; /* Totalmente redondo */
-            border: 1px solid #3a3a40;
-            background-color: #2a2a30;
-            color: white;
-            outline: none;
-            margin-right: 0.5rem;
-        }
-
-        #send-chat-btn {
-            background-color: #6C1CD1;
-            color: white;
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.2rem;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-        }
-
-        #send-chat-btn:hover {
-            background-color: #5a19b0;
-        }
-
-        .loading-dots {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            height: 20px;
-            margin-left: 10px;
-        }
-
-        .loading-dots span {
-            width: 6px;
-            height: 6px;
-            background-color: #6C1CD1;
-            border-radius: 50%;
-            margin: 0 2px;
-            animation: bounce 0.6s infinite alternate;
-        }
-
-        .loading-dots span:nth-child(2) {
-            animation-delay: 0.2s;
-        }
-
-        .loading-dots span:nth-child(3) {
-            animation-delay: 0.4s;
-        }
-
-        @keyframes bounce {
-            from {
-                transform: translateY(0);
-            }
-            to {
-                transform: translateY(-5px);
-            }
-        }
-
-        /* Estilos para o Gerador de Imagens */
-        #image-generator-modal .modal-content {
-            max-width: 500px;
-            height: auto;
-            min-height: 50vh;
-            display: flex;
-            flex-direction: column;
-            margin: 5vh auto;
-            background-color: #1E1E24;
-            border-radius: 10px;
-            overflow: hidden;
-        }
-
-        #image-generator-result {
-            flex-grow: 1;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 1rem;
-            background-color: #2a2a30;
-            min-height: 200px;
-        }
-
-        #generated-image {
-            max-width: 100%;
-            max-height: 300px;
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-        }
-
-        #image-generator-loading-indicator {
-            display: none;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 1.1rem;
-        }
-
-        #image-generator-loading-indicator .loading-dots {
-            margin-top: 10px;
-        }
     </style>
 </head>
 <body class="bg-primary text-gray-800">
@@ -1139,10 +948,6 @@
         <button id="manage-studio-video-btn" class="bg-purple-600 hover:bg-purple-700 text-white p-3 rounded-full shadow-lg transition-colors hidden">
             <i class="fas fa-video text-xl"></i>
         </button>
-        <!-- NOVO BOTÃO: Gerador de Imagens (admin) -->
-        <button id="manage-image-generator-btn" class="bg-pink-600 hover:bg-pink-700 text-white p-3 rounded-full shadow-lg transition-colors hidden">
-            <i class="fas fa-magic text-xl"></i>
-        </button>
     </div>
 
     <div id="admin-login-modal" class="modal">
@@ -1441,74 +1246,15 @@
         </div>
     </div>
 
-    <!-- Botão Flutuante do Chatbot -->
-    <div id="chatbot-fab">
-        <i class="fas fa-robot"></i>
-    </div>
-
-    <!-- Modal do Chatbot -->
-    <div id="chatbot-modal" class="modal">
-        <div class="modal-content">
-            <span class="close" id="chatbot-close">×</span>
-            <div class="p-4">
-                <h2 class="text-2xl font-bold text-white mb-4">Chatbot CBR RECORDS</h2>
-                <div id="chat-messages" class="h-64 overflow-y-auto mb-4 p-2 rounded-lg bg-gray-800">
-                    <div class="chat-message ai">
-                        <div class="bubble">Olá! Como posso ajudar você hoje na CBR RECORDS?</div>
-                    </div>
-                </div>
-                <div id="chat-input-container" class="flex items-center">
-                    <input type="text" id="chat-input" placeholder="Digite sua mensagem..." class="flex-grow p-2 rounded-full bg-gray-700 text-white border border-gray-600 focus:outline-none focus:ring-2 focus:ring-primary">
-                    <button id="send-chat-btn" class="ml-2 bg-primary hover:bg-purple-700 text-white p-2 rounded-full w-10 h-10 flex items-center justify-center">
-                        <i class="fas fa-paper-plane"></i>
-                    </button>
-                    <div id="chat-loading-indicator" class="loading-dots hidden">
-                        <span></span><span></span><span></span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- NOVO MODAL: Gerador de Capas de Música -->
-    <div id="image-generator-modal" class="modal">
-        <div class="modal-content">
-            <span class="close" id="image-generator-close">×</span>
-            <div class="p-4">
-                <h2 class="text-2xl font-bold text-white mb-4">Gerador de Capas de Música com IA</h2>
-                <div class="space-y-4">
-                    <div>
-                        <label for="image-prompt" class="block text-sm font-medium text-gray-300">Descreva a capa que você deseja:</label>
-                        <textarea id="image-prompt" rows="4" class="mt-1 block w-full border border-gray-600 rounded-md shadow-sm p-2 bg-gray-700 text-white" placeholder="Ex: Um astronauta tocando guitarra em um planeta roxo, estilo neon, com estrelas e galáxias ao fundo."></textarea>
-                    </div>
-                    <button id="generate-image-btn" class="w-full bg-primary hover:bg-purple-700 text-white font-bold py-3 px-6 rounded-lg transition-colors flex items-center justify-center">
-                        <i class="fas fa-magic mr-2"></i> Gerar Capa
-                    </button>
-                    <div id="image-generator-result" class="flex items-center justify-center relative">
-                        <img id="generated-image" src="" alt="Capa Gerada por IA" class="hidden">
-                        <p id="image-placeholder" class="text-gray-500">Sua capa gerada aparecerá aqui.</p>
-                        <div id="image-generator-loading-indicator" class="hidden">
-                            <p>Gerando sua capa...</p>
-                            <div class="loading-dots">
-                                <span></span><span></span><span></span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-
     <script>
         // Variável global para o token JWT
         const JWT_TOKEN_KEY = 'jwt_token';
         const COOKIE_CONSENT_KEY = 'cookie_consent'; // Chave para o localStorage
 
         // Variáveis globais para elementos do DOM (serão atribuídas em DOMContentLoaded)
-        let adminLoginBtn, logoutBtn, changePasswordBtn, editSocialLinksBtn, manageSpotifyTracksBtn, manageBlogPostsBtn, manageDownloadableItemsBtn, manageStudioVideoBtn, manageImageGeneratorBtn;
-        let adminLoginModal, changePasswordModal, socialLinksModal, projectModal, portfolioModal, addTestimonialModal, spotifyTrackModal, blogPostModal, downloadableItemModal, studioVideoModal, chatbotModal, imageGeneratorModal;
-        let adminLoginClose, changePasswordClose, socialLinksClose, projectClose, portfolioClose, addTestimonialClose, spotifyTrackClose, blogPostClose, downloadableItemClose, studioVideoClose, chatbotClose, imageGeneratorClose;
+        let adminLoginBtn, logoutBtn, changePasswordBtn, editSocialLinksBtn, manageSpotifyTracksBtn, manageBlogPostsBtn, manageDownloadableItemsBtn, manageStudioVideoBtn;
+        let adminLoginModal, changePasswordModal, socialLinksModal, projectModal, portfolioModal, addTestimonialModal, spotifyTrackModal, blogPostModal, downloadableItemModal, studioVideoModal;
+        let adminLoginClose, changePasswordClose, socialLinksClose, projectClose, portfolioClose, addTestimonialClose, spotifyTrackClose, blogPostClose, downloadableItemClose, studioVideoClose;
         let adminLoginForm, changePasswordForm, socialLinksForm, projectForm, portfolioForm, testimonialForm, spotifyTrackForm, blogPostForm, downloadableItemForm, studioVideoForm;
         let projectsContainer, noProjectsMessage, adminProjectsButton, addProjectBtn;
         let portfolioContainer, noPortfolioMessage, adminPortfolioButton, addPortfolioBtn;
@@ -1520,17 +1266,10 @@
         let adminLoginIcon;
         let socialLinksContactDiv;
         let cookieConsentBanner, acceptCookiesBtn, declineCookiesBtn, privacyPolicyLink; // Elementos do banner de cookies
-        // Variáveis do Chatbot
-        let chatbotFab, chatMessagesDiv, chatInput, sendChatBtn, chatLoadingIndicator;
-        let chatHistory = []; // Para manter o histórico da conversa com a IA
-        // Variáveis do Gerador de Imagens
-        let imagePromptInput, generateImageBtn, generatedImage, imagePlaceholder, imageGeneratorLoadingIndicator;
-
 
         // --- Funções Auxiliares (podem ser definidas fora de DOMContentLoaded) ---
         async function fetchAPI(endpoint, method = 'GET', data = null, needsAuth = false) {
-            // Base URL agora aponta para o diretório de funções do Netlify
-            const baseURL = window.location.origin + '/.netlify/functions'; 
+            const baseURL = window.location.origin + '/.netlify/functions/api'; 
             
             const options = {
                 method: method,
@@ -1560,8 +1299,7 @@
             }
 
             try {
-                // Ajuste do endpoint para incluir o nome da função
-                const url = `${baseURL}${endpoint}`; // Endpoint já deve vir como /api/chat ou /generate_cover
+                const url = `${baseURL}${endpoint.startsWith('/') ? endpoint : '/' + endpoint}`;
                 console.log('Chamando API com URL:', url);
                 const response = await fetch(url, options);
                 
@@ -1624,14 +1362,6 @@
             if (modal === blogPostModal && blogPostForm) blogPostForm.reset();
             if (modal === downloadableItemModal && downloadableItemForm) downloadableItemForm.reset();
             if (modal === studioVideoModal && studioVideoForm) studioVideoForm.reset(); // NOVO: resetar formulário do vídeo do estúdio
-            if (modal === chatbotModal) chatInput.value = ''; // Limpa o input do chat
-            if (modal === imageGeneratorModal) { // Limpa o gerador de imagens
-                imagePromptInput.value = '';
-                generatedImage.src = '';
-                generatedImage.classList.add('hidden');
-                imagePlaceholder.classList.remove('hidden');
-                imageGeneratorLoadingIndicator.classList.add('hidden');
-            }
         }
 
         function toggleAdminMode(enable) {
@@ -1643,7 +1373,6 @@
                 manageBlogPostsBtn.classList.remove('hidden');
                 manageDownloadableItemsBtn.classList.remove('hidden');
                 manageStudioVideoBtn.classList.remove('hidden'); // NOVO: mostrar botão de gerenciar vídeo do estúdio
-                manageImageGeneratorBtn.classList.remove('hidden'); // NOVO: mostrar botão do gerador de imagens
             } else {
                 document.body.classList.remove('admin-mode');
                 adminProjectsButton.classList.add('hidden');
@@ -1652,7 +1381,6 @@
                 manageBlogPostsBtn.classList.add('hidden');
                 manageDownloadableItemsBtn.classList.add('hidden');
                 manageStudioVideoBtn.classList.add('hidden'); // NOVO: esconder botão de gerenciar vídeo do estúdio
-                manageImageGeneratorBtn.classList.add('hidden'); // NOVO: esconder botão do gerador de imagens
             }
             fetchProjects();
             fetchPortfolio();
@@ -1677,7 +1405,6 @@
                 manageBlogPostsBtn.classList.remove('hidden');
                 manageDownloadableItemsBtn.classList.remove('hidden');
                 manageStudioVideoBtn.classList.remove('hidden'); // NOVO: mostrar botão de gerenciar vídeo do estúdio
-                manageImageGeneratorBtn.classList.remove('hidden'); // NOVO: mostrar botão do gerador de imagens
                 adminLoginIcon.classList.remove('fa-lock');
                 adminLoginIcon.classList.add('fa-user-shield');
                 
@@ -1693,7 +1420,6 @@
                 manageBlogPostsBtn.classList.add('hidden');
                 manageDownloadableItemsBtn.classList.add('hidden');
                 manageStudioVideoBtn.classList.add('hidden'); // NOVO: esconder botão de gerenciar vídeo do estúdio
-                manageImageGeneratorBtn.classList.add('hidden'); // NOVO: esconder botão do gerador de imagens
                 adminLoginIcon.classList.remove('fa-user-shield');
                 adminLoginIcon.classList.add('fa-lock');
                 
@@ -1705,7 +1431,7 @@
 
         // --- Funções de CRUD de Projetos ---
         async function fetchProjects() {
-            const projects = await fetchAPI('/api/projects'); // Chamada para /api/projects
+            const projects = await fetchAPI('/projects');
             if (projects) {
                 projectsContainer.innerHTML = '';
                 if (projects.length === 0) {
@@ -1749,7 +1475,7 @@
 
         async function deleteProject(id) {
             if (confirm('Tem certeza que deseja excluir este projeto?')) {
-                const response = await fetchAPI(`/api/projects/${id}`, 'DELETE', null, true); // Chamada para /api/projects/:id
+                const response = await fetchAPI(`/projects/${id}`, 'DELETE', null, true);
                 if (response !== null) {
                     alert('Projeto excluído com sucesso!');
                     fetchProjects();
@@ -1759,7 +1485,7 @@
 
         // --- Funções de CRUD de Portfólio ---
         async function fetchPortfolio() {
-            const portfolioItems = await fetchAPI('/api/portfolio'); // Chamada para /api/portfolio
+            const portfolioItems = await fetchAPI('/portfolio');
             if (portfolioItems) {
                 portfolioContainer.innerHTML = '';
                 if (portfolioItems.length === 0) {
@@ -1803,7 +1529,7 @@
 
         async function deletePortfolioItem(id) {
             if (confirm('Tem certeza que deseja excluir este item de portfólio?')) {
-                const response = await fetchAPI(`/api/portfolio/${id}`, 'DELETE', null, true); // Chamada para /api/portfolio/:id
+                const response = await fetchAPI(`/portfolio/${id}`, 'DELETE', null, true);
                 if (response !== null) {
                     alert('Item de portfólio excluído com sucesso!');
                     fetchPortfolio();
@@ -1813,7 +1539,7 @@
 
         // --- Funções de CRUD de Depoimentos ---
         async function fetchTestimonials() {
-            const endpoint = document.body.classList.contains('admin-mode') ? '/api/testimonials/all' : '/api/testimonials'; // Chamada para /api/testimonials/all ou /api/testimonials
+            const endpoint = document.body.classList.contains('admin-mode') ? '/testimonials/all' : '/testimonials';
             const testimonials = await fetchAPI(endpoint, 'GET', null, document.body.classList.contains('admin-mode'));
 
             if (testimonials) {
@@ -1865,7 +1591,7 @@
 
         async function submitTestimonial(name, rating, comment) {
             const testimonialData = { name, rating, comment };
-            const response = await fetchAPI('/api/testimonials', 'POST', testimonialData); // Chamada para /api/testimonials
+            const response = await fetchAPI('/testimonials', 'POST', testimonialData);
             if (response) {
                 alert('Seu depoimento foi enviado com sucesso para revisão!');
                 closeModal(addTestimonialModal);
@@ -1875,7 +1601,7 @@
 
         async function approveTestimonial(id) {
             if (confirm('Tem certeza que deseja aprovar este depoimento?')) {
-                const response = await fetchAPI(`/api/testimonials/${id}/approve`, 'PUT', null, true); // Chamada para /api/testimonials/:id/approve
+                const response = await fetchAPI(`/testimonials/${id}/approve`, 'PUT', null, true);
                 if (response) {
                     alert('Depoimento aprovado com sucesso!');
                     fetchTestimonials();
@@ -1885,7 +1611,7 @@
 
         async function deleteTestimonial(id) {
             if (confirm('Tem certeza que deseja excluir este depoimento?')) {
-                const response = await fetchAPI(`/api/testimonials/${id}`, 'DELETE', null, true); // Chamada para /api/testimonials/:id
+                const response = await fetchAPI(`/testimonials/${id}`, 'DELETE', null, true);
                 if (response !== null) {
                     alert('Depoimento excluído com sucesso!');
                     fetchTestimonials();
@@ -1921,7 +1647,7 @@
         }
 
         async function fetchSpotifyTracks() {
-            const spotifyTracks = await fetchAPI('/api/spotify-tracks'); // Chamada para /api/spotify-tracks
+            const spotifyTracks = await fetchAPI('/spotify-tracks');
             if (spotifyTracks) {
                 spotifyTracksContainer.innerHTML = '';
                 if (spotifyTracks.length === 0) {
@@ -1961,7 +1687,7 @@
 
         async function deleteSpotifyTrack(id) {
             if (confirm('Tem certeza que deseja excluir esta música do Spotify?')) {
-                const response = await fetchAPI(`/api/spotify-tracks/${id}`, 'DELETE', null, true); // Chamada para /api/spotify-tracks/:id
+                const response = await fetchAPI(`/spotify-tracks/${id}`, 'DELETE', null, true);
                 if (response !== null) {
                     alert('Música do Spotify excluída com sucesso!');
                     fetchSpotifyTracks();
@@ -1971,7 +1697,7 @@
 
         // --- Funções de CRUD de Blog Posts ---
         async function fetchBlogPosts() {
-            const endpoint = document.body.classList.contains('admin-mode') ? '/api/blog-posts/all' : '/api/blog-posts'; // Chamada para /api/blog-posts/all ou /api/blog-posts
+            const endpoint = document.body.classList.contains('admin-mode') ? '/blog-posts/all' : '/blog-posts';
             const blogPosts = await fetchAPI(endpoint, 'GET', null, document.body.classList.contains('admin-mode'));
 
             if (blogPosts) {
@@ -2001,7 +1727,7 @@
                         blogPostsContainer.innerHTML += `
                             <div class="blog-post-card bg-white rounded-lg shadow-lg overflow-hidden relative">
                                 ${statusBadgeHtml}
-                                <img src="${post.image_url || 'https://via.placeholder.com/400x250?text=Capa+do+Post'}" alt="${post.title}">
+                                <img src="${post.image_url || 'https://via.placeholder.com/400x250?text=Capa+do+Post'}" alt="${post.title}" class="w-full h-48 object-cover">
                                 <div class="p-6">
                                     <h3 class="text-xl font-bold mb-2">${post.title}</h3>
                                     <p class="text-gray-600 text-sm mb-3">Por: ${post.author} em ${formattedDate} ${formattedTime}</p>
@@ -2017,7 +1743,7 @@
         }
 
         async function showBlogPostDetail(id) {
-            const post = await fetchAPI(`/api/blog-posts/${id}`); // Chamada para /api/blog-posts/:id
+            const post = await fetchAPI(`/blog-posts/${id}`);
             if (post) {
                 const createdAtDate = new Date(post.createdAt);
                 const formattedDate = createdAtDate.toLocaleDateString('pt-BR', { day: '2-digit', month: '2-digit', year: 'numeric' });
@@ -2057,7 +1783,7 @@
 
         async function deleteBlogPost(id) {
             if (confirm('Tem certeza que deseja excluir este post de blog?')) {
-                const response = await fetchAPI(`/api/blog-posts/${id}`, 'DELETE', null, true); // Chamada para /api/blog-posts/:id
+                const response = await fetchAPI(`/blog-posts/${id}`, 'DELETE', null, true);
                 if (response !== null) {
                     alert('Post de blog excluído com sucesso!');
                     fetchBlogPosts();
@@ -2067,7 +1793,7 @@
 
         // --- Funções de CRUD de Packs e Acapellas (Downloadable Items) ---
         async function fetchDownloadableItems() {
-            const downloadableItems = await fetchAPI('/api/downloadable-items'); // Chamada para /api/downloadable-items
+            const downloadableItems = await fetchAPI('/downloadable-items');
             if (downloadableItems) {
                 downloadableItemsContainer.innerHTML = '';
                 if (downloadableItems.length === 0) {
@@ -2112,7 +1838,7 @@
 
         async function deleteDownloadableItem(id) {
             if (confirm('Tem certeza que deseja excluir este item de download?')) {
-                const response = await fetchAPI(`/api/downloadable-items/${id}`, 'DELETE', null, true); // Chamada para /api/downloadable-items/:id
+                const response = await fetchAPI(`/downloadable-items/${id}`, 'DELETE', null, true);
                 if (response !== null) {
                     alert('Item de download excluído com sucesso!');
                     fetchDownloadableItems();
@@ -2122,7 +1848,7 @@
 
         // --- Funções para renderizar Links Sociais ---
         async function renderSocialLinks() {
-            const socialLinks = await fetchAPI('/api/social-links', 'GET'); // Chamada para /api/social-links
+            const socialLinks = await fetchAPI('/social-links', 'GET');
             console.log('Dados de links sociais recebidos:', socialLinks);
             if (socialLinks) {
                 socialLinksContactDiv.innerHTML = '';
@@ -2158,7 +1884,7 @@
 
         // --- NOVO: Funções para Gerenciar Vídeo do Estúdio ---
         async function fetchStudioVideo() {
-            const studioConfig = await fetchAPI('/api/studio-config'); // Chamada para /api/studio-config
+            const studioConfig = await fetchAPI('/studio-config');
             if (studioConfig && studioConfig.youtubeVideoId) {
                 const youtubeVideoId = studioConfig.youtubeVideoId;
                 studioVideoContainer.innerHTML = `
@@ -2210,88 +1936,6 @@
             }
         }
 
-        // --- Funções do Chatbot ---
-        function addMessageToChat(message, sender) {
-            const messageDiv = document.createElement('div');
-            messageDiv.classList.add('chat-message', sender);
-            
-            const bubbleDiv = document.createElement('div');
-            bubbleDiv.classList.add('bubble');
-            bubbleDiv.textContent = message;
-            
-            messageDiv.appendChild(bubbleDiv);
-            chatMessagesDiv.appendChild(messageDiv);
-            chatMessagesDiv.scrollTop = chatMessagesDiv.scrollHeight; // Scroll para o final
-        }
-
-        async function sendChatMessage() {
-            const userMessage = chatInput.value.trim();
-            if (userMessage === '') return;
-
-            addMessageToChat(userMessage, 'user');
-            chatInput.value = '';
-            chatLoadingIndicator.classList.remove('hidden'); // Mostra o indicador de carregamento
-            sendChatBtn.disabled = true; // Desabilita o botão de enviar
-
-            // Adiciona a mensagem do usuário ao histórico
-            chatHistory.push({ role: "user", parts: [{ text: userMessage }] });
-
-            try {
-                // CORRIGIDO: Chamada para a Função Netlify do chatbot
-                const aiResponse = await fetchAPI('/chat', 'POST', { contents: chatHistory }); 
-                
-                if (aiResponse && aiResponse.text) {
-                    addMessageToChat(aiResponse.text, 'ai');
-                    // Adiciona a resposta da IA ao histórico
-                    chatHistory.push({ role: "model", parts: [{ text: aiResponse.text }] });
-                } else {
-                    addMessageToChat("Desculpe, não consegui obter uma resposta no momento. Por favor, tente novamente mais tarde.", 'ai');
-                }
-            } catch (error) {
-                console.error('Erro ao buscar resposta da IA:', error);
-                addMessageToChat("Houve um erro ao processar sua solicitação. Por favor, tente novamente.", 'ai');
-            } finally {
-                chatLoadingIndicator.classList.add('hidden'); // Esconde o indicador de carregamento
-                sendChatBtn.disabled = false; // Habilita o botão de enviar
-            }
-        }
-
-        // --- NOVO: Funções do Gerador de Imagens ---
-        async function generateCover() {
-            const prompt = imagePromptInput.value.trim();
-            if (!prompt) {
-                alert('Por favor, digite uma descrição para a capa.');
-                return;
-            }
-
-            // Esconde placeholder e imagem anterior, mostra loading
-            imagePlaceholder.classList.add('hidden');
-            generatedImage.classList.add('hidden');
-            generatedImage.src = '';
-            imageGeneratorLoadingIndicator.classList.remove('hidden');
-            generateImageBtn.disabled = true; // Desabilita o botão
-
-            try {
-                // CORRIGIDO: Chamada para a nova Função Netlify de geração de imagem
-                const response = await fetchAPI('/generate_cover', 'POST', { prompt });
-
-                if (response && response.imageUrl) {
-                    generatedImage.src = response.imageUrl;
-                    generatedImage.classList.remove('hidden');
-                } else {
-                    alert('Não foi possível gerar a capa. Tente uma descrição diferente ou verifique os logs.');
-                    imagePlaceholder.classList.remove('hidden'); // Mostra o placeholder novamente em caso de erro
-                }
-            } catch (error) {
-                console.error('Erro ao gerar capa:', error);
-                alert('Ocorreu um erro ao gerar a capa. Por favor, tente novamente mais tarde.');
-                imagePlaceholder.classList.remove('hidden'); // Mostra o placeholder novamente em caso de erro
-            } finally {
-                imageGeneratorLoadingIndicator.classList.add('hidden');
-                generateImageBtn.disabled = false; // Habilita o botão
-            }
-        }
-
 
         // --- Navegação Mobile ---
         document.getElementById('mobile-menu-button').addEventListener('click', () => {
@@ -2320,7 +1964,6 @@
             manageBlogPostsBtn = document.getElementById('manage-blog-posts-btn');
             manageDownloadableItemsBtn = document.getElementById('manage-downloadable-items-btn');
             manageStudioVideoBtn = document.getElementById('manage-studio-video-btn'); // NOVO: Botão de gerenciar vídeo do estúdio
-            manageImageGeneratorBtn = document.getElementById('manage-image-generator-btn'); // NOVO: Botão do gerador de imagens
 
             adminLoginModal = document.getElementById('admin-login-modal');
             changePasswordModal = document.getElementById('change-password-modal');
@@ -2332,8 +1975,6 @@
             blogPostModal = document.getElementById('blog-post-modal');
             downloadableItemModal = document.getElementById('downloadable-item-modal');
             studioVideoModal = document.getElementById('studio-video-modal'); // NOVO: Modal do vídeo do estúdio
-            chatbotModal = document.getElementById('chatbot-modal'); // Atribuição do modal do chatbot
-            imageGeneratorModal = document.getElementById('image-generator-modal'); // NOVO: Modal do gerador de imagens
 
             adminLoginClose = document.getElementById('admin-login-close');
             changePasswordClose = document.getElementById('change-password-close');
@@ -2345,8 +1986,6 @@
             blogPostClose = document.getElementById('blog-post-close');
             downloadableItemClose = document.getElementById('downloadable-item-close');
             studioVideoClose = document.getElementById('studio-video-close'); // NOVO: Fechar modal do vídeo do estúdio
-            chatbotClose = document.getElementById('chatbot-close'); // Fechar modal do chatbot
-            imageGeneratorClose = document.getElementById('image-generator-close'); // NOVO: Fechar modal do gerador de imagens
 
             adminLoginForm = document.getElementById('admin-login-form');
             changePasswordForm = document.getElementById('change-password-form');
@@ -2399,20 +2038,6 @@
             declineCookiesBtn = document.getElementById('decline-cookies');
             privacyPolicyLink = document.getElementById('privacy-policy-link');
 
-            // Atribuições dos elementos do Chatbot
-            chatbotFab = document.getElementById('chatbot-fab');
-            chatMessagesDiv = document.getElementById('chat-messages');
-            chatInput = document.getElementById('chat-input');
-            sendChatBtn = document.getElementById('send-chat-btn');
-            chatLoadingIndicator = document.getElementById('chat-loading-indicator');
-
-            // Atribuições dos elementos do Gerador de Imagens
-            imagePromptInput = document.getElementById('image-prompt');
-            generateImageBtn = document.getElementById('generate-image-btn');
-            generatedImage = document.getElementById('generated-image');
-            imagePlaceholder = document.getElementById('image-placeholder');
-            imageGeneratorLoadingIndicator = document.getElementById('image-generator-loading-indicator');
-
 
             // --- Event Listeners para Modals e Botões Principais ---
             adminLoginBtn.onclick = () => openModal(adminLoginModal);
@@ -2427,8 +2052,6 @@
             blogPostClose.onclick = () => closeModal(blogPostModal);
             downloadableItemClose.onclick = () => closeModal(downloadableItemModal);
             studioVideoClose.onclick = () => closeModal(studioVideoModal); // NOVO: Fechar modal do vídeo do estúdio
-            chatbotClose.onclick = () => closeModal(chatbotModal); // Fechar modal do chatbot
-            imageGeneratorClose.onclick = () => closeModal(imageGeneratorModal); // NOVO: Fechar modal do gerador de imagens
 
             window.onclick = (event) => {
                 if (event.target == adminLoginModal) closeModal(adminLoginModal);
@@ -2441,8 +2064,6 @@
                 if (event.target == blogPostModal) closeModal(blogPostModal);
                 if (event.target == downloadableItemModal) closeModal(downloadableItemModal);
                 if (event.target == studioVideoModal) closeModal(studioVideoModal); // NOVO: Fechar modal do vídeo do estúdio
-                if (event.target == chatbotModal) closeModal(chatbotModal); // Fechar modal do chatbot
-                if (event.target == imageGeneratorModal) closeModal(imageGeneratorModal); // NOVO: Fechar modal do gerador de imagens
             };
 
             // --- Funcionalidade de Login ---
@@ -2451,7 +2072,7 @@
                 const username = document.getElementById('admin-username').value;
                 const password = document.getElementById('admin-password').value;
 
-                const data = await fetchAPI('/api/login', 'POST', { username, password }); // Chamada para /api/login
+                const data = await fetchAPI('/login', 'POST', { username, password });
                 if (data && data.token) {
                     localStorage.setItem(JWT_TOKEN_KEY, data.token);
                     alert('Login bem-sucedido!');
@@ -2480,7 +2101,7 @@
                     return;
                 }
 
-                const data = await fetchAPI('/api/change-password', 'POST', { oldPassword, newPassword }, true); // Chamada para /api/change-password
+                const data = await fetchAPI('/change-password', 'POST', { oldPassword, newPassword }, true);
                 if (data) {
                     alert(data.message);
                     closeModal(changePasswordModal);
@@ -2490,7 +2111,7 @@
 
             // --- Links Sociais ---
             editSocialLinksBtn.addEventListener('click', async () => {
-                const socialLinks = await fetchAPI('/api/social-links', 'GET'); // Chamada para /api/social-links
+                const socialLinks = await fetchAPI('/social-links', 'GET');
                 if (socialLinks) {
                     document.getElementById('instagram-link').value = socialLinks.instagram || '';
                     document.getElementById('facebook-link').value = socialLinks.facebook || '';
@@ -2508,7 +2129,7 @@
                     spotify: document.getElementById('spotify-link-global').value,
                     youtube: document.getElementById('youtube-link-global').value,
                 };
-                const data = await fetchAPI('/api/social-links', 'PUT', updates, true); // Chamada para /api/social-links
+                const data = await fetchAPI('/social-links', 'PUT', updates, true);
                 if (data) {
                     alert(data.message);
                     closeModal(socialLinksModal);
@@ -2537,12 +2158,12 @@
                 const projectId = projectIdInput.value;
 
                 if (projectId) {
-                    const response = await fetchAPI(`/api/projects/${projectId}`, 'PUT', projectData, true); // Chamada para /api/projects/:id
+                    const response = await fetchAPI(`/projects/${projectId}`, 'PUT', projectData, true);
                     if (response) {
                         alert('Projeto atualizado com sucesso!');
                     }
                 } else {
-                    const response = await fetchAPI('/api/projects', 'POST', projectData, true); // Chamada para /api/projects
+                    const response = await fetchAPI('/projects', 'POST', projectData, true);
                     if (response) {
                         alert('Projeto adicionado com sucesso!');
                     }
@@ -2572,12 +2193,12 @@
                 const portfolioId = portfolioIdInput.value;
 
                 if (portfolioId) {
-                    const response = await fetchAPI(`/api/portfolio/${portfolioId}`, 'PUT', itemData, true); // Chamada para /api/portfolio/:id
+                    const response = await fetchAPI(`/portfolio/${portfolioId}`, 'PUT', itemData, true);
                     if (response) {
                         alert('Item de portfólio atualizado com sucesso!');
                     }
                 } else {
-                    const response = await fetchAPI('/api/portfolio', 'POST', itemData, true); // Chamada para /api/portfolio
+                    const response = await fetchAPI('/portfolio', 'POST', itemData, true);
                     if (response) {
                         alert('Item de portfólio adicionado com sucesso!');
                     }
@@ -2621,12 +2242,12 @@
                 const trackDbId = spotifyTrackIdInput.value;
 
                 if (trackDbId) {
-                    const response = await fetchAPI(`/api/spotify-tracks/${trackDbId}`, 'PUT', trackData, true); // Chamada para /api/spotify-tracks/:id
+                    const response = await fetchAPI(`/spotify-tracks/${trackDbId}`, 'PUT', trackData, true);
                     if (response) {
                         alert('Música Spotify atualizada com sucesso!');
                     }
                 } else {
-                    const response = await fetchAPI('/api/spotify-tracks', 'POST', trackData, true); // Chamada para /api/spotify-tracks
+                    const response = await fetchAPI('/spotify-tracks', 'POST', trackData, true);
                     if (response) {
                         alert('Música Spotify adicionada com sucesso!');
                     }
@@ -2656,12 +2277,12 @@
                 const postId = postIdInput.value;
 
                 if (postId) {
-                    const response = await fetchAPI(`/api/blog-posts/${postId}`, 'PUT', postData, true); // Chamada para /api/blog-posts/:id
+                    const response = await fetchAPI(`/blog-posts/${postId}`, 'PUT', postData, true);
                     if (response) {
                         alert('Post de blog atualizado com sucesso!');
                     }
                 } else {
-                    const response = await fetchAPI('/api/blog-posts', 'POST', postData, true); // Chamada para /api/blog-posts
+                    const response = await fetchAPI('/blog-posts', 'POST', postData, true);
                     if (response) {
                         alert('Post de blog adicionado com sucesso!');
                     }
@@ -2691,12 +2312,12 @@
                 const itemId = itemIdInput.value;
 
                 if (itemId) {
-                    const response = await fetchAPI(`/api/downloadable-items/${itemId}`, 'PUT', itemData, true); // Chamada para /api/downloadable-items/:id
+                    const response = await fetchAPI(`/downloadable-items/${itemId}`, 'PUT', itemData, true);
                     if (response) {
                         alert('Item de download atualizado com sucesso!');
                     }
                 } else {
-                    const response = await fetchAPI('/api/downloadable-items', 'POST', itemData, true); // Chamada para /api/downloadable-items
+                    const response = await fetchAPI('/downloadable-items', 'POST', itemData, true);
                     if (response) {
                         alert('Item de download adicionado com sucesso!');
                     }
@@ -2707,7 +2328,7 @@
 
             // NOVO: Event listeners para Gerenciar Vídeo do Estúdio
             manageStudioVideoBtn.addEventListener('click', async () => {
-                const studioConfig = await fetchAPI('/api/studio-config', 'GET'); // Chamada para /api/studio-config
+                const studioConfig = await fetchAPI('/studio-config', 'GET');
                 if (studioConfig) {
                     document.getElementById('youtube-video-id').value = studioConfig.youtubeVideoId || '';
                     openModal(studioVideoModal);
@@ -2717,7 +2338,7 @@
             studioVideoForm.addEventListener('submit', async (e) => {
                 e.preventDefault();
                 const youtubeVideoId = document.getElementById('youtube-video-id').value;
-                const response = await fetchAPI('/api/studio-config', 'PUT', { youtubeVideoId }, true); // Chamada para /api/studio-config
+                const response = await fetchAPI('/studio-config', 'PUT', { youtubeVideoId }, true);
                 if (response) {
                     alert('Vídeo do estúdio atualizado com sucesso!');
                     closeModal(studioVideoModal);
@@ -2730,28 +2351,6 @@
             declineCookiesBtn.addEventListener('click', () => handleCookieConsent('declined'));
             // Você precisará criar uma página de Política de Privacidade e linkar aqui
             // privacyPolicyLink.href = 'URL_DA_SUA_POLITICA_DE_PRIVACIDADE.html';
-
-            // Event listeners do Chatbot
-            chatbotFab.addEventListener('click', () => openModal(chatbotModal));
-            chatbotClose.addEventListener('click', () => closeModal(chatbotModal));
-            sendChatBtn.addEventListener('click', sendChatMessage);
-            chatInput.addEventListener('keypress', (e) => {
-                if (e.key === 'Enter' && !sendChatBtn.disabled) {
-                    e.preventDefault(); // Impede a quebra de linha padrão
-                    sendChatMessage();
-                }
-            });
-
-            // NOVO: Event listeners para o Gerador de Imagens
-            manageImageGeneratorBtn.addEventListener('click', () => openModal(imageGeneratorModal));
-            imageGeneratorClose.addEventListener('click', () => closeModal(imageGeneratorModal));
-            generateImageBtn.addEventListener('click', generateCover);
-            imagePromptInput.addEventListener('keypress', (e) => {
-                if (e.key === 'Enter' && !e.shiftKey && !generateImageBtn.disabled) { // Shift+Enter para nova linha
-                    e.preventDefault(); // Impede a quebra de linha padrão
-                    generateCover();
-                }
-            });
 
 
             // Chamadas iniciais
