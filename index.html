@@ -546,8 +546,8 @@
                 <a href="#studio" class="hover:text-primary transition-colors">Estúdio</a>
                 <a href="#testimonials" class="hover:text-primary transition-colors">Depoimentos</a>
                 <a href="#contact" class="hover:text-primary transition-colors">Contato</a>
-                <!-- NOVO ITEM DE MENU -->
-                <a href="#cbr-drive-landing" class="hover:text-primary transition-colors">Conheça Os Ramos Onde a CBR Atua</a>
+                <!-- NOVO ITEM DE MENU COM ID ESPECÍFICO PARA O CLICK -->
+                <a href="#" id="show-cbr-drive-link" class="hover:text-primary transition-colors">Conheça Os Ramos Onde a CBR Atua</a>
             </nav>
             
             <button id="mobile-menu-button" class="md:hidden text-white focus:outline-none">
@@ -573,8 +573,8 @@
                 <a href="#studio" class="hover:text-primary transition-colors">Estúdio</a>
                 <a href="#testimonials" class="hover:text-primary transition-colors">Depoimentos</a>
                 <a href="#contact" class="hover:text-primary transition-colors">Contato</a>
-                <!-- NOVO ITEM DE MENU MOBILE -->
-                <a href="#cbr-drive-landing" class="hover:text-primary transition-colors">Conheça Os Ramos Onde a CBR Atua</a>
+                <!-- NOVO ITEM DE MENU MOBILE COM ID ESPECÍFICO PARA O CLICK -->
+                <a href="#" id="show-cbr-drive-link-mobile" class="hover:text-primary transition-colors">Conheça Os Ramos Onde a CBR Atua</a>
             </nav>
         </div>
     </header>
@@ -597,17 +597,17 @@
         </div>
     </section>
 
-    <!-- NOVA SEÇÃO: CBR DRIVE LANDING PAGE -->
-    <section id="cbr-drive-landing" class="py-20 bg-secondary text-white">
+    <!-- NOVA SEÇÃO: CBR DRIVE LANDING PAGE - ADICIONADO 'hidden' POR PADRÃO -->
+    <section id="cbr-drive-landing" class="py-20 bg-secondary text-white hidden">
         <div class="cbr-drive-hero flex flex-col justify-center items-center p-8 rounded-lg mb-12">
             <div class="max-w-4xl mx-auto">
                 <h2 class="text-4xl md:text-5xl font-bold mb-4 text-white">CBR DRIVE</h2>
                 <p class="text-xl md:text-2xl font-semibold text-primary mb-6">Sua Jornada Começa Aqui. Liberte-se com Nossos Carros.</p>
                 <p class="text-lg md:text-xl text-gray-200 mb-8">O CBR Drive é a sua solução ideal para aluguel de carros, oferecendo praticidade, segurança e uma frota diversificada para atender a todas as suas necessidades de mobilidade. Seja para uma viagem de negócios, lazer ou o dia a dia, temos o carro perfeito esperando por você.</p>
-                <a href="https://example.com/seu-app-cbr-drive.apk" target="_blank" class="bg-primary hover:bg-purple-700 text-white font-bold py-3 px-8 rounded-full transition-colors text-lg inline-flex items-center justify-center">
+                <a href="https://www.mediafire.com/file/am47e9cxmjz0mly/cbr_drive_%25282%2529.apk/file" target="_blank" class="bg-primary hover:bg-purple-700 text-white font-bold py-3 px-8 rounded-full transition-colors text-lg inline-flex items-center justify-center">
                     <i class="fas fa-download mr-3"></i> Baixe o App CBR DRIVE
                 </a>
-                <p class="text-sm text-gray-400 mt-4"> (Link de exemplo. Substitua por seu link de APK real)</p>
+               
             </div>
         </div>
 
@@ -1369,7 +1369,7 @@
         let adminLoginIcon;
         let socialLinksContactDiv;
         let cookieConsentBanner, acceptCookiesBtn, declineCookiesBtn, privacyPolicyLink; // Elementos do banner de cookies
-
+        let showCbrDriveLink, showCbrDriveLinkMobile, cbrDriveLandingSection; // NOVOS: Elementos para o CBR Drive
 
         // --- Funções Auxiliares (podem ser definidas fora de DOMContentLoaded) ---
         async function fetchAPI(endpoint, method = 'GET', data = null, needsAuth = false) {
@@ -2067,7 +2067,7 @@
             manageSpotifyTracksBtn = document.getElementById('manage-spotify-tracks-btn');
             manageBlogPostsBtn = document.getElementById('manage-blog-posts-btn');
             manageDownloadableItemsBtn = document.getElementById('manage-downloadable-items-btn');
-            manageStudioVideoBtn = document.getElementById('manage-studio-video-btn'); // NOVO: Botão de gerenciar vídeo do estúdio
+            manageStudioVideoBtn = document.getElementById('manage-studio-video-btn'); 
 
             adminLoginModal = document.getElementById('admin-login-modal');
             changePasswordModal = document.getElementById('change-password-modal');
@@ -2078,7 +2078,7 @@
             spotifyTrackModal = document.getElementById('spotify-track-modal');
             blogPostModal = document.getElementById('blog-post-modal');
             downloadableItemModal = document.getElementById('downloadable-item-modal');
-            studioVideoModal = document.getElementById('studio-video-modal'); // NOVO: Modal do vídeo do estúdio
+            studioVideoModal = document.getElementById('studio-video-modal'); 
 
             adminLoginClose = document.getElementById('admin-login-close');
             changePasswordClose = document.getElementById('change-password-close');
@@ -2089,7 +2089,7 @@
             spotifyTrackClose = document.getElementById('spotify-track-close');
             blogPostClose = document.getElementById('blog-post-close');
             downloadableItemClose = document.getElementById('downloadable-item-close');
-            studioVideoClose = document.getElementById('studio-video-close'); // NOVO: Fechar modal do vídeo do estúdio
+            studioVideoClose = document.getElementById('studio-video-close'); 
 
             adminLoginForm = document.getElementById('admin-login-form');
             changePasswordForm = document.getElementById('change-password-form');
@@ -2100,7 +2100,7 @@
             spotifyTrackForm = document.getElementById('spotify-track-form');
             blogPostForm = document.getElementById('blog-post-form');
             downloadableItemForm = document.getElementById('downloadable-item-form');
-            studioVideoForm = document.getElementById('studio-video-form'); // NOVO: Formulário do vídeo do estúdio
+            studioVideoForm = document.getElementById('studio-video-form'); 
 
             projectsContainer = document.getElementById('projects-container');
             noProjectsMessage = document.getElementById('no-projects-message');
@@ -2131,7 +2131,7 @@
             adminDownloadableItemsButton = document.getElementById('admin-downloadable-items-button');
             addDownloadableItemBtn = document.getElementById('add-downloadable-item-btn');
 
-            studioVideoContainer = document.getElementById('studio-video-container'); // NOVO: Atribuir container do vídeo do estúdio
+            studioVideoContainer = document.getElementById('studio-video-container'); 
             
             adminLoginIcon = document.getElementById('admin-login-icon');
             socialLinksContactDiv = document.getElementById('social-links-contact');
@@ -2141,6 +2141,11 @@
             acceptCookiesBtn = document.getElementById('accept-cookies');
             declineCookiesBtn = document.getElementById('decline-cookies');
             privacyPolicyLink = document.getElementById('privacy-policy-link');
+
+            // Atribuições para os novos elementos do CBR Drive
+            showCbrDriveLink = document.getElementById('show-cbr-drive-link');
+            showCbrDriveLinkMobile = document.getElementById('show-cbr-drive-link-mobile');
+            cbrDriveLandingSection = document.getElementById('cbr-drive-landing');
 
 
             // --- Event Listeners para Modals e Botões Principais ---
@@ -2155,7 +2160,7 @@
             spotifyTrackClose.onclick = () => closeModal(spotifyTrackModal);
             blogPostClose.onclick = () => closeModal(blogPostModal);
             downloadableItemClose.onclick = () => closeModal(downloadableItemModal);
-            studioVideoClose.onclick = () => closeModal(studioVideoModal); // NOVO: Fechar modal do vídeo do estúdio
+            studioVideoClose.onclick = () => closeModal(studioVideoModal); 
 
             window.onclick = (event) => {
                 if (event.target == adminLoginModal) closeModal(adminLoginModal);
@@ -2167,7 +2172,7 @@
                 if (event.target == spotifyTrackModal) closeModal(spotifyTrackModal);
                 if (event.target == blogPostModal) closeModal(blogPostModal);
                 if (event.target == downloadableItemModal) closeModal(downloadableItemModal);
-                if (event.target == studioVideoModal) closeModal(studioVideoModal); // NOVO: Fechar modal do vídeo do estúdio
+                if (event.target == studioVideoModal) closeModal(studioVideoModal); 
             };
 
             // --- Funcionalidade de Login ---
@@ -2455,6 +2460,22 @@
             declineCookiesBtn.addEventListener('click', () => handleCookieConsent('declined'));
             // Você precisará criar uma página de Política de Privacidade e linkar aqui
             // privacyPolicyLink.href = 'URL_DA_SUA_POLITICA_DE_PRIVACIDADE.html';
+
+
+            // NOVO: Event listeners para mostrar a seção CBR Drive
+            showCbrDriveLink.addEventListener('click', (e) => {
+                e.preventDefault(); // Impede o comportamento padrão do link
+                cbrDriveLandingSection.classList.remove('hidden'); // Remove a classe 'hidden' para mostrar a seção
+                cbrDriveLandingSection.scrollIntoView({ behavior: 'smooth' }); // Rola suavemente até a seção
+                document.getElementById('mobile-menu').classList.remove('active'); // Fecha o menu mobile, se estiver aberto
+            });
+
+            showCbrDriveLinkMobile.addEventListener('click', (e) => {
+                e.preventDefault(); // Impede o comportamento padrão do link
+                cbrDriveLandingSection.classList.remove('hidden'); // Remove a classe 'hidden' para mostrar a seção
+                cbrDriveLandingSection.scrollIntoView({ behavior: 'smooth' }); // Rola suavemente até a seção
+                document.getElementById('mobile-menu').classList.remove('active'); // Fecha o menu mobile, se estiver aberto
+            });
 
 
             // Chamadas iniciais
