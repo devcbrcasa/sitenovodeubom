@@ -546,7 +546,6 @@
                 <a href="#studio" class="hover:text-primary transition-colors">Estúdio</a>
                 <a href="#testimonials" class="hover:text-primary transition-colors">Depoimentos</a>
                 <a href="#contact" class="hover:text-primary transition-colors">Contato</a>
-                <!-- NOVO ITEM DE MENU COM ID ESPECÍFICO PARA O CLICK -->
                 <a href="#" id="show-cbr-drive-link" class="hover:text-primary transition-colors">Conheça Os Ramos Onde a CBR Atua</a>
             </nav>
             
@@ -573,7 +572,6 @@
                 <a href="#studio" class="hover:text-primary transition-colors">Estúdio</a>
                 <a href="#testimonials" class="hover:text-primary transition-colors">Depoimentos</a>
                 <a href="#contact" class="hover:text-primary transition-colors">Contato</a>
-                <!-- NOVO ITEM DE MENU MOBILE COM ID ESPECÍFICO PARA O CLICK -->
                 <a href="#" id="show-cbr-drive-link-mobile" class="hover:text-primary transition-colors">Conheça Os Ramos Onde a CBR Atua</a>
             </nav>
         </div>
@@ -587,6 +585,9 @@
                 <div class="flex flex-wrap gap-4">
                     <a href="#contact" class="bg-primary hover:bg-purple-700 text-white font-bold py-3 px-6 rounded-full transition-colors">Agende uma Sessão</a>
                     <a href="#projects" class="bg-transparent border-2 border-white hover:border-primary hover:text-primary text-white font-bold py-3 px-6 rounded-full transition-colors">Conheça Nosso Trabalho</a>
+                    <a href="https://wa.me/5511959206171?text=Olá%2C%20gostaria%20de%20saber%20mais%20sobre%20os%20seus%20serviços." target="_blank" class="bg-green-500 hover:bg-green-600 text-white font-bold py-3 px-6 rounded-full transition-colors flex items-center">
+                        <i class="fab fa-whatsapp mr-2"></i> Contato WhatsApp
+                    </a>
                 </div>
             </div>
         </div>
@@ -597,7 +598,6 @@
         </div>
     </section>
 
-    <!-- NOVA SEÇÃO: CBR DRIVE LANDING PAGE - ADICIONADO 'hidden' POR PADRÃO -->
     <section id="cbr-drive-landing" class="py-20 bg-secondary text-white hidden">
         <div class="cbr-drive-hero flex flex-col justify-center items-center p-8 rounded-lg mb-12">
             <div class="max-w-4xl mx-auto">
@@ -668,8 +668,6 @@
             </div>
         </div>
     </section>
-    <!-- FIM NOVA SEÇÃO: CBR DRIVE LANDING PAGE -->
-
     <section id="services" class="py-20 bg-white">
         <div class="container mx-auto px-4">
             <div class="text-center mb-16">
@@ -758,7 +756,7 @@
             <div id="portfolio-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                 <p id="no-portfolio-message" class="col-span-full text-center text-gray-500 text-lg hidden">Nenhum item de portfólio ainda. Adicione um para começar!</p>
             </div>
-
+            
             <div id="admin-portfolio-button" class="text-center mt-12 hidden">
                 <button id="add-portfolio-btn" class="bg-primary hover:bg-purple-700 text-white font-bold py-3 px-6 rounded-full transition-colors">
                     <i class="fas fa-plus mr-2"></i> Adicionar Item de Portfólio
@@ -767,26 +765,20 @@
         </div>
     </section>
 
-    <!-- Seção: Player de Música Spotify -->
     <section id="music-player" class="py-20 bg-white">
         <div class="container mx-auto px-4">
             <div class="text-center mb-16">
                 <h2 class="text-3xl md:text-4xl font-bold mb-4">Ouça Nossas <span class="text-primary">Produções</span></h2>
                 <p class="text-gray-600 max-w-2xl mx-auto">Selecione uma faixa para ouvir diretamente do Spotify.</p>
             </div>
-            
             <div class="max-w-xl mx-auto mb-8 bg-secondary rounded-lg shadow-xl p-4">
                 <div id="spotify-player-iframe-container" class="w-full">
-                    <!-- O iframe do Spotify será carregado aqui -->
                     <p class="text-white text-center py-8">Selecione uma música abaixo para começar a ouvir!</p>
                 </div>
             </div>
-
             <div id="spotify-tracks-container" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6">
                 <p id="no-spotify-tracks-message" class="col-span-full text-center text-gray-500 text-lg hidden">Nenhuma música disponível ainda. Adicione uma!</p>
-                <!-- As músicas do Spotify serão carregadas aqui via JS -->
-            </div>
-
+                </div>
             <div id="admin-spotify-tracks-button" class="text-center mt-12 hidden">
                 <button id="add-spotify-track-btn" class="bg-primary hover:bg-purple-700 text-white font-bold py-3 px-6 rounded-full transition-colors">
                     <i class="fab fa-spotify mr-2"></i> Adicionar Música Spotify
@@ -795,19 +787,15 @@
         </div>
     </section>
 
-    <!-- SEÇÃO: PACKS E ACAPELLAS -->
     <section id="packs-acapellas" class="py-20 bg-white">
         <div class="container mx-auto px-4">
             <div class="text-center mb-16">
                 <h2 class="text-3xl md:text-4xl font-bold mb-4">Packs & <span class="text-primary">Acapellas</span></h2>
                 <p class="text-gray-600 max-w-2xl mx-auto">Explore e baixe nossos packs de samples e acapellas exclusivas para suas produções.</p>
             </div>
-            
             <div id="downloadable-items-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                 <p id="no-downloadable-items-message" class="col-span-full text-center text-gray-500 text-lg hidden">Nenhum item de download disponível ainda. Volte em breve para novidades!</p>
-                <!-- Os itens de download serão carregados aqui via JS -->
-            </div>
-
+                </div>
             <div id="admin-downloadable-items-button" class="text-center mt-12 hidden">
                 <button id="add-downloadable-item-btn" class="bg-primary hover:bg-purple-700 text-white font-bold py-3 px-6 rounded-full transition-colors">
                     <i class="fas fa-cloud-download-alt mr-2"></i> Adicionar Item de Download
@@ -815,21 +803,15 @@
             </div>
         </div>
     </section>
-    <!-- FIM SEÇÃO: PACKS E ACAPELLAS -->
-
-    <!-- Seção: Blog -->
     <section id="blog" class="py-20 bg-white">
         <div class="container mx-auto px-4">
             <div class="text-center mb-16">
                 <h2 class="text-3xl md:text-4xl font-bold mb-4">Nosso <span class="text-primary">Blog</span></h2>
                 <p class="text-gray-600 max-w-2xl mx-auto">Fique por dentro das últimas notícias, dicas e tendências do mundo da produção musical.</p>
             </div>
-            
             <div id="blog-posts-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                 <p id="no-blog-posts-message" class="col-span-full text-center text-gray-500 text-lg hidden">Nenhum post de blog ainda. Volte em breve para novidades!</p>
-                <!-- Os posts do blog serão carregados aqui via JS -->
-            </div>
-
+                </div>
             <div id="admin-blog-button" class="text-center mt-12 hidden">
                 <button id="add-blog-post-btn" class="bg-primary hover:bg-purple-700 text-white font-bold py-3 px-6 rounded-full transition-colors">
                     <i class="fas fa-plus mr-2"></i> Adicionar Novo Post
@@ -837,28 +819,21 @@
             </div>
         </div>
     </section>
-    <!-- FIM Seção: Blog -->
-
     <section id="studio" class="py-20 bg-white">
         <div class="container mx-auto px-4">
             <div class="text-center mb-16">
                 <h2 class="text-3xl md:text-4xl font-bold mb-4">Nosso <span class="text-primary">Estúdio</span></h2>
                 <p class="text-gray-600 max-w-2xl mx-auto">Um espaço projetado para inspirar criatividade e capturar o melhor som possível.</p>
             </div>
-            
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
                 <div>
-                    <!-- Player de Vídeo do YouTube -->
                     <div class="video-container" id="studio-video-container">
-                        <!-- O iframe do YouTube será carregado aqui via JS -->
                         <p class="text-gray-600 text-center py-8">Carregando vídeo do estúdio...</p>
                     </div>
                 </div>
-                
                 <div>
                     <h3 class="text-2xl font-bold mb-4">Equipamentos de Ponta</h3>
                     <p class="text-gray-600 mb-6">Nosso estúdio conta com equipamentos de última geração para garantir a melhor qualidade sonora em suas produções.</p>
-                    
                     <ul class="space-y-4">
                         <li class="flex items-start">
                             <i class="fas fa-check-circle text-primary mt-1 mr-3"></i>
@@ -889,1608 +864,287 @@
                             </div>
                         </li>
                     </ul>
-                    
                     <a href="#contact" class="inline-block mt-8 bg-primary hover:bg-purple-700 text-white font-bold py-3 px-6 rounded-full transition-colors">Agende uma Visita</a>
                 </div>
             </div>
         </div>
     </section>
-
     <section id="testimonials" class="py-20 bg-white">
         <div class="container mx-auto px-4">
             <div class="text-center mb-16">
                 <h2 class="text-3xl md:text-4xl font-bold mb-4">O que <span class="text-primary">Dizem</span> Sobre Nós</h2>
                 <p class="text-gray-600 max-w-2xl mx-auto">Veja o que nossos clientes têm a dizer sobre sua experiência com a CBR Records.</p>
             </div>
-            
             <div id="testimonials-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <p id="no-testimonials-message" class="col-span-full text-center text-gray-500 text-lg hidden">Nenhum depoimento ainda. Seja o primeiro a deixar um!</p>
-                <!-- Depoimentos existentes serão carregados aqui via JS -->
-            </div>
-
-            <div class="text-center mt-12">
+                <p id="no-testimonials-message" class="col-span-full text-center text-gray-500 text-lg hidden">Nenhum depoimento ainda. Adicione um para começar!</p>
+                </div>
+            <div id="admin-testimonials-button" class="text-center mt-12 hidden">
                 <button id="add-testimonial-btn" class="bg-primary hover:bg-purple-700 text-white font-bold py-3 px-6 rounded-full transition-colors">
-                    <i class="fas fa-star mr-2"></i> Deixe seu Depoimento
+                    <i class="fas fa-plus mr-2"></i> Adicionar Depoimento
                 </button>
             </div>
         </div>
     </section>
-
-    <section id="contact" class="py-20 bg-secondary text-white">
-        <div class="container mx-auto px-4">
-            <div class="text-center mb-16">
-                <h2 class="text-3xl md:text-4xl font-bold mb-4">Entre em <span class="text-primary">Contato</span></h2>
-                <p class="text-gray-300 max-w-2xl mx-auto">Estamos prontos para transformar seu projeto em realidade. Entre em contato para agendar uma sessão ou tirar suas dúvidas.</p>
-            </div>
+    
+    <section id="contact" class="py-20 bg-primary text-white">
+        <div class="container mx-auto px-4 text-center">
+            <h2 class="text-3xl md:text-4xl font-bold mb-4">Fale <span class="text-white">Conosco</span></h2>
+            <p class="text-gray-200 max-w-2xl mx-auto mb-12">Estamos prontos para transformar sua visão em realidade. Entre em contato para agendar uma conversa ou sessão de estúdio.</p>
             
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-                <div>
-                    <form name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field" action="/#contact" class="space-y-6">
-                        <!-- Campo honeypot para prevenção de spam (manter oculto) -->
-                        <p class="hidden">
-                            <label>Não preencha este campo: <input name="bot-field" /></label>
-                        </p>
-                        <div>
-                            <label for="name" class="block mb-2 font-medium">Nome</label>
-                            <input type="text" id="name" name="name" class="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-lg focus:outline-none focus:border-primary text-white" placeholder="Seu nome">
-                        </div>
-                        
-                        <div>
-                            <label for="email" class="block mb-2 font-medium">Email</label>
-                            <input type="email" id="email" name="email" class="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-lg focus:outline-none focus:border-primary text-white" placeholder="seu@email.com">
-                        </div>
-                        
-                        <div>
-                            <label for="service" class="block mb-2 font-medium">Serviço de Interesse</label>
-                            <select id="service" name="service" class="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-lg focus:outline-none focus:border-primary text-white">
-                                <option value="" disabled selected>Selecione um serviço</option>
-                                <option value="recording">Gravação</option>
-                                <option value="mixing">Mixagem</option>
-                                <option value="mastering">Masterização</option>
-                                <option value="production">Produção Musical</option>
-                                <option value="distribution">Distribuição Digital</option>
-                                <option value="other">Outro</option>
-                            </select>
-                        </div>
-                        
-                        <div>
-                            <label for="message" class="block mb-2 font-medium">Mensagem</label>
-                            <textarea id="message" name="message" rows="5" class="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-lg focus:outline-none focus:border-primary text-white" placeholder="Conte-nos sobre seu projeto..."></textarea>
-                        </div>
-                        
-                        <button type="submit" class="w-full bg-primary hover:bg-purple-700 text-white font-bold py-3 px-6 rounded-lg transition-colors">Enviar Mensagem</button>
-                    </form>
+            <div class="flex flex-wrap justify-center gap-8">
+                <div class="text-center">
+                    <i class="fas fa-envelope text-4xl mb-4"></i>
+                    <h3 class="font-bold text-xl mb-2">E-mail</h3>
+                    <a href="mailto:contato@cbrrecords.com" class="text-gray-200 hover:text-white transition-colors">contato@cbrrecords.com</a>
                 </div>
                 
-                <div>
-                    <div class="bg-gray-800 p-8 rounded-lg">
-                        <h3 class="text-2xl font-bold mb-6">Informações de Contato</h3>
-                        
-                        <div class="space-y-6">
-                            <div class="flex items-start">
-                                <div class="bg-primary/20 w-12 h-12 rounded-full flex items-center justify-center mr-4">
-                                    <i class="fas fa-map-marker-alt text-primary"></i>
-                                </div>
-                                <div>
-                                    <h4 class="font-bold mb-1">Endereço</h4>
-                                    <p class="text-gray-300">Av. Castelo Branco, 226, São Bernardo do campo - SP</p>
-                                </div>
-                            </div>
-                            <div class="flex items-start">
-                                <div class="bg-primary/20 w-12 h-12 rounded-full flex items-center justify-center mr-4">
-                                    <i class="fas fa-phone text-primary"></i>
-                                </div>
-                                <div>
-                                    <h4 class="font-bold mb-1">Telefone</h4>
-                                    <p class="text-gray-300">(11) 95920-6171</p>
-                                </div>
-                            </div>
-                            <div class="flex items-start">
-                                <div class="bg-primary/20 w-12 h-12 rounded-full flex items-center justify-center mr-4">
-                                    <i class="fas fa-envelope text-primary"></i>
-                                </div>
-                                <div>
-                                    <h4 class="font-bold mb-1">Email</h4>
-                                    <p class="text-gray-300">casabombarecord@gmail.com</p>
-                                </div>
-                            </div>
-                            <div class="flex items-start">
-                                <div class="bg-primary/20 w-12 h-12 rounded-full flex items-center justify-center mr-4">
-                                    <i class="fas fa-clock text-primary"></i>
-                                </div>
-                                <div>
-                                    <h4 class="font-bold mb-1">Horário de Funcionamento</h4>
-                                    <p class="text-gray-300">Segunda a Sexta: 9h às 18h<br>Sábado: 10h às 15h</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="mt-8">
-                            <h4 class="font-bold mb-4">Siga-nos</h4>
-                            <div id="social-links-contact" class="flex space-x-4">
-                                <!-- Os links serão renderizados dinamicamente aqui -->
-                            </div>
-                        </div>
-                    </div>
+                <div class="text-center">
+                    <i class="fas fa-phone-alt text-4xl mb-4"></i>
+                    <h3 class="font-bold text-xl mb-2">Telefone</h3>
+                    <a href="tel:+5511999999999" class="text-gray-200 hover:text-white transition-colors">(11) 99999-9999</a>
                 </div>
+                
+                <div class="text-center">
+                    <i class="fas fa-map-marker-alt text-4xl mb-4"></i>
+                    <h3 class="font-bold text-xl mb-2">Endereço</h3>
+                    <p class="text-gray-200">São Paulo, SP - Brasil</p>
+                </div>
+            </div>
+
+            <div class="mt-12">
+                <form id="contact-form" class="max-w-lg mx-auto bg-secondary p-8 rounded-lg shadow-xl">
+                    <div class="mb-6">
+                        <label for="name" class="block text-left text-sm font-bold mb-2">Nome Completo</label>
+                        <input type="text" id="name" name="name" class="w-full px-4 py-3 rounded-md bg-gray-700 text-white border-none focus:outline-none focus:ring-2 focus:ring-primary" required>
+                    </div>
+                    <div class="mb-6">
+                        <label for="email" class="block text-left text-sm font-bold mb-2">E-mail</label>
+                        <input type="email" id="email" name="email" class="w-full px-4 py-3 rounded-md bg-gray-700 text-white border-none focus:outline-none focus:ring-2 focus:ring-primary" required>
+                    </div>
+                    <div class="mb-6">
+                        <label for="message" class="block text-left text-sm font-bold mb-2">Sua Mensagem</label>
+                        <textarea id="message" name="message" rows="5" class="w-full px-4 py-3 rounded-md bg-gray-700 text-white border-none focus:outline-none focus:ring-2 focus:ring-primary" required></textarea>
+                    </div>
+                    <button type="submit" class="w-full bg-primary hover:bg-purple-700 text-white font-bold py-3 px-6 rounded-full transition-colors">Enviar Mensagem</button>
+                    <p id="form-status" class="mt-4 text-sm font-bold"></p>
+                </form>
             </div>
         </div>
     </section>
 
-    <footer class="bg-secondary text-white py-8 text-center">
-        <div class="container mx-auto px-4">
-            <p>© 2024 CBR RECORDS. Todos os direitos reservados.</p>
+    <footer class="bg-secondary text-white py-8">
+        <div class="container mx-auto px-4 text-center md:text-left">
+            <div class="md:flex md:justify-between md:items-center">
+                <div class="mb-4 md:mb-0">
+                    <a href="#" class="text-2xl font-bold">CBR <span class="text-primary">RECORDS</span></a>
+                    <p class="text-gray-400 mt-2">Transformando seu som em arte.</p>
+                </div>
+                <div class="flex space-x-6 justify-center">
+                    <a href="#" class="text-gray-400 hover:text-primary transition-colors"><i class="fab fa-facebook-f text-xl"></i></a>
+                    <a href="#" class="text-gray-400 hover:text-primary transition-colors"><i class="fab fa-instagram text-xl"></i></a>
+                    <a href="#" class="text-gray-400 hover:text-primary transition-colors"><i class="fab fa-twitter text-xl"></i></a>
+                    <a href="#" class="text-gray-400 hover:text-primary transition-colors"><i class="fab fa-youtube text-xl"></i></a>
+                    <a href="#" class="text-gray-400 hover:text-primary transition-colors"><i class="fab fa-spotify text-xl"></i></a>
+                    <a href="#" class="text-gray-400 hover:text-primary transition-colors"><i class="fab fa-soundcloud text-xl"></i></a>
+                </div>
+            </div>
+            <div class="mt-8 border-t border-gray-700 pt-8 text-sm text-center">
+                <p>&copy; 2023 CBR Records. Todos os direitos reservados. | <a href="#" class="text-primary hover:underline">Política de Privacidade</a></p>
+            </div>
         </div>
     </footer>
-
-    <div class="admin-panel">
-        <button id="admin-login-btn" class="bg-primary hover:bg-purple-700 text-white p-3 rounded-full shadow-lg transition-colors flex items-center justify-center">
-            <i id="admin-login-icon" class="fas fa-lock text-xl"></i>
-        </button>
-        <button id="logout-btn" class="bg-red-600 hover:bg-red-700 text-white p-3 rounded-full shadow-lg transition-colors hidden">
-            <i class="fas fa-sign-out-alt text-xl"></i>
-        </button>
-        <button id="change-password-btn" class="bg-gray-600 hover:bg-gray-700 text-white p-3 rounded-full shadow-lg transition-colors hidden">
-            <i class="fas fa-key text-xl"></i>
-        </button>
-        <button id="edit-social-links-btn" class="bg-blue-600 hover:bg-blue-700 text-white p-3 rounded-full shadow-lg transition-colors hidden">
-            <i class="fas fa-share-alt text-xl"></i>
-        </button>
-        <!-- Botão para gerenciar músicas do Spotify (admin) -->
-        <button id="manage-spotify-tracks-btn" class="bg-green-600 hover:bg-green-700 text-white p-3 rounded-full shadow-lg transition-colors hidden">
-            <i class="fab fa-spotify text-xl"></i>
-        </button>
-        <!-- Botão para gerenciar Blog Posts (admin) -->
-        <button id="manage-blog-posts-btn" class="bg-yellow-600 hover:bg-yellow-700 text-white p-3 rounded-full shadow-lg transition-colors hidden">
-            <i class="fas fa-blog text-xl"></i>
-        </button>
-        <!-- Botão para gerenciar Packs e Acapellas (admin) -->
-        <button id="manage-downloadable-items-btn" class="bg-orange-600 hover:bg-orange-700 text-white p-3 rounded-full shadow-lg transition-colors hidden">
-            <i class="fas fa-cloud-download-alt text-xl"></i>
-        </button>
-        <!-- NOVO BOTÃO: Gerenciar Vídeo do Estúdio (admin) -->
-        <button id="manage-studio-video-btn" class="bg-purple-600 hover:bg-purple-700 text-white p-3 rounded-full shadow-lg transition-colors hidden">
-            <i class="fas fa-video text-xl"></i>
-        </button>
+    
+    <div id="project-modal" class="modal">
+        <div class="modal-content text-white">
+            <span class="close" id="close-project-modal">&times;</span>
+            <h2 id="project-modal-title" class="text-2xl font-bold mb-4">Adicionar Novo Projeto</h2>
+            <form id="project-form">
+                <input type="hidden" id="project-id">
+                <div class="mb-4">
+                    <label for="project-title" class="block mb-2">Título do Projeto</label>
+                    <input type="text" id="project-title" class="w-full p-2 rounded-md bg-gray-700 text-white" required>
+                </div>
+                <div class="mb-4">
+                    <label for="project-artist" class="block mb-2">Nome do Artista</label>
+                    <input type="text" id="project-artist" class="w-full p-2 rounded-md bg-gray-700 text-white" required>
+                </div>
+                <div class="mb-4">
+                    <label for="project-link" class="block mb-2">Link do Projeto (Ex: Spotify)</label>
+                    <input type="url" id="project-link" class="w-full p-2 rounded-md bg-gray-700 text-white" required>
+                </div>
+                <div class="mb-4">
+                    <label for="project-banner-file" class="block mb-2">Banner do Projeto (Imagem)</label>
+                    <input type="file" id="project-banner-file" class="w-full p-2 rounded-md bg-gray-700 text-white">
+                </div>
+                <button type="submit" class="bg-primary hover:bg-purple-700 text-white font-bold py-2 px-4 rounded-full transition-colors">Salvar</button>
+            </form>
+        </div>
     </div>
-
-    <div id="admin-login-modal" class="modal">
-        <div class="modal-content">
-            <span class="close" id="admin-login-close">×</span>
-            <div class="p-4">
-                <h2 class="text-2xl font-bold text-white mb-4">Login do Administrador</h2>
-                <form id="admin-login-form" class="space-y-4">
-                    <input type="text" id="admin-username" placeholder="Usuário" class="w-full p-3 rounded bg-gray-700 text-white border border-gray-600 focus:outline-none focus:ring-2 focus:ring-primary">
-                    <input type="password" id="admin-password" placeholder="Senha" class="w-full p-3 rounded bg-gray-700 text-white border border-gray-600 focus:outline-none focus:ring-2 focus:ring-primary">
-                    <button type="submit" class="w-full bg-primary hover:bg-purple-800 text-white font-bold py-3 px-6 rounded-lg transition-colors">Login</button>
-                </form>
-            </div>
+    
+    <div id="portfolio-modal" class="modal">
+        <div class="modal-content text-white">
+            <span class="close" id="close-portfolio-modal">&times;</span>
+            <h2 id="portfolio-modal-title" class="text-2xl font-bold mb-4">Adicionar Item de Portfólio</h2>
+            <form id="portfolio-form">
+                <input type="hidden" id="portfolio-id">
+                <div class="mb-4">
+                    <label for="portfolio-title" class="block mb-2">Título do Projeto</label>
+                    <input type="text" id="portfolio-title" class="w-full p-2 rounded-md bg-gray-700 text-white" required>
+                </div>
+                <div class="mb-4">
+                    <label for="portfolio-category" class="block mb-2">Categoria</label>
+                    <input type="text" id="portfolio-category" class="w-full p-2 rounded-md bg-gray-700 text-white" placeholder="Ex: Mixing, Mastering, Production" required>
+                </div>
+                <div class="mb-4">
+                    <label for="portfolio-cover-file" class="block mb-2">Capa do Projeto (Imagem)</label>
+                    <input type="file" id="portfolio-cover-file" class="w-full p-2 rounded-md bg-gray-700 text-white" required>
+                </div>
+                <button type="submit" class="bg-primary hover:bg-purple-700 text-white font-bold py-2 px-4 rounded-full transition-colors">Salvar</button>
+            </form>
+        </div>
+    </div>
+    
+    <div id="spotify-track-modal" class="modal">
+        <div class="modal-content text-white">
+            <span class="close" id="close-spotify-track-modal">&times;</span>
+            <h2 id="spotify-track-modal-title" class="text-2xl font-bold mb-4">Adicionar Música Spotify</h2>
+            <form id="spotify-track-form">
+                <input type="hidden" id="spotify-track-id">
+                <div class="mb-4">
+                    <label for="spotify-track-name" class="block mb-2">Nome da Música</label>
+                    <input type="text" id="spotify-track-name" class="w-full p-2 rounded-md bg-gray-700 text-white" required>
+                </div>
+                <div class="mb-4">
+                    <label for="spotify-track-link" class="block mb-2">URL do Spotify Embed</label>
+                    <input type="url" id="spotify-track-link" class="w-full p-2 rounded-md bg-gray-700 text-white" placeholder="Ex: https://open.spotify.com/embed/track/..." required>
+                </div>
+                <button type="submit" class="bg-primary hover:bg-purple-700 text-white font-bold py-2 px-4 rounded-full transition-colors">Salvar</button>
+            </form>
         </div>
     </div>
 
-    <div id="change-password-modal" class="modal">
-        <div class="modal-content">
-            <span class="close" id="change-password-close">×</span>
-            <div class="p-4">
-                <h2 class="text-2xl font-bold text-white mb-4">Alterar Senha do Administrador</h2>
-                <form id="change-password-form" class="space-y-4">
-                    <input type="password" id="old-password" placeholder="Senha Antiga" class="w-full p-3 rounded bg-gray-700 text-white border border-gray-600 focus:outline-none focus:ring-2 focus:ring-primary">
-                    <input type="password" id="new-password" placeholder="Nova Senha (mín. 6 caracteres)" class="w-full p-3 rounded bg-gray-700 text-white border border-gray-600 focus:outline-none focus:ring-2 focus:ring-primary">
-                    <input type="password" id="confirm-new-password" placeholder="Confirmar Nova Senha" class="w-full p-3 rounded bg-gray-700 text-white border border-gray-600 focus:outline-none focus:ring-2 focus:ring-primary">
-                    <button type="submit" class="w-full bg-primary hover:bg-purple-800 text-white font-bold py-3 px-6 rounded-lg transition-colors">Alterar Senha</button>
-                </form>
-            </div>
+    <div id="downloadable-item-modal" class="modal">
+        <div class="modal-content text-white">
+            <span class="close" id="close-downloadable-item-modal">&times;</span>
+            <h2 id="downloadable-item-modal-title" class="text-2xl font-bold mb-4">Adicionar Item de Download</h2>
+            <form id="downloadable-item-form">
+                <input type="hidden" id="downloadable-item-id">
+                <div class="mb-4">
+                    <label for="downloadable-item-name" class="block mb-2">Nome do Item</label>
+                    <input type="text" id="downloadable-item-name" class="w-full p-2 rounded-md bg-gray-700 text-white" required>
+                </div>
+                <div class="mb-4">
+                    <label for="downloadable-item-description" class="block mb-2">Descrição</label>
+                    <textarea id="downloadable-item-description" class="w-full p-2 rounded-md bg-gray-700 text-white" rows="3" required></textarea>
+                </div>
+                <div class="mb-4">
+                    <label for="downloadable-item-link" class="block mb-2">Link para Download</label>
+                    <input type="url" id="downloadable-item-link" class="w-full p-2 rounded-md bg-gray-700 text-white" required>
+                </div>
+                <div class="mb-4">
+                    <label for="downloadable-item-cover-file" class="block mb-2">Capa do Item (Imagem)</label>
+                    <input type="file" id="downloadable-item-cover-file" class="w-full p-2 rounded-md bg-gray-700 text-white" required>
+                </div>
+                <button type="submit" class="bg-primary hover:bg-purple-700 text-white font-bold py-2 px-4 rounded-full transition-colors">Salvar</button>
+            </form>
+        </div>
+    </div>
+
+    <div id="blog-post-modal" class="modal">
+        <div class="modal-content text-white">
+            <span class="close" id="close-blog-post-modal">&times;</span>
+            <h2 id="blog-post-modal-title" class="text-2xl font-bold mb-4">Adicionar Novo Post</h2>
+            <form id="blog-post-form">
+                <input type="hidden" id="blog-post-id">
+                <div class="mb-4">
+                    <label for="blog-post-title" class="block mb-2">Título do Post</label>
+                    <input type="text" id="blog-post-title" class="w-full p-2 rounded-md bg-gray-700 text-white" required>
+                </div>
+                <div class="mb-4">
+                    <label for="blog-post-content" class="block mb-2">Conteúdo</label>
+                    <textarea id="blog-post-content" class="w-full p-2 rounded-md bg-gray-700 text-white" rows="10" required></textarea>
+                </div>
+                <div class="mb-4">
+                    <label for="blog-post-image-file" class="block mb-2">Imagem de Destaque (opcional)</label>
+                    <input type="file" id="blog-post-image-file" class="w-full p-2 rounded-md bg-gray-700 text-white">
+                </div>
+                <button type="submit" class="bg-primary hover:bg-purple-700 text-white font-bold py-2 px-4 rounded-full transition-colors">Salvar</button>
+            </form>
         </div>
     </div>
 
     <div id="social-links-modal" class="modal">
-        <div class="modal-content">
-            <span class="close" id="social-links-close">×</span>
-            <div class="p-4">
-                <h2 class="text-2xl font-bold text-white mb-4">Editar Links das Redes Sociais</h2>
-                <form id="social-links-form" class="space-y-4">
-                    <label for="instagram-link" class="block text-sm font-medium text-gray-300">Instagram:</label>
-                    <input type="url" id="instagram-link" name="instagram" placeholder="Link do Instagram" class="w-full p-3 rounded bg-gray-700 text-white border border-gray-600 focus:outline-none focus:ring-2 focus:ring-primary">
-
-                    <label for="facebook-link" class="block text-sm font-medium text-gray-300">Facebook:</label>
-                    <input type="url" id="facebook-link" name="facebook" placeholder="Link do Facebook" class="w-full p-3 rounded bg-gray-700 text-white border border-gray-600 focus:outline-none focus:ring-2 focus:ring-primary">
-                    
-                    <label for="spotify-link-global" class="block text-sm font-medium text-gray-300">Spotify (Global):</label>
-                    <input type="url" id="spotify-link-global" name="spotify" placeholder="Link do Spotify" class="w-full p-3 rounded bg-gray-700 text-white border border-gray-600 focus:outline-none focus:ring-2 focus:ring-primary">
-                    
-                    <label for="youtube-link-global" class="block text-sm font-medium text-gray-300">YouTube (Global):</label>
-                    <input type="url" id="youtube-link-global" name="youtube" placeholder="Link do YouTube" class="w-full p-3 rounded bg-gray-700 text-white border border-gray-600 focus:outline-none focus:ring-2 focus:ring-primary">
-
-                    <button type="submit" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-lg transition-colors">Salvar Links</button>
-                </form>
+        <div class="modal-content text-white">
+            <span class="close" id="close-social-links-modal">&times;</span>
+            <h2 class="text-2xl font-bold mb-4">Editar Links Sociais</h2>
+            <form id="social-links-form">
+                <div class="mb-4">
+                    <label for="facebook-link" class="block mb-2">Facebook URL</label>
+                    <input type="url" id="facebook-link" class="w-full p-2 rounded-md bg-gray-700 text-white">
+                </div>
+                <div class="mb-4">
+                    <label for="instagram-link" class="block mb-2">Instagram URL</label>
+                    <input type="url" id="instagram-link" class="w-full p-2 rounded-md bg-gray-700 text-white">
+                </div>
+                <div class="mb-4">
+                    <label for="twitter-link" class="block mb-2">Twitter URL</label>
+                    <input type="url" id="twitter-link" class="w-full p-2 rounded-md bg-gray-700 text-white">
+                </div>
+                <div class="mb-4">
+                    <label for="youtube-link" class="block mb-2">YouTube URL</label>
+                    <input type="url" id="youtube-link" class="w-full p-2 rounded-md bg-gray-700 text-white">
+                </div>
+                <div class="mb-4">
+                    <label for="spotify-link" class="block mb-2">Spotify URL</label>
+                    <input type="url" id="spotify-link" class="w-full p-2 rounded-md bg-gray-700 text-white">
+                </div>
+                <div class="mb-4">
+                    <label for="soundcloud-link" class="block mb-2">SoundCloud URL</label>
+                    <input type="url" id="soundcloud-link" class="w-full p-2 rounded-md bg-gray-700 text-white">
+                </div>
+                <button type="submit" class="bg-primary hover:bg-purple-700 text-white font-bold py-2 px-4 rounded-full transition-colors">Salvar Links</button>
+            </form>
+        </div>
+    </div>
+    
+    <div id="blog-post-view-modal" class="modal">
+        <div class="modal-content text-white max-w-4xl">
+            <span class="close" id="close-blog-post-view-modal">&times;</span>
+            <div id="blog-post-detail-content">
+                </div>
+        </div>
+    </div>
+    
+    <div id="confirm-modal" class="modal">
+        <div class="modal-content text-white w-full max-w-sm">
+            <span class="close" id="close-confirm-modal">&times;</span>
+            <h3 class="text-xl font-bold mb-4">Confirmação</h3>
+            <p id="confirm-modal-message" class="mb-6">Você tem certeza que deseja realizar esta ação?</p>
+            <div class="flex justify-end gap-4">
+                <button id="cancel-btn" class="bg-gray-500 hover:bg-gray-600 text-white font-bold py-2 px-4 rounded-full transition-colors">Cancelar</button>
+                <button id="confirm-btn" class="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded-full transition-colors">Confirmar</button>
             </div>
         </div>
     </div>
-
-    <div id="project-modal" class="modal">
-        <div class="modal-content">
-            <span class="close" id="project-close">×</span>
-            <div class="p-4">
-                <h2 class="text-2xl font-bold text-white mb-4" id="project-modal-title">Adicionar Novo Projeto</h2>
-                <form id="project-form" class="space-y-4">
-                    <input type="hidden" id="project-id">
-                    <div>
-                        <label for="project-title" class="block text-sm font-medium text-gray-300">Título do Projeto:</label>
-                        <input type="text" id="project-title" class="mt-1 block w-full border border-gray-600 rounded-md shadow-sm p-2 bg-gray-700 text-white" required>
-                    </div>
-                    <div>
-                        <label for="project-description" class="block text-sm font-medium text-gray-300">Descrição:</label>
-                        <textarea id="project-description" rows="3" class="mt-1 block w-full border border-gray-600 rounded-md shadow-sm p-2 bg-gray-700 text-white" required></textarea>
-                    </div>
-                    <div>
-                        <label for="project-image-url" class="block text-sm font-medium text-gray-300">URL da Imagem de Capa:</label>
-                        <input type="url" id="project-image-url" class="mt-1 block w-full border border-gray-600 rounded-md shadow-sm p-2 bg-gray-700 text-white">
-                    </div>
-                    <div>
-                        <label for="project-spotify-link" class="block text-sm font-medium text-gray-300">Link Spotify:</label>
-                        <input type="url" id="project-spotify-link" class="mt-1 block w-full border border-gray-600 rounded-md shadow-sm p-2 bg-gray-700 text-white" required>
-                    </div>
-                    <div>
-                        <label for="project-youtube-link" class="block text-sm font-medium text-gray-300">Link YouTube:</label>
-                        <input type="url" id="project-youtube-link" class="mt-1 block w-full border border-gray-600 rounded-md shadow-sm p-2 bg-gray-700 text-white" required>
-                    </div>
-                    <button type="submit" class="w-full bg-primary hover:bg-purple-700 text-white font-bold py-3 px-6 rounded-lg transition-colors">
-                        <i class="fas fa-save mr-2"></i> Salvar Projeto
-                    </button>
-                </form>
-            </div>
-        </div>
+    
+    <div id="admin-panel" class="admin-panel">
+        <button id="admin-toggle-btn" class="bg-primary hover:bg-purple-700 text-white font-bold py-3 px-6 rounded-full shadow-lg transition-colors flex items-center">
+            <i class="fas fa-lock-open mr-2"></i> Admin Mode
+        </button>
+        <button id="edit-social-links-btn" class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-3 px-6 rounded-full shadow-lg transition-colors hidden">
+            <i class="fas fa-link mr-2"></i> Editar Links Sociais
+        </button>
     </div>
-
-    <div id="portfolio-modal" class="modal">
-        <div class="modal-content">
-            <span class="close" id="portfolio-close">×</span>
-            <div class="p-4">
-                <h2 class="text-2xl font-bold text-white mb-4" id="portfolio-modal-title">Adicionar Novo Item de Portfólio</h2>
-                <form id="portfolio-form" class="space-y-4">
-                    <input type="hidden" id="portfolio-id">
-                    <div>
-                        <label for="portfolio-title" class="block text-sm font-medium text-gray-300">Título do Item:</label>
-                        <input type="text" id="portfolio-title" class="mt-1 block w-full border border-gray-600 rounded-md shadow-sm p-2 bg-gray-700 text-white" required>
-                    </div>
-                    <div>
-                        <label for="portfolio-description" class="block text-sm font-medium text-gray-300">Descrição:</label>
-                        <textarea id="portfolio-description" rows="3" class="mt-1 block w-full border border-gray-600 rounded-md shadow-sm p-2 bg-gray-700 text-white" required></textarea>
-                    </div>
-                    <div>
-                        <label for="portfolio-image-url" class="block text-sm font-medium text-gray-300">URL da Imagem de Capa:</label>
-                        <input type="url" id="portfolio-image-url" class="mt-1 block w-full border border-gray-600 rounded-md shadow-sm p-2 bg-gray-700 text-white">
-                    </div>
-                    <div>
-                        <label for="portfolio-spotify-link" class="block text-sm font-medium text-gray-300">Link Spotify:</label>
-                        <input type="url" id="portfolio-spotify-link" class="mt-1 block w-full border border-gray-600 rounded-md shadow-sm p-2 bg-gray-700 text-white">
-                    </div>
-                    <div>
-                        <label for="portfolio-youtube-link" class="block text-sm font-medium text-gray-300">Link YouTube:</label>
-                        <input type="url" id="portfolio-youtube-link" class="mt-1 block w-full border border-gray-600 rounded-md shadow-sm p-2 bg-gray-700 text-white">
-                        <p class="text-xs text-gray-400 mt-1">Insira a URL completa do vídeo do YouTube (ex: `https://www.youtube.com/watch?v=dQw4w9WgXcQ`).</p>
-                    </div>
-                    <button type="submit" class="w-full bg-primary hover:bg-purple-700 text-white font-bold py-3 px-6 rounded-lg transition-colors">
-                        <i class="fas fa-save mr-2"></i> Salvar Item
-                    </button>
-                </form>
-            </div>
-        </div>
-    </div>
-
-    <!-- Modal para Deixar Depoimento -->
-    <div id="add-testimonial-modal" class="modal">
-        <div class="modal-content">
-            <span class="close" id="add-testimonial-close">×</span>
-            <div class="p-4">
-                <h2 class="text-2xl font-bold text-white mb-4">Deixe seu Depoimento</h2>
-                <form id="testimonial-form" class="space-y-4">
-                    <div>
-                        <label for="testimonial-name" class="block text-sm font-medium text-gray-300">Seu Nome:</label>
-                        <input type="text" id="testimonial-name" class="mt-1 block w-full border border-gray-600 rounded-md shadow-sm p-2 bg-gray-700 text-white" required>
-                    </div>
-                    <div>
-                        <label for="testimonial-rating" class="block text-sm font-medium text-gray-300 mb-2">Sua Avaliação:</label>
-                        <div class="rating-stars">
-                            <input type="radio" id="star5" name="rating" value="5" required /><label for="star5" title="5 estrelas"><i class="fas fa-star"></i></label>
-                            <input type="radio" id="star4" name="rating" value="4" /><label for="star4" title="4 estrelas"><i class="fas fa-star"></i></label>
-                            <input type="radio" id="star3" name="rating" value="3" /><label for="star3" title="3 estrelas"><i class="fas fa-star"></i></label>
-                            <input type="radio" id="star2" name="rating" value="2" /><label for="star2" title="2 estrelas"><i class="fas fa-star"></i></label>
-                            <input type="radio" id="star1" name="rating" value="1" /><label for="star1" title="1 estrela"><i class="fas fa-star"></i></label>
-                        </div>
-                    </div>
-                    <div>
-                        <label for="testimonial-comment" class="block text-sm font-medium text-gray-300">Seu Depoimento:</label>
-                        <textarea id="testimonial-comment" rows="5" class="mt-1 block w-full border border-gray-600 rounded-md shadow-sm p-2 bg-gray-700 text-white" required></textarea>
-                    </div>
-                    <button type="submit" class="w-full bg-primary hover:bg-purple-700 text-white font-bold py-3 px-6 rounded-lg transition-colors">
-                        <i class="fas fa-paper-plane mr-2"></i> Enviar Depoimento
-                    </button>
-                </form>
-            </div>
-        </div>
-    </div>
-
-    <!-- Modal para Gerenciar Músicas Spotify (Admin) -->
-    <div id="spotify-track-modal" class="modal">
-        <div class="modal-content">
-            <span class="close" id="spotify-track-close">×</span>
-            <div class="p-4">
-                <h2 class="text-2xl font-bold text-white mb-4" id="spotify-track-modal-title">Adicionar Música Spotify</h2>
-                <form id="spotify-track-form" class="space-y-4">
-                    <input type="hidden" id="spotify-track-id">
-                    <div>
-                        <label for="spotify-track-title" class="block text-sm font-medium text-gray-300">Título da Música:</label>
-                        <input type="text" id="spotify-track-title" class="mt-1 block w-full border border-gray-600 rounded-md shadow-sm p-2 bg-gray-700 text-white" required>
-                    </div>
-                    <div>
-                        <label for="spotify-track-artist" class="block text-sm font-medium text-gray-300">Artista:</label>
-                        <input type="text" id="spotify-track-artist" class="mt-1 block w-full border border-gray-600 rounded-md shadow-sm p-2 bg-gray-700 text-white" required>
-                    </div>
-                    <div>
-                        <label for="spotify-track-id-input" class="block text-sm font-medium text-gray-300">ID da Música Spotify:</label>
-                        <input type="text" id="spotify-track-id-input" class="mt-1 block w-full border border-gray-600 rounded-md shadow-sm p-2 bg-gray-700 text-white" placeholder="Ex: 3n3Ppam7vgaVa1iaxmoLqA" required>
-                        <p class="text-xs text-gray-400 mt-1">Você pode encontrar o ID da música no link de compartilhamento do Spotify (ex: `https://open.spotify.com/track/<ID_AQUI>`).</p>
-                    </div>
-                    <div>
-                        <label for="spotify-track-image-url" class="block text-sm font-medium text-gray-300">URL da Imagem da Capa (Opcional):</label>
-                        <input type="url" id="spotify-track-image-url" class="mt-1 block w-full border border-gray-600 rounded-md shadow-sm p-2 bg-gray-700 text-white" placeholder="URL da capa do álbum">
-                    </div>
-                    <button type="submit" class="w-full bg-primary hover:bg-purple-700 text-white font-bold py-3 px-6 rounded-lg transition-colors">
-                        <i class="fas fa-save mr-2"></i> Salvar Música
-                    </button>
-                </form>
-            </div>
-        </div>
-    </div>
-
-    <!-- Modal para Blog Posts (Admin) -->
-    <div id="blog-post-modal" class="modal">
-        <div class="modal-content">
-            <span class="close" id="blog-post-close">×</span>
-            <div class="p-4">
-                <h2 class="text-2xl font-bold text-white mb-4" id="blog-post-modal-title">Adicionar Novo Post de Blog</h2>
-                <form id="blog-post-form" class="space-y-4">
-                    <input type="hidden" id="blog-post-id">
-                    <div>
-                        <label for="blog-post-title" class="block text-sm font-medium text-gray-300">Título do Post:</label>
-                        <input type="text" id="blog-post-title" class="mt-1 block w-full border border-gray-600 rounded-md shadow-sm p-2 bg-gray-700 text-white" required>
-                    </div>
-                    <div>
-                        <label for="blog-post-author" class="block text-sm font-medium text-gray-300">Autor:</label>
-                        <input type="text" id="blog-post-author" class="mt-1 block w-full border border-gray-600 rounded-md shadow-sm p-2 bg-gray-700 text-white" required>
-                    </div>
-                    <div>
-                        <label for="blog-post-image-url" class="block text-sm font-medium text-gray-300">URL da Imagem de Capa (Opcional):</label>
-                        <input type="url" id="blog-post-image-url" class="mt-1 block w-full border border-gray-600 rounded-md shadow-sm p-2 bg-gray-700 text-white" placeholder="URL da imagem principal do post">
-                    </div>
-                    <div>
-                        <label for="blog-post-content" class="block text-sm font-medium text-gray-300">Conteúdo do Post:</label>
-                        <textarea id="blog-post-content" rows="10" class="mt-1 block w-full border border-gray-600 rounded-md shadow-sm p-2 bg-gray-700 text-white" required placeholder="Escreva o conteúdo completo do seu post aqui..."></textarea>
-                    </div>
-                    <div class="flex items-center">
-                        <input type="checkbox" id="blog-post-approved" class="h-4 w-4 text-primary rounded border-gray-600 focus:ring-primary">
-                        <label for="blog-post-approved" class="ml-2 block text-sm text-gray-300">Aprovar Post (Visível publicamente)</label>
-                    </div>
-                    <button type="submit" class="w-full bg-primary hover:bg-purple-700 text-white font-bold py-3 px-6 rounded-lg transition-colors">
-                        <i class="fas fa-save mr-2"></i> Salvar Post
-                    </button>
-                </form>
-            </div>
-        </div>
-    </div>
-
-    <!-- Modal para Packs e Acapellas (Admin) -->
-    <div id="downloadable-item-modal" class="modal">
-        <div class="modal-content">
-            <span class="close" id="downloadable-item-close">×</span>
-            <div class="p-4">
-                <h2 class="text-2xl font-bold text-white mb-4" id="downloadable-item-modal-title">Adicionar Novo Item de Download</h2>
-                <form id="downloadable-item-form" class="space-y-4">
-                    <input type="hidden" id="downloadable-item-id">
-                    <div>
-                        <label for="downloadable-item-title" class="block text-sm font-medium text-gray-300">Título do Item:</label>
-                        <input type="text" id="downloadable-item-title" class="mt-1 block w-full border border-gray-600 rounded-md shadow-sm p-2 bg-gray-700 text-white" required>
-                    </div>
-                    <div>
-                        <label for="downloadable-item-description" class="block text-sm font-medium text-gray-300">Descrição:</label>
-                        <textarea id="downloadable-item-description" rows="3" class="mt-1 block w-full border border-gray-600 rounded-md shadow-sm p-2 bg-gray-700 text-white" required></textarea>
-                    </div>
-                    <div>
-                        <label for="downloadable-item-type" class="block text-sm font-medium text-gray-300">Tipo:</label>
-                        <select id="downloadable-item-type" class="mt-1 block w-full border border-gray-600 rounded-md shadow-sm p-2 bg-gray-700 text-white" required>
-                            <option value="pack">Pack de Samples</option>
-                            <option value="acapella">Acapella</option>
-                            <option value="outro">Outro</option>
-                        </select>
-                    </div>
-                    <div>
-                        <label for="downloadable-item-download-url" class="block text-sm font-medium text-gray-300">URL para Download:</label>
-                        <input type="url" id="downloadable-item-download-url" class="mt-1 block w-full border border-gray-600 rounded-md shadow-sm p-2 bg-gray-700 text-white" placeholder="Link para Google Drive, Dropbox, MediaFire, etc." required>
-                        <p class="text-xs text-gray-400 mt-1">Certifique-se de que é um link de download *direto* para o arquivo (ex: `https://www.mediafire.com/file/SEUID/nome_do_arquivo.zip/file` ou `https://drive.google.com/uc?export=download&id=SEU_ID`).</p>
-                    </div>
-                    <div>
-                        <label for="downloadable-item-image-url" class="block text-sm font-medium text-gray-300">URL da Imagem de Capa (Opcional):</label>
-                        <input type="url" id="downloadable-item-image-url" class="mt-1 block w-full border border-gray-600 rounded-md shadow-sm p-2 bg-gray-700 text-white" placeholder="URL da imagem do item">
-                    </div>
-                    <button type="submit" class="w-full bg-primary hover:bg-purple-700 text-white font-bold py-3 px-6 rounded-lg transition-colors">
-                        <i class="fas fa-save mr-2"></i> Salvar Item
-                    </button>
-                </form>
-            </div>
-        </div>
-    </div>
-
-    <!-- NOVO MODAL: Gerenciar Vídeo do Estúdio -->
-    <div id="studio-video-modal" class="modal">
-        <div class="modal-content">
-            <span class="close" id="studio-video-close">×</span>
-            <div class="p-4">
-                <h2 class="text-2xl font-bold text-white mb-4">Gerenciar Vídeo do Estúdio</h2>
-                <form id="studio-video-form" class="space-y-4">
-                    <div>
-                        <label for="youtube-video-id" class="block text-sm font-medium text-gray-300">ID do Vídeo do YouTube:</label>
-                        <input type="text" id="youtube-video-id" class="mt-1 block w-full border border-gray-600 rounded-md shadow-sm p-2 bg-gray-700 text-white" placeholder="Ex: dQw4w9WgXcQ" required>
-                        <p class="text-xs text-gray-400 mt-1">Insira apenas o ID do vídeo do YouTube (a parte depois de "v=" na URL, ex: `dQw4w9WgXcQ`).</p>
-                    </div>
-                    <button type="submit" class="w-full bg-primary hover:bg-purple-700 text-white font-bold py-3 px-6 rounded-lg transition-colors">
-                        <i class="fas fa-save mr-2"></i> Salvar Vídeo
-                    </button>
-                </form>
-            </div>
-        </div>
-    </div>
-
-    <!-- Banner de Consentimento de Cookies -->
-    <div id="cookie-consent-banner" class="hidden">
-        <p>Este site utiliza cookies para garantir a melhor experiência. Ao continuar, você concorda com nossa <a href="privacy-policy.html" id="privacy-policy-link">Política de Privacidade</a>.</p>
+    
+    <div id="cookie-consent-banner" class="show">
+        <p>Este site utiliza cookies para garantir a melhor experiência possível. Ao continuar navegando, você concorda com a nossa <a href="#" id="privacy-policy-link">Política de Privacidade</a> e uso de cookies.</p>
         <div class="cookie-buttons">
-            <button id="accept-cookies">Aceitar Cookies</button>
-            <button id="decline-cookies">Recusar</button>
+            <button id="accept-cookies">Aceitar Todos os Cookies</button>
+            <button id="decline-cookies">Rejeitar</button>
         </div>
     </div>
 
-    <script>
-        // Variável global para o token JWT
-        const JWT_TOKEN_KEY = 'jwt_token';
-        const COOKIE_CONSENT_KEY = 'cookie_consent'; // Chave para o localStorage
+    <script src="./js/scripts.js"></script>
 
-        // Variáveis globais para elementos do DOM (serão atribuídas em DOMContentLoaded)
-        let adminLoginBtn, logoutBtn, changePasswordBtn, editSocialLinksBtn, manageSpotifyTracksBtn, manageBlogPostsBtn, manageDownloadableItemsBtn, manageStudioVideoBtn;
-        let adminLoginModal, changePasswordModal, socialLinksModal, projectModal, portfolioModal, addTestimonialModal, spotifyTrackModal, blogPostModal, downloadableItemModal, studioVideoModal;
-        let adminLoginClose, changePasswordClose, socialLinksClose, projectClose, portfolioClose, addTestimonialClose, spotifyTrackClose, blogPostClose, downloadableItemClose, studioVideoClose;
-        let adminLoginForm, changePasswordForm, socialLinksForm, projectForm, portfolioForm, testimonialForm, spotifyTrackForm, blogPostForm, downloadableItemForm, studioVideoForm;
-        let projectsContainer, noProjectsMessage, adminProjectsButton, addProjectBtn;
-        let portfolioContainer, noPortfolioMessage, adminPortfolioButton, addPortfolioBtn;
-        let testimonialsContainer, noTestimonialsMessage, addTestimonialBtn;
-        let spotifyPlayerIframeContainer, spotifyTracksContainer, noSpotifyTracksMessage, addSpotifyTrackBtn;
-        let blogPostsContainer, noBlogPostsMessage, adminBlogButton, addBlogPostBtn;
-        let downloadableItemsContainer, noDownloadableItemsMessage, adminDownloadableItemsButton, addDownloadableItemBtn;
-        let studioVideoContainer; // NOVO: Container para o vídeo do estúdio
-        let adminLoginIcon;
-        let socialLinksContactDiv;
-        let cookieConsentBanner, acceptCookiesBtn, declineCookiesBtn, privacyPolicyLink; // Elementos do banner de cookies
-        let showCbrDriveLink, showCbrDriveLinkMobile, cbrDriveLandingSection; // NOVOS: Elementos para o CBR Drive
-
-        // --- Funções Auxiliares (podem ser definidas fora de DOMContentLoaded) ---
-        async function fetchAPI(endpoint, method = 'GET', data = null, needsAuth = false) {
-            const baseURL = window.location.origin + '/.netlify/functions/api'; 
-            
-            const options = {
-                method: method,
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-            };
-
-            if (needsAuth) {
-                const token = localStorage.getItem(JWT_TOKEN_KEY);
-                if (!token) {
-                    console.error('Nenhum token JWT encontrado');
-                    logout();
-                    alert('Sua sessão expirou ou você não está logado. Por favor, faça login novamente.');
-                    return null;
-                }
-                options.headers['Authorization'] = `Bearer ${token}`;
-            }
-
-            if (!(data instanceof FormData)) {
-                options.headers['Content-Type'] = 'application/json';
-                if (data) {
-                    options.body = JSON.stringify(data);
-                }
-            } else {
-                options.body = data;
-            }
-
-            try {
-                const url = `${baseURL}${endpoint.startsWith('/') ? endpoint : '/' + endpoint}`;
-                console.log('Chamando API com URL:', url);
-                const response = await fetch(url, options);
-                
-                if (response.status === 204) return {};
-                
-                const contentType = response.headers.get('content-type');
-                let responseData = {};
-
-                if (contentType && contentType.includes('application/json')) {
-                    const text = await response.text();
-                    responseData = text ? JSON.parse(text) : {};
-                } else {
-                    const rawText = await response.text();
-                    console.error('Resposta não é JSON. Conteúdo:', rawText);
-                    try {
-                        responseData = JSON.parse(rawText);
-                    } catch (e) {
-                        responseData = { message: rawText || 'Resposta inesperada do servidor.' };
-                    }
-                }
-                
-                if (!response.ok) {
-                    if (response.status === 401 || response.status === 403) {
-                        logout();
-                        alert(responseData.message || 'Sua sessão expirou ou suas credenciais são inválidas. Por favor, faça login novamente.');
-                    } else {
-                        alert(responseData.message || `Erro: ${response.statusText}. Verifique o console para mais detalhes.`);
-                    }
-                    throw new Error(responseData.message || `Erro: ${response.statusText}`);
-                }
-                
-                return responseData;
-            } catch (error) {
-                console.error(`Erro na API (${method} ${endpoint}):`, error);
-                if (error.message.includes('Failed to fetch') || error.message.includes('NetworkError')) {
-                     alert('Erro ao conectar com o servidor. Verifique sua conexão ou tente novamente mais tarde.');
-                }
-                return null;
-            }
-        }
-
-        function logout() {
-            localStorage.removeItem(JWT_TOKEN_KEY);
-            checkLoginStatus();
-        }
-
-        function openModal(modal) {
-            modal.style.display = 'block';
-            document.body.classList.add('overflow-hidden');
-        }
-
-        function closeModal(modal) {
-            modal.style.display = 'none';
-            document.body.classList.remove('overflow-hidden');
-            if (modal === projectModal && projectForm) projectForm.reset();
-            if (modal === portfolioModal && portfolioForm) portfolioForm.reset();
-            if (modal === changePasswordModal && changePasswordForm) changePasswordForm.reset();
-            if (modal === addTestimonialModal && testimonialForm) testimonialForm.reset();
-            if (modal === spotifyTrackModal && spotifyTrackForm) spotifyTrackForm.reset();
-            if (modal === blogPostModal && blogPostForm) blogPostForm.reset();
-            if (modal === downloadableItemModal && downloadableItemForm) downloadableItemForm.reset();
-            if (modal === studioVideoModal && studioVideoForm) studioVideoForm.reset(); // NOVO: resetar formulário do vídeo do estúdio
-        }
-
-        function toggleAdminMode(enable) {
-            if (enable) {
-                document.body.classList.add('admin-mode');
-                adminProjectsButton.classList.remove('hidden');
-                adminPortfolioButton.classList.remove('hidden');
-                manageSpotifyTracksBtn.classList.remove('hidden');
-                manageBlogPostsBtn.classList.remove('hidden');
-                manageDownloadableItemsBtn.classList.remove('hidden');
-                manageStudioVideoBtn.classList.remove('hidden'); // NOVO: mostrar botão de gerenciar vídeo do estúdio
-            } else {
-                document.body.classList.remove('admin-mode');
-                adminProjectsButton.classList.add('hidden');
-                adminPortfolioButton.classList.add('hidden');
-                manageSpotifyTracksBtn.classList.add('hidden');
-                manageBlogPostsBtn.classList.add('hidden');
-                manageDownloadableItemsBtn.classList.add('hidden');
-                manageStudioVideoBtn.classList.add('hidden'); // NOVO: esconder botão de gerenciar vídeo do estúdio
-            }
-            fetchProjects();
-            fetchPortfolio();
-            fetchTestimonials();
-            fetchSpotifyTracks();
-            fetchBlogPosts();
-            fetchDownloadableItems();
-            renderSocialLinks();
-            fetchStudioVideo(); // NOVO: Recarregar o vídeo do estúdio ao mudar o modo
-        }
-
-        function checkLoginStatus() {
-            const token = localStorage.getItem(JWT_TOKEN_KEY);
-            const isAdminMode = document.body.classList.contains('admin-mode');
-
-            if (token) {
-                adminLoginBtn.classList.add('hidden');
-                logoutBtn.classList.remove('hidden');
-                changePasswordBtn.classList.remove('hidden');
-                editSocialLinksBtn.classList.remove('hidden');
-                manageSpotifyTracksBtn.classList.remove('hidden');
-                manageBlogPostsBtn.classList.remove('hidden');
-                manageDownloadableItemsBtn.classList.remove('hidden');
-                manageStudioVideoBtn.classList.remove('hidden'); // NOVO: mostrar botão de gerenciar vídeo do estúdio
-                adminLoginIcon.classList.remove('fa-lock');
-                adminLoginIcon.classList.add('fa-user-shield');
-                
-                if (!isAdminMode) {
-                    toggleAdminMode(true);
-                }
-            } else {
-                adminLoginBtn.classList.remove('hidden');
-                logoutBtn.classList.add('hidden');
-                changePasswordBtn.classList.add('hidden');
-                editSocialLinksBtn.classList.add('hidden');
-                manageSpotifyTracksBtn.classList.add('hidden');
-                manageBlogPostsBtn.classList.add('hidden');
-                manageDownloadableItemsBtn.classList.add('hidden');
-                manageStudioVideoBtn.classList.add('hidden'); // NOVO: esconder botão de gerenciar vídeo do estúdio
-                adminLoginIcon.classList.remove('fa-user-shield');
-                adminLoginIcon.classList.add('fa-lock');
-                
-                if (isAdminMode) {
-                    toggleAdminMode(false);
-                }
-            }
-        }
-
-        // --- Funções de CRUD de Projetos ---
-        async function fetchProjects() {
-            const projects = await fetchAPI('/projects');
-            if (projects) {
-                projectsContainer.innerHTML = '';
-                if (projects.length === 0) {
-                    noProjectsMessage.classList.remove('hidden');
-                } else {
-                    noProjectsMessage.classList.add('hidden');
-                    projects.forEach(project => {
-                        projectsContainer.innerHTML += `
-                            <div class="project-card bg-white rounded-lg shadow-lg overflow-hidden relative">
-                                <div class="admin-badge ${document.body.classList.contains('admin-mode') ? '' : 'hidden'}">ADMIN</div>
-                                <img src="${project.image_url || 'https://via.placeholder.com/400x250?text=Capa+do+Projeto'}" alt="${project.title}" class="w-full h-48 object-cover">
-                                <div class="p-6">
-                                    <h3 class="text-xl font-bold mb-2">${project.title}</h3>
-                                    <p class="text-gray-600 mb-4">${project.description}</p>
-                                    <div class="flex flex-wrap gap-3">
-                                        ${project.spotify_link ? `<a href="${project.spotify_link}" target="_blank" class="bg-purple-600 hover:bg-purple-700 text-white font-bold py-2 px-4 rounded-full transition-colors"><i class="fab fa-spotify mr-2"></i>Spotify</a>` : ''}
-                                        ${project.youtube_link ? `<a href="${project.youtube_link}" target="_blank" class="bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-full transition-colors"><i class="fab fa-youtube mr-2"></i>YouTube</a>` : ''}
-                                    </div>
-                                </div>
-                                <div class="project-actions absolute top-2 right-2 flex gap-2 ${document.body.classList.contains('admin-mode') ? '' : 'hidden'}">
-                                    <button onclick="editProject('${project._id}', '${project.title.replace(/'/g, "\\'")}', '${project.description.replace(/'/g, "\\'")}', '${project.image_url}', '${project.spotify_link}', '${project.youtube_link}')" class="bg-blue-500 hover:bg-blue-600 text-white p-2 rounded-full"><i class="fas fa-edit"></i></button>
-                                    <button onclick="deleteProject('${project._id}')" class="bg-red-500 hover:bg-red-600 text-white p-2 rounded-full"><i class="fas fa-trash-alt"></i></button>
-                                </div>
-                            </div>
-                        `;
-                    });
-                }
-            }
-        }
-
-        function editProject(id, title, description, imageUrl, spotifyLink, youtubeLink) {
-            document.getElementById('project-modal-title').textContent = 'Editar Projeto';
-            document.getElementById('project-id').value = id;
-            document.getElementById('project-title').value = title;
-            document.getElementById('project-description').value = description;
-            document.getElementById('project-image-url').value = imageUrl;
-            document.getElementById('project-spotify-link').value = spotifyLink;
-            document.getElementById('project-youtube-link').value = youtubeLink;
-            openModal(projectModal);
-        }
-
-        async function deleteProject(id) {
-            if (confirm('Tem certeza que deseja excluir este projeto?')) {
-                const response = await fetchAPI(`/projects/${id}`, 'DELETE', null, true);
-                if (response !== null) {
-                    alert('Projeto excluído com sucesso!');
-                    fetchProjects();
-                }
-            }
-        }
-
-        // --- Funções de CRUD de Portfólio ---
-        async function fetchPortfolio() {
-            const portfolioItems = await fetchAPI('/portfolio');
-            if (portfolioItems) {
-                portfolioContainer.innerHTML = '';
-                if (portfolioItems.length === 0) {
-                    noPortfolioMessage.classList.remove('hidden');
-                } else {
-                    noPortfolioMessage.classList.add('hidden');
-                    portfolioItems.forEach(item => {
-                        portfolioContainer.innerHTML += `
-                            <div class="portfolio-card bg-white rounded-lg shadow-lg overflow-hidden relative">
-                                <div class="admin-badge ${document.body.classList.contains('admin-mode') ? '' : 'hidden'}">ADMIN</div>
-                                <img src="${item.image_url || 'https://via.placeholder.com/400x250?text=Capa+do+Portfolio'}" alt="${item.title}" class="w-full h-48 object-cover">
-                                <div class="p-6">
-                                    <h3 class="text-xl font-bold mb-2">${item.title}</h3>
-                                    <p class="text-gray-600 mb-4">${item.description}</p>
-                                    <div class="flex flex-wrap gap-3">
-                                        ${item.spotify_link ? `<a href="${item.spotify_link}" target="_blank" class="bg-purple-600 hover:bg-purple-700 text-white font-bold py-2 px-4 rounded-full transition-colors"><i class="fab fa-spotify mr-2"></i>Spotify</a>` : ''}
-                                        ${item.youtube_link ? `<a href="${item.youtube_link}" target="_blank" class="bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-full transition-colors"><i class="fab fa-youtube mr-2"></i>YouTube</a>` : ''}
-                                    </div>
-                                </div>
-                                <div class="portfolio-actions absolute top-2 right-2 flex gap-2 ${document.body.classList.contains('admin-mode') ? '' : 'hidden'}">
-                                    <button onclick="editPortfolioItem('${item._id}', '${item.title.replace(/'/g, "\\'")}', '${item.description.replace(/'/g, "\\'")}', '${item.image_url}', '${item.spotify_link}', '${item.youtube_link}')" class="bg-blue-500 hover:bg-blue-600 text-white p-2 rounded-full"><i class="fas fa-edit"></i></button>
-                                    <button onclick="deletePortfolioItem('${item._id}')" class="bg-red-500 hover:bg-red-600 text-white p-2 rounded-full"><i class="fas fa-trash-alt"></i></button>
-                                </div>
-                            </div>
-                        `;
-                    });
-                }
-            }
-        }
-
-        function editPortfolioItem(id, title, description, imageUrl, spotifyLink, youtubeLink) {
-            document.getElementById('portfolio-modal-title').textContent = 'Editar Item de Portfólio';
-            document.getElementById('portfolio-id').value = id;
-            document.getElementById('portfolio-title').value = title;
-            document.getElementById('portfolio-description').value = description;
-            document.getElementById('portfolio-image-url').value = imageUrl;
-            document.getElementById('portfolio-spotify-link').value = spotifyLink;
-            document.getElementById('portfolio-youtube-link').value = youtubeLink;
-            openModal(portfolioModal);
-        }
-
-        async function deletePortfolioItem(id) {
-            if (confirm('Tem certeza que deseja excluir este item de portfólio?')) {
-                const response = await fetchAPI(`/portfolio/${id}`, 'DELETE', null, true);
-                if (response !== null) {
-                    alert('Item de portfólio excluído com sucesso!');
-                    fetchPortfolio();
-                }
-            }
-        }
-
-        // --- Funções de CRUD de Depoimentos ---
-        async function fetchTestimonials() {
-            const endpoint = document.body.classList.contains('admin-mode') ? '/testimonials/all' : '/testimonials';
-            const testimonials = await fetchAPI(endpoint, 'GET', null, document.body.classList.contains('admin-mode'));
-
-            if (testimonials) {
-                testimonialsContainer.innerHTML = '';
-                if (testimonials.length === 0) {
-                    noTestimonialsMessage.classList.remove('hidden');
-                } else {
-                    noTestimonialsMessage.classList.add('hidden');
-                    testimonials.forEach(testimonial => {
-                        const starsHtml = Array(testimonial.rating).fill('<i class="fas fa-star"></i>').join('');
-                        const emptyStarsHtml = Array(5 - testimonial.rating).fill('<i class="far fa-star"></i>').join('');
-
-                        const adminActionsHtml = document.body.classList.contains('admin-mode') ? `
-                            <div class="flex gap-2 mt-4">
-                                ${!testimonial.approved ? `<button onclick="approveTestimonial('${testimonial._id}')" class="bg-green-500 hover:bg-green-600 text-white p-2 rounded-full"><i class="fas fa-check"></i> Aprovar</button>` : ''}
-                                <button onclick="deleteTestimonial('${testimonial._id}')" class="bg-red-500 hover:bg-red-600 text-white p-2 rounded-full"><i class="fas fa-trash-alt"></i> Excluir</button>
-                            </div>
-                        ` : '';
-
-                        const statusBadgeHtml = document.body.classList.contains('admin-mode') ? `
-                            <div class="testimonial-status-badge ${testimonial.approved ? 'approved' : 'pending'}">
-                                ${testimonial.approved ? 'APROVADO' : 'PENDENTE'}
-                            </div>
-                        ` : '';
-
-                        testimonialsContainer.innerHTML += `
-                            <div class="bg-white p-8 rounded-lg shadow-lg relative">
-                                ${statusBadgeHtml}
-                                <div class="flex items-center mb-4">
-                                    <div class="w-12 h-12 bg-primary/20 rounded-full flex items-center justify-center mr-4">
-                                        <span class="text-primary font-bold">${testimonial.name.substring(0, 2).toUpperCase()}</span>
-                                    </div>
-                                    <div>
-                                        <h4 class="font-bold">${testimonial.name}</h4>
-                                        <p class="text-gray-600 text-sm">Cliente</p>
-                                    </div>
-                                </div>
-                                <p class="text-gray-600 italic">"${testimonial.comment}"</p>
-                                <div class="mt-4 flex text-yellow-400">
-                                    ${starsHtml}${emptyStarsHtml}
-                                </div>
-                                ${adminActionsHtml}
-                            </div>
-                        `;
-                    });
-                }
-            }
-        }
-
-        async function submitTestimonial(name, rating, comment) {
-            const testimonialData = { name, rating, comment };
-            const response = await fetchAPI('/testimonials', 'POST', testimonialData);
-            if (response) {
-                alert('Seu depoimento foi enviado com sucesso para revisão!');
-                closeModal(addTestimonialModal);
-                fetchTestimonials();
-            }
-        }
-
-        async function approveTestimonial(id) {
-            if (confirm('Tem certeza que deseja aprovar este depoimento?')) {
-                const response = await fetchAPI(`/testimonials/${id}/approve`, 'PUT', null, true);
-                if (response) {
-                    alert('Depoimento aprovado com sucesso!');
-                    fetchTestimonials();
-                }
-            }
-        }
-
-        async function deleteTestimonial(id) {
-            if (confirm('Tem certeza que deseja excluir este depoimento?')) {
-                const response = await fetchAPI(`/testimonials/${id}`, 'DELETE', null, true);
-                if (response !== null) {
-                    alert('Depoimento excluído com sucesso!');
-                    fetchTestimonials();
-                }
-            }
-        }
-
-        // --- Funções de CRUD de Músicas Spotify ---
-        function loadSpotifyPlayer(spotifyId) {
-            console.log('Tentando carregar player do Spotify com ID:', spotifyId);
-
-            if (!spotifyId) {
-                console.error('Erro: spotifyId está vazio. Não é possível carregar o player.');
-                spotifyPlayerIframeContainer.innerHTML = '<p class="text-red-500 text-center py-8">ID da música Spotify inválido. Por favor, verifique o ID.</p>';
-                return;
-            }
-            
-            spotifyPlayerIframeContainer.innerHTML = `
-                <iframe src="https://open.spotify.com/embed/track/${spotifyId}?utm_source=generator" 
-                        width="100%" height="380" frameborder="0" allowtransparency="true" 
-                        allow="encrypted-media; fullscreen; picture-in-picture"></iframe>
-            `;
-            const iframe = spotifyPlayerIframeContainer.querySelector('iframe');
-            if (iframe) {
-                iframe.onload = () => {
-                    console.log('Iframe do Spotify carregado com sucesso para ID:', spotifyId);
-                };
-                iframe.onerror = (e) => {
-                    console.error('Erro ao carregar iframe do Spotify para ID:', spotifyId, e);
-                    spotifyPlayerIframeContainer.innerHTML = '<p class="text-red-500 text-center py-8">Erro ao carregar o player do Spotify. Verifique o ID da música.</p>';
-                };
-            }
-        }
-
-        async function fetchSpotifyTracks() {
-            const spotifyTracks = await fetchAPI('/spotify-tracks');
-            if (spotifyTracks) {
-                spotifyTracksContainer.innerHTML = '';
-                if (spotifyTracks.length === 0) {
-                    noSpotifyTracksMessage.classList.remove('hidden');
-                } else {
-                    noSpotifyTracksMessage.classList.add('hidden');
-                    spotifyTracks.forEach(track => {
-                        spotifyTracksContainer.innerHTML += `
-                            <div class="spotify-track-card bg-secondary text-white rounded-lg shadow-lg overflow-hidden relative p-4 flex flex-col items-center text-center flex-shrink-0 min-w-0" onclick="loadSpotifyPlayer('${track.spotifyId}')">
-                                <div class="admin-badge ${document.body.classList.contains('admin-mode') ? '' : 'hidden'}">ADMIN</div>
-                                <img src="${track.image_url || 'https://via.placeholder.com/150x150?text=Capa'}" alt="${track.title}" class="w-24 h-24 rounded-full object-cover mb-3">
-                                <h3 class="text-lg font-bold truncate w-full">${track.title}</h3>
-                                <p class="text-gray-400 text-sm truncate w-full">${track.artist}</p>
-                                <div class="spotify-track-actions">
-                                    <button onclick="event.stopPropagation(); editSpotifyTrack('${track._id}', '${track.title.replace(/'/g, "\\'")}', '${track.artist.replace(/'/g, "\\'")}', '${track.spotifyId}', '${track.image_url}')" class="bg-blue-500 hover:bg-blue-600 text-white p-2 rounded-full"><i class="fas fa-edit"></i></button>
-                                    <button onclick="event.stopPropagation(); deleteSpotifyTrack('${track._id}')" class="bg-red-500 hover:bg-red-600 text-white p-2 rounded-full"><i class="fas fa-trash-alt"></i></button>
-                                </div>
-                            </div>
-                        `;
-                    });
-                    if (spotifyTracks.length > 0) {
-                        loadSpotifyPlayer(spotifyTracks[0].spotifyId);
-                    }
-                }
-            }
-        }
-
-        function editSpotifyTrack(id, title, artist, spotifyId, imageUrl) {
-            document.getElementById('spotify-track-modal-title').textContent = 'Editar Música Spotify';
-            document.getElementById('spotify-track-id').value = id;
-            document.getElementById('spotify-track-title').value = title;
-            document.getElementById('spotify-track-artist').value = artist;
-            document.getElementById('spotify-track-id-input').value = spotifyId;
-            document.getElementById('spotify-track-image-url').value = imageUrl;
-            openModal(spotifyTrackModal);
-        }
-
-        async function deleteSpotifyTrack(id) {
-            if (confirm('Tem certeza que deseja excluir esta música do Spotify?')) {
-                const response = await fetchAPI(`/spotify-tracks/${id}`, 'DELETE', null, true);
-                if (response !== null) {
-                    alert('Música do Spotify excluída com sucesso!');
-                    fetchSpotifyTracks();
-                }
-            }
-        }
-
-        // --- Funções de CRUD de Blog Posts ---
-        async function fetchBlogPosts() {
-            const endpoint = document.body.classList.contains('admin-mode') ? '/blog-posts/all' : '/blog-posts';
-            const blogPosts = await fetchAPI(endpoint, 'GET', null, document.body.classList.contains('admin-mode'));
-
-            if (blogPosts) {
-                blogPostsContainer.innerHTML = '';
-                if (blogPosts.length === 0) {
-                    noBlogPostsMessage.classList.remove('hidden');
-                } else {
-                    noBlogPostsMessage.classList.add('hidden');
-                    blogPosts.forEach(post => {
-                        const createdAtDate = new Date(post.createdAt);
-                        const formattedDate = createdAtDate.toLocaleDateString('pt-BR', { day: '2-digit', month: '2-digit', year: 'numeric' });
-                        const formattedTime = createdAtDate.toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' });
-
-                        const adminActionsHtml = document.body.classList.contains('admin-mode') ? `
-                            <div class="blog-post-actions">
-                                <button onclick="event.stopPropagation(); editBlogPost('${post._id}', '${post.title.replace(/'/g, "\\'")}', '${post.author.replace(/'/g, "\\'")}', '${post.image_url || ''}', \`${post.content.replace(/`/g, '\\`')}\`, ${post.approved})" class="bg-blue-500 hover:bg-blue-600 text-white p-2 rounded-full text-xs"><i class="fas fa-edit"></i></button>
-                                <button onclick="event.stopPropagation(); deleteBlogPost('${post._id}')" class="bg-red-500 hover:bg-red-600 text-white p-2 rounded-full text-xs"><i class="fas fa-trash-alt"></i></button>
-                            </div>
-                        ` : '';
-
-                        const statusBadgeHtml = document.body.classList.contains('admin-mode') ? `
-                            <div class="blog-status-badge ${post.approved ? 'approved' : 'pending'}">
-                                ${post.approved ? 'APROVADO' : 'PENDENTE'}
-                            </div>
-                        ` : '';
-
-                        blogPostsContainer.innerHTML += `
-                            <div class="blog-post-card bg-white rounded-lg shadow-lg overflow-hidden relative">
-                                ${statusBadgeHtml}
-                                <img src="${post.image_url || 'https://via.placeholder.com/400x250?text=Capa+do+Post'}" alt="${post.title}" class="w-full h-48 object-cover">
-                                <div class="p-6">
-                                    <h3 class="text-xl font-bold mb-2">${post.title}</h3>
-                                    <p class="text-gray-600 text-sm mb-3">Por: ${post.author} em ${formattedDate} ${formattedTime}</p>
-                                    <p class="text-gray-600 mb-4">${post.content.substring(0, 150)}...</p>
-                                    <a href="#" onclick="showBlogPostDetail('${post._id}')" class="text-primary hover:underline font-bold">Leia Mais</a>
-                                </div>
-                                ${adminActionsHtml}
-                            </div>
-                        `;
-                    });
-                }
-            }
-        }
-
-        async function showBlogPostDetail(id) {
-            const post = await fetchAPI(`/blog-posts/${id}`);
-            if (post) {
-                const createdAtDate = new Date(post.createdAt);
-                const formattedDate = createdAtDate.toLocaleDateString('pt-BR', { day: '2-digit', month: '2-digit', year: 'numeric' });
-                const formattedTime = createdAtDate.toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' });
-
-                const detailHtml = `
-                    <div class="blog-post-detail">
-                        <button onclick="hideBlogPostDetail()" class="back-button"><i class="fas fa-arrow-left mr-2"></i> Voltar para o Blog</button>
-                        <h1 class="mt-8">${post.title}</h1>
-                        <div class="meta">
-                            <span>Por: ${post.author}</span>
-                            <span>Em: ${formattedDate} ${formattedTime}</span>
-                        </div>
-                        ${post.image_url ? `<img src="${post.image_url}" alt="${post.title}">` : ''}
-                        <p>${post.content.replace(/\n/g, '<br>')}</p>
-                    </div>
-                `;
-                document.body.innerHTML = detailHtml;
-                window.scrollTo(0, 0);
-            }
-        }
-
-        function hideBlogPostDetail() {
-            location.reload(); 
-        }
-
-        function editBlogPost(id, title, author, imageUrl, content, approved) {
-            document.getElementById('blog-post-modal-title').textContent = 'Editar Post de Blog';
-            document.getElementById('blog-post-id').value = id;
-            document.getElementById('blog-post-title').value = title;
-            document.getElementById('blog-post-author').value = author;
-            document.getElementById('blog-post-image-url').value = imageUrl;
-            document.getElementById('blog-post-content').value = content;
-            document.getElementById('blog-post-approved').checked = approved;
-            openModal(blogPostModal);
-        }
-
-        async function deleteBlogPost(id) {
-            if (confirm('Tem certeza que deseja excluir este post de blog?')) {
-                const response = await fetchAPI(`/blog-posts/${id}`, 'DELETE', null, true);
-                if (response !== null) {
-                    alert('Post de blog excluído com sucesso!');
-                    fetchBlogPosts();
-                }
-            }
-        }
-
-        // --- Funções de CRUD de Packs e Acapellas (Downloadable Items) ---
-        async function fetchDownloadableItems() {
-            const downloadableItems = await fetchAPI('/downloadable-items');
-            if (downloadableItems) {
-                downloadableItemsContainer.innerHTML = '';
-                if (downloadableItems.length === 0) {
-                    noDownloadableItemsMessage.classList.remove('hidden');
-                } else {
-                    noDownloadableItemsMessage.classList.add('hidden');
-                    downloadableItems.forEach(item => {
-                        const adminActionsHtml = document.body.classList.contains('admin-mode') ? `
-                            <div class="downloadable-item-actions absolute top-2 right-2 flex gap-2">
-                                <button onclick="editDownloadableItem('${item._id}', '${item.title.replace(/'/g, "\\'")}', '${item.description.replace(/'/g, "\\'")}', '${item.type}', '${item.download_url}', '${item.image_url || ''}')" class="bg-blue-500 hover:bg-blue-600 text-white p-2 rounded-full text-xs"><i class="fas fa-edit"></i></button>
-                                <button onclick="deleteDownloadableItem('${item._id}')" class="bg-red-500 hover:bg-red-600 text-white p-2 rounded-full text-xs"><i class="fas fa-trash-alt"></i></button>
-                            </div>
-                        ` : '';
-
-                        downloadableItemsContainer.innerHTML += `
-                            <div class="downloadable-item-card bg-secondary text-white rounded-lg shadow-lg overflow-hidden relative p-6 text-center">
-                                <img src="${item.image_url || 'https://via.placeholder.com/150x150?text=Capa'}" alt="${item.title}" class="w-24 h-24 rounded-lg object-cover mx-auto mb-4">
-                                <h3 class="text-xl font-bold mb-2">${item.title}</h3>
-                                <p class="text-gray-400 text-sm mb-3">${item.description}</p>
-                                <p class="text-gray-500 text-xs mb-4">Tipo: ${item.type.charAt(0).toUpperCase() + item.type.slice(1)}</p>
-                                <a href="${item.download_url}" target="_blank" class="bg-primary hover:bg-purple-700 text-white font-bold py-2 px-4 rounded-full transition-colors inline-flex items-center">
-                                    <i class="fas fa-download mr-2"></i> Baixar
-                                </a>
-                                ${adminActionsHtml}
-                            </div>
-                        `;
-                    });
-                }
-            }
-        }
-
-        function editDownloadableItem(id, title, description, type, downloadUrl, imageUrl) {
-            document.getElementById('downloadable-item-modal-title').textContent = 'Editar Item de Download';
-            document.getElementById('downloadable-item-id').value = id;
-            document.getElementById('downloadable-item-title').value = title;
-            document.getElementById('downloadable-item-description').value = description;
-            document.getElementById('downloadable-item-type').value = type;
-            document.getElementById('downloadable-item-download-url').value = downloadUrl;
-            document.getElementById('downloadable-item-image-url').value = imageUrl;
-            openModal(downloadableItemModal);
-        }
-
-        async function deleteDownloadableItem(id) {
-            if (confirm('Tem certeza que deseja excluir este item de download?')) {
-                const response = await fetchAPI(`/downloadable-items/${id}`, 'DELETE', null, true);
-                if (response !== null) {
-                    alert('Item de download excluído com sucesso!');
-                    fetchDownloadableItems();
-                }
-            }
-        }
-
-        // --- Funções para renderizar Links Sociais ---
-        async function renderSocialLinks() {
-            const socialLinks = await fetchAPI('/social-links', 'GET');
-            console.log('Dados de links sociais recebidos:', socialLinks);
-            if (socialLinks) {
-                socialLinksContactDiv.innerHTML = '';
-                
-                if (socialLinks.instagram) {
-                    socialLinksContactDiv.innerHTML += `
-                        <a href="${socialLinks.instagram}" target="_blank" class="bg-gray-700 hover:bg-primary w-10 h-10 rounded-full flex items-center justify-center transition-colors"><i class="fab fa-instagram text-white"></i></a>
-                    `;
-                }
-                if (socialLinks.facebook) {
-                    socialLinksContactDiv.innerHTML += `
-                        <a href="${socialLinks.facebook}" target="_blank" class="bg-gray-700 hover:bg-primary w-10 h-10 rounded-full flex items-center justify-center transition-colors"><i class="fab fa-facebook-f text-white"></i></a>
-                    `;
-                }
-                if (socialLinks.youtube) {
-                    socialLinksContactDiv.innerHTML += `
-                        <a href="${socialLinks.youtube}" target="_blank" class="bg-gray-700 hover:bg-primary w-10 h-10 rounded-full flex items-center justify-center transition-colors"><i class="fab fa-youtube text-white"></i></a>
-                    `;
-                }
-                if (socialLinks.spotify) {
-                    socialLinksContactDiv.innerHTML += `
-                        <a href="${socialLinks.spotify}" target="_blank" class="bg-gray-700 hover:bg-primary w-10 h-10 rounded-full flex items-center justify-center transition-colors"><i class="fab fa-spotify text-white"></i></a>
-                    `;
-                }
-
-                if (!socialLinks.instagram && !socialLinks.facebook && !socialLinks.youtube && !socialLinks.spotify) {
-                    socialLinksContactDiv.innerHTML = '<p class="text-gray-500 text-sm">Nenhum link social configurado.</p>';
-                }
-            } else {
-                socialLinksContactDiv.innerHTML = '<p class="text-red-500 text-sm">Erro ao carregar links sociais. Verifique o console.</p>';
-            }
-        }
-
-        // --- NOVO: Funções para Gerenciar Vídeo do Estúdio ---
-        async function fetchStudioVideo() {
-            const studioConfig = await fetchAPI('/studio-config');
-            if (studioConfig && studioConfig.youtubeVideoId) {
-                const youtubeVideoId = studioConfig.youtubeVideoId;
-                studioVideoContainer.innerHTML = `
-                    <iframe src="https://www.youtube.com/embed/${youtubeVideoId}" 
-                            title="YouTube video player" frameborder="0" 
-                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
-                            referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-                `;
-            } else {
-                studioVideoContainer.innerHTML = '<p class="text-gray-600 text-center py-8">Nenhum vídeo do estúdio configurado. Por favor, adicione um.</p>';
-            }
-        }
-
-        // --- Funções de Consentimento de Cookies ---
-        function showCookieConsent() {
-            // Verifica se o usuário já aceitou ou recusou
-            if (localStorage.getItem(COOKIE_CONSENT_KEY) === null) {
-                cookieConsentBanner.classList.remove('hidden');
-                setTimeout(() => {
-                    cookieConsentBanner.classList.add('show');
-                }, 100); // Pequeno atraso para a transição CSS
-            }
-        }
-
-        function hideCookieConsent() {
-            cookieConsentBanner.classList.remove('show');
-            setTimeout(() => {
-                cookieConsentBanner.classList.add('hidden');
-            }, 500); // Tempo para a transição CSS
-        }
-
-        function handleCookieConsent(consent) {
-            localStorage.setItem(COOKIE_CONSENT_KEY, consent);
-            hideCookieConsent();
-            // Aqui você pode adicionar lógica para carregar scripts de terceiros
-            // ou anúncios do Google AdSense APENAS se o consentimento for 'accepted'
-            if (consent === 'accepted') {
-                console.log('Cookies aceitos. Carregando scripts de anúncios/análise (se houver).');
-                // Exemplo: Se você tivesse um script do Google Analytics, carregaria aqui
-                // const gaScript = document.createElement('script');
-                // gaScript.src = 'https://www.googletagmanager.com/gtag/js?id=UA-XXXXX-Y';
-                // document.head.appendChild(gaScript);
-                // window.dataLayer = window.dataLayer || [];
-                // function gtag(){dataLayer.push(arguments);}
-                // gtag('js', new Date());
-                // gtag('config', 'UA-XXXXX-Y');
-            } else {
-                console.log('Cookies recusados. Scripts de anúncios/análise não serão carregados.');
-            }
-        }
-
-
-        // --- Navegação Mobile ---
-        document.getElementById('mobile-menu-button').addEventListener('click', () => {
-            document.getElementById('mobile-menu').classList.add('active');
-        });
-
-        document.getElementById('close-menu').addEventListener('click', () => {
-            document.getElementById('mobile-menu').classList.remove('active');
-        });
-
-        document.querySelectorAll('#mobile-menu a').forEach(item => {
-            item.addEventListener('click', () => {
-                document.getElementById('mobile-menu').classList.remove('active');
-            });
-        });
-
-
-        // --- Inicialização (TUDO dentro de DOMContentLoaded) ---
-        document.addEventListener('DOMContentLoaded', () => {
-            // Atribuições de variáveis de elementos do DOM
-            adminLoginBtn = document.getElementById('admin-login-btn');
-            logoutBtn = document.getElementById('logout-btn');
-            changePasswordBtn = document.getElementById('change-password-btn');
-            editSocialLinksBtn = document.getElementById('edit-social-links-btn');
-            manageSpotifyTracksBtn = document.getElementById('manage-spotify-tracks-btn');
-            manageBlogPostsBtn = document.getElementById('manage-blog-posts-btn');
-            manageDownloadableItemsBtn = document.getElementById('manage-downloadable-items-btn');
-            manageStudioVideoBtn = document.getElementById('manage-studio-video-btn'); 
-
-            adminLoginModal = document.getElementById('admin-login-modal');
-            changePasswordModal = document.getElementById('change-password-modal');
-            socialLinksModal = document.getElementById('social-links-modal');
-            projectModal = document.getElementById('project-modal');
-            portfolioModal = document.getElementById('portfolio-modal');
-            addTestimonialModal = document.getElementById('add-testimonial-modal');
-            spotifyTrackModal = document.getElementById('spotify-track-modal');
-            blogPostModal = document.getElementById('blog-post-modal');
-            downloadableItemModal = document.getElementById('downloadable-item-modal');
-            studioVideoModal = document.getElementById('studio-video-modal'); 
-
-            adminLoginClose = document.getElementById('admin-login-close');
-            changePasswordClose = document.getElementById('change-password-close');
-            socialLinksClose = document.getElementById('social-links-close');
-            projectClose = document.getElementById('project-close');
-            portfolioClose = document.getElementById('portfolio-close');
-            addTestimonialClose = document.getElementById('add-testimonial-close');
-            spotifyTrackClose = document.getElementById('spotify-track-close');
-            blogPostClose = document.getElementById('blog-post-close');
-            downloadableItemClose = document.getElementById('downloadable-item-close');
-            studioVideoClose = document.getElementById('studio-video-close'); 
-
-            adminLoginForm = document.getElementById('admin-login-form');
-            changePasswordForm = document.getElementById('change-password-form');
-            socialLinksForm = document.getElementById('social-links-form');
-            projectForm = document.getElementById('project-form');
-            portfolioForm = document.getElementById('portfolio-form');
-            testimonialForm = document.getElementById('testimonial-form');
-            spotifyTrackForm = document.getElementById('spotify-track-form');
-            blogPostForm = document.getElementById('blog-post-form');
-            downloadableItemForm = document.getElementById('downloadable-item-form');
-            studioVideoForm = document.getElementById('studio-video-form'); 
-
-            projectsContainer = document.getElementById('projects-container');
-            noProjectsMessage = document.getElementById('no-projects-message');
-            adminProjectsButton = document.getElementById('admin-projects-button');
-            addProjectBtn = document.getElementById('add-project-btn');
-
-            portfolioContainer = document.getElementById('portfolio-container');
-            noPortfolioMessage = document.getElementById('no-portfolio-message');
-            adminPortfolioButton = document.getElementById('admin-portfolio-button');
-            addPortfolioBtn = document.getElementById('add-portfolio-btn');
-
-            testimonialsContainer = document.getElementById('testimonials-container');
-            noTestimonialsMessage = document.getElementById('no-testimonials-message');
-            addTestimonialBtn = document.getElementById('add-testimonial-btn');
-
-            spotifyPlayerIframeContainer = document.getElementById('spotify-player-iframe-container');
-            spotifyTracksContainer = document.getElementById('spotify-tracks-container');
-            noSpotifyTracksMessage = document.getElementById('no-spotify-tracks-message');
-            addSpotifyTrackBtn = document.getElementById('add-spotify-track-btn');
-
-            blogPostsContainer = document.getElementById('blog-posts-container');
-            noBlogPostsMessage = document.getElementById('no-blog-posts-message');
-            adminBlogButton = document.getElementById('admin-blog-button');
-            addBlogPostBtn = document.getElementById('add-blog-post-btn');
-
-            downloadableItemsContainer = document.getElementById('downloadable-items-container');
-            noDownloadableItemsMessage = document.getElementById('no-downloadable-items-message');
-            adminDownloadableItemsButton = document.getElementById('admin-downloadable-items-button');
-            addDownloadableItemBtn = document.getElementById('add-downloadable-item-btn');
-
-            studioVideoContainer = document.getElementById('studio-video-container'); 
-            
-            adminLoginIcon = document.getElementById('admin-login-icon');
-            socialLinksContactDiv = document.getElementById('social-links-contact');
-
-            // Atribuições para o banner de cookies
-            cookieConsentBanner = document.getElementById('cookie-consent-banner');
-            acceptCookiesBtn = document.getElementById('accept-cookies');
-            declineCookiesBtn = document.getElementById('decline-cookies');
-            privacyPolicyLink = document.getElementById('privacy-policy-link');
-
-            // Atribuições para os novos elementos do CBR Drive
-            showCbrDriveLink = document.getElementById('show-cbr-drive-link');
-            showCbrDriveLinkMobile = document.getElementById('show-cbr-drive-link-mobile');
-            cbrDriveLandingSection = document.getElementById('cbr-drive-landing');
-
-
-            // --- Event Listeners para Modals e Botões Principais ---
-            adminLoginBtn.onclick = () => openModal(adminLoginModal);
-            adminLoginClose.onclick = () => closeModal(adminLoginModal);
-            changePasswordBtn.onclick = () => openModal(changePasswordModal);
-            changePasswordClose.onclick = () => closeModal(changePasswordModal);
-            socialLinksClose.onclick = () => closeModal(socialLinksModal);
-            projectClose.onclick = () => closeModal(projectModal);
-            portfolioClose.onclick = () => closeModal(portfolioModal);
-            addTestimonialClose.onclick = () => closeModal(addTestimonialModal);
-            spotifyTrackClose.onclick = () => closeModal(spotifyTrackModal);
-            blogPostClose.onclick = () => closeModal(blogPostModal);
-            downloadableItemClose.onclick = () => closeModal(downloadableItemModal);
-            studioVideoClose.onclick = () => closeModal(studioVideoModal); 
-
-            window.onclick = (event) => {
-                if (event.target == adminLoginModal) closeModal(adminLoginModal);
-                if (event.target == changePasswordModal) closeModal(changePasswordModal);
-                if (event.target == socialLinksModal) closeModal(socialLinksModal);
-                if (event.target == projectModal) closeModal(projectModal);
-                if (event.target == portfolioModal) closeModal(portfolioModal);
-                if (event.target == addTestimonialModal) closeModal(addTestimonialModal);
-                if (event.target == spotifyTrackModal) closeModal(spotifyTrackModal);
-                if (event.target == blogPostModal) closeModal(blogPostModal);
-                if (event.target == downloadableItemModal) closeModal(downloadableItemModal);
-                if (event.target == studioVideoModal) closeModal(studioVideoModal); 
-            };
-
-            // --- Funcionalidade de Login ---
-            adminLoginForm.addEventListener('submit', async (e) => {
-                e.preventDefault();
-                const username = document.getElementById('admin-username').value;
-                const password = document.getElementById('admin-password').value;
-
-                const data = await fetchAPI('/login', 'POST', { username, password });
-                if (data && data.token) {
-                    localStorage.setItem(JWT_TOKEN_KEY, data.token);
-                    alert('Login bem-sucedido!');
-                    closeModal(adminLoginModal);
-                    checkLoginStatus();
-                }
-            });
-
-            logoutBtn.addEventListener('click', () => {
-                logout();
-            });
-
-            // --- Funcionalidade de Alterar Senha ---
-            changePasswordForm.addEventListener('submit', async (e) => {
-                e.preventDefault();
-                const oldPassword = document.getElementById('old-password').value;
-                const newPassword = document.getElementById('new-password').value;
-                const confirmNewPassword = document.getElementById('confirm-new-password').value;
-
-                if (newPassword.length < 6) {
-                    alert('A nova senha deve ter no mínimo 6 caracteres.');
-                    return;
-                }
-                if (newPassword !== confirmNewPassword) {
-                    alert('A nova senha e a confirmação não coincidem.');
-                    return;
-                }
-
-                const data = await fetchAPI('/change-password', 'POST', { oldPassword, newPassword }, true);
-                if (data) {
-                    alert(data.message);
-                    closeModal(changePasswordModal);
-                    logout();
-                }
-            });
-
-            // --- Links Sociais ---
-            editSocialLinksBtn.addEventListener('click', async () => {
-                const socialLinks = await fetchAPI('/social-links', 'GET');
-                if (socialLinks) {
-                    document.getElementById('instagram-link').value = socialLinks.instagram || '';
-                    document.getElementById('facebook-link').value = socialLinks.facebook || '';
-                    document.getElementById('spotify-link-global').value = socialLinks.spotify || '';
-                    document.getElementById('youtube-link-global').value = socialLinks.youtube || '';
-                    openModal(socialLinksModal);
-                }
-            });
-
-            socialLinksForm.addEventListener('submit', async (e) => {
-                e.preventDefault();
-                const updates = {
-                    instagram: document.getElementById('instagram-link').value,
-                    facebook: document.getElementById('facebook-link').value,
-                    spotify: document.getElementById('spotify-link-global').value,
-                    youtube: document.getElementById('youtube-link-global').value,
-                };
-                const data = await fetchAPI('/social-links', 'PUT', updates, true);
-                if (data) {
-                    alert(data.message);
-                    closeModal(socialLinksModal);
-                    renderSocialLinks();
-                }
-            });
-
-            // Event listener for project form
-            addProjectBtn.addEventListener('click', () => {
-                document.getElementById('project-modal-title').textContent = 'Adicionar Novo Projeto';
-                document.getElementById('project-id').value = '';
-                projectForm.reset();
-                openModal(projectModal);
-            });
-
-            projectForm.addEventListener('submit', async (e) => {
-                e.preventDefault();
-                const projectIdInput = document.getElementById('project-id');
-                const title = document.getElementById('project-title').value;
-                const description = document.getElementById('project-description').value;
-                const image_url = document.getElementById('project-image-url').value;
-                const spotify_link = document.getElementById('project-spotify-link').value;
-                const youtube_link = document.getElementById('project-youtube-link').value;
-
-                const projectData = { title, description, image_url, spotify_link, youtube_link };
-                const projectId = projectIdInput.value;
-
-                if (projectId) {
-                    const response = await fetchAPI(`/projects/${projectId}`, 'PUT', projectData, true);
-                    if (response) {
-                        alert('Projeto atualizado com sucesso!');
-                    }
-                } else {
-                    const response = await fetchAPI('/projects', 'POST', projectData, true);
-                    if (response) {
-                        alert('Projeto adicionado com sucesso!');
-                    }
-                }
-                closeModal(projectModal);
-                fetchProjects();
-            });
-
-            // Event listener for portfolio form
-            addPortfolioBtn.addEventListener('click', () => {
-                document.getElementById('portfolio-modal-title').textContent = 'Adicionar Novo Item de Portfólio';
-                document.getElementById('portfolio-id').value = '';
-                portfolioForm.reset();
-                openModal(portfolioModal);
-            });
-
-            portfolioForm.addEventListener('submit', async (e) => {
-                e.preventDefault();
-                const portfolioIdInput = document.getElementById('portfolio-id');
-                const title = document.getElementById('portfolio-title').value;
-                const description = document.getElementById('portfolio-description').value;
-                const image_url = document.getElementById('portfolio-image-url').value;
-                const spotify_link = document.getElementById('portfolio-spotify-link').value;
-                const youtube_link = document.getElementById('portfolio-youtube-link').value;
-
-                const itemData = { title, description, image_url, spotify_link, youtube_link };
-                const portfolioId = portfolioIdInput.value;
-
-                if (portfolioId) {
-                    const response = await fetchAPI(`/portfolio/${portfolioId}`, 'PUT', itemData, true);
-                    if (response) {
-                        alert('Item de portfólio atualizado com sucesso!');
-                    }
-                } else {
-                    const response = await fetchAPI('/portfolio', 'POST', itemData, true);
-                    if (response) {
-                        alert('Item de portfólio adicionado com sucesso!');
-                    }
-                }
-                closeModal(portfolioModal);
-                fetchPortfolio();
-            });
-
-            // Event listener for testimonial form
-            addTestimonialBtn.addEventListener('click', () => {
-                testimonialForm.reset();
-                openModal(addTestimonialModal);
-            });
-
-            testimonialForm.addEventListener('submit', async (e) => {
-                e.preventDefault();
-                const name = document.getElementById('testimonial-name').value;
-                const rating = parseInt(document.querySelector('input[name="rating"]:checked').value);
-                const comment = document.getElementById('testimonial-comment').value;
-
-                await submitTestimonial(name, rating, comment);
-            });
-
-            // Event listeners para músicas do Spotify
-            manageSpotifyTracksBtn.addEventListener('click', () => {
-                document.getElementById('spotify-track-modal-title').textContent = 'Adicionar Nova Música Spotify';
-                document.getElementById('spotify-track-id').value = '';
-                spotifyTrackForm.reset();
-                openModal(spotifyTrackModal);
-            });
-
-            spotifyTrackForm.addEventListener('submit', async (e) => {
-                e.preventDefault();
-                const spotifyTrackIdInput = document.getElementById('spotify-track-id');
-                const title = document.getElementById('spotify-track-title').value;
-                const artist = document.getElementById('spotify-track-artist').value;
-                const spotifyId = document.getElementById('spotify-track-id-input').value;
-                const image_url = document.getElementById('spotify-track-image-url').value;
-
-                const trackData = { title, artist, spotifyId, image_url };
-                const trackDbId = spotifyTrackIdInput.value;
-
-                if (trackDbId) {
-                    const response = await fetchAPI(`/spotify-tracks/${trackDbId}`, 'PUT', trackData, true);
-                    if (response) {
-                        alert('Música Spotify atualizada com sucesso!');
-                    }
-                } else {
-                    const response = await fetchAPI('/spotify-tracks', 'POST', trackData, true);
-                    if (response) {
-                        alert('Música Spotify adicionada com sucesso!');
-                    }
-                }
-                closeModal(spotifyTrackModal);
-                fetchSpotifyTracks();
-            });
-
-            // Event listeners para Blog Posts
-            manageBlogPostsBtn.addEventListener('click', () => {
-                document.getElementById('blog-post-modal-title').textContent = 'Adicionar Novo Post de Blog';
-                document.getElementById('blog-post-id').value = '';
-                blogPostForm.reset();
-                openModal(blogPostModal);
-            });
-
-            blogPostForm.addEventListener('submit', async (e) => {
-                e.preventDefault();
-                const postIdInput = document.getElementById('blog-post-id');
-                const title = document.getElementById('blog-post-title').value;
-                const author = document.getElementById('blog-post-author').value;
-                const image_url = document.getElementById('blog-post-image-url').value;
-                const content = document.getElementById('blog-post-content').value;
-                const approved = document.getElementById('blog-post-approved').checked;
-
-                const postData = { title, author, image_url, content, approved };
-                const postId = postIdInput.value;
-
-                if (postId) {
-                    const response = await fetchAPI(`/blog-posts/${postId}`, 'PUT', postData, true);
-                    if (response) {
-                        alert('Post de blog atualizado com sucesso!');
-                    }
-                } else {
-                    const response = await fetchAPI('/blog-posts', 'POST', postData, true);
-                    if (response) {
-                        alert('Post de blog adicionado com sucesso!');
-                    }
-                }
-                closeModal(blogPostModal);
-                fetchBlogPosts();
-            });
-
-            // Event listeners para Packs e Acapellas (Downloadable Items)
-            manageDownloadableItemsBtn.addEventListener('click', () => {
-                document.getElementById('downloadable-item-modal-title').textContent = 'Adicionar Novo Item de Download';
-                document.getElementById('downloadable-item-id').value = '';
-                downloadableItemForm.reset();
-                openModal(downloadableItemModal);
-            });
-
-            downloadableItemForm.addEventListener('submit', async (e) => {
-                e.preventDefault();
-                const itemIdInput = document.getElementById('downloadable-item-id');
-                const title = document.getElementById('downloadable-item-title').value;
-                const description = document.getElementById('downloadable-item-description').value;
-                const type = document.getElementById('downloadable-item-type').value;
-                const download_url = document.getElementById('downloadable-item-download-url').value;
-                const image_url = document.getElementById('downloadable-item-image-url').value;
-
-                const itemData = { title, description, type, download_url, image_url };
-                const itemId = itemIdInput.value;
-
-                if (itemId) {
-                    const response = await fetchAPI(`/downloadable-items/${itemId}`, 'PUT', itemData, true);
-                    if (response) {
-                        alert('Item de download atualizado com sucesso!');
-                    }
-                } else {
-                    const response = await fetchAPI('/downloadable-items', 'POST', itemData, true);
-                    if (response) {
-                        alert('Item de download adicionado com sucesso!');
-                    }
-                }
-                closeModal(downloadableItemModal);
-                fetchDownloadableItems();
-            });
-
-            // NOVO: Event listeners para Gerenciar Vídeo do Estúdio
-            manageStudioVideoBtn.addEventListener('click', async () => {
-                const studioConfig = await fetchAPI('/studio-config', 'GET');
-                if (studioConfig) {
-                    document.getElementById('youtube-video-id').value = studioConfig.youtubeVideoId || '';
-                    openModal(studioVideoModal);
-                }
-            });
-
-            studioVideoForm.addEventListener('submit', async (e) => {
-                e.preventDefault();
-                const youtubeVideoId = document.getElementById('youtube-video-id').value;
-                const response = await fetchAPI('/studio-config', 'PUT', { youtubeVideoId }, true);
-                if (response) {
-                    alert('Vídeo do estúdio atualizado com sucesso!');
-                    closeModal(studioVideoModal);
-                    fetchStudioVideo(); // Recarrega o vídeo na página principal
-                }
-            });
-
-            // Event listeners para o banner de cookies
-            acceptCookiesBtn.addEventListener('click', () => handleCookieConsent('accepted'));
-            declineCookiesBtn.addEventListener('click', () => handleCookieConsent('declined'));
-            // Você precisará criar uma página de Política de Privacidade e linkar aqui
-            // privacyPolicyLink.href = 'URL_DA_SUA_POLITICA_DE_PRIVACIDADE.html';
-
-
-            // NOVO: Event listeners para mostrar a seção CBR Drive
-            showCbrDriveLink.addEventListener('click', (e) => {
-                e.preventDefault(); // Impede o comportamento padrão do link
-                cbrDriveLandingSection.classList.remove('hidden'); // Remove a classe 'hidden' para mostrar a seção
-                cbrDriveLandingSection.scrollIntoView({ behavior: 'smooth' }); // Rola suavemente até a seção
-                document.getElementById('mobile-menu').classList.remove('active'); // Fecha o menu mobile, se estiver aberto
-            });
-
-            showCbrDriveLinkMobile.addEventListener('click', (e) => {
-                e.preventDefault(); // Impede o comportamento padrão do link
-                cbrDriveLandingSection.classList.remove('hidden'); // Remove a classe 'hidden' para mostrar a seção
-                cbrDriveLandingSection.scrollIntoView({ behavior: 'smooth' }); // Rola suavemente até a seção
-                document.getElementById('mobile-menu').classList.remove('active'); // Fecha o menu mobile, se estiver aberto
-            });
-
-
-            // Chamadas iniciais
-            checkLoginStatus();
-            fetchProjects();
-            fetchPortfolio();
-            fetchTestimonials();
-            fetchSpotifyTracks();
-            fetchBlogPosts();
-            fetchDownloadableItems();
-            renderSocialLinks();
-            fetchStudioVideo(); // NOVO: Carregar o vídeo do estúdio ao iniciar
-            showCookieConsent(); // Mostra o banner de cookies ao carregar a página
-        });
-    </script>
-  
 </body>
 </html>
