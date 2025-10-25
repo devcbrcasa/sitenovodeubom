@@ -1,4 +1,4 @@
-// functions/api.js
+// functions/api.js - CORRIGIDO PARA SERVERLESS
 
 const express = require('express');
 const serverless = require('serverless-http');
@@ -7,170 +7,88 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const dotenv = require('dotenv');
 
-// Carrega as variáveis de ambiente do arquivo .env
 dotenv.config();
 
 const app = express();
 const router = express.Router();
 
-// Middleware para parsear JSON no corpo das requisições
+// ---------------------------------------------------
+// 1. OTIMIZAÇÃO DA CONEXÃO MONGODB PARA SERVERLESS
+// ---------------------------------------------------
+
+let isConnected = false;
+
+const connectToDatabase = async () => {
+    // Retorna se a conexão já estiver estabelecida
+    if (isConnected) {
+        return;
+    }
+
+    try {
+        await mongoose.connect(process.env.MONGODB_URI, {
+            // As opções deprecated (useNewUrlParser, useUnifiedTopology) foram removidas.
+            // Se o Mongoose for antigo, você pode precisar adicioná-las.
+        });
+        isConnected = true;
+        console.log('MongoDB conectado com sucesso (Serverless).');
+    } catch (err) {
+        console.error('Erro de conexão com MongoDB (Serverless):', err);
+    }
+};
+
+// ---------------------------------------------------
+// 2. IMPORTAÇÃO DOS MODELOS (A CHAVE DA CORREÇÃO)
+// Removemos a definição de todos os Schemas daqui para evitar o erro de recompilação.
+// Certifique-se de que os caminhos e nomes dos modelos estão corretos.
+// ---------------------------------------------------
+
+// Importe os modelos que você já corrigiu:
+const User = require('../models/user'); 
+const Project = require('../models/project');
+const PortfolioItem = require('../models/portfolio');
+const SocialLinks = require('../models/sociallinks');
+
+// Importe os modelos que você PRECISA criar/corrigir:
+
+
+
+// ---------------------------------------------------
+// 3. MIDDLEWARES
+// ---------------------------------------------------
+
 app.use(express.json());
 
-// Conexão com o MongoDB
-// Utiliza process.env.MONGODB_URI, que deve ser configurado no Netlify ou localmente
-mongoose.connect(process.env.MONGODB_URI, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-    // Remover as opções deprecated abaixo se estiver usando Mongoose 6.x ou superior
-    // useCreateIndex: true, 
-    // useFindAndModify: false 
-})
-.then(() => console.log('MongoDB conectado com sucesso.'))
-.catch(err => {
-    console.error('Erro de conexão com MongoDB:', err);
-    // Em produção, você pode querer sair do processo ou logar de forma mais robusta
-    // process.exit(1);
+// Middleware para garantir a conexão com o DB em cada requisição
+router.use(async (req, res, next) => {
+    await connectToDatabase();
+    next();
 });
 
-// --- Schemas Mongoose ---
-
-// Schema para Usuário (Admin)
-// Garante que o nome de usuário é único e a senha é obrigatória
-const UserSchema = new mongoose.Schema({
-    username: {
-        type: String,
-        required: true,
-        unique: true, // Garante que não haverá usuários com o mesmo username
-        trim: true // Remove espaços em branco do início e fim
-    },
-    password: {
-        type: String,
-        required: true
-    }
-});
-
-const User = mongoose.model('User', UserSchema);
-
-// Schema para Projetos
-// Adicionado `trim` para strings
-const ProjectSchema = new mongoose.Schema({
-    title: { type: String, required: true, trim: true },
-    description: { type: String, required: true, trim: true },
-    image_url: { type: String, trim: true },
-    spotify_link: { type: String, trim: true }, // Não obrigatório, pois pode não ter link Spotify
-    youtube_link: { type: String, trim: true }, // Não obrigatório, pois pode não ter link YouTube
-    createdAt: { type: Date, default: Date.now, index: true } // Adicionado para ordenação
-});
-
-const Project = mongoose.model('Project', ProjectSchema);
-
-// Schema para Portfólio
-// Adicionado `trim` para strings
-const PortfolioItemSchema = new mongoose.Schema({
-    title: { type: String, required: true, trim: true },
-    description: { type: String, required: true, trim: true },
-    image_url: { type: String, trim: true },
-    spotify_link: { type: String, trim: true }, // Não obrigatório
-    youtube_link: { type: String, trim: true }, // Não obrigatório
-    createdAt: { type: Date, default: Date.now, index: true } // Adicionado para ordenação
-});
-
-const PortfolioItem = mongoose.model('PortfolioItem', PortfolioItemSchema);
-
-// Schema para Links Sociais
-// Garante que só haverá um documento de links sociais no banco de dados
-const SocialLinksSchema = new mongoose.Schema({
-    instagram: { type: String, default: '', trim: true },
-    facebook: { type: String, default: '', trim: true },
-    spotify: { type: String, default: '', trim: true },
-    youtube: { type: String, default: '', trim: true },
-});
-
-const SocialLinks = mongoose.model('SocialLinks', SocialLinksSchema);
-
-// Schema para Depoimentos
-// Adicionado `trim` para strings e `index: true` para `createdAt` para melhor performance de ordenação
-const TestimonialSchema = new mongoose.Schema({
-    name: { type: String, required: true, trim: true },
-    rating: { type: Number, required: true, min: 1, max: 5 },
-    comment: { type: String, required: true, trim: true },
-    approved: { type: Boolean, default: false }, // Depoimentos começam como não aprovados
-    createdAt: { type: Date, default: Date.now, index: true } // Index para ordenação eficiente
-});
-
-const Testimonial = mongoose.model('Testimonial', TestimonialSchema);
-
-// Schema para Músicas Spotify
-// Adicionado `trim` para strings e `index: true` para `createdAt`
-const SpotifyTrackSchema = new mongoose.Schema({
-    title: { type: String, required: true, trim: true },
-    artist: { type: String, required: true, trim: true },
-    spotifyId: { type: String, required: true, unique: true, trim: true }, // ID único do Spotify
-    image_url: { type: String, default: '', trim: true }, // URL da capa do álbum/música
-    createdAt: { type: Date, default: Date.now, index: true }
-});
-
-const SpotifyTrack = mongoose.model('SpotifyTrack', SpotifyTrackSchema);
-
-// Schema para Blog Posts
-// Adicionado `trim` para strings e `index: true` para `createdAt`
-const BlogPostSchema = new mongoose.Schema({
-    title: { type: String, required: true, trim: true },
-    content: { type: String, required: true, trim: true },
-    author: { type: String, required: true, trim: true },
-    image_url: { type: String, default: '', trim: true },
-    approved: { type: Boolean, default: false }, // Posts começam como não aprovados
-    createdAt: { type: Date, default: Date.now, index: true }
-});
-
-const BlogPost = mongoose.model('BlogPost', BlogPostSchema);
-
-// Schema para Packs e Acapellas (Downloadable Items)
-// Adicionado `trim` para strings e `index: true` para `createdAt`
-const DownloadableItemSchema = new mongoose.Schema({
-    title: { type: String, required: true, trim: true },
-    description: { type: String, required: true, trim: true },
-    type: { type: String, required: true, enum: ['pack', 'acapella', 'outro'], trim: true }, // Tipo do item (pack, acapella, etc.)
-    download_url: { type: String, required: true, trim: true }, // Link para download externo
-    image_url: { type: String, default: '', trim: true }, // Imagem de capa para o item
-    createdAt: { type: Date, default: Date.now, index: true }
-});
-
-const DownloadableItem = mongoose.model('DownloadableItem', DownloadableItemSchema);
-
-// NOVO SCHEMA: Schema para Configuração do Vídeo do Estúdio
-const StudioConfigSchema = new mongoose.Schema({
-    youtubeVideoId: { type: String, default: '', trim: true } // ID do vídeo do YouTube
-});
-
-const StudioConfig = mongoose.model('StudioConfig', StudioConfigSchema);
-
-
-// --- Middleware de Autenticação ---
-// Verifica a presença e validade do token JWT
+// Middleware de Autenticação (Mantido o seu código original)
 const authenticateToken = (req, res, next) => {
     const authHeader = req.headers['authorization'];
     const token = authHeader && authHeader.split(' ')[1];
 
     if (!token) {
-        console.error('Autenticação falhou: Nenhum token fornecido.');
         return res.status(401).json({ message: 'Acesso negado. Token não fornecido.' });
     }
 
     jwt.verify(token, process.env.JWT_SECRET, (err, user) => {
         if (err) {
-            console.error('Erro de verificação de token:', err); // Loga o erro para depuração
             if (err.name === 'TokenExpiredError') {
                 return res.status(403).json({ message: 'Sua sessão expirou. Por favor, faça login novamente.' });
             }
             return res.status(403).json({ message: 'Token inválido ou expirado.' });
         }
-        req.user = user; // Anexa as informações do usuário ao objeto de requisição
+        req.user = user;
         next();
     });
 };
 
-// --- Rotas de Autenticação ---
+// ---------------------------------------------------
+// 4. ROTAS DE AUTENTICAÇÃO
+// O uso de 'User.findOne' e 'bcrypt.compare' permanece.
+// ---------------------------------------------------
 
 // Rota de Login
 router.post('/login', async (req, res) => {
@@ -181,12 +99,15 @@ router.post('/login', async (req, res) => {
             return res.status(400).json({ message: 'Credenciais inválidas.' });
         }
 
+        // Se você adicionou 'comparePassword' ao seu user.js, use-o:
+        // const isMatch = await user.comparePassword(password);
+        // Senão, mantenha a comparação direta:
         const isMatch = await bcrypt.compare(password, user.password);
+        
         if (!isMatch) {
             return res.status(400).json({ message: 'Credenciais inválidas.' });
         }
 
-        // Gera um token JWT com o ID e username do usuário
         const token = jwt.sign({ id: user._id, username: user.username }, process.env.JWT_SECRET, { expiresIn: '8h' });
         res.json({ message: 'Login bem-sucedido!', token });
     } catch (error) {
@@ -201,11 +122,11 @@ router.post('/change-password', authenticateToken, async (req, res) => {
     try {
         const user = await User.findById(req.user.id);
         if (!user) {
-            // Isso não deveria acontecer se o token for válido, mas é uma boa verificação
             return res.status(404).json({ message: 'Usuário não encontrado.' });
         }
-
-        const isMatch = await bcrypt.compare(oldPassword, user.password);
+        
+        // Mantido bcrypt.compare como estava no original
+        const isMatch = await bcrypt.compare(oldPassword, user.password); 
         if (!isMatch) {
             return res.status(400).json({ message: 'Senha antiga incorreta.' });
         }
@@ -214,7 +135,8 @@ router.post('/change-password', authenticateToken, async (req, res) => {
             return res.status(400).json({ message: 'A nova senha deve ter no mínimo 6 caracteres.' });
         }
 
-        user.password = await bcrypt.hash(newPassword, 10); // Hash da nova senha
+        // O hash é feito aqui, como estava no seu código original
+        user.password = await bcrypt.hash(newPassword, 10); 
         await user.save();
         res.json({ message: 'Senha alterada com sucesso!' });
     } catch (error) {
@@ -223,9 +145,7 @@ router.post('/change-password', authenticateToken, async (req, res) => {
     }
 });
 
-// Rota para criar o primeiro usuário admin (apenas para inicialização)
-// RECOMENDAÇÃO: Esta rota deve ser REMOVIDA ou protegida por uma chave API
-// após a criação do primeiro administrador em um ambiente de produção.
+// Rota para criar o primeiro usuário admin
 router.post('/create-first-admin', async (req, res) => {
     const { username, password } = req.body;
     if (!username || !password) {
@@ -247,12 +167,14 @@ router.post('/create-first-admin', async (req, res) => {
 });
 
 
-// --- Rotas CRUD para Projetos ---
+// ---------------------------------------------------
+// 5. ROTAS CRUD PARA PROJETOS
+// ---------------------------------------------------
 
 // Obter todos os projetos (público)
 router.get('/projects', async (req, res) => {
     try {
-        const projects = await Project.find({}).sort({ createdAt: -1 }); // Ordena pelos mais recentes
+        const projects = await Project.find({}).sort({ createdAt: -1 });
         res.json(projects);
     } catch (error) {
         console.error('Erro ao buscar projetos:', error);
@@ -293,19 +215,21 @@ router.delete('/projects/:id', authenticateToken, async (req, res) => {
         if (!deletedProject) {
             return res.status(404).json({ message: 'Projeto não encontrado.' });
         }
-        res.status(204).send(); // Resposta 204 No Content para exclusão bem-sucedida
+        res.status(204).send();
     } catch (error) {
         console.error('Erro ao excluir projeto:', error);
         res.status(500).json({ message: 'Erro ao excluir projeto.', error: error.message });
     }
 });
 
-// --- Rotas CRUD para Portfólio ---
+// ---------------------------------------------------
+// 6. ROTAS CRUD PARA PORTFÓLIO
+// ---------------------------------------------------
 
 // Obter todos os itens de portfólio (público)
 router.get('/portfolio', async (req, res) => {
     try {
-        const portfolioItems = await PortfolioItem.find({}).sort({ createdAt: -1 }); // Ordena pelos mais recentes
+        const portfolioItems = await PortfolioItem.find({}).sort({ createdAt: -1 });
         res.json(portfolioItems);
     } catch (error) {
         console.error('Erro ao buscar itens de portfólio:', error);
@@ -346,22 +270,23 @@ router.delete('/portfolio/:id', authenticateToken, async (req, res) => {
         if (!deletedItem) {
             return res.status(404).json({ message: 'Item de portfólio não encontrado.' });
         }
-        res.status(204).send(); // No Content
+        res.status(204).send();
     } catch (error) {
         console.error('Erro ao excluir item de portfólio:', error);
         res.status(500).json({ message: 'Erro ao excluir item de portfólio.', error: error.message });
     }
 });
 
-// --- Rotas para Links Sociais ---
+// ---------------------------------------------------
+// 7. ROTAS PARA LINKS SOCIAIS
+// ---------------------------------------------------
 
 // Obter links sociais (público)
-// Se não houver links, um documento padrão é criado e retornado
 router.get('/social-links', async (req, res) => {
     try {
         let socialLinks = await SocialLinks.findOne();
         if (!socialLinks) {
-            socialLinks = new SocialLinks(); // Cria um novo se não existir
+            socialLinks = new SocialLinks();
             await socialLinks.save();
         }
         res.json(socialLinks);
@@ -374,8 +299,6 @@ router.get('/social-links', async (req, res) => {
 // Atualizar links sociais (admin-only)
 router.put('/social-links', authenticateToken, async (req, res) => {
     try {
-        // Encontra e atualiza o único documento de SocialLinks.
-        // `upsert: true` cria o documento se ele não existir.
         const socialLinks = await SocialLinks.findOneAndUpdate({}, req.body, { new: true, upsert: true, runValidators: true });
         res.json({ message: 'Links sociais atualizados com sucesso!', socialLinks });
     } catch (error) {
@@ -384,7 +307,9 @@ router.put('/social-links', authenticateToken, async (req, res) => {
     }
 });
 
-// --- Rotas para Depoimentos ---
+// ---------------------------------------------------
+// 8. ROTAS PARA DEPOIMENTOS
+// ---------------------------------------------------
 
 // Rota para submeter um novo depoimento (público)
 router.post('/testimonials', async (req, res) => {
@@ -393,7 +318,6 @@ router.post('/testimonials', async (req, res) => {
         if (!name || !rating || !comment) {
             return res.status(400).json({ message: 'Nome, avaliação e depoimento são obrigatórios.' });
         }
-        // Depoimentos começam como não aprovados por padrão
         const newTestimonial = new Testimonial({ name, rating, comment, approved: false });
         await newTestimonial.save();
         res.status(201).json({ message: 'Depoimento enviado com sucesso para revisão!', testimonial: newTestimonial });
@@ -406,7 +330,7 @@ router.post('/testimonials', async (req, res) => {
 // Rota para obter depoimentos APROVADOS (público)
 router.get('/testimonials', async (req, res) => {
     try {
-        const approvedTestimonials = await Testimonial.find({ approved: true }).sort({ createdAt: -1 }); // Ordena pelos mais recentes
+        const approvedTestimonials = await Testimonial.find({ approved: true }).sort({ createdAt: -1 });
         res.json(approvedTestimonials);
     } catch (error) {
         console.error('Erro ao buscar depoimentos aprovados:', error);
@@ -417,7 +341,7 @@ router.get('/testimonials', async (req, res) => {
 // Rota para obter TODOS os depoimentos (admin-only)
 router.get('/testimonials/all', authenticateToken, async (req, res) => {
     try {
-        const allTestimonials = await Testimonial.find({}).sort({ createdAt: -1 }); // Ordena pelos mais recentes
+        const allTestimonials = await Testimonial.find({}).sort({ createdAt: -1 });
         res.json(allTestimonials);
     } catch (error) {
         console.error('Erro ao buscar todos os depoimentos (admin):', error);
@@ -444,7 +368,7 @@ router.put('/testimonials/:id', authenticateToken, async (req, res) => {
     try {
         const updatedTestimonial = await Testimonial.findByIdAndUpdate(
             req.params.id,
-            req.body, // Permite atualizar todos os campos, incluindo `approved` e `rating`
+            req.body,
             { new: true, runValidators: true }
         );
         if (!updatedTestimonial) {
@@ -482,14 +406,16 @@ router.delete('/testimonials/:id', authenticateToken, async (req, res) => {
         if (!deletedTestimonial) {
             return res.status(404).json({ message: 'Depoimento não encontrado.' });
         }
-        res.status(204).send(); // No Content
+        res.status(204).send();
     } catch (error) {
         console.error('Erro ao excluir depoimento:', error);
         res.status(500).json({ message: 'Erro ao excluir depoimento.', error: error.message });
     }
 });
 
-// --- Rotas para Músicas Spotify ---
+// ---------------------------------------------------
+// 9. ROTAS PARA MÚSICAS SPOTIFY
+// ---------------------------------------------------
 
 // Rota para adicionar uma nova música Spotify (admin-only)
 router.post('/spotify-tracks', authenticateToken, async (req, res) => {
@@ -503,7 +429,6 @@ router.post('/spotify-tracks', authenticateToken, async (req, res) => {
         res.status(201).json({ message: 'Música Spotify adicionada com sucesso!', track: newTrack });
     } catch (error) {
         console.error('Erro ao adicionar música Spotify:', error);
-        // Se o erro for de duplicidade de spotifyId (unique: true)
         if (error.code === 11000) {
             return res.status(409).json({ message: 'Esta música do Spotify (ID) já existe.' });
         }
@@ -514,7 +439,7 @@ router.post('/spotify-tracks', authenticateToken, async (req, res) => {
 // Rota para obter todas as músicas Spotify (público)
 router.get('/spotify-tracks', async (req, res) => {
     try {
-        const tracks = await SpotifyTrack.find({}).sort({ createdAt: -1 }); // Ordena pelas mais recentes
+        const tracks = await SpotifyTrack.find({}).sort({ createdAt: -1 });
         res.json(tracks);
     } catch (error) {
         console.error('Erro ao buscar músicas Spotify:', error);
@@ -543,7 +468,7 @@ router.put('/spotify-tracks/:id', authenticateToken, async (req, res) => {
         const updatedTrack = await SpotifyTrack.findByIdAndUpdate(
             req.params.id,
             { title, artist, spotifyId, image_url },
-            { new: true, runValidators: true } // `runValidators` para garantir que o `spotifyId` único seja validado
+            { new: true, runValidators: true }
         );
         if (!updatedTrack) {
             return res.status(404).json({ message: 'Música Spotify não encontrada.' });
@@ -565,14 +490,16 @@ router.delete('/spotify-tracks/:id', authenticateToken, async (req, res) => {
         if (!deletedTrack) {
             return res.status(404).json({ message: 'Música Spotify não encontrada.' });
         }
-        res.status(204).send(); // No Content
+        res.status(204).send();
     } catch (error) {
         console.error('Erro ao excluir música Spotify:', error);
         res.status(500).json({ message: 'Erro ao excluir música Spotify.', error: error.message });
     }
 });
 
-// --- Rotas para Blog Posts ---
+// ---------------------------------------------------
+// 10. ROTAS PARA BLOG POSTS
+// ---------------------------------------------------
 
 // Rota para adicionar um novo post de blog (admin-only)
 router.post('/blog-posts', authenticateToken, async (req, res) => {
@@ -593,7 +520,7 @@ router.post('/blog-posts', authenticateToken, async (req, res) => {
 // Rota para obter todos os posts de blog APROVADOS (público)
 router.get('/blog-posts', async (req, res) => {
     try {
-        const approvedPosts = await BlogPost.find({ approved: true }).sort({ createdAt: -1 }); // Ordena pelos mais recentes
+        const approvedPosts = await BlogPost.find({ approved: true }).sort({ createdAt: -1 });
         res.json(approvedPosts);
     } catch (error) {
         console.error('Erro ao buscar posts de blog aprovados:', error);
@@ -604,7 +531,7 @@ router.get('/blog-posts', async (req, res) => {
 // Rota para obter TODOS os posts de blog (admin-only)
 router.get('/blog-posts/all', authenticateToken, async (req, res) => {
     try {
-        const allPosts = await BlogPost.find({}).sort({ createdAt: -1 }); // Ordena pelos mais recentes
+        const allPosts = await BlogPost.find({}).sort({ createdAt: -1 });
         res.json(allPosts);
     } catch (error) {
         console.error('Erro ao buscar todos os posts de blog (admin):', error);
@@ -647,20 +574,21 @@ router.delete('/blog-posts/:id', authenticateToken, async (req, res) => {
         if (!deletedPost) {
             return res.status(404).json({ message: 'Post de blog não encontrado.' });
         }
-        res.status(204).send(); // No Content
+        res.status(204).send();
     } catch (error) {
         console.error('Erro ao excluir post de blog:', error);
         res.status(500).json({ message: 'Erro ao excluir post de blog.', error: error.message });
     }
 });
 
-// --- Rotas para Packs e Acapellas (Downloadable Items) ---
+// ---------------------------------------------------
+// 11. ROTAS PARA DOWNLOADABLE ITEMS
+// ---------------------------------------------------
 
 // Rota para adicionar um novo item de download (admin-only)
 router.post('/downloadable-items', authenticateToken, async (req, res) => {
     try {
         const { title, description, type, download_url, image_url } = req.body;
-        // Validação básica dos campos obrigatórios
         if (!title || !description || !type || !download_url) {
             return res.status(400).json({ message: 'Título, descrição, tipo e URL de download são obrigatórios para o item.' });
         }
@@ -676,7 +604,7 @@ router.post('/downloadable-items', authenticateToken, async (req, res) => {
 // Rota para obter todos os itens de download (público)
 router.get('/downloadable-items', async (req, res) => {
     try {
-        const items = await DownloadableItem.find({}).sort({ createdAt: -1 }); // Ordena pelos mais recentes
+        const items = await DownloadableItem.find({}).sort({ createdAt: -1 });
         res.json(items);
     } catch (error) {
         console.error('Erro ao buscar itens de download:', error);
@@ -719,21 +647,22 @@ router.delete('/downloadable-items/:id', authenticateToken, async (req, res) => 
         if (!deletedItem) {
             return res.status(404).json({ message: 'Item de download não encontrado.' });
         }
-        res.status(204).send(); // No Content
+        res.status(204).send();
     } catch (error) {
         console.error('Erro ao excluir item de download:', error);
         res.status(500).json({ message: 'Erro ao excluir item de download.', error: error.message });
     }
 });
 
-// --- NOVAS ROTAS PARA CONFIGURAÇÃO DO VÍDEO DO ESTÚDIO ---
+// ---------------------------------------------------
+// 12. ROTAS PARA CONFIGURAÇÃO DO VÍDEO DO ESTÚDIO
+// ---------------------------------------------------
 
 // Rota para obter a configuração do vídeo do estúdio (público)
 router.get('/studio-config', async (req, res) => {
     try {
         let studioConfig = await StudioConfig.findOne();
         if (!studioConfig) {
-            // Se não houver configuração, cria uma com um ID padrão (Rick Astley)
             studioConfig = new StudioConfig({ youtubeVideoId: 'dQw4w9WgXcQ' });
             await studioConfig.save();
         }
@@ -751,8 +680,6 @@ router.put('/studio-config', authenticateToken, async (req, res) => {
         if (typeof youtubeVideoId === 'undefined') {
             return res.status(400).json({ message: 'O ID do vídeo do YouTube é obrigatório.' });
         }
-        // Encontra e atualiza o único documento de StudioConfig.
-        // `upsert: true` cria o documento se ele não existir.
         const studioConfig = await StudioConfig.findOneAndUpdate(
             {}, 
             { youtubeVideoId }, 
@@ -765,8 +692,11 @@ router.put('/studio-config', authenticateToken, async (req, res) => {
     }
 });
 
-// Prefixo para as rotas da Netlify Function
-// Todas as rotas serão acessíveis via /.netlify/functions/api/...
+// ---------------------------------------------------
+// 13. EXPORTAÇÃO DO HANDLER
+// ---------------------------------------------------
+
+// Anexa todas as rotas ao app com o prefixo correto para Netlify Functions
 app.use('/.netlify/functions/api', router);
 
 // Exporta o handler para o Netlify Functions
