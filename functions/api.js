@@ -1,3 +1,5 @@
+// functions/api.js - CORRIGIDO PARA AMBIENTES NETLIFY FUNCTIONS
+
 const express = require('express');
 const serverless = require('serverless-http');
 const mongoose = require('mongoose');
@@ -5,83 +7,68 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const dotenv = require('dotenv');
 
-dotenv.config();
+// ❌ REMOVIDO: dotenv.config() - O Netlify injeta as variáveis automaticamente.
 
 const app = express();
 const router = express.Router();
 
-// Middleware para parsear JSON
+// ---------------------------------------------------
+// 1. OTIMIZAÇÃO DA CONEXÃO MONGODB PARA SERVERLESS
+// ---------------------------------------------------
+
+let isConnected = false;
+
+const connectToDatabase = async () => {
+    // Retorna se a conexão já estiver estabelecida
+    if (isConnected && mongoose.connection.readyState === 1) {
+        return;
+    }
+    
+    // Assegura que o MONGODB_URI existe (injecado pelo Netlify)
+    if (!process.env.MONGODB_URI) {
+         console.error('MONGODB_URI não está definida nas variáveis de ambiente!');
+         return;
+    }
+
+    try {
+        await mongoose.connect(process.env.MONGODB_URI, {
+            // As opções useNewUrlParser e useUnifiedTopology foram removidas/comentadas,
+            // pois são obsoletas no Mongoose 6+ e causam warnings.
+            // useNewUrlParser: true,
+            // useUnifiedTopology: true,
+        });
+        isConnected = true;
+        console.log('MongoDB conectado com sucesso (Serverless).');
+    } catch (err) {
+        console.error('Erro de conexão com MongoDB (Serverless):', err);
+        isConnected = false;
+    }
+};
+
+// ---------------------------------------------------
+// 2. IMPORTAÇÃO DOS MODELOS (NENHUM SCHEMA DEFINIDO AQUI)
+// ---------------------------------------------------
+
+// Importa os modelos corrigidos e modularizados
+const User = require('../models/user'); 
+const Project = require('../models/project');
+const PortfolioItem = require('../models/portfolio');
+const SocialLinks = require('../models/sociallinks');
+const Testimonial = require('../models/testimonial'); // Novo arquivo criado acima
+
+// ---------------------------------------------------
+// 3. MIDDLEWARES
+// ---------------------------------------------------
+
 app.use(express.json());
 
-// Conexão com o MongoDB
-mongoose.connect(process.env.MONGODB_URI, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-})
-.then(() => console.log('MongoDB conectado com sucesso.'))
-.catch(err => console.error('Erro de conexão com MongoDB:', err));
-
-// --- Schemas Mongoose ---
-
-// Schema para Usuário (Admin)
-const UserSchema = new mongoose.Schema({
-    username: {
-        type: String,
-        required: true,
-        unique: true
-    },
-    password: {
-        type: String,
-        required: true
-    }
+// Middleware para garantir a conexão com o DB em cada requisição
+router.use(async (req, res, next) => {
+    await connectToDatabase();
+    next();
 });
 
-const User = mongoose.model('User', UserSchema);
-
-// Schema para Projetos
-const ProjectSchema = new mongoose.Schema({
-    title: { type: String, required: true },
-    description: { type: String, required: true },
-    image_url: { type: String },
-    spotify_link: { type: String, required: true },
-    youtube_link: { type: String, required: true },
-});
-
-const Project = mongoose.model('Project', ProjectSchema);
-
-// Schema para Portfólio
-const PortfolioItemSchema = new mongoose.Schema({
-    title: { type: String, required: true },
-    description: { type: String, required: true },
-    image_url: { type: String },
-    spotify_link: { type: String, required: true },
-    youtube_link: { type: String, required: true },
-});
-
-const PortfolioItem = mongoose.model('PortfolioItem', PortfolioItemSchema);
-
-// Schema para Links Sociais
-const SocialLinksSchema = new mongoose.Schema({
-    instagram: { type: String, default: '' },
-    facebook: { type: String, default: '' },
-    spotify: { type: String, default: '' },
-    youtube: { type: String, default: '' },
-});
-
-const SocialLinks = mongoose.model('SocialLinks', SocialLinksSchema);
-
-// NOVO SCHEMA PARA DEPOIMENTOS
-const TestimonialSchema = new mongoose.Schema({
-    name: { type: String, required: true },
-    rating: { type: Number, required: true, min: 1, max: 5 },
-    comment: { type: String, required: true },
-    approved: { type: Boolean, default: false }, // Depoimentos começam como não aprovados
-    createdAt: { type: Date, default: Date.now }
-});
-
-const Testimonial = mongoose.model('Testimonial', TestimonialSchema);
-
-// --- Middleware de Autenticação ---
+// Middleware de Autenticação (Mantido o seu código original)
 const authenticateToken = (req, res, next) => {
     const authHeader = req.headers['authorization'];
     const token = authHeader && authHeader.split(' ')[1];
@@ -92,8 +79,6 @@ const authenticateToken = (req, res, next) => {
 
     jwt.verify(token, process.env.JWT_SECRET, (err, user) => {
         if (err) {
-            console.error('Erro de verificação de token:', err); // Loga o erro para depuração
-            // Se o erro for de token expirado, envia uma mensagem específica
             if (err.name === 'TokenExpiredError') {
                 return res.status(403).json({ message: 'Sua sessão expirou. Por favor, faça login novamente.' });
             }
@@ -104,7 +89,9 @@ const authenticateToken = (req, res, next) => {
     });
 };
 
-// --- Rotas de Autenticação ---
+// ---------------------------------------------------
+// 4. ROTAS DE AUTENTICAÇÃO
+// ---------------------------------------------------
 
 // Rota de Login
 router.post('/login', async (req, res) => {
@@ -115,12 +102,13 @@ router.post('/login', async (req, res) => {
             return res.status(400).json({ message: 'Credenciais inválidas.' });
         }
 
-        const isMatch = await bcrypt.compare(password, user.password);
+        // Usando o método .comparePassword definido no models/user.js
+        const isMatch = await user.comparePassword(password);
+        
         if (!isMatch) {
             return res.status(400).json({ message: 'Credenciais inválidas.' });
         }
 
-        // AQUI: Tempo de expiração do token alterado para 8 horas
         const token = jwt.sign({ id: user._id, username: user.username }, process.env.JWT_SECRET, { expiresIn: '8h' });
         res.json({ message: 'Login bem-sucedido!', token });
     } catch (error) {
@@ -137,7 +125,8 @@ router.post('/change-password', authenticateToken, async (req, res) => {
             return res.status(404).json({ message: 'Usuário não encontrado.' });
         }
 
-        const isMatch = await bcrypt.compare(oldPassword, user.password);
+        // Usando o método .comparePassword definido no models/user.js
+        const isMatch = await user.comparePassword(oldPassword);
         if (!isMatch) {
             return res.status(400).json({ message: 'Senha antiga incorreta.' });
         }
@@ -146,7 +135,8 @@ router.post('/change-password', authenticateToken, async (req, res) => {
             return res.status(400).json({ message: 'A nova senha deve ter no mínimo 6 caracteres.' });
         }
 
-        user.password = await bcrypt.hash(newPassword, 10);
+        // O hook 'pre-save' no models/user.js fará o hash
+        user.password = newPassword; 
         await user.save();
         res.json({ message: 'Senha alterada com sucesso!' });
     } catch (error) {
@@ -155,7 +145,6 @@ router.post('/change-password', authenticateToken, async (req, res) => {
 });
 
 // Rota para criar o primeiro usuário admin (apenas para inicialização)
-// Esta rota deve ser removida ou protegida após a criação do primeiro admin
 router.post('/create-first-admin', async (req, res) => {
     const { username, password } = req.body;
     if (!username || !password) {
@@ -166,8 +155,8 @@ router.post('/create-first-admin', async (req, res) => {
         if (existingUser) {
             return res.status(409).json({ message: 'Usuário já existe.' });
         }
-        const hashedPassword = await bcrypt.hash(password, 10);
-        const newUser = new User({ username, password: hashedPassword });
+        // O hook 'pre-save' no models/user.js fará o hash automaticamente
+        const newUser = new User({ username, password });
         await newUser.save();
         res.status(201).json({ message: 'Primeiro usuário admin criado com sucesso.' });
     } catch (error) {
@@ -176,8 +165,7 @@ router.post('/create-first-admin', async (req, res) => {
 });
 
 
-// --- Rotas CRUD para Projetos (protegidas por autenticação) ---
-
+// --- Rotas CRUD para Projetos ---
 // Obter todos os projetos
 router.get('/projects', async (req, res) => {
     try {
@@ -225,8 +213,7 @@ router.delete('/projects/:id', authenticateToken, async (req, res) => {
     }
 });
 
-// --- Rotas CRUD para Portfólio (protegidas por autenticação) ---
-
+// --- Rotas CRUD para Portfólio ---
 // Obter todos os itens de portfólio
 router.get('/portfolio', async (req, res) => {
     try {
@@ -274,18 +261,12 @@ router.delete('/portfolio/:id', authenticateToken, async (req, res) => {
     }
 });
 
-// --- Rotas para Links Sociais (protegidas por autenticação) ---
-
+// --- Rotas para Links Sociais ---
 // Obter links sociais
 router.get('/social-links', async (req, res) => {
     try {
-        const socialLinks = await SocialLinks.findOne();
-        if (!socialLinks) {
-            // Se não houver links, cria um padrão
-            const newSocialLinks = new SocialLinks();
-            await newSocialLinks.save();
-            return res.json(newSocialLinks);
-        }
+        // Encontra ou cria o único documento
+        const socialLinks = await SocialLinks.findOneAndUpdate({}, {}, { new: true, upsert: true });
         res.json(socialLinks);
     } catch (error) {
         res.status(500).json({ message: 'Erro ao buscar links sociais.', error: error.message });
@@ -295,22 +276,15 @@ router.get('/social-links', async (req, res) => {
 // Atualizar links sociais
 router.put('/social-links', authenticateToken, async (req, res) => {
     try {
-        let socialLinks = await SocialLinks.findOne();
-        if (!socialLinks) {
-            socialLinks = new SocialLinks();
-        }
-        socialLinks.instagram = req.body.instagram || '';
-        socialLinks.facebook = req.body.facebook || '';
-        socialLinks.spotify = req.body.spotify || '';
-        socialLinks.youtube = req.body.youtube || '';
-        await socialLinks.save();
+        // Encontra ou cria o único documento e o atualiza
+        const socialLinks = await SocialLinks.findOneAndUpdate({}, req.body, { new: true, upsert: true });
         res.json({ message: 'Links sociais atualizados com sucesso!', socialLinks });
     } catch (error) {
         res.status(400).json({ message: 'Erro ao atualizar links sociais.', error: error.message });
     }
 });
 
-// --- NOVAS ROTAS PARA DEPOIMENTOS ---
+// --- ROTAS PARA DEPOIMENTOS ---
 
 // Rota para submeter um novo depoimento (público)
 router.post('/testimonials', async (req, res) => {
@@ -319,7 +293,7 @@ router.post('/testimonials', async (req, res) => {
         if (!name || !rating || !comment) {
             return res.status(400).json({ message: 'Nome, avaliação e depoimento são obrigatórios.' });
         }
-        const newTestimonial = new Testimonial({ name, rating, comment, approved: false }); // Começa como não aprovado
+        const newTestimonial = new Testimonial({ name, rating, comment, approved: false }); // Usa o modelo Testimonial importado
         await newTestimonial.save();
         res.status(201).json({ message: 'Depoimento enviado com sucesso para revisão!', testimonial: newTestimonial });
     } catch (error) {
@@ -330,7 +304,7 @@ router.post('/testimonials', async (req, res) => {
 // Rota para obter depoimentos APROVADOS (público)
 router.get('/testimonials', async (req, res) => {
     try {
-        const approvedTestimonials = await Testimonial.find({ approved: true }).sort({ createdAt: -1 }); // Ordena pelos mais recentes
+        const approvedTestimonials = await Testimonial.find({ approved: true }).sort({ createdAt: -1 });
         res.json(approvedTestimonials);
     } catch (error) {
         res.status(500).json({ message: 'Erro ao buscar depoimentos aprovados.', error: error.message });
@@ -340,7 +314,7 @@ router.get('/testimonials', async (req, res) => {
 // Rota para obter TODOS os depoimentos (admin-only)
 router.get('/testimonials/all', authenticateToken, async (req, res) => {
     try {
-        const allTestimonials = await Testimonial.find({}).sort({ createdAt: -1 }); // Ordena pelos mais recentes
+        const allTestimonials = await Testimonial.find({}).sort({ createdAt: -1 });
         res.json(allTestimonials);
     } catch (error) {
         res.status(500).json({ message: 'Erro ao buscar todos os depoimentos.', error: error.message });
@@ -377,7 +351,7 @@ router.delete('/testimonials/:id', authenticateToken, async (req, res) => {
     }
 });
 
-
-app.use('/.netlify/functions/api', router); // Prefixo para as rotas da Netlify Function
+// Prefixo para as rotas da Netlify Function
+app.use('/.netlify/functions/api', router);
 
 module.exports.handler = serverless(app);

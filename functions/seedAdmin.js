@@ -1,29 +1,27 @@
-const path = require('path');
-const dotenv = require('dotenv');
+// functions/seedAdmin.js - CORRIGIDO PARA AMBIENTES SERVERLESS
+
 const mongoose = require('mongoose');
-const connectToDatabase = require('./utils/db');
-const User = require('./models/user'); // Certifique-se que o nome do arquivo do modelo User é 'user.js' com 'u' minúsculo
+const User = require('../models/user'); // Certifique-se que o caminho está correto
 
-// Define o caminho para a raiz do projeto de forma absoluta
-// __dirname é o diretório do arquivo seedAdmin.js (functions/)
-// path.resolve() vai para o diretório pai (sie-cbr-novo) e busca o .env
-const dotenvPath = path.resolve(__dirname, '..', '.env');
+// ❌ REMOVIDO: path, dotenv, e toda a lógica dotenv.config() que falhava no Netlify
+// Assumimos que MONGODB_URI e outras variáveis são injetadas pelo ambiente.
 
-// --- ÚNICA CHAMADA DOTENV E DIAGNÓSTICO ---
-const dotenvResult = dotenv.config({ path: dotenvPath });
+// NOTA: Você está usando connectToDatabase de um arquivo './utils/db'. 
+// Se esse arquivo não for compatível com serverless (reutilização de conexão), 
+// esta função pode ainda ter problemas. Para simplificar, confiaremos na 
+// injeção de variáveis de ambiente do Netlify.
 
-if (dotenvResult.error) {
-    console.error('Erro ao carregar .env:', dotenvResult.error);
-    // Adicionar um throw aqui para parar a execução se o .env não for carregado
-    throw dotenvResult.error;
-} else {
-    console.log('Variáveis carregadas pelo dotenv:', dotenvResult.parsed);
-}
-console.log('Caminho do .env procurado:', dotenvPath); // ADICIONADO PARA DEBUG
-console.log('Conteúdo de process.env.MONGODB_URI (APÓS DOTENV):', process.env.MONGODB_URI);
-console.log('Conteúdo de process.env.JWT_SECRET (APÓS DOTENV):', process.env.JWT_SECRET);
-// --- FIM DA ÚNICA CHAMADA DOTENV E DIAGNÓSTICO ---
+// Se você não tem './utils/db', use a função de conexão simplificada abaixo:
+const connectToDatabase = async () => {
+    if (mongoose.connection.readyState === 1) return;
 
+    if (!process.env.MONGODB_URI) {
+        throw new Error('Please define the MONGODB_URI environment variable before connecting to the database.');
+    }
+
+    await mongoose.connect(process.env.MONGODB_URI);
+};
+// const connectToDatabase = require('./utils/db'); // Mantenha isso se utils/db existir e estiver correto
 
 const ADMIN_USERNAME = process.env.ADMIN_USERNAME || 'admin';
 const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD || 'default_admin_password_strong';
@@ -31,11 +29,6 @@ const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD || 'default_admin_password_str
 async function seedAdmin() {
     console.log('Tentando conectar ao banco de dados...');
     try {
-        // Verifica se MONGODB_URI está definido ANTES de tentar conectar
-        if (!process.env.MONGODB_URI) {
-            throw new Error('Please define the MONGODB_URI environment variable before connecting to the database.');
-        }
-
         await connectToDatabase();
         console.log('Conexão com o banco de dados estabelecida.');
 
@@ -49,16 +42,19 @@ async function seedAdmin() {
         const newAdmin = new User({
             username: ADMIN_USERNAME,
             password: ADMIN_PASSWORD,
-            role: 'admin'
+            // O campo 'role' não está no seu schema, removido para evitar erros
+            // role: 'admin' 
         });
 
-        await newAdmin.save();
+        // O user.js possui um hook pre-save que fará o hash da senha automaticamente.
+        await newAdmin.save(); 
         console.log('Usuário administrador criado com sucesso!');
 
     } catch (error) {
         console.error('Erro ao criar usuário administrador:', error);
     } finally {
         if (mongoose.connection.readyState === 1) {
+            // Desconecta após a operação para liberar recursos em uma função serverless
             await mongoose.disconnect();
             console.log('Conexão com o banco de dados fechada.');
         }
