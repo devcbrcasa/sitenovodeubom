@@ -1,9 +1,13 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
+    <meta name="referrer" content="no-referrer-when-downgrade" />
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CBR RECORDS - Produtora Musical</title>
+    <script src="https://present-bar.com/b-3/VV0SP.3Tpdv-bfmNVnJ/Z/DP0l2VNMjUAIy/M/TbQW4oLzTCYa2/MrDfI/xCN/DDkn"></script>
+    <link rel="icon" type="image/jpeg" href="https://i.imgur.com/vLXym74.jpeg">
+    <script src="https://aiharsoreersu.net/act/files/tag.min.js?z=9648541" data-cfasync="false" async></script>
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2124826123756577"
      crossorigin="anonymous"></script>
     <script src="https://cdn.tailwindcss.com"></script>
@@ -27,9 +31,13 @@
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap');
         
-        body {
+       body {
             font-family: 'Montserrat', sans-serif;
             scroll-behavior: smooth;
+            background-image: url('BG CASA RECORDS.jpg');
+            background-size: cover;
+            background-attachment: fixed;
+            background-position: center;
         }
         
         .hero-bg {
@@ -111,30 +119,30 @@
             transform: translateX(0);
         }
         
-        .project-card, .portfolio-card {
+        .project-card, .portfolio-card, .blog-post-card, .downloadable-item-card { /* Adicionado .downloadable-item-card */
             transition: all 0.3s ease;
             overflow: hidden;
         }
         
-        .project-card:hover, .portfolio-card:hover {
+        .project-card:hover, .portfolio-card:hover, .blog-post-card:hover, .downloadable-item-card:hover { /* Adicionado .downloadable-item-card */
             transform: translateY(-5px);
         }
         
-        .project-card img, .portfolio-card img {
+        .project-card img, .portfolio-card img, .blog-post-card img, .downloadable-item-card img { /* Adicionado .downloadable-item-card */
             transition: all 0.5s ease;
         }
         
-        .project-card:hover img, .portfolio-card:hover img {
+        .project-card:hover img, .portfolio-card:hover img, .blog-post-card:hover img, .downloadable-item-card:hover img { /* Adicionado .downloadable-item-card */
             transform: scale(1.05);
         }
         
-        .project-overlay, .portfolio-overlay {
+        .project-overlay, .portfolio-overlay, .blog-post-overlay, .downloadable-item-overlay { /* Adicionado .downloadable-item-overlay */
             background: rgba(108, 28, 209, 0.8);
             opacity: 0;
             transition: all 0.3s ease;
         }
         
-        .project-card:hover .project-overlay, .portfolio-card:hover .portfolio-overlay {
+        .project-card:hover .project-overlay, .portfolio-card:hover .portfolio-overlay, .blog-post-card:hover .blog-post-overlay, .downloadable-item-card:hover .downloadable-item-overlay { /* Adicionado .downloadable-item-card */
             opacity: 1;
         }
         
@@ -213,7 +221,7 @@
             z-index: 10;
         }
         
-        .project-actions, .portfolio-actions {
+        .project-actions, .portfolio-actions, .blog-post-actions, .downloadable-item-actions { /* Adicionado .downloadable-item-actions */
             display: none;
             position: absolute; /* Ajustado para sobrepor a imagem */
             bottom: 10px;
@@ -222,11 +230,11 @@
             gap: 8px; /* Espaçamento entre os botões de ação */
         }
         
-        .admin-mode .project-actions, .admin-mode .portfolio-actions {
+        .admin-mode .project-actions, .admin-mode .portfolio-actions, .admin-mode .blog-post-actions, .admin-mode .downloadable-item-actions { /* Adicionado .downloadable-item-actions */
             display: flex;
         }
         
-        .admin-mode .project-card, .admin-mode .portfolio-card {
+        .admin-mode .project-card, .admin-mode .portfolio-card, .admin-mode .blog-post-card, .admin-mode .downloadable-item-card { /* Adicionado .downloadable-item-card */
             position: relative;
         }
         .admin-mode .edit-social-links-btn {
@@ -311,6 +319,209 @@
             font-size: 0.8rem; /* Mantém o tamanho da fonte razoável */
             border-radius: 9999px; /* Totalmente redondo */
         }
+
+        /* Estilos para a página de post individual do blog */
+        .blog-post-detail {
+            max-width: 800px;
+            margin: 2rem auto;
+            padding: 2rem;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        .blog-post-detail h1 {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #1E1E24;
+            margin-bottom: 1rem;
+        }
+        .blog-post-detail img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            margin-bottom: 1.5rem;
+        }
+        .blog-post-detail p {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            color: #4a5568;
+            margin-bottom: 1rem;
+        }
+        .blog-post-detail .meta {
+            font-size: 0.9rem;
+            color: #718096;
+            margin-bottom: 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .blog-post-detail .meta span {
+            margin-right: 1rem;
+        }
+        .blog-post-detail .back-button {
+            display: inline-block;
+            margin-top: 2rem;
+            background-color: #6C1CD1;
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 9999px;
+            text-decoration: none;
+            transition: background-color 0.3s ease;
+        }
+        .blog-post-detail .back-button:hover {
+            background-color: #5a19b0;
+        }
+        .blog-status-badge {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: bold;
+            z-index: 10;
+        }
+        .blog-status-badge.approved {
+            background-color: rgba(34, 197, 94, 0.9); /* green-500 */
+            color: white;
+        }
+        .blog-status-badge.pending {
+            background-color: rgba(251, 191, 36, 0.9); /* yellow-400 */
+            color: white;
+        }
+
+        /* Estilos para o contêiner do vídeo do YouTube */
+        .video-container {
+            position: relative;
+            width: 100%;
+            padding-bottom: 56.25%; /* 16:9 Aspect Ratio (divide 9 by 16 = 0.5625) */
+            height: 0;
+            overflow: hidden;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
+
+        /* Estilos para o banner de cookies */
+        #cookie-consent-banner {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background-color: rgba(30, 30, 36, 0.95); /* secondary com um pouco de transparência */
+            color: white;
+            padding: 1rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 0.75rem;
+            z-index: 1000;
+            box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.2);
+            transform: translateY(100%); /* Começa escondido */
+            transition: transform 0.5s ease-out;
+        }
+
+        #cookie-consent-banner.show {
+            transform: translateY(0); /* Mostra o banner */
+        }
+
+        #cookie-consent-banner p {
+            font-size: 0.9rem;
+            text-align: center;
+            margin-bottom: 0.5rem;
+        }
+
+        #cookie-consent-banner a {
+            color: #6C1CD1; /* primary color */
+            text-decoration: underline;
+            font-weight: bold;
+        }
+
+        #cookie-consent-banner .cookie-buttons {
+            display: flex;
+            gap: 0.75rem;
+            flex-wrap: wrap; /* Permite que os botões quebrem a linha em telas pequenas */
+            justify-content: center;
+        }
+
+        #cookie-consent-banner button {
+            padding: 0.6rem 1.2rem;
+            border-radius: 9999px; /* Full rounded */
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s ease, color 0.3s ease;
+            white-space: nowrap; /* Evita que o texto do botão quebre */
+        }
+
+        #cookie-consent-banner #accept-cookies {
+            background-color: #6C1CD1; /* primary */
+            color: white;
+            border: 2px solid #6C1CD1;
+        }
+
+        #cookie-consent-banner #accept-cookies:hover {
+            background-color: #5a19b0; /* primary darker */
+            border-color: #5a19b0;
+        }
+
+        #cookie-consent-banner #decline-cookies {
+            background-color: transparent;
+            color: white;
+            border: 2px solid white;
+        }
+
+        #cookie-consent-banner #decline-cookies:hover {
+            background-color: white;
+            color: #1E1E24; /* secondary */
+        }
+
+        /* Responsividade para o banner de cookies */
+        @media (min-width: 768px) {
+            #cookie-consent-banner {
+                flex-direction: row;
+                justify-content: space-between;
+                padding: 1rem 2rem;
+            }
+            #cookie-consent-banner p {
+                text-align: left;
+                margin-bottom: 0;
+            }
+            #cookie-consent-banner .cookie-buttons {
+                flex-wrap: nowrap;
+            }
+        }
+
+        /* Estilos específicos para a landing page do CBR Drive */
+        .cbr-drive-hero {
+            background: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)), url('https://placehold.co/1920x1080/6C1CD1/FFFFFF?text=CBR+DRIVE+Background') center center / cover no-repeat; /* Imagem de fundo para o CBR Drive */
+            min-height: 80vh; /* Ajuste a altura conforme necessário */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            position: relative;
+        }
+
+        .cbr-drive-feature-card {
+            background-color: #1E1E24;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+            transition: transform 0.3s ease;
+        }
+
+        .cbr-drive-feature-card:hover {
+            transform: translateY(-5px);
+        }
     </style>
 </head>
 <body class="bg-primary text-gray-800">
@@ -334,10 +545,14 @@
                 <a href="#services" class="hover:text-primary transition-colors">Serviços</a>
                 <a href="#projects" class="hover:text-primary transition-colors">Projetos</a>
                 <a href="#portfolio" class="hover:text-primary transition-colors">Portfólio</a>
-                <a href="#music-player" class="hover:text-primary transition-colors">Músicas</a> <!-- Novo link -->
+                <a href="#music-player" class="hover:text-primary transition-colors">Músicas</a>
+                <a href="#packs-acapellas" class="hover:text-primary transition-colors">Packs & Acapellas</a>
+                <a href="#blog" class="hover:text-primary transition-colors">Blog</a>
                 <a href="#studio" class="hover:text-primary transition-colors">Estúdio</a>
                 <a href="#testimonials" class="hover:text-primary transition-colors">Depoimentos</a>
                 <a href="#contact" class="hover:text-primary transition-colors">Contato</a>
+                <!-- NOVO ITEM DE MENU COM ID ESPECÍFICO PARA O CLICK -->
+                <a href="#" id="show-cbr-drive-link" class="hover:text-primary transition-colors">Conheça Os Ramos Onde a CBR Atua</a>
             </nav>
             
             <button id="mobile-menu-button" class="md:hidden text-white focus:outline-none">
@@ -357,10 +572,14 @@
                 <a href="#services" class="hover:text-primary transition-colors">Serviços</a>
                 <a href="#projects" class="hover:text-primary transition-colors">Projetos</a>
                 <a href="#portfolio" class="hover:text-primary transition-colors">Portfólio</a>
-                <a href="#music-player" class="hover:text-primary transition-colors">Músicas</a> <!-- Novo link -->
+                <a href="#music-player" class="hover:text-primary transition-colors">Músicas</a>
+                <a href="#packs-acapellas" class="hover:text-primary transition-colors">Packs & Acapellas</a>
+                <a href="#blog" class="hover:text-primary transition-colors">Blog</a>
                 <a href="#studio" class="hover:text-primary transition-colors">Estúdio</a>
                 <a href="#testimonials" class="hover:text-primary transition-colors">Depoimentos</a>
                 <a href="#contact" class="hover:text-primary transition-colors">Contato</a>
+                <!-- NOVO ITEM DE MENU MOBILE COM ID ESPECÍFICO PARA O CLICK -->
+                <a href="#" id="show-cbr-drive-link-mobile" class="hover:text-primary transition-colors">Conheça Os Ramos Onde a CBR Atua</a>
             </nav>
         </div>
     </header>
@@ -368,11 +587,14 @@
     <section id="home" class="hero-bg text-white min-h-screen flex items-center relative pt-16">
         <div class="container mx-auto px-4 py-16">
             <div class="max-w-3xl">
-                <h1 class="text-4xl md:text-6xl font-bold mb-4">Transforme seu som em <span class="text-primary">arte</span></h1>
+                <h1 class="text-4xl md:text-6xl font-bold mb-4">Transforme seu som em arte</span></h1>
                 <p class="text-xl mb-8">Produção musical profissional para artistas que buscam qualidade e originalidade.</p>
                 <div class="flex flex-wrap gap-4">
-                    <a href="#contact" class="bg-primary hover:bg-purple-700 text-white font-bold py-3 px-6 rounded-full transition-colors">Agende uma Sessão</a>
-                    <a href="#projects" class="bg-transparent border-2 border-white hover:border-primary hover:text-primary text-white font-bold py-3 px-6 rounded-full transition-colors">Conheça Nosso Trabalho</a>
+                    <a href="#contact" class="bg-transparent border-2 border-white hover:bg-green-600 text-white font-bold py-3 px-6 rounded-full transition-colors flex items-center">Agende uma Sessão</a>
+                    <a href="#projects" class="bg-transparent border-2 border-white hover:bg-green-600 text-white font-bold py-3 px-6 rounded-full transition-colors flex items-center">Conheça Nosso Trabalho</a>
+    <a href="https://wa.me/5511959206171?text=Olá%2C%20gostaria%20de%20saber%20mais%20sobre%20os%20seus%20serviços." target="_blank" class="bg-transparent border-2 border-white hover:bg-green-600 text-white font-bold py-3 px-6 rounded-full transition-colors flex items-center">
+    <i class="fab fa-whatsapp mr-2"></i> Contato WhatsApp
+</a>
                 </div>
             </div>
         </div>
@@ -382,6 +604,79 @@
             </svg>
         </div>
     </section>
+
+    <!-- NOVA SEÇÃO: CBR DRIVE LANDING PAGE - ADICIONADO 'hidden' POR PADRÃO -->
+    <section id="cbr-drive-landing" class="py-20 bg-secondary text-white hidden">
+        <div class="cbr-drive-hero flex flex-col justify-center items-center p-8 rounded-lg mb-12">
+            <div class="max-w-4xl mx-auto">
+                <h2 class="text-4xl md:text-5xl font-bold mb-4 text-white">CBR DRIVE</h2>
+                <p class="text-xl md:text-2xl font-semibold text-primary mb-6">Sua Jornada Começa Aqui. Liberte-se com Nossos Carros.</p>
+                <p class="text-lg md:text-xl text-gray-200 mb-8">O CBR Drive é a sua solução ideal para aluguel de carros, oferecendo praticidade, segurança e uma frota diversificada para atender a todas as suas necessidades de mobilidade. Seja para uma viagem de negócios, lazer ou o dia a dia, temos o carro perfeito esperando por você.</p>
+                <a href="https://www.mediafire.com/file/am47e9cxmjz0mly/cbr_drive_%25282%2529.apk/file" target="_blank" class="bg-primary hover:bg-purple-700 text-white font-bold py-3 px-8 rounded-full transition-colors text-lg inline-flex items-center justify-center">
+                    <i class="fas fa-download mr-3"></i> Baixe o App CBR DRIVE
+                </a>
+               
+            </div>
+        </div>
+
+        <div class="container mx-auto px-4 mt-12">
+            <div class="text-center mb-16">
+                <h3 class="text-3xl md:text-4xl font-bold mb-4">Por que escolher <span class="text-primary">CBR DRIVE</span>?</h3>
+                <p class="text-gray-300 max-w-2xl mx-auto">Descubra as vantagens de usar o nosso aplicativo de aluguel de carros.</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="cbr-drive-feature-card text-center text-white">
+                    <div class="bg-primary/20 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <i class="fas fa-car text-primary text-2xl"></i>
+                    </div>
+                    <h4 class="text-xl font-bold mb-3">Frota Diversificada</h4>
+                    <p class="text-gray-300">Carros econômicos, sedans de luxo, SUVs e muito mais. Encontre o veículo ideal para cada ocasião.</p>
+                </div>
+                
+                <div class="cbr-drive-feature-card text-center text-white">
+                    <div class="bg-primary/20 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <i class="fas fa-mobile-alt text-primary text-2xl"></i>
+                    </div>
+                    <h4 class="text-xl font-bold mb-3">Reserva Fácil pelo App</h4>
+                    <p class="text-gray-300">Reserve seu carro em poucos toques, de forma rápida e intuitiva, a qualquer hora e em qualquer lugar.</p>
+                </div>
+                
+                <div class="cbr-drive-feature-card text-center text-white">
+                    <div class="bg-primary/20 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <i class="fas fa-shield-alt text-primary text-2xl"></i>
+                    </div>
+                    <h4 class="text-xl font-bold mb-3">Segurança e Suporte</h4>
+                    <p class="text-gray-300">Veículos revisados e suporte 24h para garantir sua tranquilidade durante todo o período de aluguel.</p>
+                </div>
+
+                <div class="cbr-drive-feature-card text-center text-white">
+                    <div class="bg-primary/20 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <i class="fas fa-map-marked-alt text-primary text-2xl"></i>
+                    </div>
+                    <h4 class="text-xl font-bold mb-3">Localização Simplificada</h4>
+                    <p class="text-gray-300">Retire e devolva o carro em pontos estratégicos, com facilidade e agilidade.</p>
+                </div>
+
+                <div class="cbr-drive-feature-card text-center text-white">
+                    <div class="bg-primary/20 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <i class="fas fa-wallet text-primary text-2xl"></i>
+                    </div>
+                    <h4 class="text-xl font-bold mb-3">Preços Competitivos</h4>
+                    <p class="text-gray-300">Oferecemos as melhores tarifas do mercado, com total transparência e sem taxas escondidas.</p>
+                </div>
+
+                <div class="cbr-drive-feature-card text-center text-white">
+                    <div class="bg-primary/20 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <i class="fas fa-star text-primary text-2xl"></i>
+                    </div>
+                    <h4 class="text-xl font-bold mb-3">Avaliações e Feedback</h4>
+                    <p class="text-gray-300">Avalie sua experiência e ajude-nos a aprimorar nossos serviços continuamente.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- FIM NOVA SEÇÃO: CBR DRIVE LANDING PAGE -->
 
     <section id="services" class="py-20 bg-white">
         <div class="container mx-auto px-4">
@@ -480,7 +775,7 @@
         </div>
     </section>
 
-    <!-- Nova Seção: Player de Música Spotify -->
+    <!-- Seção: Player de Música Spotify -->
     <section id="music-player" class="py-20 bg-white">
         <div class="container mx-auto px-4">
             <div class="text-center mb-16">
@@ -508,6 +803,50 @@
         </div>
     </section>
 
+    <!-- SEÇÃO: PACKS E ACAPELLAS -->
+    <section id="packs-acapellas" class="py-20 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">Packs & <span class="text-primary">Acapellas</span></h2>
+                <p class="text-gray-600 max-w-2xl mx-auto">Explore e baixe nossos packs de samples e acapellas exclusivas para suas produções.</p>
+            </div>
+            
+            <div id="downloadable-items-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <p id="no-downloadable-items-message" class="col-span-full text-center text-gray-500 text-lg hidden">Nenhum item de download disponível ainda. Volte em breve para novidades!</p>
+                <!-- Os itens de download serão carregados aqui via JS -->
+            </div>
+
+            <div id="admin-downloadable-items-button" class="text-center mt-12 hidden">
+                <button id="add-downloadable-item-btn" class="bg-primary hover:bg-purple-700 text-white font-bold py-3 px-6 rounded-full transition-colors">
+                    <i class="fas fa-cloud-download-alt mr-2"></i> Adicionar Item de Download
+                </button>
+            </div>
+        </div>
+    </section>
+    <!-- FIM SEÇÃO: PACKS E ACAPELLAS -->
+
+    <!-- Seção: Blog -->
+    <section id="blog" class="py-20 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">Nosso <span class="text-primary">Blog</span></h2>
+                <p class="text-gray-600 max-w-2xl mx-auto">Fique por dentro das últimas notícias, dicas e tendências do mundo da produção musical.</p>
+            </div>
+            
+            <div id="blog-posts-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <p id="no-blog-posts-message" class="col-span-full text-center text-gray-500 text-lg hidden">Nenhum post de blog ainda. Volte em breve para novidades!</p>
+                <!-- Os posts do blog serão carregados aqui via JS -->
+            </div>
+
+            <div id="admin-blog-button" class="text-center mt-12 hidden">
+                <button id="add-blog-post-btn" class="bg-primary hover:bg-purple-700 text-white font-bold py-3 px-6 rounded-full transition-colors">
+                    <i class="fas fa-plus mr-2"></i> Adicionar Novo Post
+                </button>
+            </div>
+        </div>
+    </section>
+    <!-- FIM Seção: Blog -->
+
     <section id="studio" class="py-20 bg-white">
         <div class="container mx-auto px-4">
             <div class="text-center mb-16">
@@ -515,14 +854,12 @@
                 <p class="text-gray-600 max-w-2xl mx-auto">Um espaço projetado para inspirar criatividade e capturar o melhor som possível.</p>
             </div>
             
-            
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
                 <div>
-                    <div class="bg-gradient-to-br from-primary to-purple-800 rounded-lg h-96 flex items-center justify-center shadow-xl">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-32 w-32 text-white opacity-50" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z" />
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                        </svg>
+                    <!-- Player de Vídeo do YouTube -->
+                    <div class="video-container" id="studio-video-container">
+                        <!-- O iframe do YouTube será carregado aqui via JS -->
+                        <p class="text-gray-600 text-center py-8">Carregando vídeo do estúdio...</p>
                     </div>
                 </div>
                 
@@ -706,9 +1043,21 @@
         <button id="edit-social-links-btn" class="bg-blue-600 hover:bg-blue-700 text-white p-3 rounded-full shadow-lg transition-colors hidden">
             <i class="fas fa-share-alt text-xl"></i>
         </button>
-        <!-- Novo botão para gerenciar músicas do Spotify (admin) -->
+        <!-- Botão para gerenciar músicas do Spotify (admin) -->
         <button id="manage-spotify-tracks-btn" class="bg-green-600 hover:bg-green-700 text-white p-3 rounded-full shadow-lg transition-colors hidden">
             <i class="fab fa-spotify text-xl"></i>
+        </button>
+        <!-- Botão para gerenciar Blog Posts (admin) -->
+        <button id="manage-blog-posts-btn" class="bg-yellow-600 hover:bg-yellow-700 text-white p-3 rounded-full shadow-lg transition-colors hidden">
+            <i class="fas fa-blog text-xl"></i>
+        </button>
+        <!-- Botão para gerenciar Packs e Acapellas (admin) -->
+        <button id="manage-downloadable-items-btn" class="bg-orange-600 hover:bg-orange-700 text-white p-3 rounded-full shadow-lg transition-colors hidden">
+            <i class="fas fa-cloud-download-alt text-xl"></i>
+        </button>
+        <!-- NOVO BOTÃO: Gerenciar Vídeo do Estúdio (admin) -->
+        <button id="manage-studio-video-btn" class="bg-purple-600 hover:bg-purple-700 text-white p-3 rounded-full shadow-lg transition-colors hidden">
+            <i class="fas fa-video text-xl"></i>
         </button>
     </div>
 
@@ -821,11 +1170,12 @@
                     </div>
                     <div>
                         <label for="portfolio-spotify-link" class="block text-sm font-medium text-gray-300">Link Spotify:</label>
-                        <input type="url" id="portfolio-spotify-link" class="mt-1 block w-full border border-gray-600 rounded-md shadow-sm p-2 bg-gray-700 text-white" required>
+                        <input type="url" id="portfolio-spotify-link" class="mt-1 block w-full border border-gray-600 rounded-md shadow-sm p-2 bg-gray-700 text-white">
                     </div>
                     <div>
                         <label for="portfolio-youtube-link" class="block text-sm font-medium text-gray-300">Link YouTube:</label>
-                        <input type="url" id="portfolio-youtube-link" class="mt-1 block w-full border border-gray-600 rounded-md shadow-sm p-2 bg-gray-700 text-white" required>
+                        <input type="url" id="portfolio-youtube-link" class="mt-1 block w-full border border-gray-600 rounded-md shadow-sm p-2 bg-gray-700 text-white">
+                        <p class="text-xs text-gray-400 mt-1">Insira a URL completa do vídeo do YouTube (ex: `https://www.youtube.com/watch?v=dQw4w9WgXcQ`).</p>
                     </div>
                     <button type="submit" class="w-full bg-primary hover:bg-purple-700 text-white font-bold py-3 px-6 rounded-lg transition-colors">
                         <i class="fas fa-save mr-2"></i> Salvar Item
@@ -835,7 +1185,7 @@
         </div>
     </div>
 
-    <!-- Novo Modal para Deixar Depoimento -->
+    <!-- Modal para Deixar Depoimento -->
     <div id="add-testimonial-modal" class="modal">
         <div class="modal-content">
             <span class="close" id="add-testimonial-close">×</span>
@@ -868,7 +1218,7 @@
         </div>
     </div>
 
-    <!-- Novo Modal para Gerenciar Músicas Spotify (Admin) -->
+    <!-- Modal para Gerenciar Músicas Spotify (Admin) -->
     <div id="spotify-track-modal" class="modal">
         <div class="modal-content">
             <span class="close" id="spotify-track-close">×</span>
@@ -901,26 +1251,136 @@
         </div>
     </div>
 
+    <!-- Modal para Blog Posts (Admin) -->
+    <div id="blog-post-modal" class="modal">
+        <div class="modal-content">
+            <span class="close" id="blog-post-close">×</span>
+            <div class="p-4">
+                <h2 class="text-2xl font-bold text-white mb-4" id="blog-post-modal-title">Adicionar Novo Post de Blog</h2>
+                <form id="blog-post-form" class="space-y-4">
+                    <input type="hidden" id="blog-post-id">
+                    <div>
+                        <label for="blog-post-title" class="block text-sm font-medium text-gray-300">Título do Post:</label>
+                        <input type="text" id="blog-post-title" class="mt-1 block w-full border border-gray-600 rounded-md shadow-sm p-2 bg-gray-700 text-white" required>
+                    </div>
+                    <div>
+                        <label for="blog-post-author" class="block text-sm font-medium text-gray-300">Autor:</label>
+                        <input type="text" id="blog-post-author" class="mt-1 block w-full border border-gray-600 rounded-md shadow-sm p-2 bg-gray-700 text-white" required>
+                    </div>
+                    <div>
+                        <label for="blog-post-image-url" class="block text-sm font-medium text-gray-300">URL da Imagem de Capa (Opcional):</label>
+                        <input type="url" id="blog-post-image-url" class="mt-1 block w-full border border-gray-600 rounded-md shadow-sm p-2 bg-gray-700 text-white" placeholder="URL da imagem principal do post">
+                    </div>
+                    <div>
+                        <label for="blog-post-content" class="block text-sm font-medium text-gray-300">Conteúdo do Post:</label>
+                        <textarea id="blog-post-content" rows="10" class="mt-1 block w-full border border-gray-600 rounded-md shadow-sm p-2 bg-gray-700 text-white" required placeholder="Escreva o conteúdo completo do seu post aqui..."></textarea>
+                    </div>
+                    <div class="flex items-center">
+                        <input type="checkbox" id="blog-post-approved" class="h-4 w-4 text-primary rounded border-gray-600 focus:ring-primary">
+                        <label for="blog-post-approved" class="ml-2 block text-sm text-gray-300">Aprovar Post (Visível publicamente)</label>
+                    </div>
+                    <button type="submit" class="w-full bg-primary hover:bg-purple-700 text-white font-bold py-3 px-6 rounded-lg transition-colors">
+                        <i class="fas fa-save mr-2"></i> Salvar Post
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal para Packs e Acapellas (Admin) -->
+    <div id="downloadable-item-modal" class="modal">
+        <div class="modal-content">
+            <span class="close" id="downloadable-item-close">×</span>
+            <div class="p-4">
+                <h2 class="text-2xl font-bold text-white mb-4" id="downloadable-item-modal-title">Adicionar Novo Item de Download</h2>
+                <form id="downloadable-item-form" class="space-y-4">
+                    <input type="hidden" id="downloadable-item-id">
+                    <div>
+                        <label for="downloadable-item-title" class="block text-sm font-medium text-gray-300">Título do Item:</label>
+                        <input type="text" id="downloadable-item-title" class="mt-1 block w-full border border-gray-600 rounded-md shadow-sm p-2 bg-gray-700 text-white" required>
+                    </div>
+                    <div>
+                        <label for="downloadable-item-description" class="block text-sm font-medium text-gray-300">Descrição:</label>
+                        <textarea id="downloadable-item-description" rows="3" class="mt-1 block w-full border border-gray-600 rounded-md shadow-sm p-2 bg-gray-700 text-white" required></textarea>
+                    </div>
+                    <div>
+                        <label for="downloadable-item-type" class="block text-sm font-medium text-gray-300">Tipo:</label>
+                        <select id="downloadable-item-type" class="mt-1 block w-full border border-gray-600 rounded-md shadow-sm p-2 bg-gray-700 text-white" required>
+                            <option value="pack">Pack de Samples</option>
+                            <option value="acapella">Acapella</option>
+                            <option value="outro">Outro</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label for="downloadable-item-download-url" class="block text-sm font-medium text-gray-300">URL para Download:</label>
+                        <input type="url" id="downloadable-item-download-url" class="mt-1 block w-full border border-gray-600 rounded-md shadow-sm p-2 bg-gray-700 text-white" placeholder="Link para Google Drive, Dropbox, MediaFire, etc." required>
+                        <p class="text-xs text-gray-400 mt-1">Certifique-se de que é um link de download *direto* para o arquivo (ex: `https://www.mediafire.com/file/SEUID/nome_do_arquivo.zip/file` ou `https://drive.google.com/uc?export=download&id=SEU_ID`).</p>
+                    </div>
+                    <div>
+                        <label for="downloadable-item-image-url" class="block text-sm font-medium text-gray-300">URL da Imagem de Capa (Opcional):</label>
+                        <input type="url" id="downloadable-item-image-url" class="mt-1 block w-full border border-gray-600 rounded-md shadow-sm p-2 bg-gray-700 text-white" placeholder="URL da imagem do item">
+                    </div>
+                    <button type="submit" class="w-full bg-primary hover:bg-purple-700 text-white font-bold py-3 px-6 rounded-lg transition-colors">
+                        <i class="fas fa-save mr-2"></i> Salvar Item
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- NOVO MODAL: Gerenciar Vídeo do Estúdio -->
+    <div id="studio-video-modal" class="modal">
+        <div class="modal-content">
+            <span class="close" id="studio-video-close">×</span>
+            <div class="p-4">
+                <h2 class="text-2xl font-bold text-white mb-4">Gerenciar Vídeo do Estúdio</h2>
+                <form id="studio-video-form" class="space-y-4">
+                    <div>
+                        <label for="youtube-video-id" class="block text-sm font-medium text-gray-300">ID do Vídeo do YouTube:</label>
+                        <input type="text" id="youtube-video-id" class="mt-1 block w-full border border-gray-600 rounded-md shadow-sm p-2 bg-gray-700 text-white" placeholder="Ex: dQw4w9WgXcQ" required>
+                        <p class="text-xs text-gray-400 mt-1">Insira apenas o ID do vídeo do YouTube (a parte depois de "v=" na URL, ex: `dQw4w9WgXcQ`).</p>
+                    </div>
+                    <button type="submit" class="w-full bg-primary hover:bg-purple-700 text-white font-bold py-3 px-6 rounded-lg transition-colors">
+                        <i class="fas fa-save mr-2"></i> Salvar Vídeo
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Banner de Consentimento de Cookies -->
+    <div id="cookie-consent-banner" class="hidden">
+        <p>Este site utiliza cookies para garantir a melhor experiência. Ao continuar, você concorda com nossa <a href="privacy-policy.html" id="privacy-policy-link">Política de Privacidade</a>.</p>
+        <div class="cookie-buttons">
+            <button id="accept-cookies">Aceitar Cookies</button>
+            <button id="decline-cookies">Recusar</button>
+        </div>
+    </div>
 
     <script>
         // Variável global para o token JWT
         const JWT_TOKEN_KEY = 'jwt_token';
+        const COOKIE_CONSENT_KEY = 'cookie_consent'; // Chave para o localStorage
 
         // Variáveis globais para elementos do DOM (serão atribuídas em DOMContentLoaded)
-        let adminLoginBtn, logoutBtn, changePasswordBtn, editSocialLinksBtn, manageSpotifyTracksBtn;
-        let adminLoginModal, changePasswordModal, socialLinksModal, projectModal, portfolioModal, addTestimonialModal, spotifyTrackModal;
-        let adminLoginClose, changePasswordClose, socialLinksClose, projectClose, portfolioClose, addTestimonialClose, spotifyTrackClose;
-        let adminLoginForm, changePasswordForm, socialLinksForm, projectForm, portfolioForm, testimonialForm, spotifyTrackForm;
+        let adminLoginBtn, logoutBtn, changePasswordBtn, editSocialLinksBtn, manageSpotifyTracksBtn, manageBlogPostsBtn, manageDownloadableItemsBtn, manageStudioVideoBtn;
+        let adminLoginModal, changePasswordModal, socialLinksModal, projectModal, portfolioModal, addTestimonialModal, spotifyTrackModal, blogPostModal, downloadableItemModal, studioVideoModal;
+        let adminLoginClose, changePasswordClose, socialLinksClose, projectClose, portfolioClose, addTestimonialClose, spotifyTrackClose, blogPostClose, downloadableItemClose, studioVideoClose;
+        let adminLoginForm, changePasswordForm, socialLinksForm, projectForm, portfolioForm, testimonialForm, spotifyTrackForm, blogPostForm, downloadableItemForm, studioVideoForm;
         let projectsContainer, noProjectsMessage, adminProjectsButton, addProjectBtn;
         let portfolioContainer, noPortfolioMessage, adminPortfolioButton, addPortfolioBtn;
         let testimonialsContainer, noTestimonialsMessage, addTestimonialBtn;
         let spotifyPlayerIframeContainer, spotifyTracksContainer, noSpotifyTracksMessage, addSpotifyTrackBtn;
+        let blogPostsContainer, noBlogPostsMessage, adminBlogButton, addBlogPostBtn;
+        let downloadableItemsContainer, noDownloadableItemsMessage, adminDownloadableItemsButton, addDownloadableItemBtn;
+        let studioVideoContainer; // NOVO: Container para o vídeo do estúdio
         let adminLoginIcon;
-        let socialLinksContactDiv; // Referência ao div dos links sociais
+        let socialLinksContactDiv;
+        let cookieConsentBanner, acceptCookiesBtn, declineCookiesBtn, privacyPolicyLink; // Elementos do banner de cookies
+        let showCbrDriveLink, showCbrDriveLinkMobile, cbrDriveLandingSection; // NOVOS: Elementos para o CBR Drive
 
         // --- Funções Auxiliares (podem ser definidas fora de DOMContentLoaded) ---
         async function fetchAPI(endpoint, method = 'GET', data = null, needsAuth = false) {
-            // Alterado para usar window.location.origin para construir um URL absoluto
             const baseURL = window.location.origin + '/.netlify/functions/api'; 
             
             const options = {
@@ -941,14 +1401,18 @@
                 options.headers['Authorization'] = `Bearer ${token}`;
             }
 
-            if (data) {
-                options.body = JSON.stringify(data);
+            if (!(data instanceof FormData)) {
+                options.headers['Content-Type'] = 'application/json';
+                if (data) {
+                    options.body = JSON.stringify(data);
+                }
+            } else {
+                options.body = data;
             }
 
             try {
-                // Garante que o endpoint sempre comece com '/'
                 const url = `${baseURL}${endpoint.startsWith('/') ? endpoint : '/' + endpoint}`;
-                console.log('Chamando API com URL:', url); // LOG DE DEBUG: Mostra o URL completo da API
+                console.log('Chamando API com URL:', url);
                 const response = await fetch(url, options);
                 
                 if (response.status === 204) return {};
@@ -962,7 +1426,11 @@
                 } else {
                     const rawText = await response.text();
                     console.error('Resposta não é JSON. Conteúdo:', rawText);
-                    throw new Error(`Resposta inesperada do servidor (Status: ${response.status}, Tipo: ${contentType}). Verifique os logs do Netlify.`);
+                    try {
+                        responseData = JSON.parse(rawText);
+                    } catch (e) {
+                        responseData = { message: rawText || 'Resposta inesperada do servidor.' };
+                    }
                 }
                 
                 if (!response.ok) {
@@ -1003,6 +1471,9 @@
             if (modal === changePasswordModal && changePasswordForm) changePasswordForm.reset();
             if (modal === addTestimonialModal && testimonialForm) testimonialForm.reset();
             if (modal === spotifyTrackModal && spotifyTrackForm) spotifyTrackForm.reset();
+            if (modal === blogPostModal && blogPostForm) blogPostForm.reset();
+            if (modal === downloadableItemModal && downloadableItemForm) downloadableItemForm.reset();
+            if (modal === studioVideoModal && studioVideoForm) studioVideoForm.reset(); // NOVO: resetar formulário do vídeo do estúdio
         }
 
         function toggleAdminMode(enable) {
@@ -1011,17 +1482,26 @@
                 adminProjectsButton.classList.remove('hidden');
                 adminPortfolioButton.classList.remove('hidden');
                 manageSpotifyTracksBtn.classList.remove('hidden');
+                manageBlogPostsBtn.classList.remove('hidden');
+                manageDownloadableItemsBtn.classList.remove('hidden');
+                manageStudioVideoBtn.classList.remove('hidden'); // NOVO: mostrar botão de gerenciar vídeo do estúdio
             } else {
                 document.body.classList.remove('admin-mode');
                 adminProjectsButton.classList.add('hidden');
                 adminPortfolioButton.classList.add('hidden');
                 manageSpotifyTracksBtn.classList.add('hidden');
+                manageBlogPostsBtn.classList.add('hidden');
+                manageDownloadableItemsBtn.classList.add('hidden');
+                manageStudioVideoBtn.classList.add('hidden'); // NOVO: esconder botão de gerenciar vídeo do estúdio
             }
             fetchProjects();
             fetchPortfolio();
             fetchTestimonials();
             fetchSpotifyTracks();
-            renderSocialLinks(); // Chamar para atualizar os links sociais
+            fetchBlogPosts();
+            fetchDownloadableItems();
+            renderSocialLinks();
+            fetchStudioVideo(); // NOVO: Recarregar o vídeo do estúdio ao mudar o modo
         }
 
         function checkLoginStatus() {
@@ -1034,6 +1514,9 @@
                 changePasswordBtn.classList.remove('hidden');
                 editSocialLinksBtn.classList.remove('hidden');
                 manageSpotifyTracksBtn.classList.remove('hidden');
+                manageBlogPostsBtn.classList.remove('hidden');
+                manageDownloadableItemsBtn.classList.remove('hidden');
+                manageStudioVideoBtn.classList.remove('hidden'); // NOVO: mostrar botão de gerenciar vídeo do estúdio
                 adminLoginIcon.classList.remove('fa-lock');
                 adminLoginIcon.classList.add('fa-user-shield');
                 
@@ -1046,6 +1529,9 @@
                 changePasswordBtn.classList.add('hidden');
                 editSocialLinksBtn.classList.add('hidden');
                 manageSpotifyTracksBtn.classList.add('hidden');
+                manageBlogPostsBtn.classList.add('hidden');
+                manageDownloadableItemsBtn.classList.add('hidden');
+                manageStudioVideoBtn.classList.add('hidden'); // NOVO: esconder botão de gerenciar vídeo do estúdio
                 adminLoginIcon.classList.remove('fa-user-shield');
                 adminLoginIcon.classList.add('fa-lock');
                 
@@ -1219,7 +1705,7 @@
             const testimonialData = { name, rating, comment };
             const response = await fetchAPI('/testimonials', 'POST', testimonialData);
             if (response) {
-                alert('Seu depoimento foi enviado com sucesso e será revisado em breve!');
+                alert('Seu depoimento foi enviado com sucesso para revisão!');
                 closeModal(addTestimonialModal);
                 fetchTestimonials();
             }
@@ -1247,7 +1733,7 @@
 
         // --- Funções de CRUD de Músicas Spotify ---
         function loadSpotifyPlayer(spotifyId) {
-            console.log('Tentando carregar player do Spotify com ID:', spotifyId); // LOG DE DEBUG
+            console.log('Tentando carregar player do Spotify com ID:', spotifyId);
 
             if (!spotifyId) {
                 console.error('Erro: spotifyId está vazio. Não é possível carregar o player.');
@@ -1260,7 +1746,6 @@
                         width="100%" height="380" frameborder="0" allowtransparency="true" 
                         allow="encrypted-media; fullscreen; picture-in-picture"></iframe>
             `;
-            // Adiciona um listener para verificar se o iframe carregou
             const iframe = spotifyPlayerIframeContainer.querySelector('iframe');
             if (iframe) {
                 iframe.onload = () => {
@@ -1288,14 +1773,13 @@
                                 <img src="${track.image_url || 'https://via.placeholder.com/150x150?text=Capa'}" alt="${track.title}" class="w-24 h-24 rounded-full object-cover mb-3">
                                 <h3 class="text-lg font-bold truncate w-full">${track.title}</h3>
                                 <p class="text-gray-400 text-sm truncate w-full">${track.artist}</p>
-                                <div class="spotify-track-actions absolute top-2 right-2 flex gap-2 ${document.body.classList.contains('admin-mode') ? '' : 'hidden'}">
-                                    <button onclick="event.stopPropagation(); editSpotifyTrack('${track._id}', '${track.title.replace(/'/g, "\\'")}', '${track.artist.replace(/'/g, "\\'")}', '${track.spotifyId}', '${track.image_url}')" class="bg-blue-500 hover:bg-blue-600 text-white p-2 rounded-full text-xs"><i class="fas fa-edit"></i></button>
-                                    <button onclick="event.stopPropagation(); deleteSpotifyTrack('${track._id}')" class="bg-red-500 hover:bg-red-600 text-white p-2 rounded-full text-xs"><i class="fas fa-trash-alt"></i></button>
+                                <div class="spotify-track-actions">
+                                    <button onclick="event.stopPropagation(); editSpotifyTrack('${track._id}', '${track.title.replace(/'/g, "\\'")}', '${track.artist.replace(/'/g, "\\'")}', '${track.spotifyId}', '${track.image_url}')" class="bg-blue-500 hover:bg-blue-600 text-white p-2 rounded-full"><i class="fas fa-edit"></i></button>
+                                    <button onclick="event.stopPropagation(); deleteSpotifyTrack('${track._id}')" class="bg-red-500 hover:bg-red-600 text-white p-2 rounded-full"><i class="fas fa-trash-alt"></i></button>
                                 </div>
                             </div>
                         `;
                     });
-                    // Carrega a primeira música automaticamente se houver
                     if (spotifyTracks.length > 0) {
                         loadSpotifyPlayer(spotifyTracks[0].spotifyId);
                     }
@@ -1323,14 +1807,164 @@
             }
         }
 
+        // --- Funções de CRUD de Blog Posts ---
+        async function fetchBlogPosts() {
+            const endpoint = document.body.classList.contains('admin-mode') ? '/blog-posts/all' : '/blog-posts';
+            const blogPosts = await fetchAPI(endpoint, 'GET', null, document.body.classList.contains('admin-mode'));
+
+            if (blogPosts) {
+                blogPostsContainer.innerHTML = '';
+                if (blogPosts.length === 0) {
+                    noBlogPostsMessage.classList.remove('hidden');
+                } else {
+                    noBlogPostsMessage.classList.add('hidden');
+                    blogPosts.forEach(post => {
+                        const createdAtDate = new Date(post.createdAt);
+                        const formattedDate = createdAtDate.toLocaleDateString('pt-BR', { day: '2-digit', month: '2-digit', year: 'numeric' });
+                        const formattedTime = createdAtDate.toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' });
+
+                        const adminActionsHtml = document.body.classList.contains('admin-mode') ? `
+                            <div class="blog-post-actions">
+                                <button onclick="event.stopPropagation(); editBlogPost('${post._id}', '${post.title.replace(/'/g, "\\'")}', '${post.author.replace(/'/g, "\\'")}', '${post.image_url || ''}', \`${post.content.replace(/`/g, '\\`')}\`, ${post.approved})" class="bg-blue-500 hover:bg-blue-600 text-white p-2 rounded-full text-xs"><i class="fas fa-edit"></i></button>
+                                <button onclick="event.stopPropagation(); deleteBlogPost('${post._id}')" class="bg-red-500 hover:bg-red-600 text-white p-2 rounded-full text-xs"><i class="fas fa-trash-alt"></i></button>
+                            </div>
+                        ` : '';
+
+                        const statusBadgeHtml = document.body.classList.contains('admin-mode') ? `
+                            <div class="blog-status-badge ${post.approved ? 'approved' : 'pending'}">
+                                ${post.approved ? 'APROVADO' : 'PENDENTE'}
+                            </div>
+                        ` : '';
+
+                        blogPostsContainer.innerHTML += `
+                            <div class="blog-post-card bg-white rounded-lg shadow-lg overflow-hidden relative">
+                                ${statusBadgeHtml}
+                                <img src="${post.image_url || 'https://via.placeholder.com/400x250?text=Capa+do+Post'}" alt="${post.title}" class="w-full h-48 object-cover">
+                                <div class="p-6">
+                                    <h3 class="text-xl font-bold mb-2">${post.title}</h3>
+                                    <p class="text-gray-600 text-sm mb-3">Por: ${post.author} em ${formattedDate} ${formattedTime}</p>
+                                    <p class="text-gray-600 mb-4">${post.content.substring(0, 150)}...</p>
+                                    <a href="#" onclick="showBlogPostDetail('${post._id}')" class="text-primary hover:underline font-bold">Leia Mais</a>
+                                </div>
+                                ${adminActionsHtml}
+                            </div>
+                        `;
+                    });
+                }
+            }
+        }
+
+        async function showBlogPostDetail(id) {
+            const post = await fetchAPI(`/blog-posts/${id}`);
+            if (post) {
+                const createdAtDate = new Date(post.createdAt);
+                const formattedDate = createdAtDate.toLocaleDateString('pt-BR', { day: '2-digit', month: '2-digit', year: 'numeric' });
+                const formattedTime = createdAtDate.toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' });
+
+                const detailHtml = `
+                    <div class="blog-post-detail">
+                        <button onclick="hideBlogPostDetail()" class="back-button"><i class="fas fa-arrow-left mr-2"></i> Voltar para o Blog</button>
+                        <h1 class="mt-8">${post.title}</h1>
+                        <div class="meta">
+                            <span>Por: ${post.author}</span>
+                            <span>Em: ${formattedDate} ${formattedTime}</span>
+                        </div>
+                        ${post.image_url ? `<img src="${post.image_url}" alt="${post.title}">` : ''}
+                        <p>${post.content.replace(/\n/g, '<br>')}</p>
+                    </div>
+                `;
+                document.body.innerHTML = detailHtml;
+                window.scrollTo(0, 0);
+            }
+        }
+
+        function hideBlogPostDetail() {
+            location.reload(); 
+        }
+
+        function editBlogPost(id, title, author, imageUrl, content, approved) {
+            document.getElementById('blog-post-modal-title').textContent = 'Editar Post de Blog';
+            document.getElementById('blog-post-id').value = id;
+            document.getElementById('blog-post-title').value = title;
+            document.getElementById('blog-post-author').value = author;
+            document.getElementById('blog-post-image-url').value = imageUrl;
+            document.getElementById('blog-post-content').value = content;
+            document.getElementById('blog-post-approved').checked = approved;
+            openModal(blogPostModal);
+        }
+
+        async function deleteBlogPost(id) {
+            if (confirm('Tem certeza que deseja excluir este post de blog?')) {
+                const response = await fetchAPI(`/blog-posts/${id}`, 'DELETE', null, true);
+                if (response !== null) {
+                    alert('Post de blog excluído com sucesso!');
+                    fetchBlogPosts();
+                }
+            }
+        }
+
+        // --- Funções de CRUD de Packs e Acapellas (Downloadable Items) ---
+        async function fetchDownloadableItems() {
+            const downloadableItems = await fetchAPI('/downloadable-items');
+            if (downloadableItems) {
+                downloadableItemsContainer.innerHTML = '';
+                if (downloadableItems.length === 0) {
+                    noDownloadableItemsMessage.classList.remove('hidden');
+                } else {
+                    noDownloadableItemsMessage.classList.add('hidden');
+                    downloadableItems.forEach(item => {
+                        const adminActionsHtml = document.body.classList.contains('admin-mode') ? `
+                            <div class="downloadable-item-actions absolute top-2 right-2 flex gap-2">
+                                <button onclick="editDownloadableItem('${item._id}', '${item.title.replace(/'/g, "\\'")}', '${item.description.replace(/'/g, "\\'")}', '${item.type}', '${item.download_url}', '${item.image_url || ''}')" class="bg-blue-500 hover:bg-blue-600 text-white p-2 rounded-full text-xs"><i class="fas fa-edit"></i></button>
+                                <button onclick="deleteDownloadableItem('${item._id}')" class="bg-red-500 hover:bg-red-600 text-white p-2 rounded-full text-xs"><i class="fas fa-trash-alt"></i></button>
+                            </div>
+                        ` : '';
+
+                        downloadableItemsContainer.innerHTML += `
+                            <div class="downloadable-item-card bg-secondary text-white rounded-lg shadow-lg overflow-hidden relative p-6 text-center">
+                                <img src="${item.image_url || 'https://via.placeholder.com/150x150?text=Capa'}" alt="${item.title}" class="w-24 h-24 rounded-lg object-cover mx-auto mb-4">
+                                <h3 class="text-xl font-bold mb-2">${item.title}</h3>
+                                <p class="text-gray-400 text-sm mb-3">${item.description}</p>
+                                <p class="text-gray-500 text-xs mb-4">Tipo: ${item.type.charAt(0).toUpperCase() + item.type.slice(1)}</p>
+                                <a href="${item.download_url}" target="_blank" class="bg-primary hover:bg-purple-700 text-white font-bold py-2 px-4 rounded-full transition-colors inline-flex items-center">
+                                    <i class="fas fa-download mr-2"></i> Baixar
+                                </a>
+                                ${adminActionsHtml}
+                            </div>
+                        `;
+                    });
+                }
+            }
+        }
+
+        function editDownloadableItem(id, title, description, type, downloadUrl, imageUrl) {
+            document.getElementById('downloadable-item-modal-title').textContent = 'Editar Item de Download';
+            document.getElementById('downloadable-item-id').value = id;
+            document.getElementById('downloadable-item-title').value = title;
+            document.getElementById('downloadable-item-description').value = description;
+            document.getElementById('downloadable-item-type').value = type;
+            document.getElementById('downloadable-item-download-url').value = downloadUrl;
+            document.getElementById('downloadable-item-image-url').value = imageUrl;
+            openModal(downloadableItemModal);
+        }
+
+        async function deleteDownloadableItem(id) {
+            if (confirm('Tem certeza que deseja excluir este item de download?')) {
+                const response = await fetchAPI(`/downloadable-items/${id}`, 'DELETE', null, true);
+                if (response !== null) {
+                    alert('Item de download excluído com sucesso!');
+                    fetchDownloadableItems();
+                }
+            }
+        }
+
         // --- Funções para renderizar Links Sociais ---
         async function renderSocialLinks() {
             const socialLinks = await fetchAPI('/social-links', 'GET');
-            console.log('Dados de links sociais recebidos:', socialLinks); // LOG DE DEBUG
+            console.log('Dados de links sociais recebidos:', socialLinks);
             if (socialLinks) {
-                socialLinksContactDiv.innerHTML = ''; // Limpa os links existentes
+                socialLinksContactDiv.innerHTML = '';
                 
-                // Adiciona links apenas se existirem
                 if (socialLinks.instagram) {
                     socialLinksContactDiv.innerHTML += `
                         <a href="${socialLinks.instagram}" target="_blank" class="bg-gray-700 hover:bg-primary w-10 h-10 rounded-full flex items-center justify-center transition-colors"><i class="fab fa-instagram text-white"></i></a>
@@ -1352,13 +1986,65 @@
                     `;
                 }
 
-                // Mensagem de fallback se nenhum link for configurado
                 if (!socialLinks.instagram && !socialLinks.facebook && !socialLinks.youtube && !socialLinks.spotify) {
                     socialLinksContactDiv.innerHTML = '<p class="text-gray-500 text-sm">Nenhum link social configurado.</p>';
                 }
             } else {
-                // Mensagem de erro se a requisição falhar
                 socialLinksContactDiv.innerHTML = '<p class="text-red-500 text-sm">Erro ao carregar links sociais. Verifique o console.</p>';
+            }
+        }
+
+        // --- NOVO: Funções para Gerenciar Vídeo do Estúdio ---
+        async function fetchStudioVideo() {
+            const studioConfig = await fetchAPI('/studio-config');
+            if (studioConfig && studioConfig.youtubeVideoId) {
+                const youtubeVideoId = studioConfig.youtubeVideoId;
+                studioVideoContainer.innerHTML = `
+                    <iframe src="https://www.youtube.com/embed/${youtubeVideoId}" 
+                            title="YouTube video player" frameborder="0" 
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                            referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                `;
+            } else {
+                studioVideoContainer.innerHTML = '<p class="text-gray-600 text-center py-8">Nenhum vídeo do estúdio configurado. Por favor, adicione um.</p>';
+            }
+        }
+
+        // --- Funções de Consentimento de Cookies ---
+        function showCookieConsent() {
+            // Verifica se o usuário já aceitou ou recusou
+            if (localStorage.getItem(COOKIE_CONSENT_KEY) === null) {
+                cookieConsentBanner.classList.remove('hidden');
+                setTimeout(() => {
+                    cookieConsentBanner.classList.add('show');
+                }, 100); // Pequeno atraso para a transição CSS
+            }
+        }
+
+        function hideCookieConsent() {
+            cookieConsentBanner.classList.remove('show');
+            setTimeout(() => {
+                cookieConsentBanner.classList.add('hidden');
+            }, 500); // Tempo para a transição CSS
+        }
+
+        function handleCookieConsent(consent) {
+            localStorage.setItem(COOKIE_CONSENT_KEY, consent);
+            hideCookieConsent();
+            // Aqui você pode adicionar lógica para carregar scripts de terceiros
+            // ou anúncios do Google AdSense APENAS se o consentimento for 'accepted'
+            if (consent === 'accepted') {
+                console.log('Cookies aceitos. Carregando scripts de anúncios/análise (se houver).');
+                // Exemplo: Se você tivesse um script do Google Analytics, carregaria aqui
+                // const gaScript = document.createElement('script');
+                // gaScript.src = 'https://www.googletagmanager.com/gtag/js?id=UA-XXXXX-Y';
+                // document.head.appendChild(gaScript);
+                // window.dataLayer = window.dataLayer || [];
+                // function gtag(){dataLayer.push(arguments);}
+                // gtag('js', new Date());
+                // gtag('config', 'UA-XXXXX-Y');
+            } else {
+                console.log('Cookies recusados. Scripts de anúncios/análise não serão carregados.');
             }
         }
 
@@ -1387,6 +2073,9 @@
             changePasswordBtn = document.getElementById('change-password-btn');
             editSocialLinksBtn = document.getElementById('edit-social-links-btn');
             manageSpotifyTracksBtn = document.getElementById('manage-spotify-tracks-btn');
+            manageBlogPostsBtn = document.getElementById('manage-blog-posts-btn');
+            manageDownloadableItemsBtn = document.getElementById('manage-downloadable-items-btn');
+            manageStudioVideoBtn = document.getElementById('manage-studio-video-btn'); 
 
             adminLoginModal = document.getElementById('admin-login-modal');
             changePasswordModal = document.getElementById('change-password-modal');
@@ -1395,6 +2084,9 @@
             portfolioModal = document.getElementById('portfolio-modal');
             addTestimonialModal = document.getElementById('add-testimonial-modal');
             spotifyTrackModal = document.getElementById('spotify-track-modal');
+            blogPostModal = document.getElementById('blog-post-modal');
+            downloadableItemModal = document.getElementById('downloadable-item-modal');
+            studioVideoModal = document.getElementById('studio-video-modal'); 
 
             adminLoginClose = document.getElementById('admin-login-close');
             changePasswordClose = document.getElementById('change-password-close');
@@ -1403,6 +2095,9 @@
             portfolioClose = document.getElementById('portfolio-close');
             addTestimonialClose = document.getElementById('add-testimonial-close');
             spotifyTrackClose = document.getElementById('spotify-track-close');
+            blogPostClose = document.getElementById('blog-post-close');
+            downloadableItemClose = document.getElementById('downloadable-item-close');
+            studioVideoClose = document.getElementById('studio-video-close'); 
 
             adminLoginForm = document.getElementById('admin-login-form');
             changePasswordForm = document.getElementById('change-password-form');
@@ -1411,6 +2106,9 @@
             portfolioForm = document.getElementById('portfolio-form');
             testimonialForm = document.getElementById('testimonial-form');
             spotifyTrackForm = document.getElementById('spotify-track-form');
+            blogPostForm = document.getElementById('blog-post-form');
+            downloadableItemForm = document.getElementById('downloadable-item-form');
+            studioVideoForm = document.getElementById('studio-video-form'); 
 
             projectsContainer = document.getElementById('projects-container');
             noProjectsMessage = document.getElementById('no-projects-message');
@@ -1431,8 +2129,31 @@
             noSpotifyTracksMessage = document.getElementById('no-spotify-tracks-message');
             addSpotifyTrackBtn = document.getElementById('add-spotify-track-btn');
 
+            blogPostsContainer = document.getElementById('blog-posts-container');
+            noBlogPostsMessage = document.getElementById('no-blog-posts-message');
+            adminBlogButton = document.getElementById('admin-blog-button');
+            addBlogPostBtn = document.getElementById('add-blog-post-btn');
+
+            downloadableItemsContainer = document.getElementById('downloadable-items-container');
+            noDownloadableItemsMessage = document.getElementById('no-downloadable-items-message');
+            adminDownloadableItemsButton = document.getElementById('admin-downloadable-items-button');
+            addDownloadableItemBtn = document.getElementById('add-downloadable-item-btn');
+
+            studioVideoContainer = document.getElementById('studio-video-container'); 
+            
             adminLoginIcon = document.getElementById('admin-login-icon');
-            socialLinksContactDiv = document.getElementById('social-links-contact'); // Atribuição do novo elemento
+            socialLinksContactDiv = document.getElementById('social-links-contact');
+
+            // Atribuições para o banner de cookies
+            cookieConsentBanner = document.getElementById('cookie-consent-banner');
+            acceptCookiesBtn = document.getElementById('accept-cookies');
+            declineCookiesBtn = document.getElementById('decline-cookies');
+            privacyPolicyLink = document.getElementById('privacy-policy-link');
+
+            // Atribuições para os novos elementos do CBR Drive
+            showCbrDriveLink = document.getElementById('show-cbr-drive-link');
+            showCbrDriveLinkMobile = document.getElementById('show-cbr-drive-link-mobile');
+            cbrDriveLandingSection = document.getElementById('cbr-drive-landing');
 
 
             // --- Event Listeners para Modals e Botões Principais ---
@@ -1445,6 +2166,9 @@
             portfolioClose.onclick = () => closeModal(portfolioModal);
             addTestimonialClose.onclick = () => closeModal(addTestimonialModal);
             spotifyTrackClose.onclick = () => closeModal(spotifyTrackModal);
+            blogPostClose.onclick = () => closeModal(blogPostModal);
+            downloadableItemClose.onclick = () => closeModal(downloadableItemModal);
+            studioVideoClose.onclick = () => closeModal(studioVideoModal); 
 
             window.onclick = (event) => {
                 if (event.target == adminLoginModal) closeModal(adminLoginModal);
@@ -1454,6 +2178,9 @@
                 if (event.target == portfolioModal) closeModal(portfolioModal);
                 if (event.target == addTestimonialModal) closeModal(addTestimonialModal);
                 if (event.target == spotifyTrackModal) closeModal(spotifyTrackModal);
+                if (event.target == blogPostModal) closeModal(blogPostModal);
+                if (event.target == downloadableItemModal) closeModal(downloadableItemModal);
+                if (event.target == studioVideoModal) closeModal(studioVideoModal); 
             };
 
             // --- Funcionalidade de Login ---
@@ -1523,7 +2250,7 @@
                 if (data) {
                     alert(data.message);
                     closeModal(socialLinksModal);
-                    renderSocialLinks(); // Chamar para atualizar os links no rodapé
+                    renderSocialLinks();
                 }
             });
 
@@ -1646,6 +2373,118 @@
                 fetchSpotifyTracks();
             });
 
+            // Event listeners para Blog Posts
+            manageBlogPostsBtn.addEventListener('click', () => {
+                document.getElementById('blog-post-modal-title').textContent = 'Adicionar Novo Post de Blog';
+                document.getElementById('blog-post-id').value = '';
+                blogPostForm.reset();
+                openModal(blogPostModal);
+            });
+
+            blogPostForm.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                const postIdInput = document.getElementById('blog-post-id');
+                const title = document.getElementById('blog-post-title').value;
+                const author = document.getElementById('blog-post-author').value;
+                const image_url = document.getElementById('blog-post-image-url').value;
+                const content = document.getElementById('blog-post-content').value;
+                const approved = document.getElementById('blog-post-approved').checked;
+
+                const postData = { title, author, image_url, content, approved };
+                const postId = postIdInput.value;
+
+                if (postId) {
+                    const response = await fetchAPI(`/blog-posts/${postId}`, 'PUT', postData, true);
+                    if (response) {
+                        alert('Post de blog atualizado com sucesso!');
+                    }
+                } else {
+                    const response = await fetchAPI('/blog-posts', 'POST', postData, true);
+                    if (response) {
+                        alert('Post de blog adicionado com sucesso!');
+                    }
+                }
+                closeModal(blogPostModal);
+                fetchBlogPosts();
+            });
+
+            // Event listeners para Packs e Acapellas (Downloadable Items)
+            manageDownloadableItemsBtn.addEventListener('click', () => {
+                document.getElementById('downloadable-item-modal-title').textContent = 'Adicionar Novo Item de Download';
+                document.getElementById('downloadable-item-id').value = '';
+                downloadableItemForm.reset();
+                openModal(downloadableItemModal);
+            });
+
+            downloadableItemForm.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                const itemIdInput = document.getElementById('downloadable-item-id');
+                const title = document.getElementById('downloadable-item-title').value;
+                const description = document.getElementById('downloadable-item-description').value;
+                const type = document.getElementById('downloadable-item-type').value;
+                const download_url = document.getElementById('downloadable-item-download-url').value;
+                const image_url = document.getElementById('downloadable-item-image-url').value;
+
+                const itemData = { title, description, type, download_url, image_url };
+                const itemId = itemIdInput.value;
+
+                if (itemId) {
+                    const response = await fetchAPI(`/downloadable-items/${itemId}`, 'PUT', itemData, true);
+                    if (response) {
+                        alert('Item de download atualizado com sucesso!');
+                    }
+                } else {
+                    const response = await fetchAPI('/downloadable-items', 'POST', itemData, true);
+                    if (response) {
+                        alert('Item de download adicionado com sucesso!');
+                    }
+                }
+                closeModal(downloadableItemModal);
+                fetchDownloadableItems();
+            });
+
+            // NOVO: Event listeners para Gerenciar Vídeo do Estúdio
+            manageStudioVideoBtn.addEventListener('click', async () => {
+                const studioConfig = await fetchAPI('/studio-config', 'GET');
+                if (studioConfig) {
+                    document.getElementById('youtube-video-id').value = studioConfig.youtubeVideoId || '';
+                    openModal(studioVideoModal);
+                }
+            });
+
+            studioVideoForm.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                const youtubeVideoId = document.getElementById('youtube-video-id').value;
+                const response = await fetchAPI('/studio-config', 'PUT', { youtubeVideoId }, true);
+                if (response) {
+                    alert('Vídeo do estúdio atualizado com sucesso!');
+                    closeModal(studioVideoModal);
+                    fetchStudioVideo(); // Recarrega o vídeo na página principal
+                }
+            });
+
+            // Event listeners para o banner de cookies
+            acceptCookiesBtn.addEventListener('click', () => handleCookieConsent('accepted'));
+            declineCookiesBtn.addEventListener('click', () => handleCookieConsent('declined'));
+            // Você precisará criar uma página de Política de Privacidade e linkar aqui
+            // privacyPolicyLink.href = 'URL_DA_SUA_POLITICA_DE_PRIVACIDADE.html';
+
+
+            // NOVO: Event listeners para mostrar a seção CBR Drive
+            showCbrDriveLink.addEventListener('click', (e) => {
+                e.preventDefault(); // Impede o comportamento padrão do link
+                cbrDriveLandingSection.classList.remove('hidden'); // Remove a classe 'hidden' para mostrar a seção
+                cbrDriveLandingSection.scrollIntoView({ behavior: 'smooth' }); // Rola suavemente até a seção
+                document.getElementById('mobile-menu').classList.remove('active'); // Fecha o menu mobile, se estiver aberto
+            });
+
+            showCbrDriveLinkMobile.addEventListener('click', (e) => {
+                e.preventDefault(); // Impede o comportamento padrão do link
+                cbrDriveLandingSection.classList.remove('hidden'); // Remove a classe 'hidden' para mostrar a seção
+                cbrDriveLandingSection.scrollIntoView({ behavior: 'smooth' }); // Rola suavemente até a seção
+                document.getElementById('mobile-menu').classList.remove('active'); // Fecha o menu mobile, se estiver aberto
+            });
+
 
             // Chamadas iniciais
             checkLoginStatus();
@@ -1653,7 +2492,11 @@
             fetchPortfolio();
             fetchTestimonials();
             fetchSpotifyTracks();
-            renderSocialLinks(); // Adicionado para carregar os links sociais no início
+            fetchBlogPosts();
+            fetchDownloadableItems();
+            renderSocialLinks();
+            fetchStudioVideo(); // NOVO: Carregar o vídeo do estúdio ao iniciar
+            showCookieConsent(); // Mostra o banner de cookies ao carregar a página
         });
     </script>
 </body>
