@@ -1,0 +1,1660 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CBR RECORDS - Produtora Musical</title>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2124826123756577"
+     crossorigin="anonymous"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#6C1CD1',
+                        secondary: '#1E1E24',
+                        accent: '#6C1CD1', // Alterado para primary também para consistência se usado em botões
+                    },
+                    fontFamily: {
+                        sans: ['Montserrat', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap');
+        
+        body {
+            font-family: 'Montserrat', sans-serif;
+            scroll-behavior: smooth;
+        }
+        
+        .hero-bg {
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), 
+                        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100%25' height='100%25'%3E%3Cdefs%3E%3ClinearGradient id='a' x1='0' y1='0' x2='0' y2='1'%3E%3Cstop offset='0' stop-color='%236C1CD1'/%3E%3Cstop offset='1' stop-color='%23000000'/%3E%3C/linearGradient%3E%3Cpattern id='b' width='24' height='24' patternUnits='userSpaceOnUse'%3E%3Ccircle fill='%23ffffff' cx='12' cy='12' r='1'/%3E%3C/circle%3E%3Crect width='100%25' height='100%25' fill='url(%23a)'/%3E%3Crect width='100%25' height='100%25' fill='url(%23b)' fill-opacity='0.1'/%3E%3C/svg%3E");
+            background-size: cover;
+            background-position: center;
+        }
+        
+        .wave-divider {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            overflow: hidden;
+            line-height: 0;
+        }
+        
+        .wave-divider svg {
+            position: relative;
+            display: block;
+            width: calc(100% + 1.3px);
+            height: 78px;
+        }
+        
+        .wave-divider .shape-fill {
+            fill: #FFFFFF;
+        }
+        
+        .service-card {
+            transition: all 0.3s ease;
+        }
+        
+        .service-card:hover {
+            transform: translateY(-10px);
+        }
+        
+        .album-cover {
+            transition: all 0.3s ease;
+        }
+        
+        .album-cover:hover {
+            transform: scale(1.05);
+        }
+        
+        .sound-wave {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 50px;
+        }
+        
+        .sound-wave span {
+            display: block;
+            width: 3px;
+            margin: 0 2px;
+            background: #6C1CD1;
+            animation: sound-wave-animation 1.2s infinite ease-in-out;
+        }
+        
+        .sound-wave span:nth-child(2) { animation-delay: 0.1s; }
+        .sound-wave span:nth-child(3) { animation-delay: 0.2s; }
+        .sound-wave span:nth-child(4) { animation-delay: 0.3s; }
+        .sound-wave span:nth-child(5) { animation-delay: 0.4s; }
+        .sound-wave span:nth-child(6) { animation-delay: 0.5s; }
+        .sound-wave span:nth-child(7) { animation-delay: 0.6s; }
+        
+        @keyframes sound-wave-animation {
+            0%, 100% { height: 10px; }
+            50% { height: 40px; }
+        }
+        
+        .mobile-menu {
+            transition: transform 0.3s ease-in-out;
+            transform: translateX(-100%);
+        }
+        
+        .mobile-menu.active {
+            transform: translateX(0);
+        }
+        
+        .project-card, .portfolio-card {
+            transition: all 0.3s ease;
+            overflow: hidden;
+        }
+        
+        .project-card:hover, .portfolio-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .project-card img, .portfolio-card img {
+            transition: all 0.5s ease;
+        }
+        
+        .project-card:hover img, .portfolio-card:hover img {
+            transform: scale(1.05);
+        }
+        
+        .project-overlay, .portfolio-overlay {
+            background: rgba(108, 28, 209, 0.8);
+            opacity: 0;
+            transition: all 0.3s ease;
+        }
+        
+        .project-card:hover .project-overlay, .portfolio-card:hover .portfolio-overlay {
+            opacity: 1;
+        }
+        
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 100;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.8);
+        }
+        
+        .modal-content {
+            background-color: #1E1E24;
+            margin: 10% auto;
+            padding: 20px;
+            border-radius: 10px;
+            max-width: 600px;
+            animation: modalopen 0.5s;
+        }
+        
+        @keyframes modalopen {
+            from {opacity: 0; transform: translateY(-50px);}
+            to {opacity: 1; transform: translateY(0);}
+        }
+        
+        .close {
+            color: white;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        
+        .close:hover {
+            color: #6C1CD1;
+        }
+        
+        .admin-panel {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 90;
+            display: flex; /* Para alinhar os botões lado a lado */
+            gap: 10px; /* Espaçamento entre os botões */
+        }
+        
+        .banner-preview, .cover-preview {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .project-banner-container, .portfolio-cover-container {
+            position: relative;
+            height: 64px;
+            width: 64px;
+            overflow: hidden;
+            border-radius: 8px;
+            margin-right: 12px;
+        }
+        
+        .admin-badge {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background-color: rgba(108, 28, 209, 0.9);
+            color: white;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: bold;
+            z-index: 10;
+        }
+        
+        .project-actions, .portfolio-actions {
+            display: none;
+            position: absolute; /* Ajustado para sobrepor a imagem */
+            bottom: 10px;
+            right: 10px;
+            z-index: 20;
+            gap: 8px; /* Espaçamento entre os botões de ação */
+        }
+        
+        .admin-mode .project-actions, .admin-mode .portfolio-actions {
+            display: flex;
+        }
+        
+        .admin-mode .project-card, .admin-mode .portfolio-card {
+            position: relative;
+        }
+        .admin-mode .edit-social-links-btn {
+            display: block;
+        }
+
+        /* Estilos para as estrelas de avaliação */
+        .rating-stars {
+            display: flex;
+            justify-content: center; /* Centraliza as estrelas */
+            gap: 5px; /* Espaçamento entre as estrelas */
+            margin-bottom: 1rem;
+        }
+        .rating-stars input[type="radio"] {
+            display: none; /* Oculta os radios buttons */
+        }
+        .rating-stars label {
+            font-size: 2rem; /* Tamanho das estrelas */
+            color: #ccc; /* Cor padrão das estrelas */
+            cursor: pointer;
+            transition: color 0.2s;
+        }
+        .rating-stars label:hover,
+        .rating-stars label:hover ~ label,
+        .rating-stars input[type="radio"]:checked ~ label {
+            color: #ffc107; /* Cor das estrelas preenchidas */
+        }
+        .rating-stars label:hover {
+            transform: scale(1.1); /* Efeito de hover */
+        }
+        /* Inverte a ordem das estrelas para que o hover funcione da direita para a esquerda */
+        .rating-stars {
+            direction: rtl;
+        }
+        .rating-stars label {
+            direction: ltr;
+        }
+
+        .testimonial-status-badge {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: bold;
+            z-index: 10;
+        }
+        .testimonial-status-badge.approved {
+            background-color: rgba(34, 197, 94, 0.9); /* green-500 */
+            color: white;
+        }
+        .testimonial-status-badge.pending {
+            background-color: rgba(251, 191, 36, 0.9); /* yellow-400 */
+            color: white;
+        }
+
+        /* Estilos para o player de música */
+        .spotify-track-card {
+            cursor: pointer;
+            transition: transform 0.2s ease-in-out;
+        }
+        .spotify-track-card:hover {
+            transform: translateY(-5px);
+        }
+        /* Estilos para os botões de ação do Spotify Track Card */
+        .spotify-track-actions {
+            display: none; /* Escondido por padrão */
+            position: absolute;
+            top: 8px; /* Ajustado para um pouco mais de espaço */
+            right: 8px; /* Ajustado para um pouco mais de espaço */
+            z-index: 20;
+            gap: 6px; /* Espaçamento entre os botões */
+        }
+        /* Mostra os botões de ação em modo admin */
+        .admin-mode .spotify-track-actions {
+            display: flex;
+        }
+        /* Pequenos ajustes para os botões dentro do card */
+        .spotify-track-actions button {
+            padding: 6px; /* Aumenta o padding para um target maior */
+            font-size: 0.8rem; /* Mantém o tamanho da fonte razoável */
+            border-radius: 9999px; /* Totalmente redondo */
+        }
+    </style>
+</head>
+<body class="bg-primary text-gray-800">
+    <header class="bg-secondary text-white fixed w-full z-50">
+        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+            <div class="flex items-center">
+                <div class="sound-wave mr-3">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+                <a href="#" class="text-2xl font-bold">CBR <span class="text-primary">RECORDS</span></a>
+            </div>
+            
+            <nav class="hidden md:flex space-x-8">
+                <a href="#home" class="hover:text-primary transition-colors">Início</a>
+                <a href="#services" class="hover:text-primary transition-colors">Serviços</a>
+                <a href="#projects" class="hover:text-primary transition-colors">Projetos</a>
+                <a href="#portfolio" class="hover:text-primary transition-colors">Portfólio</a>
+                <a href="#music-player" class="hover:text-primary transition-colors">Músicas</a> <!-- Novo link -->
+                <a href="#studio" class="hover:text-primary transition-colors">Estúdio</a>
+                <a href="#testimonials" class="hover:text-primary transition-colors">Depoimentos</a>
+                <a href="#contact" class="hover:text-primary transition-colors">Contato</a>
+            </nav>
+            
+            <button id="mobile-menu-button" class="md:hidden text-white focus:outline-none">
+                <i class="fas fa-bars text-2xl"></i>
+            </button>
+        </div>
+        
+        <div id="mobile-menu" class="mobile-menu fixed top-0 left-0 h-full w-64 bg-secondary z-50 p-5">
+            <div class="flex justify-between items-center mb-8">
+                <div class="text-xl font-bold">CBR <span class="text-primary">RECORDS</span></div>
+                <button id="close-menu" class="text-white focus:outline-none">
+                    <i class="fas fa-times text-2xl"></i>
+                </button>
+            </div>
+            <nav class="flex flex-col space-y-4">
+                <a href="#home" class="hover:text-primary transition-colors">Início</a>
+                <a href="#services" class="hover:text-primary transition-colors">Serviços</a>
+                <a href="#projects" class="hover:text-primary transition-colors">Projetos</a>
+                <a href="#portfolio" class="hover:text-primary transition-colors">Portfólio</a>
+                <a href="#music-player" class="hover:text-primary transition-colors">Músicas</a> <!-- Novo link -->
+                <a href="#studio" class="hover:text-primary transition-colors">Estúdio</a>
+                <a href="#testimonials" class="hover:text-primary transition-colors">Depoimentos</a>
+                <a href="#contact" class="hover:text-primary transition-colors">Contato</a>
+            </nav>
+        </div>
+    </header>
+
+    <section id="home" class="hero-bg text-white min-h-screen flex items-center relative pt-16">
+        <div class="container mx-auto px-4 py-16">
+            <div class="max-w-3xl">
+                <h1 class="text-4xl md:text-6xl font-bold mb-4">Transforme seu som em <span class="text-primary">arte</span></h1>
+                <p class="text-xl mb-8">Produção musical profissional para artistas que buscam qualidade e originalidade.</p>
+                <div class="flex flex-wrap gap-4">
+                    <a href="#contact" class="bg-primary hover:bg-purple-700 text-white font-bold py-3 px-6 rounded-full transition-colors">Agende uma Sessão</a>
+                    <a href="#projects" class="bg-transparent border-2 border-white hover:border-primary hover:text-primary text-white font-bold py-3 px-6 rounded-full transition-colors">Conheça Nosso Trabalho</a>
+                </div>
+            </div>
+        </div>
+        <div class="wave-divider">
+            <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
+                <path d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z" class="shape-fill"></path>
+            </svg>
+        </div>
+    </section>
+
+    <section id="services" class="py-20 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">Nossos <span class="text-primary">Serviços</span></h2>
+                <p class="text-gray-600 max-w-2xl mx-auto">Oferecemos uma gama completa de serviços de produção musical para elevar seu projeto ao próximo nível.</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="service-card bg-white rounded-lg shadow-lg p-8 text-center">
+                    <div class="bg-primary/10 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <i class="fas fa-microphone text-primary text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Gravação Profissional</h3>
+                    <p class="text-gray-600">Equipamentos de última geração e ambiente acusticamente tratado para capturar o melhor do seu som.</p>
+                </div>
+                
+                <div class="service-card bg-white rounded-lg shadow-lg p-8 text-center">
+                    <div class="bg-primary/10 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <i class="fas fa-sliders-h text-primary text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Mixagem & Masterização</h3>
+                    <p class="text-gray-600">Dê o acabamento perfeito às suas faixas com nossa expertise em mixagem e masterização.</p>
+                </div>
+                
+                <div class="service-card bg-white rounded-lg shadow-lg p-8 text-center">
+                    <div class="bg-primary/10 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <i class="fas fa-music text-primary text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Produção Musical</h3>
+                    <p class="text-gray-600">Do conceito ao produto final, ajudamos a desenvolver sua visão artística com arranjos e produção completa.</p>
+                </div>
+                
+                <div class="service-card bg-white rounded-lg shadow-lg p-8 text-center">
+                    <div class="bg-primary/10 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <i class="fas fa-drum text-primary text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Sessões com Músicos</h3>
+                    <p class="text-gray-600">Acesso a músicos profissionais para complementar suas gravações com instrumentos diversos.</p>
+                </div>
+                
+                <div class="service-card bg-white rounded-lg shadow-lg p-8 text-center">
+                    <div class="bg-primary/10 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <i class="fas fa-compact-disc text-primary text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Distribuição Digital</h3>
+                    <p class="text-gray-600">Ajudamos a levar sua música para as principais plataformas de streaming e lojas digitais.</p>
+                </div>
+                
+                <div class="service-card bg-white rounded-lg shadow-lg p-8 text-center">
+                    <div class="bg-primary/10 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <i class="fas fa-video text-primary text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Produção Audiovisual</h3>
+                    <p class="text-gray-600">Videoclipes, lyric videos e conteúdo para redes sociais para promover seu trabalho.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="projects" class="py-20 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">Nossos <span class="text-primary">Projetos</span></h2>
+                <p class="text-gray-600 max-w-2xl mx-auto">Confira alguns dos nossos trabalhos mais recentes e ouça nas plataformas de streaming.</p>
+            </div>
+            
+            <div id="projects-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <p id="no-projects-message" class="col-span-full text-center text-gray-500 text-lg hidden">Nenhum projeto ainda. Adicione um para começar!</p>
+            </div>
+            
+            <div id="admin-projects-button" class="text-center mt-12 hidden">
+                <button id="add-project-btn" class="bg-primary hover:bg-purple-700 text-white font-bold py-3 px-6 rounded-full transition-colors">
+                    <i class="fas fa-plus mr-2"></i> Adicionar Novo Projeto
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <section id="portfolio" class="py-20 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">Nosso <span class="text-primary">Portfólio</span></h2>
+                <p class="text-gray-600 max-w-2xl mx-auto">Conheça alguns dos projetos que tivemos o prazer de produzir em nosso estúdio.</p>
+            </div>
+            
+            <div id="portfolio-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <p id="no-portfolio-message" class="col-span-full text-center text-gray-500 text-lg hidden">Nenhum item de portfólio ainda. Adicione um para começar!</p>
+            </div>
+
+            <div id="admin-portfolio-button" class="text-center mt-12 hidden">
+                <button id="add-portfolio-btn" class="bg-primary hover:bg-purple-700 text-white font-bold py-3 px-6 rounded-full transition-colors">
+                    <i class="fas fa-plus mr-2"></i> Adicionar Item de Portfólio
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Nova Seção: Player de Música Spotify -->
+    <section id="music-player" class="py-20 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">Ouça Nossas <span class="text-primary">Produções</span></h2>
+                <p class="text-gray-600 max-w-2xl mx-auto">Selecione uma faixa para ouvir diretamente do Spotify.</p>
+            </div>
+            
+            <div class="max-w-xl mx-auto mb-8 bg-secondary rounded-lg shadow-xl p-4">
+                <div id="spotify-player-iframe-container" class="w-full">
+                    <!-- O iframe do Spotify será carregado aqui -->
+                    <p class="text-white text-center py-8">Selecione uma música abaixo para começar a ouvir!</p>
+                </div>
+            </div>
+
+            <div id="spotify-tracks-container" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6">
+                <p id="no-spotify-tracks-message" class="col-span-full text-center text-gray-500 text-lg hidden">Nenhuma música disponível ainda. Adicione uma!</p>
+                <!-- As músicas do Spotify serão carregadas aqui via JS -->
+            </div>
+
+            <div id="admin-spotify-tracks-button" class="text-center mt-12 hidden">
+                <button id="add-spotify-track-btn" class="bg-primary hover:bg-purple-700 text-white font-bold py-3 px-6 rounded-full transition-colors">
+                    <i class="fab fa-spotify mr-2"></i> Adicionar Música Spotify
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <section id="studio" class="py-20 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">Nosso <span class="text-primary">Estúdio</span></h2>
+                <p class="text-gray-600 max-w-2xl mx-auto">Um espaço projetado para inspirar criatividade e capturar o melhor som possível.</p>
+            </div>
+            
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+                <div>
+                    <div class="bg-gradient-to-br from-primary to-purple-800 rounded-lg h-96 flex items-center justify-center shadow-xl">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-32 w-32 text-white opacity-50" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z" />
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
+                    </div>
+                </div>
+                
+                <div>
+                    <h3 class="text-2xl font-bold mb-4">Equipamentos de Ponta</h3>
+                    <p class="text-gray-600 mb-6">Nosso estúdio conta com equipamentos de última geração para garantir a melhor qualidade sonora em suas produções.</p>
+                    
+                    <ul class="space-y-4">
+                        <li class="flex items-start">
+                            <i class="fas fa-check-circle text-primary mt-1 mr-3"></i>
+                            <div>
+                                <h4 class="font-bold">Sala Acusticamente Tratada</h4>
+                                <p class="text-gray-600">Ambiente projetado para capturar o som com precisão e clareza.</p>
+                            </div>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check-circle text-primary mt-1 mr-3"></i>
+                            <div>
+                                <h4 class="font-bold">Microfones Profissionais</h4>
+                                <p class="text-gray-600">Coleção de microfones de alta qualidade para diferentes aplicações.</p>
+                            </div>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check-circle text-primary mt-1 mr-3"></i>
+                            <div>
+                                <h4 class="font-bold">Instrumentos Disponíveis</h4>
+                                <p class="text-gray-600">Acesso a diversos instrumentos musicais para enriquecer suas produções.</p>
+                            </div>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check-circle text-primary mt-1 mr-3"></i>
+                            <div>
+                                <h4 class="font-bold">Software e Hardware Profissional</h4>
+                                <p class="text-gray-600">Utilizamos as melhores ferramentas do mercado para produção musical.</p>
+                            </div>
+                        </li>
+                    </ul>
+                    
+                    <a href="#contact" class="inline-block mt-8 bg-primary hover:bg-purple-700 text-white font-bold py-3 px-6 rounded-full transition-colors">Agende uma Visita</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="testimonials" class="py-20 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">O que <span class="text-primary">Dizem</span> Sobre Nós</h2>
+                <p class="text-gray-600 max-w-2xl mx-auto">Veja o que nossos clientes têm a dizer sobre sua experiência com a CBR Records.</p>
+            </div>
+            
+            <div id="testimonials-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <p id="no-testimonials-message" class="col-span-full text-center text-gray-500 text-lg hidden">Nenhum depoimento ainda. Seja o primeiro a deixar um!</p>
+                <!-- Depoimentos existentes serão carregados aqui via JS -->
+            </div>
+
+            <div class="text-center mt-12">
+                <button id="add-testimonial-btn" class="bg-primary hover:bg-purple-700 text-white font-bold py-3 px-6 rounded-full transition-colors">
+                    <i class="fas fa-star mr-2"></i> Deixe seu Depoimento
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="py-20 bg-secondary text-white">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">Entre em <span class="text-primary">Contato</span></h2>
+                <p class="text-gray-300 max-w-2xl mx-auto">Estamos prontos para transformar seu projeto em realidade. Entre em contato para agendar uma sessão ou tirar suas dúvidas.</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+                <div>
+                    <form name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field" action="/#contact" class="space-y-6">
+                        <!-- Campo honeypot para prevenção de spam (manter oculto) -->
+                        <p class="hidden">
+                            <label>Não preencha este campo: <input name="bot-field" /></label>
+                        </p>
+                        <div>
+                            <label for="name" class="block mb-2 font-medium">Nome</label>
+                            <input type="text" id="name" name="name" class="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-lg focus:outline-none focus:border-primary text-white" placeholder="Seu nome">
+                        </div>
+                        
+                        <div>
+                            <label for="email" class="block mb-2 font-medium">Email</label>
+                            <input type="email" id="email" name="email" class="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-lg focus:outline-none focus:border-primary text-white" placeholder="seu@email.com">
+                        </div>
+                        
+                        <div>
+                            <label for="service" class="block mb-2 font-medium">Serviço de Interesse</label>
+                            <select id="service" name="service" class="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-lg focus:outline-none focus:border-primary text-white">
+                                <option value="" disabled selected>Selecione um serviço</option>
+                                <option value="recording">Gravação</option>
+                                <option value="mixing">Mixagem</option>
+                                <option value="mastering">Masterização</option>
+                                <option value="production">Produção Musical</option>
+                                <option value="distribution">Distribuição Digital</option>
+                                <option value="other">Outro</option>
+                            </select>
+                        </div>
+                        
+                        <div>
+                            <label for="message" class="block mb-2 font-medium">Mensagem</label>
+                            <textarea id="message" name="message" rows="5" class="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-lg focus:outline-none focus:border-primary text-white" placeholder="Conte-nos sobre seu projeto..."></textarea>
+                        </div>
+                        
+                        <button type="submit" class="w-full bg-primary hover:bg-purple-700 text-white font-bold py-3 px-6 rounded-lg transition-colors">Enviar Mensagem</button>
+                    </form>
+                </div>
+                
+                <div>
+                    <div class="bg-gray-800 p-8 rounded-lg">
+                        <h3 class="text-2xl font-bold mb-6">Informações de Contato</h3>
+                        
+                        <div class="space-y-6">
+                            <div class="flex items-start">
+                                <div class="bg-primary/20 w-12 h-12 rounded-full flex items-center justify-center mr-4">
+                                    <i class="fas fa-map-marker-alt text-primary"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold mb-1">Endereço</h4>
+                                    <p class="text-gray-300">Av. Castelo Branco, 226, São Bernardo do campo - SP</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start">
+                                <div class="bg-primary/20 w-12 h-12 rounded-full flex items-center justify-center mr-4">
+                                    <i class="fas fa-phone text-primary"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold mb-1">Telefone</h4>
+                                    <p class="text-gray-300">(11) 95920-6171</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start">
+                                <div class="bg-primary/20 w-12 h-12 rounded-full flex items-center justify-center mr-4">
+                                    <i class="fas fa-envelope text-primary"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold mb-1">Email</h4>
+                                    <p class="text-gray-300">casabombarecord@gmail.com</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start">
+                                <div class="bg-primary/20 w-12 h-12 rounded-full flex items-center justify-center mr-4">
+                                    <i class="fas fa-clock text-primary"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold mb-1">Horário de Funcionamento</h4>
+                                    <p class="text-gray-300">Segunda a Sexta: 9h às 18h<br>Sábado: 10h às 15h</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mt-8">
+                            <h4 class="font-bold mb-4">Siga-nos</h4>
+                            <div id="social-links-contact" class="flex space-x-4">
+                                <!-- Os links serão renderizados dinamicamente aqui -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="bg-secondary text-white py-8 text-center">
+        <div class="container mx-auto px-4">
+            <p>© 2024 CBR RECORDS. Todos os direitos reservados.</p>
+        </div>
+    </footer>
+
+    <div class="admin-panel">
+        <button id="admin-login-btn" class="bg-primary hover:bg-purple-700 text-white p-3 rounded-full shadow-lg transition-colors flex items-center justify-center">
+            <i id="admin-login-icon" class="fas fa-lock text-xl"></i>
+        </button>
+        <button id="logout-btn" class="bg-red-600 hover:bg-red-700 text-white p-3 rounded-full shadow-lg transition-colors hidden">
+            <i class="fas fa-sign-out-alt text-xl"></i>
+        </button>
+        <button id="change-password-btn" class="bg-gray-600 hover:bg-gray-700 text-white p-3 rounded-full shadow-lg transition-colors hidden">
+            <i class="fas fa-key text-xl"></i>
+        </button>
+        <button id="edit-social-links-btn" class="bg-blue-600 hover:bg-blue-700 text-white p-3 rounded-full shadow-lg transition-colors hidden">
+            <i class="fas fa-share-alt text-xl"></i>
+        </button>
+        <!-- Novo botão para gerenciar músicas do Spotify (admin) -->
+        <button id="manage-spotify-tracks-btn" class="bg-green-600 hover:bg-green-700 text-white p-3 rounded-full shadow-lg transition-colors hidden">
+            <i class="fab fa-spotify text-xl"></i>
+        </button>
+    </div>
+
+    <div id="admin-login-modal" class="modal">
+        <div class="modal-content">
+            <span class="close" id="admin-login-close">×</span>
+            <div class="p-4">
+                <h2 class="text-2xl font-bold text-white mb-4">Login do Administrador</h2>
+                <form id="admin-login-form" class="space-y-4">
+                    <input type="text" id="admin-username" placeholder="Usuário" class="w-full p-3 rounded bg-gray-700 text-white border border-gray-600 focus:outline-none focus:ring-2 focus:ring-primary">
+                    <input type="password" id="admin-password" placeholder="Senha" class="w-full p-3 rounded bg-gray-700 text-white border border-gray-600 focus:outline-none focus:ring-2 focus:ring-primary">
+                    <button type="submit" class="w-full bg-primary hover:bg-purple-800 text-white font-bold py-3 px-6 rounded-lg transition-colors">Login</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div id="change-password-modal" class="modal">
+        <div class="modal-content">
+            <span class="close" id="change-password-close">×</span>
+            <div class="p-4">
+                <h2 class="text-2xl font-bold text-white mb-4">Alterar Senha do Administrador</h2>
+                <form id="change-password-form" class="space-y-4">
+                    <input type="password" id="old-password" placeholder="Senha Antiga" class="w-full p-3 rounded bg-gray-700 text-white border border-gray-600 focus:outline-none focus:ring-2 focus:ring-primary">
+                    <input type="password" id="new-password" placeholder="Nova Senha (mín. 6 caracteres)" class="w-full p-3 rounded bg-gray-700 text-white border border-gray-600 focus:outline-none focus:ring-2 focus:ring-primary">
+                    <input type="password" id="confirm-new-password" placeholder="Confirmar Nova Senha" class="w-full p-3 rounded bg-gray-700 text-white border border-gray-600 focus:outline-none focus:ring-2 focus:ring-primary">
+                    <button type="submit" class="w-full bg-primary hover:bg-purple-800 text-white font-bold py-3 px-6 rounded-lg transition-colors">Alterar Senha</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div id="social-links-modal" class="modal">
+        <div class="modal-content">
+            <span class="close" id="social-links-close">×</span>
+            <div class="p-4">
+                <h2 class="text-2xl font-bold text-white mb-4">Editar Links das Redes Sociais</h2>
+                <form id="social-links-form" class="space-y-4">
+                    <label for="instagram-link" class="block text-sm font-medium text-gray-300">Instagram:</label>
+                    <input type="url" id="instagram-link" name="instagram" placeholder="Link do Instagram" class="w-full p-3 rounded bg-gray-700 text-white border border-gray-600 focus:outline-none focus:ring-2 focus:ring-primary">
+
+                    <label for="facebook-link" class="block text-sm font-medium text-gray-300">Facebook:</label>
+                    <input type="url" id="facebook-link" name="facebook" placeholder="Link do Facebook" class="w-full p-3 rounded bg-gray-700 text-white border border-gray-600 focus:outline-none focus:ring-2 focus:ring-primary">
+                    
+                    <label for="spotify-link-global" class="block text-sm font-medium text-gray-300">Spotify (Global):</label>
+                    <input type="url" id="spotify-link-global" name="spotify" placeholder="Link do Spotify" class="w-full p-3 rounded bg-gray-700 text-white border border-gray-600 focus:outline-none focus:ring-2 focus:ring-primary">
+                    
+                    <label for="youtube-link-global" class="block text-sm font-medium text-gray-300">YouTube (Global):</label>
+                    <input type="url" id="youtube-link-global" name="youtube" placeholder="Link do YouTube" class="w-full p-3 rounded bg-gray-700 text-white border border-gray-600 focus:outline-none focus:ring-2 focus:ring-primary">
+
+                    <button type="submit" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-lg transition-colors">Salvar Links</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div id="project-modal" class="modal">
+        <div class="modal-content">
+            <span class="close" id="project-close">×</span>
+            <div class="p-4">
+                <h2 class="text-2xl font-bold text-white mb-4" id="project-modal-title">Adicionar Novo Projeto</h2>
+                <form id="project-form" class="space-y-4">
+                    <input type="hidden" id="project-id">
+                    <div>
+                        <label for="project-title" class="block text-sm font-medium text-gray-300">Título do Projeto:</label>
+                        <input type="text" id="project-title" class="mt-1 block w-full border border-gray-600 rounded-md shadow-sm p-2 bg-gray-700 text-white" required>
+                    </div>
+                    <div>
+                        <label for="project-description" class="block text-sm font-medium text-gray-300">Descrição:</label>
+                        <textarea id="project-description" rows="3" class="mt-1 block w-full border border-gray-600 rounded-md shadow-sm p-2 bg-gray-700 text-white" required></textarea>
+                    </div>
+                    <div>
+                        <label for="project-image-url" class="block text-sm font-medium text-gray-300">URL da Imagem de Capa:</label>
+                        <input type="url" id="project-image-url" class="mt-1 block w-full border border-gray-600 rounded-md shadow-sm p-2 bg-gray-700 text-white">
+                    </div>
+                    <div>
+                        <label for="project-spotify-link" class="block text-sm font-medium text-gray-300">Link Spotify:</label>
+                        <input type="url" id="project-spotify-link" class="mt-1 block w-full border border-gray-600 rounded-md shadow-sm p-2 bg-gray-700 text-white" required>
+                    </div>
+                    <div>
+                        <label for="project-youtube-link" class="block text-sm font-medium text-gray-300">Link YouTube:</label>
+                        <input type="url" id="project-youtube-link" class="mt-1 block w-full border border-gray-600 rounded-md shadow-sm p-2 bg-gray-700 text-white" required>
+                    </div>
+                    <button type="submit" class="w-full bg-primary hover:bg-purple-700 text-white font-bold py-3 px-6 rounded-lg transition-colors">
+                        <i class="fas fa-save mr-2"></i> Salvar Projeto
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div id="portfolio-modal" class="modal">
+        <div class="modal-content">
+            <span class="close" id="portfolio-close">×</span>
+            <div class="p-4">
+                <h2 class="text-2xl font-bold text-white mb-4" id="portfolio-modal-title">Adicionar Novo Item de Portfólio</h2>
+                <form id="portfolio-form" class="space-y-4">
+                    <input type="hidden" id="portfolio-id">
+                    <div>
+                        <label for="portfolio-title" class="block text-sm font-medium text-gray-300">Título do Item:</label>
+                        <input type="text" id="portfolio-title" class="mt-1 block w-full border border-gray-600 rounded-md shadow-sm p-2 bg-gray-700 text-white" required>
+                    </div>
+                    <div>
+                        <label for="portfolio-description" class="block text-sm font-medium text-gray-300">Descrição:</label>
+                        <textarea id="portfolio-description" rows="3" class="mt-1 block w-full border border-gray-600 rounded-md shadow-sm p-2 bg-gray-700 text-white" required></textarea>
+                    </div>
+                    <div>
+                        <label for="portfolio-image-url" class="block text-sm font-medium text-gray-300">URL da Imagem de Capa:</label>
+                        <input type="url" id="portfolio-image-url" class="mt-1 block w-full border border-gray-600 rounded-md shadow-sm p-2 bg-gray-700 text-white">
+                    </div>
+                    <div>
+                        <label for="portfolio-spotify-link" class="block text-sm font-medium text-gray-300">Link Spotify:</label>
+                        <input type="url" id="portfolio-spotify-link" class="mt-1 block w-full border border-gray-600 rounded-md shadow-sm p-2 bg-gray-700 text-white" required>
+                    </div>
+                    <div>
+                        <label for="portfolio-youtube-link" class="block text-sm font-medium text-gray-300">Link YouTube:</label>
+                        <input type="url" id="portfolio-youtube-link" class="mt-1 block w-full border border-gray-600 rounded-md shadow-sm p-2 bg-gray-700 text-white" required>
+                    </div>
+                    <button type="submit" class="w-full bg-primary hover:bg-purple-700 text-white font-bold py-3 px-6 rounded-lg transition-colors">
+                        <i class="fas fa-save mr-2"></i> Salvar Item
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Novo Modal para Deixar Depoimento -->
+    <div id="add-testimonial-modal" class="modal">
+        <div class="modal-content">
+            <span class="close" id="add-testimonial-close">×</span>
+            <div class="p-4">
+                <h2 class="text-2xl font-bold text-white mb-4">Deixe seu Depoimento</h2>
+                <form id="testimonial-form" class="space-y-4">
+                    <div>
+                        <label for="testimonial-name" class="block text-sm font-medium text-gray-300">Seu Nome:</label>
+                        <input type="text" id="testimonial-name" class="mt-1 block w-full border border-gray-600 rounded-md shadow-sm p-2 bg-gray-700 text-white" required>
+                    </div>
+                    <div>
+                        <label for="testimonial-rating" class="block text-sm font-medium text-gray-300 mb-2">Sua Avaliação:</label>
+                        <div class="rating-stars">
+                            <input type="radio" id="star5" name="rating" value="5" required /><label for="star5" title="5 estrelas"><i class="fas fa-star"></i></label>
+                            <input type="radio" id="star4" name="rating" value="4" /><label for="star4" title="4 estrelas"><i class="fas fa-star"></i></label>
+                            <input type="radio" id="star3" name="rating" value="3" /><label for="star3" title="3 estrelas"><i class="fas fa-star"></i></label>
+                            <input type="radio" id="star2" name="rating" value="2" /><label for="star2" title="2 estrelas"><i class="fas fa-star"></i></label>
+                            <input type="radio" id="star1" name="rating" value="1" /><label for="star1" title="1 estrela"><i class="fas fa-star"></i></label>
+                        </div>
+                    </div>
+                    <div>
+                        <label for="testimonial-comment" class="block text-sm font-medium text-gray-300">Seu Depoimento:</label>
+                        <textarea id="testimonial-comment" rows="5" class="mt-1 block w-full border border-gray-600 rounded-md shadow-sm p-2 bg-gray-700 text-white" required></textarea>
+                    </div>
+                    <button type="submit" class="w-full bg-primary hover:bg-purple-700 text-white font-bold py-3 px-6 rounded-lg transition-colors">
+                        <i class="fas fa-paper-plane mr-2"></i> Enviar Depoimento
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Novo Modal para Gerenciar Músicas Spotify (Admin) -->
+    <div id="spotify-track-modal" class="modal">
+        <div class="modal-content">
+            <span class="close" id="spotify-track-close">×</span>
+            <div class="p-4">
+                <h2 class="text-2xl font-bold text-white mb-4" id="spotify-track-modal-title">Adicionar Música Spotify</h2>
+                <form id="spotify-track-form" class="space-y-4">
+                    <input type="hidden" id="spotify-track-id">
+                    <div>
+                        <label for="spotify-track-title" class="block text-sm font-medium text-gray-300">Título da Música:</label>
+                        <input type="text" id="spotify-track-title" class="mt-1 block w-full border border-gray-600 rounded-md shadow-sm p-2 bg-gray-700 text-white" required>
+                    </div>
+                    <div>
+                        <label for="spotify-track-artist" class="block text-sm font-medium text-gray-300">Artista:</label>
+                        <input type="text" id="spotify-track-artist" class="mt-1 block w-full border border-gray-600 rounded-md shadow-sm p-2 bg-gray-700 text-white" required>
+                    </div>
+                    <div>
+                        <label for="spotify-track-id-input" class="block text-sm font-medium text-gray-300">ID da Música Spotify:</label>
+                        <input type="text" id="spotify-track-id-input" class="mt-1 block w-full border border-gray-600 rounded-md shadow-sm p-2 bg-gray-700 text-white" placeholder="Ex: 3n3Ppam7vgaVa1iaxmoLqA" required>
+                        <p class="text-xs text-gray-400 mt-1">Você pode encontrar o ID da música no link de compartilhamento do Spotify (ex: `https://open.spotify.com/track/<ID_AQUI>`).</p>
+                    </div>
+                    <div>
+                        <label for="spotify-track-image-url" class="block text-sm font-medium text-gray-300">URL da Imagem da Capa (Opcional):</label>
+                        <input type="url" id="spotify-track-image-url" class="mt-1 block w-full border border-gray-600 rounded-md shadow-sm p-2 bg-gray-700 text-white" placeholder="URL da capa do álbum">
+                    </div>
+                    <button type="submit" class="w-full bg-primary hover:bg-purple-700 text-white font-bold py-3 px-6 rounded-lg transition-colors">
+                        <i class="fas fa-save mr-2"></i> Salvar Música
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+
+    <script>
+        // Variável global para o token JWT
+        const JWT_TOKEN_KEY = 'jwt_token';
+
+        // Variáveis globais para elementos do DOM (serão atribuídas em DOMContentLoaded)
+        let adminLoginBtn, logoutBtn, changePasswordBtn, editSocialLinksBtn, manageSpotifyTracksBtn;
+        let adminLoginModal, changePasswordModal, socialLinksModal, projectModal, portfolioModal, addTestimonialModal, spotifyTrackModal;
+        let adminLoginClose, changePasswordClose, socialLinksClose, projectClose, portfolioClose, addTestimonialClose, spotifyTrackClose;
+        let adminLoginForm, changePasswordForm, socialLinksForm, projectForm, portfolioForm, testimonialForm, spotifyTrackForm;
+        let projectsContainer, noProjectsMessage, adminProjectsButton, addProjectBtn;
+        let portfolioContainer, noPortfolioMessage, adminPortfolioButton, addPortfolioBtn;
+        let testimonialsContainer, noTestimonialsMessage, addTestimonialBtn;
+        let spotifyPlayerIframeContainer, spotifyTracksContainer, noSpotifyTracksMessage, addSpotifyTrackBtn;
+        let adminLoginIcon;
+        let socialLinksContactDiv; // Referência ao div dos links sociais
+
+        // --- Funções Auxiliares (podem ser definidas fora de DOMContentLoaded) ---
+        async function fetchAPI(endpoint, method = 'GET', data = null, needsAuth = false) {
+            // Alterado para usar window.location.origin para construir um URL absoluto
+            const baseURL = window.location.origin + '/.netlify/functions/api'; 
+            
+            const options = {
+                method: method,
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+            };
+
+            if (needsAuth) {
+                const token = localStorage.getItem(JWT_TOKEN_KEY);
+                if (!token) {
+                    console.error('Nenhum token JWT encontrado');
+                    logout();
+                    alert('Sua sessão expirou ou você não está logado. Por favor, faça login novamente.');
+                    return null;
+                }
+                options.headers['Authorization'] = `Bearer ${token}`;
+            }
+
+            if (data) {
+                options.body = JSON.stringify(data);
+            }
+
+            try {
+                // Garante que o endpoint sempre comece com '/'
+                const url = `${baseURL}${endpoint.startsWith('/') ? endpoint : '/' + endpoint}`;
+                console.log('Chamando API com URL:', url); // LOG DE DEBUG: Mostra o URL completo da API
+                const response = await fetch(url, options);
+                
+                if (response.status === 204) return {};
+                
+                const contentType = response.headers.get('content-type');
+                let responseData = {};
+
+                if (contentType && contentType.includes('application/json')) {
+                    const text = await response.text();
+                    responseData = text ? JSON.parse(text) : {};
+                } else {
+                    const rawText = await response.text();
+                    console.error('Resposta não é JSON. Conteúdo:', rawText);
+                    throw new Error(`Resposta inesperada do servidor (Status: ${response.status}, Tipo: ${contentType}). Verifique os logs do Netlify.`);
+                }
+                
+                if (!response.ok) {
+                    if (response.status === 401 || response.status === 403) {
+                        logout();
+                        alert(responseData.message || 'Sua sessão expirou ou suas credenciais são inválidas. Por favor, faça login novamente.');
+                    } else {
+                        alert(responseData.message || `Erro: ${response.statusText}. Verifique o console para mais detalhes.`);
+                    }
+                    throw new Error(responseData.message || `Erro: ${response.statusText}`);
+                }
+                
+                return responseData;
+            } catch (error) {
+                console.error(`Erro na API (${method} ${endpoint}):`, error);
+                if (error.message.includes('Failed to fetch') || error.message.includes('NetworkError')) {
+                     alert('Erro ao conectar com o servidor. Verifique sua conexão ou tente novamente mais tarde.');
+                }
+                return null;
+            }
+        }
+
+        function logout() {
+            localStorage.removeItem(JWT_TOKEN_KEY);
+            checkLoginStatus();
+        }
+
+        function openModal(modal) {
+            modal.style.display = 'block';
+            document.body.classList.add('overflow-hidden');
+        }
+
+        function closeModal(modal) {
+            modal.style.display = 'none';
+            document.body.classList.remove('overflow-hidden');
+            if (modal === projectModal && projectForm) projectForm.reset();
+            if (modal === portfolioModal && portfolioForm) portfolioForm.reset();
+            if (modal === changePasswordModal && changePasswordForm) changePasswordForm.reset();
+            if (modal === addTestimonialModal && testimonialForm) testimonialForm.reset();
+            if (modal === spotifyTrackModal && spotifyTrackForm) spotifyTrackForm.reset();
+        }
+
+        function toggleAdminMode(enable) {
+            if (enable) {
+                document.body.classList.add('admin-mode');
+                adminProjectsButton.classList.remove('hidden');
+                adminPortfolioButton.classList.remove('hidden');
+                manageSpotifyTracksBtn.classList.remove('hidden');
+            } else {
+                document.body.classList.remove('admin-mode');
+                adminProjectsButton.classList.add('hidden');
+                adminPortfolioButton.classList.add('hidden');
+                manageSpotifyTracksBtn.classList.add('hidden');
+            }
+            fetchProjects();
+            fetchPortfolio();
+            fetchTestimonials();
+            fetchSpotifyTracks();
+            renderSocialLinks(); // Chamar para atualizar os links sociais
+        }
+
+        function checkLoginStatus() {
+            const token = localStorage.getItem(JWT_TOKEN_KEY);
+            const isAdminMode = document.body.classList.contains('admin-mode');
+
+            if (token) {
+                adminLoginBtn.classList.add('hidden');
+                logoutBtn.classList.remove('hidden');
+                changePasswordBtn.classList.remove('hidden');
+                editSocialLinksBtn.classList.remove('hidden');
+                manageSpotifyTracksBtn.classList.remove('hidden');
+                adminLoginIcon.classList.remove('fa-lock');
+                adminLoginIcon.classList.add('fa-user-shield');
+                
+                if (!isAdminMode) {
+                    toggleAdminMode(true);
+                }
+            } else {
+                adminLoginBtn.classList.remove('hidden');
+                logoutBtn.classList.add('hidden');
+                changePasswordBtn.classList.add('hidden');
+                editSocialLinksBtn.classList.add('hidden');
+                manageSpotifyTracksBtn.classList.add('hidden');
+                adminLoginIcon.classList.remove('fa-user-shield');
+                adminLoginIcon.classList.add('fa-lock');
+                
+                if (isAdminMode) {
+                    toggleAdminMode(false);
+                }
+            }
+        }
+
+        // --- Funções de CRUD de Projetos ---
+        async function fetchProjects() {
+            const projects = await fetchAPI('/projects');
+            if (projects) {
+                projectsContainer.innerHTML = '';
+                if (projects.length === 0) {
+                    noProjectsMessage.classList.remove('hidden');
+                } else {
+                    noProjectsMessage.classList.add('hidden');
+                    projects.forEach(project => {
+                        projectsContainer.innerHTML += `
+                            <div class="project-card bg-white rounded-lg shadow-lg overflow-hidden relative">
+                                <div class="admin-badge ${document.body.classList.contains('admin-mode') ? '' : 'hidden'}">ADMIN</div>
+                                <img src="${project.image_url || 'https://via.placeholder.com/400x250?text=Capa+do+Projeto'}" alt="${project.title}" class="w-full h-48 object-cover">
+                                <div class="p-6">
+                                    <h3 class="text-xl font-bold mb-2">${project.title}</h3>
+                                    <p class="text-gray-600 mb-4">${project.description}</p>
+                                    <div class="flex flex-wrap gap-3">
+                                        ${project.spotify_link ? `<a href="${project.spotify_link}" target="_blank" class="bg-purple-600 hover:bg-purple-700 text-white font-bold py-2 px-4 rounded-full transition-colors"><i class="fab fa-spotify mr-2"></i>Spotify</a>` : ''}
+                                        ${project.youtube_link ? `<a href="${project.youtube_link}" target="_blank" class="bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-full transition-colors"><i class="fab fa-youtube mr-2"></i>YouTube</a>` : ''}
+                                    </div>
+                                </div>
+                                <div class="project-actions absolute top-2 right-2 flex gap-2 ${document.body.classList.contains('admin-mode') ? '' : 'hidden'}">
+                                    <button onclick="editProject('${project._id}', '${project.title.replace(/'/g, "\\'")}', '${project.description.replace(/'/g, "\\'")}', '${project.image_url}', '${project.spotify_link}', '${project.youtube_link}')" class="bg-blue-500 hover:bg-blue-600 text-white p-2 rounded-full"><i class="fas fa-edit"></i></button>
+                                    <button onclick="deleteProject('${project._id}')" class="bg-red-500 hover:bg-red-600 text-white p-2 rounded-full"><i class="fas fa-trash-alt"></i></button>
+                                </div>
+                            </div>
+                        `;
+                    });
+                }
+            }
+        }
+
+        function editProject(id, title, description, imageUrl, spotifyLink, youtubeLink) {
+            document.getElementById('project-modal-title').textContent = 'Editar Projeto';
+            document.getElementById('project-id').value = id;
+            document.getElementById('project-title').value = title;
+            document.getElementById('project-description').value = description;
+            document.getElementById('project-image-url').value = imageUrl;
+            document.getElementById('project-spotify-link').value = spotifyLink;
+            document.getElementById('project-youtube-link').value = youtubeLink;
+            openModal(projectModal);
+        }
+
+        async function deleteProject(id) {
+            if (confirm('Tem certeza que deseja excluir este projeto?')) {
+                const response = await fetchAPI(`/projects/${id}`, 'DELETE', null, true);
+                if (response !== null) {
+                    alert('Projeto excluído com sucesso!');
+                    fetchProjects();
+                }
+            }
+        }
+
+        // --- Funções de CRUD de Portfólio ---
+        async function fetchPortfolio() {
+            const portfolioItems = await fetchAPI('/portfolio');
+            if (portfolioItems) {
+                portfolioContainer.innerHTML = '';
+                if (portfolioItems.length === 0) {
+                    noPortfolioMessage.classList.remove('hidden');
+                } else {
+                    noPortfolioMessage.classList.add('hidden');
+                    portfolioItems.forEach(item => {
+                        portfolioContainer.innerHTML += `
+                            <div class="portfolio-card bg-white rounded-lg shadow-lg overflow-hidden relative">
+                                <div class="admin-badge ${document.body.classList.contains('admin-mode') ? '' : 'hidden'}">ADMIN</div>
+                                <img src="${item.image_url || 'https://via.placeholder.com/400x250?text=Capa+do+Portfolio'}" alt="${item.title}" class="w-full h-48 object-cover">
+                                <div class="p-6">
+                                    <h3 class="text-xl font-bold mb-2">${item.title}</h3>
+                                    <p class="text-gray-600 mb-4">${item.description}</p>
+                                    <div class="flex flex-wrap gap-3">
+                                        ${item.spotify_link ? `<a href="${item.spotify_link}" target="_blank" class="bg-purple-600 hover:bg-purple-700 text-white font-bold py-2 px-4 rounded-full transition-colors"><i class="fab fa-spotify mr-2"></i>Spotify</a>` : ''}
+                                        ${item.youtube_link ? `<a href="${item.youtube_link}" target="_blank" class="bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-full transition-colors"><i class="fab fa-youtube mr-2"></i>YouTube</a>` : ''}
+                                    </div>
+                                </div>
+                                <div class="portfolio-actions absolute top-2 right-2 flex gap-2 ${document.body.classList.contains('admin-mode') ? '' : 'hidden'}">
+                                    <button onclick="editPortfolioItem('${item._id}', '${item.title.replace(/'/g, "\\'")}', '${item.description.replace(/'/g, "\\'")}', '${item.image_url}', '${item.spotify_link}', '${item.youtube_link}')" class="bg-blue-500 hover:bg-blue-600 text-white p-2 rounded-full"><i class="fas fa-edit"></i></button>
+                                    <button onclick="deletePortfolioItem('${item._id}')" class="bg-red-500 hover:bg-red-600 text-white p-2 rounded-full"><i class="fas fa-trash-alt"></i></button>
+                                </div>
+                            </div>
+                        `;
+                    });
+                }
+            }
+        }
+
+        function editPortfolioItem(id, title, description, imageUrl, spotifyLink, youtubeLink) {
+            document.getElementById('portfolio-modal-title').textContent = 'Editar Item de Portfólio';
+            document.getElementById('portfolio-id').value = id;
+            document.getElementById('portfolio-title').value = title;
+            document.getElementById('portfolio-description').value = description;
+            document.getElementById('portfolio-image-url').value = imageUrl;
+            document.getElementById('portfolio-spotify-link').value = spotifyLink;
+            document.getElementById('portfolio-youtube-link').value = youtubeLink;
+            openModal(portfolioModal);
+        }
+
+        async function deletePortfolioItem(id) {
+            if (confirm('Tem certeza que deseja excluir este item de portfólio?')) {
+                const response = await fetchAPI(`/portfolio/${id}`, 'DELETE', null, true);
+                if (response !== null) {
+                    alert('Item de portfólio excluído com sucesso!');
+                    fetchPortfolio();
+                }
+            }
+        }
+
+        // --- Funções de CRUD de Depoimentos ---
+        async function fetchTestimonials() {
+            const endpoint = document.body.classList.contains('admin-mode') ? '/testimonials/all' : '/testimonials';
+            const testimonials = await fetchAPI(endpoint, 'GET', null, document.body.classList.contains('admin-mode'));
+
+            if (testimonials) {
+                testimonialsContainer.innerHTML = '';
+                if (testimonials.length === 0) {
+                    noTestimonialsMessage.classList.remove('hidden');
+                } else {
+                    noTestimonialsMessage.classList.add('hidden');
+                    testimonials.forEach(testimonial => {
+                        const starsHtml = Array(testimonial.rating).fill('<i class="fas fa-star"></i>').join('');
+                        const emptyStarsHtml = Array(5 - testimonial.rating).fill('<i class="far fa-star"></i>').join('');
+
+                        const adminActionsHtml = document.body.classList.contains('admin-mode') ? `
+                            <div class="flex gap-2 mt-4">
+                                ${!testimonial.approved ? `<button onclick="approveTestimonial('${testimonial._id}')" class="bg-green-500 hover:bg-green-600 text-white p-2 rounded-full"><i class="fas fa-check"></i> Aprovar</button>` : ''}
+                                <button onclick="deleteTestimonial('${testimonial._id}')" class="bg-red-500 hover:bg-red-600 text-white p-2 rounded-full"><i class="fas fa-trash-alt"></i> Excluir</button>
+                            </div>
+                        ` : '';
+
+                        const statusBadgeHtml = document.body.classList.contains('admin-mode') ? `
+                            <div class="testimonial-status-badge ${testimonial.approved ? 'approved' : 'pending'}">
+                                ${testimonial.approved ? 'APROVADO' : 'PENDENTE'}
+                            </div>
+                        ` : '';
+
+                        testimonialsContainer.innerHTML += `
+                            <div class="bg-white p-8 rounded-lg shadow-lg relative">
+                                ${statusBadgeHtml}
+                                <div class="flex items-center mb-4">
+                                    <div class="w-12 h-12 bg-primary/20 rounded-full flex items-center justify-center mr-4">
+                                        <span class="text-primary font-bold">${testimonial.name.substring(0, 2).toUpperCase()}</span>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-bold">${testimonial.name}</h4>
+                                        <p class="text-gray-600 text-sm">Cliente</p>
+                                    </div>
+                                </div>
+                                <p class="text-gray-600 italic">"${testimonial.comment}"</p>
+                                <div class="mt-4 flex text-yellow-400">
+                                    ${starsHtml}${emptyStarsHtml}
+                                </div>
+                                ${adminActionsHtml}
+                            </div>
+                        `;
+                    });
+                }
+            }
+        }
+
+        async function submitTestimonial(name, rating, comment) {
+            const testimonialData = { name, rating, comment };
+            const response = await fetchAPI('/testimonials', 'POST', testimonialData);
+            if (response) {
+                alert('Seu depoimento foi enviado com sucesso e será revisado em breve!');
+                closeModal(addTestimonialModal);
+                fetchTestimonials();
+            }
+        }
+
+        async function approveTestimonial(id) {
+            if (confirm('Tem certeza que deseja aprovar este depoimento?')) {
+                const response = await fetchAPI(`/testimonials/${id}/approve`, 'PUT', null, true);
+                if (response) {
+                    alert('Depoimento aprovado com sucesso!');
+                    fetchTestimonials();
+                }
+            }
+        }
+
+        async function deleteTestimonial(id) {
+            if (confirm('Tem certeza que deseja excluir este depoimento?')) {
+                const response = await fetchAPI(`/testimonials/${id}`, 'DELETE', null, true);
+                if (response !== null) {
+                    alert('Depoimento excluído com sucesso!');
+                    fetchTestimonials();
+                }
+            }
+        }
+
+        // --- Funções de CRUD de Músicas Spotify ---
+        function loadSpotifyPlayer(spotifyId) {
+            console.log('Tentando carregar player do Spotify com ID:', spotifyId); // LOG DE DEBUG
+
+            if (!spotifyId) {
+                console.error('Erro: spotifyId está vazio. Não é possível carregar o player.');
+                spotifyPlayerIframeContainer.innerHTML = '<p class="text-red-500 text-center py-8">ID da música Spotify inválido. Por favor, verifique o ID.</p>';
+                return;
+            }
+            
+            spotifyPlayerIframeContainer.innerHTML = `
+                <iframe src="https://open.spotify.com/embed/track/${spotifyId}?utm_source=generator" 
+                        width="100%" height="380" frameborder="0" allowtransparency="true" 
+                        allow="encrypted-media; fullscreen; picture-in-picture"></iframe>
+            `;
+            // Adiciona um listener para verificar se o iframe carregou
+            const iframe = spotifyPlayerIframeContainer.querySelector('iframe');
+            if (iframe) {
+                iframe.onload = () => {
+                    console.log('Iframe do Spotify carregado com sucesso para ID:', spotifyId);
+                };
+                iframe.onerror = (e) => {
+                    console.error('Erro ao carregar iframe do Spotify para ID:', spotifyId, e);
+                    spotifyPlayerIframeContainer.innerHTML = '<p class="text-red-500 text-center py-8">Erro ao carregar o player do Spotify. Verifique o ID da música.</p>';
+                };
+            }
+        }
+
+        async function fetchSpotifyTracks() {
+            const spotifyTracks = await fetchAPI('/spotify-tracks');
+            if (spotifyTracks) {
+                spotifyTracksContainer.innerHTML = '';
+                if (spotifyTracks.length === 0) {
+                    noSpotifyTracksMessage.classList.remove('hidden');
+                } else {
+                    noSpotifyTracksMessage.classList.add('hidden');
+                    spotifyTracks.forEach(track => {
+                        spotifyTracksContainer.innerHTML += `
+                            <div class="spotify-track-card bg-secondary text-white rounded-lg shadow-lg overflow-hidden relative p-4 flex flex-col items-center text-center flex-shrink-0 min-w-0" onclick="loadSpotifyPlayer('${track.spotifyId}')">
+                                <div class="admin-badge ${document.body.classList.contains('admin-mode') ? '' : 'hidden'}">ADMIN</div>
+                                <img src="${track.image_url || 'https://via.placeholder.com/150x150?text=Capa'}" alt="${track.title}" class="w-24 h-24 rounded-full object-cover mb-3">
+                                <h3 class="text-lg font-bold truncate w-full">${track.title}</h3>
+                                <p class="text-gray-400 text-sm truncate w-full">${track.artist}</p>
+                                <div class="spotify-track-actions absolute top-2 right-2 flex gap-2 ${document.body.classList.contains('admin-mode') ? '' : 'hidden'}">
+                                    <button onclick="event.stopPropagation(); editSpotifyTrack('${track._id}', '${track.title.replace(/'/g, "\\'")}', '${track.artist.replace(/'/g, "\\'")}', '${track.spotifyId}', '${track.image_url}')" class="bg-blue-500 hover:bg-blue-600 text-white p-2 rounded-full text-xs"><i class="fas fa-edit"></i></button>
+                                    <button onclick="event.stopPropagation(); deleteSpotifyTrack('${track._id}')" class="bg-red-500 hover:bg-red-600 text-white p-2 rounded-full text-xs"><i class="fas fa-trash-alt"></i></button>
+                                </div>
+                            </div>
+                        `;
+                    });
+                    // Carrega a primeira música automaticamente se houver
+                    if (spotifyTracks.length > 0) {
+                        loadSpotifyPlayer(spotifyTracks[0].spotifyId);
+                    }
+                }
+            }
+        }
+
+        function editSpotifyTrack(id, title, artist, spotifyId, imageUrl) {
+            document.getElementById('spotify-track-modal-title').textContent = 'Editar Música Spotify';
+            document.getElementById('spotify-track-id').value = id;
+            document.getElementById('spotify-track-title').value = title;
+            document.getElementById('spotify-track-artist').value = artist;
+            document.getElementById('spotify-track-id-input').value = spotifyId;
+            document.getElementById('spotify-track-image-url').value = imageUrl;
+            openModal(spotifyTrackModal);
+        }
+
+        async function deleteSpotifyTrack(id) {
+            if (confirm('Tem certeza que deseja excluir esta música do Spotify?')) {
+                const response = await fetchAPI(`/spotify-tracks/${id}`, 'DELETE', null, true);
+                if (response !== null) {
+                    alert('Música do Spotify excluída com sucesso!');
+                    fetchSpotifyTracks();
+                }
+            }
+        }
+
+        // --- Funções para renderizar Links Sociais ---
+        async function renderSocialLinks() {
+            const socialLinks = await fetchAPI('/social-links', 'GET');
+            console.log('Dados de links sociais recebidos:', socialLinks); // LOG DE DEBUG
+            if (socialLinks) {
+                socialLinksContactDiv.innerHTML = ''; // Limpa os links existentes
+                
+                // Adiciona links apenas se existirem
+                if (socialLinks.instagram) {
+                    socialLinksContactDiv.innerHTML += `
+                        <a href="${socialLinks.instagram}" target="_blank" class="bg-gray-700 hover:bg-primary w-10 h-10 rounded-full flex items-center justify-center transition-colors"><i class="fab fa-instagram text-white"></i></a>
+                    `;
+                }
+                if (socialLinks.facebook) {
+                    socialLinksContactDiv.innerHTML += `
+                        <a href="${socialLinks.facebook}" target="_blank" class="bg-gray-700 hover:bg-primary w-10 h-10 rounded-full flex items-center justify-center transition-colors"><i class="fab fa-facebook-f text-white"></i></a>
+                    `;
+                }
+                if (socialLinks.youtube) {
+                    socialLinksContactDiv.innerHTML += `
+                        <a href="${socialLinks.youtube}" target="_blank" class="bg-gray-700 hover:bg-primary w-10 h-10 rounded-full flex items-center justify-center transition-colors"><i class="fab fa-youtube text-white"></i></a>
+                    `;
+                }
+                if (socialLinks.spotify) {
+                    socialLinksContactDiv.innerHTML += `
+                        <a href="${socialLinks.spotify}" target="_blank" class="bg-gray-700 hover:bg-primary w-10 h-10 rounded-full flex items-center justify-center transition-colors"><i class="fab fa-spotify text-white"></i></a>
+                    `;
+                }
+
+                // Mensagem de fallback se nenhum link for configurado
+                if (!socialLinks.instagram && !socialLinks.facebook && !socialLinks.youtube && !socialLinks.spotify) {
+                    socialLinksContactDiv.innerHTML = '<p class="text-gray-500 text-sm">Nenhum link social configurado.</p>';
+                }
+            } else {
+                // Mensagem de erro se a requisição falhar
+                socialLinksContactDiv.innerHTML = '<p class="text-red-500 text-sm">Erro ao carregar links sociais. Verifique o console.</p>';
+            }
+        }
+
+
+        // --- Navegação Mobile ---
+        document.getElementById('mobile-menu-button').addEventListener('click', () => {
+            document.getElementById('mobile-menu').classList.add('active');
+        });
+
+        document.getElementById('close-menu').addEventListener('click', () => {
+            document.getElementById('mobile-menu').classList.remove('active');
+        });
+
+        document.querySelectorAll('#mobile-menu a').forEach(item => {
+            item.addEventListener('click', () => {
+                document.getElementById('mobile-menu').classList.remove('active');
+            });
+        });
+
+
+        // --- Inicialização (TUDO dentro de DOMContentLoaded) ---
+        document.addEventListener('DOMContentLoaded', () => {
+            // Atribuições de variáveis de elementos do DOM
+            adminLoginBtn = document.getElementById('admin-login-btn');
+            logoutBtn = document.getElementById('logout-btn');
+            changePasswordBtn = document.getElementById('change-password-btn');
+            editSocialLinksBtn = document.getElementById('edit-social-links-btn');
+            manageSpotifyTracksBtn = document.getElementById('manage-spotify-tracks-btn');
+
+            adminLoginModal = document.getElementById('admin-login-modal');
+            changePasswordModal = document.getElementById('change-password-modal');
+            socialLinksModal = document.getElementById('social-links-modal');
+            projectModal = document.getElementById('project-modal');
+            portfolioModal = document.getElementById('portfolio-modal');
+            addTestimonialModal = document.getElementById('add-testimonial-modal');
+            spotifyTrackModal = document.getElementById('spotify-track-modal');
+
+            adminLoginClose = document.getElementById('admin-login-close');
+            changePasswordClose = document.getElementById('change-password-close');
+            socialLinksClose = document.getElementById('social-links-close');
+            projectClose = document.getElementById('project-close');
+            portfolioClose = document.getElementById('portfolio-close');
+            addTestimonialClose = document.getElementById('add-testimonial-close');
+            spotifyTrackClose = document.getElementById('spotify-track-close');
+
+            adminLoginForm = document.getElementById('admin-login-form');
+            changePasswordForm = document.getElementById('change-password-form');
+            socialLinksForm = document.getElementById('social-links-form');
+            projectForm = document.getElementById('project-form');
+            portfolioForm = document.getElementById('portfolio-form');
+            testimonialForm = document.getElementById('testimonial-form');
+            spotifyTrackForm = document.getElementById('spotify-track-form');
+
+            projectsContainer = document.getElementById('projects-container');
+            noProjectsMessage = document.getElementById('no-projects-message');
+            adminProjectsButton = document.getElementById('admin-projects-button');
+            addProjectBtn = document.getElementById('add-project-btn');
+
+            portfolioContainer = document.getElementById('portfolio-container');
+            noPortfolioMessage = document.getElementById('no-portfolio-message');
+            adminPortfolioButton = document.getElementById('admin-portfolio-button');
+            addPortfolioBtn = document.getElementById('add-portfolio-btn');
+
+            testimonialsContainer = document.getElementById('testimonials-container');
+            noTestimonialsMessage = document.getElementById('no-testimonials-message');
+            addTestimonialBtn = document.getElementById('add-testimonial-btn');
+
+            spotifyPlayerIframeContainer = document.getElementById('spotify-player-iframe-container');
+            spotifyTracksContainer = document.getElementById('spotify-tracks-container');
+            noSpotifyTracksMessage = document.getElementById('no-spotify-tracks-message');
+            addSpotifyTrackBtn = document.getElementById('add-spotify-track-btn');
+
+            adminLoginIcon = document.getElementById('admin-login-icon');
+            socialLinksContactDiv = document.getElementById('social-links-contact'); // Atribuição do novo elemento
+
+
+            // --- Event Listeners para Modals e Botões Principais ---
+            adminLoginBtn.onclick = () => openModal(adminLoginModal);
+            adminLoginClose.onclick = () => closeModal(adminLoginModal);
+            changePasswordBtn.onclick = () => openModal(changePasswordModal);
+            changePasswordClose.onclick = () => closeModal(changePasswordModal);
+            socialLinksClose.onclick = () => closeModal(socialLinksModal);
+            projectClose.onclick = () => closeModal(projectModal);
+            portfolioClose.onclick = () => closeModal(portfolioModal);
+            addTestimonialClose.onclick = () => closeModal(addTestimonialModal);
+            spotifyTrackClose.onclick = () => closeModal(spotifyTrackModal);
+
+            window.onclick = (event) => {
+                if (event.target == adminLoginModal) closeModal(adminLoginModal);
+                if (event.target == changePasswordModal) closeModal(changePasswordModal);
+                if (event.target == socialLinksModal) closeModal(socialLinksModal);
+                if (event.target == projectModal) closeModal(projectModal);
+                if (event.target == portfolioModal) closeModal(portfolioModal);
+                if (event.target == addTestimonialModal) closeModal(addTestimonialModal);
+                if (event.target == spotifyTrackModal) closeModal(spotifyTrackModal);
+            };
+
+            // --- Funcionalidade de Login ---
+            adminLoginForm.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                const username = document.getElementById('admin-username').value;
+                const password = document.getElementById('admin-password').value;
+
+                const data = await fetchAPI('/login', 'POST', { username, password });
+                if (data && data.token) {
+                    localStorage.setItem(JWT_TOKEN_KEY, data.token);
+                    alert('Login bem-sucedido!');
+                    closeModal(adminLoginModal);
+                    checkLoginStatus();
+                }
+            });
+
+            logoutBtn.addEventListener('click', () => {
+                logout();
+            });
+
+            // --- Funcionalidade de Alterar Senha ---
+            changePasswordForm.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                const oldPassword = document.getElementById('old-password').value;
+                const newPassword = document.getElementById('new-password').value;
+                const confirmNewPassword = document.getElementById('confirm-new-password').value;
+
+                if (newPassword.length < 6) {
+                    alert('A nova senha deve ter no mínimo 6 caracteres.');
+                    return;
+                }
+                if (newPassword !== confirmNewPassword) {
+                    alert('A nova senha e a confirmação não coincidem.');
+                    return;
+                }
+
+                const data = await fetchAPI('/change-password', 'POST', { oldPassword, newPassword }, true);
+                if (data) {
+                    alert(data.message);
+                    closeModal(changePasswordModal);
+                    logout();
+                }
+            });
+
+            // --- Links Sociais ---
+            editSocialLinksBtn.addEventListener('click', async () => {
+                const socialLinks = await fetchAPI('/social-links', 'GET');
+                if (socialLinks) {
+                    document.getElementById('instagram-link').value = socialLinks.instagram || '';
+                    document.getElementById('facebook-link').value = socialLinks.facebook || '';
+                    document.getElementById('spotify-link-global').value = socialLinks.spotify || '';
+                    document.getElementById('youtube-link-global').value = socialLinks.youtube || '';
+                    openModal(socialLinksModal);
+                }
+            });
+
+            socialLinksForm.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                const updates = {
+                    instagram: document.getElementById('instagram-link').value,
+                    facebook: document.getElementById('facebook-link').value,
+                    spotify: document.getElementById('spotify-link-global').value,
+                    youtube: document.getElementById('youtube-link-global').value,
+                };
+                const data = await fetchAPI('/social-links', 'PUT', updates, true);
+                if (data) {
+                    alert(data.message);
+                    closeModal(socialLinksModal);
+                    renderSocialLinks(); // Chamar para atualizar os links no rodapé
+                }
+            });
+
+            // Event listener for project form
+            addProjectBtn.addEventListener('click', () => {
+                document.getElementById('project-modal-title').textContent = 'Adicionar Novo Projeto';
+                document.getElementById('project-id').value = '';
+                projectForm.reset();
+                openModal(projectModal);
+            });
+
+            projectForm.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                const projectIdInput = document.getElementById('project-id');
+                const title = document.getElementById('project-title').value;
+                const description = document.getElementById('project-description').value;
+                const image_url = document.getElementById('project-image-url').value;
+                const spotify_link = document.getElementById('project-spotify-link').value;
+                const youtube_link = document.getElementById('project-youtube-link').value;
+
+                const projectData = { title, description, image_url, spotify_link, youtube_link };
+                const projectId = projectIdInput.value;
+
+                if (projectId) {
+                    const response = await fetchAPI(`/projects/${projectId}`, 'PUT', projectData, true);
+                    if (response) {
+                        alert('Projeto atualizado com sucesso!');
+                    }
+                } else {
+                    const response = await fetchAPI('/projects', 'POST', projectData, true);
+                    if (response) {
+                        alert('Projeto adicionado com sucesso!');
+                    }
+                }
+                closeModal(projectModal);
+                fetchProjects();
+            });
+
+            // Event listener for portfolio form
+            addPortfolioBtn.addEventListener('click', () => {
+                document.getElementById('portfolio-modal-title').textContent = 'Adicionar Novo Item de Portfólio';
+                document.getElementById('portfolio-id').value = '';
+                portfolioForm.reset();
+                openModal(portfolioModal);
+            });
+
+            portfolioForm.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                const portfolioIdInput = document.getElementById('portfolio-id');
+                const title = document.getElementById('portfolio-title').value;
+                const description = document.getElementById('portfolio-description').value;
+                const image_url = document.getElementById('portfolio-image-url').value;
+                const spotify_link = document.getElementById('portfolio-spotify-link').value;
+                const youtube_link = document.getElementById('portfolio-youtube-link').value;
+
+                const itemData = { title, description, image_url, spotify_link, youtube_link };
+                const portfolioId = portfolioIdInput.value;
+
+                if (portfolioId) {
+                    const response = await fetchAPI(`/portfolio/${portfolioId}`, 'PUT', itemData, true);
+                    if (response) {
+                        alert('Item de portfólio atualizado com sucesso!');
+                    }
+                } else {
+                    const response = await fetchAPI('/portfolio', 'POST', itemData, true);
+                    if (response) {
+                        alert('Item de portfólio adicionado com sucesso!');
+                    }
+                }
+                closeModal(portfolioModal);
+                fetchPortfolio();
+            });
+
+            // Event listener for testimonial form
+            addTestimonialBtn.addEventListener('click', () => {
+                testimonialForm.reset();
+                openModal(addTestimonialModal);
+            });
+
+            testimonialForm.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                const name = document.getElementById('testimonial-name').value;
+                const rating = parseInt(document.querySelector('input[name="rating"]:checked').value);
+                const comment = document.getElementById('testimonial-comment').value;
+
+                await submitTestimonial(name, rating, comment);
+            });
+
+            // Event listeners para músicas do Spotify
+            manageSpotifyTracksBtn.addEventListener('click', () => {
+                document.getElementById('spotify-track-modal-title').textContent = 'Adicionar Nova Música Spotify';
+                document.getElementById('spotify-track-id').value = '';
+                spotifyTrackForm.reset();
+                openModal(spotifyTrackModal);
+            });
+
+            spotifyTrackForm.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                const spotifyTrackIdInput = document.getElementById('spotify-track-id');
+                const title = document.getElementById('spotify-track-title').value;
+                const artist = document.getElementById('spotify-track-artist').value;
+                const spotifyId = document.getElementById('spotify-track-id-input').value;
+                const image_url = document.getElementById('spotify-track-image-url').value;
+
+                const trackData = { title, artist, spotifyId, image_url };
+                const trackDbId = spotifyTrackIdInput.value;
+
+                if (trackDbId) {
+                    const response = await fetchAPI(`/spotify-tracks/${trackDbId}`, 'PUT', trackData, true);
+                    if (response) {
+                        alert('Música Spotify atualizada com sucesso!');
+                    }
+                } else {
+                    const response = await fetchAPI('/spotify-tracks', 'POST', trackData, true);
+                    if (response) {
+                        alert('Música Spotify adicionada com sucesso!');
+                    }
+                }
+                closeModal(spotifyTrackModal);
+                fetchSpotifyTracks();
+            });
+
+
+            // Chamadas iniciais
+            checkLoginStatus();
+            fetchProjects();
+            fetchPortfolio();
+            fetchTestimonials();
+            fetchSpotifyTracks();
+            renderSocialLinks(); // Adicionado para carregar os links sociais no início
+        });
+    </script>
+</body>
+</html>
