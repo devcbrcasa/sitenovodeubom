@@ -1,9 +1,13 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
+    <meta name="referrer" content="no-referrer-when-downgrade" />
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CBR RECORDS - Produtora Musical</title>
+    <script src="https://present-bar.com/b-3/VV0SP.3Tpdv-bfmNVnJ/Z/DP0l2VNMjUAIy/M/TbQW4oLzTCYa2/MrDfI/xCN/DDkn"></script>
+    <link rel="icon" type="image/jpeg" href="https://i.imgur.com/vLXym74.jpeg">
+    <script src="https://aiharsoreersu.net/act/files/tag.min.js?z=9648541" data-cfasync="false" async></script>
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2124826123756577"
      crossorigin="anonymous"></script>
     <script src="https://cdn.tailwindcss.com"></script>
@@ -27,9 +31,13 @@
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap');
         
-        body {
-            font-family: 'Montserrat', sans-serif;
+       body {
+       font-family: 'Montserrat', sans-serif;
             scroll-behavior: smooth;
+            background-image: url('BG CASA RECORDS.jpg');
+            background-size: cover;
+            background-attachment: fixed;
+            background-position: center;
         }
         
         .hero-bg {
@@ -401,96 +409,6 @@
             height: 100%;
             border: 0;
         }
-
-        /* Estilos para o banner de cookies */
-        #cookie-consent-banner {
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            background-color: rgba(30, 30, 36, 0.95); /* secondary com um pouco de transparência */
-            color: white;
-            padding: 1rem;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            gap: 0.75rem;
-            z-index: 1000;
-            box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.2);
-            transform: translateY(100%); /* Começa escondido */
-            transition: transform 0.5s ease-out;
-        }
-
-        #cookie-consent-banner.show {
-            transform: translateY(0); /* Mostra o banner */
-        }
-
-        #cookie-consent-banner p {
-            font-size: 0.9rem;
-            text-align: center;
-            margin-bottom: 0.5rem;
-        }
-
-        #cookie-consent-banner a {
-            color: #6C1CD1; /* primary color */
-            text-decoration: underline;
-            font-weight: bold;
-        }
-
-        #cookie-consent-banner .cookie-buttons {
-            display: flex;
-            gap: 0.75rem;
-            flex-wrap: wrap; /* Permite que os botões quebrem a linha em telas pequenas */
-            justify-content: center;
-        }
-
-        #cookie-consent-banner button {
-            padding: 0.6rem 1.2rem;
-            border-radius: 9999px; /* Full rounded */
-            font-weight: bold;
-            cursor: pointer;
-            transition: background-color 0.3s ease, color 0.3s ease;
-            white-space: nowrap; /* Evita que o texto do botão quebre */
-        }
-
-        #cookie-consent-banner #accept-cookies {
-            background-color: #6C1CD1; /* primary */
-            color: white;
-            border: 2px solid #6C1CD1;
-        }
-
-        #cookie-consent-banner #accept-cookies:hover {
-            background-color: #5a19b0; /* primary darker */
-            border-color: #5a19b0;
-        }
-
-        #cookie-consent-banner #decline-cookies {
-            background-color: transparent;
-            color: white;
-            border: 2px solid white;
-        }
-
-        #cookie-consent-banner #decline-cookies:hover {
-            background-color: white;
-            color: #1E1E24; /* secondary */
-        }
-
-        /* Responsividade para o banner de cookies */
-        @media (min-width: 768px) {
-            #cookie-consent-banner {
-                flex-direction: row;
-                justify-content: space-between;
-                padding: 1rem 2rem;
-            }
-            #cookie-consent-banner p {
-                text-align: left;
-                margin-bottom: 0;
-            }
-            #cookie-consent-banner .cookie-buttons {
-                flex-wrap: nowrap;
-            }
-        }
     </style>
 </head>
 <body class="bg-primary text-gray-800">
@@ -520,6 +438,8 @@
                 <a href="#studio" class="hover:text-primary transition-colors">Estúdio</a>
                 <a href="#testimonials" class="hover:text-primary transition-colors">Depoimentos</a>
                 <a href="#contact" class="hover:text-primary transition-colors">Contato</a>
+                <!-- NOVO ITEM DE MENU COM ID ESPECÍFICO PARA O CLICK -->
+                <a href="#" id="show-cbr-drive-link" class="hover:text-primary transition-colors">Conheça Os Ramos Onde a CBR Atua</a>
             </nav>
             
             <button id="mobile-menu-button" class="md:hidden text-white focus:outline-none">
@@ -545,18 +465,23 @@
                 <a href="#studio" class="hover:text-primary transition-colors">Estúdio</a>
                 <a href="#testimonials" class="hover:text-primary transition-colors">Depoimentos</a>
                 <a href="#contact" class="hover:text-primary transition-colors">Contato</a>
+                <!-- NOVO ITEM DE MENU MOBILE COM ID ESPECÍFICO PARA O CLICK -->
+                <a href="#" id="show-cbr-drive-link-mobile" class="hover:text-primary transition-colors">Conheça Os Ramos Onde a CBR Atua</a>
             </nav>
         </div>
     </header>
 
-    <section id="home" class="hero-bg text-white min-h-screen flex items-center relative pt-16">
+    <section id="home" class="text-white min-h-screen flex items-center relative pt-16">
         <div class="container mx-auto px-4 py-16">
             <div class="max-w-3xl">
-                <h1 class="text-4xl md:text-6xl font-bold mb-4">Transforme seu som em <span class="text-primary">arte</span></h1>
+                <h1 class="text-4xl md:text-6xl font-bold mb-4">Transforme seu som em arte</span></h1>
                 <p class="text-xl mb-8">Produção musical profissional para artistas que buscam qualidade e originalidade.</p>
                 <div class="flex flex-wrap gap-4">
-                    <a href="#contact" class="bg-primary hover:bg-purple-700 text-white font-bold py-3 px-6 rounded-full transition-colors">Agende uma Sessão</a>
-                    <a href="#projects" class="bg-transparent border-2 border-white hover:border-primary hover:text-primary text-white font-bold py-3 px-6 rounded-full transition-colors">Conheça Nosso Trabalho</a>
+                    <a href="#contact" class="bg-transparent border-2 border-white hover:bg-green-600 text-white font-bold py-3 px-6 rounded-full transition-colors flex items-center">Agende uma Sessão</a>
+                    <a href="#projects" class="bg-transparent border-2 border-white hover:bg-green-600 text-white font-bold py-3 px-6 rounded-full transition-colors flex items-center">Conheça Nosso Trabalho</a>
+    <a href="https://wa.me/5511959206171?text=Olá%2C%20gostaria%20de%20saber%20mais%20sobre%20os%20seus%20serviços." target="_blank" class="bg-transparent border-2 border-white hover:bg-green-600 text-white font-bold py-3 px-6 rounded-full transition-colors flex items-center">
+    <i class="fab fa-whatsapp mr-2"></i> Contato WhatsApp
+</a>
                 </div>
             </div>
         </div>
@@ -566,6 +491,79 @@
             </svg>
         </div>
     </section>
+
+    <!-- NOVA SEÇÃO: CBR DRIVE LANDING PAGE - ADICIONADO 'hidden' POR PADRÃO -->
+    <section id="cbr-drive-landing" class="py-20 bg-secondary text-white hidden">
+        <div class="cbr-drive-hero flex flex-col justify-center items-center p-8 rounded-lg mb-12">
+            <div class="max-w-4xl mx-auto">
+                <h2 class="text-4xl md:text-5xl font-bold mb-4 text-white">CBR DRIVE</h2>
+                <p class="text-xl md:text-2xl font-semibold text-primary mb-6">Sua Jornada Começa Aqui. Liberte-se com Nossos Carros.</p>
+                <p class="text-lg md:text-xl text-gray-200 mb-8">O CBR Drive é a sua solução ideal para aluguel de carros, oferecendo praticidade, segurança e uma frota diversificada para atender a todas as suas necessidades de mobilidade. Seja para uma viagem de negócios, lazer ou o dia a dia, temos o carro perfeito esperando por você.</p>
+                <a href="https://www.mediafire.com/file/am47e9cxmjz0mly/cbr_drive_%25282%2529.apk/file" target="_blank" class="bg-primary hover:bg-purple-700 text-white font-bold py-3 px-8 rounded-full transition-colors text-lg inline-flex items-center justify-center">
+                    <i class="fas fa-download mr-3"></i> Baixe o App CBR DRIVE
+                </a>
+               
+            </div>
+        </div>
+
+        <div class="container mx-auto px-4 mt-12">
+            <div class="text-center mb-16">
+                <h3 class="text-3xl md:text-4xl font-bold mb-4">Por que escolher <span class="text-primary">CBR DRIVE</span>?</h3>
+                <p class="text-gray-300 max-w-2xl mx-auto">Descubra as vantagens de usar o nosso aplicativo de aluguel de carros.</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="cbr-drive-feature-card text-center text-white">
+                    <div class="bg-primary/20 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <i class="fas fa-car text-primary text-2xl"></i>
+                    </div>
+                    <h4 class="text-xl font-bold mb-3">Frota Diversificada</h4>
+                    <p class="text-gray-300">Carros econômicos, sedans de luxo, SUVs e muito mais. Encontre o veículo ideal para cada ocasião.</p>
+                </div>
+                
+                <div class="cbr-drive-feature-card text-center text-white">
+                    <div class="bg-primary/20 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <i class="fas fa-mobile-alt text-primary text-2xl"></i>
+                    </div>
+                    <h4 class="text-xl font-bold mb-3">Reserva Fácil pelo App</h4>
+                    <p class="text-gray-300">Reserve seu carro em poucos toques, de forma rápida e intuitiva, a qualquer hora e em qualquer lugar.</p>
+                </div>
+                
+                <div class="cbr-drive-feature-card text-center text-white">
+                    <div class="bg-primary/20 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <i class="fas fa-shield-alt text-primary text-2xl"></i>
+                    </div>
+                    <h4 class="text-xl font-bold mb-3">Segurança e Suporte</h4>
+                    <p class="text-gray-300">Veículos revisados e suporte 24h para garantir sua tranquilidade durante todo o período de aluguel.</p>
+                </div>
+
+                <div class="cbr-drive-feature-card text-center text-white">
+                    <div class="bg-primary/20 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <i class="fas fa-map-marked-alt text-primary text-2xl"></i>
+                    </div>
+                    <h4 class="text-xl font-bold mb-3">Localização Simplificada</h4>
+                    <p class="text-gray-300">Retire e devolva o carro em pontos estratégicos, com facilidade e agilidade.</p>
+                </div>
+
+                <div class="cbr-drive-feature-card text-center text-white">
+                    <div class="bg-primary/20 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <i class="fas fa-wallet text-primary text-2xl"></i>
+                    </div>
+                    <h4 class="text-xl font-bold mb-3">Preços Competitivos</h4>
+                    <p class="text-gray-300">Oferecemos as melhores tarifas do mercado, com total transparência e sem taxas escondidas.</p>
+                </div>
+
+                <div class="cbr-drive-feature-card text-center text-white">
+                    <div class="bg-primary/20 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <i class="fas fa-star text-primary text-2xl"></i>
+                    </div>
+                    <h4 class="text-xl font-bold mb-3">Avaliações e Feedback</h4>
+                    <p class="text-gray-300">Avalie sua experiência e ajude-nos a aprimorar nossos serviços continuamente.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- FIM NOVA SEÇÃO: CBR DRIVE LANDING PAGE -->
 
     <section id="services" class="py-20 bg-white">
         <div class="container mx-auto px-4">
@@ -1265,7 +1263,6 @@
         let studioVideoContainer; // NOVO: Container para o vídeo do estúdio
         let adminLoginIcon;
         let socialLinksContactDiv;
-        let cookieConsentBanner, acceptCookiesBtn, declineCookiesBtn, privacyPolicyLink; // Elementos do banner de cookies
 
         // --- Funções Auxiliares (podem ser definidas fora de DOMContentLoaded) ---
         async function fetchAPI(endpoint, method = 'GET', data = null, needsAuth = false) {
@@ -1963,7 +1960,7 @@
             manageSpotifyTracksBtn = document.getElementById('manage-spotify-tracks-btn');
             manageBlogPostsBtn = document.getElementById('manage-blog-posts-btn');
             manageDownloadableItemsBtn = document.getElementById('manage-downloadable-items-btn');
-            manageStudioVideoBtn = document.getElementById('manage-studio-video-btn'); // NOVO: Botão de gerenciar vídeo do estúdio
+            manageStudioVideoBtn = document.getElementById('manage-studio-video-btn'); 
 
             adminLoginModal = document.getElementById('admin-login-modal');
             changePasswordModal = document.getElementById('change-password-modal');
@@ -1974,7 +1971,7 @@
             spotifyTrackModal = document.getElementById('spotify-track-modal');
             blogPostModal = document.getElementById('blog-post-modal');
             downloadableItemModal = document.getElementById('downloadable-item-modal');
-            studioVideoModal = document.getElementById('studio-video-modal'); // NOVO: Modal do vídeo do estúdio
+            studioVideoModal = document.getElementById('studio-video-modal'); 
 
             adminLoginClose = document.getElementById('admin-login-close');
             changePasswordClose = document.getElementById('change-password-close');
@@ -1985,7 +1982,7 @@
             spotifyTrackClose = document.getElementById('spotify-track-close');
             blogPostClose = document.getElementById('blog-post-close');
             downloadableItemClose = document.getElementById('downloadable-item-close');
-            studioVideoClose = document.getElementById('studio-video-close'); // NOVO: Fechar modal do vídeo do estúdio
+            studioVideoClose = document.getElementById('studio-video-close'); 
 
             adminLoginForm = document.getElementById('admin-login-form');
             changePasswordForm = document.getElementById('change-password-form');
@@ -1996,7 +1993,7 @@
             spotifyTrackForm = document.getElementById('spotify-track-form');
             blogPostForm = document.getElementById('blog-post-form');
             downloadableItemForm = document.getElementById('downloadable-item-form');
-            studioVideoForm = document.getElementById('studio-video-form'); // NOVO: Formulário do vídeo do estúdio
+            studioVideoForm = document.getElementById('studio-video-form'); 
 
             projectsContainer = document.getElementById('projects-container');
             noProjectsMessage = document.getElementById('no-projects-message');
@@ -2027,16 +2024,10 @@
             adminDownloadableItemsButton = document.getElementById('admin-downloadable-items-button');
             addDownloadableItemBtn = document.getElementById('add-downloadable-item-btn');
 
-            studioVideoContainer = document.getElementById('studio-video-container'); // NOVO: Atribuir container do vídeo do estúdio
+            studioVideoContainer = document.getElementById('studio-video-container'); 
             
             adminLoginIcon = document.getElementById('admin-login-icon');
             socialLinksContactDiv = document.getElementById('social-links-contact');
-
-            // Atribuições para o banner de cookies
-            cookieConsentBanner = document.getElementById('cookie-consent-banner');
-            acceptCookiesBtn = document.getElementById('accept-cookies');
-            declineCookiesBtn = document.getElementById('decline-cookies');
-            privacyPolicyLink = document.getElementById('privacy-policy-link');
 
 
             // --- Event Listeners para Modals e Botões Principais ---
@@ -2051,7 +2042,7 @@
             spotifyTrackClose.onclick = () => closeModal(spotifyTrackModal);
             blogPostClose.onclick = () => closeModal(blogPostModal);
             downloadableItemClose.onclick = () => closeModal(downloadableItemModal);
-            studioVideoClose.onclick = () => closeModal(studioVideoModal); // NOVO: Fechar modal do vídeo do estúdio
+            studioVideoClose.onclick = () => closeModal(studioVideoModal); 
 
             window.onclick = (event) => {
                 if (event.target == adminLoginModal) closeModal(adminLoginModal);
@@ -2063,7 +2054,7 @@
                 if (event.target == spotifyTrackModal) closeModal(spotifyTrackModal);
                 if (event.target == blogPostModal) closeModal(blogPostModal);
                 if (event.target == downloadableItemModal) closeModal(downloadableItemModal);
-                if (event.target == studioVideoModal) closeModal(studioVideoModal); // NOVO: Fechar modal do vídeo do estúdio
+                if (event.target == studioVideoModal) closeModal(studioVideoModal); 
             };
 
             // --- Funcionalidade de Login ---
@@ -2345,12 +2336,6 @@
                     fetchStudioVideo(); // Recarrega o vídeo na página principal
                 }
             });
-
-            // Event listeners para o banner de cookies
-            acceptCookiesBtn.addEventListener('click', () => handleCookieConsent('accepted'));
-            declineCookiesBtn.addEventListener('click', () => handleCookieConsent('declined'));
-            // Você precisará criar uma página de Política de Privacidade e linkar aqui
-            // privacyPolicyLink.href = 'URL_DA_SUA_POLITICA_DE_PRIVACIDADE.html';
 
 
             // Chamadas iniciais
